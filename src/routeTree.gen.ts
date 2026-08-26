@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as DemoRouteImport } from './routes/demo'
 import { Route as HowToConnectGbpRouteImport } from './routes/how-to-connect-gbp'
 import { Route as HowToCreatePostRouteImport } from './routes/how-to-create-post'
+import { Route as HowToGenerateMagicQrRouteImport } from './routes/how-to-generate-magic-qr'
 import { Route as HowToReplyReviewRouteImport } from './routes/how-to-reply-review'
 import { Route as LoginRouteImport } from './routes/login'
 
@@ -36,6 +37,11 @@ const HowToCreatePostRoute = HowToCreatePostRouteImport.update({
   path: '/how-to-create-post',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HowToGenerateMagicQrRoute = HowToGenerateMagicQrRouteImport.update({
+  id: '/how-to-generate-magic-qr',
+  path: '/how-to-generate-magic-qr',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const HowToReplyReviewRoute = HowToReplyReviewRouteImport.update({
   id: '/how-to-reply-review',
   path: '/how-to-reply-review',
@@ -52,6 +58,7 @@ export interface FileRoutesByFullPath {
   '/demo': typeof DemoRoute
   '/how-to-connect-gbp': typeof HowToConnectGbpRoute
   '/how-to-create-post': typeof HowToCreatePostRoute
+  '/how-to-generate-magic-qr': typeof HowToGenerateMagicQrRoute
   '/how-to-reply-review': typeof HowToReplyReviewRoute
   '/login': typeof LoginRoute
 }
@@ -60,6 +67,7 @@ export interface FileRoutesByTo {
   '/demo': typeof DemoRoute
   '/how-to-connect-gbp': typeof HowToConnectGbpRoute
   '/how-to-create-post': typeof HowToCreatePostRoute
+  '/how-to-generate-magic-qr': typeof HowToGenerateMagicQrRoute
   '/how-to-reply-review': typeof HowToReplyReviewRoute
   '/login': typeof LoginRoute
 }
@@ -69,6 +77,7 @@ export interface FileRoutesById {
   '/demo': typeof DemoRoute
   '/how-to-connect-gbp': typeof HowToConnectGbpRoute
   '/how-to-create-post': typeof HowToCreatePostRoute
+  '/how-to-generate-magic-qr': typeof HowToGenerateMagicQrRoute
   '/how-to-reply-review': typeof HowToReplyReviewRoute
   '/login': typeof LoginRoute
 }
@@ -79,6 +88,7 @@ export interface FileRouteTypes {
     | '/demo'
     | '/how-to-connect-gbp'
     | '/how-to-create-post'
+    | '/how-to-generate-magic-qr'
     | '/how-to-reply-review'
     | '/login'
   fileRoutesByTo: FileRoutesByTo
@@ -87,6 +97,7 @@ export interface FileRouteTypes {
     | '/demo'
     | '/how-to-connect-gbp'
     | '/how-to-create-post'
+    | '/how-to-generate-magic-qr'
     | '/how-to-reply-review'
     | '/login'
   id:
@@ -95,6 +106,7 @@ export interface FileRouteTypes {
     | '/demo'
     | '/how-to-connect-gbp'
     | '/how-to-create-post'
+    | '/how-to-generate-magic-qr'
     | '/how-to-reply-review'
     | '/login'
   fileRoutesById: FileRoutesById
@@ -104,6 +116,7 @@ export interface RootRouteChildren {
   DemoRoute: typeof DemoRoute
   HowToConnectGbpRoute: typeof HowToConnectGbpRoute
   HowToCreatePostRoute: typeof HowToCreatePostRoute
+  HowToGenerateMagicQrRoute: typeof HowToGenerateMagicQrRoute
   HowToReplyReviewRoute: typeof HowToReplyReviewRoute
   LoginRoute: typeof LoginRoute
 }
@@ -138,6 +151,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HowToCreatePostRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/how-to-generate-magic-qr': {
+      id: '/how-to-generate-magic-qr'
+      path: '/how-to-generate-magic-qr'
+      fullPath: '/how-to-generate-magic-qr'
+      preLoaderRoute: typeof HowToGenerateMagicQrRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/how-to-reply-review': {
       id: '/how-to-reply-review'
       path: '/how-to-reply-review'
@@ -160,6 +180,7 @@ const rootRouteChildren: RootRouteChildren = {
   DemoRoute: DemoRoute,
   HowToConnectGbpRoute: HowToConnectGbpRoute,
   HowToCreatePostRoute: HowToCreatePostRoute,
+  HowToGenerateMagicQrRoute: HowToGenerateMagicQrRoute,
   HowToReplyReviewRoute: HowToReplyReviewRoute,
   LoginRoute: LoginRoute,
 }
