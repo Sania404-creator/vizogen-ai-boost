@@ -12,7 +12,9 @@ import {
   UtensilsCrossed,
   Flower2,
 } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import { Reveal, SectionHeading } from "./reveal";
+
 
 const industries: { label: string; icon: typeof Dumbbell; to?: string }[] = [
   { label: "Gyms", icon: Dumbbell, to: "/gym-marketing-software" },
