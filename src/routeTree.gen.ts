@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as DemoRouteImport } from './routes/demo'
 import { Route as HowToConnectGbpRouteImport } from './routes/how-to-connect-gbp'
 import { Route as HowToCreatePostRouteImport } from './routes/how-to-create-post'
+import { Route as HowToReplyReviewRouteImport } from './routes/how-to-reply-review'
 import { Route as LoginRouteImport } from './routes/login'
 
 const IndexRoute = IndexRouteImport.update({
@@ -35,6 +36,11 @@ const HowToCreatePostRoute = HowToCreatePostRouteImport.update({
   path: '/how-to-create-post',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HowToReplyReviewRoute = HowToReplyReviewRouteImport.update({
+  id: '/how-to-reply-review',
+  path: '/how-to-reply-review',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
@@ -46,6 +52,7 @@ export interface FileRoutesByFullPath {
   '/demo': typeof DemoRoute
   '/how-to-connect-gbp': typeof HowToConnectGbpRoute
   '/how-to-create-post': typeof HowToCreatePostRoute
+  '/how-to-reply-review': typeof HowToReplyReviewRoute
   '/login': typeof LoginRoute
 }
 export interface FileRoutesByTo {
@@ -53,6 +60,7 @@ export interface FileRoutesByTo {
   '/demo': typeof DemoRoute
   '/how-to-connect-gbp': typeof HowToConnectGbpRoute
   '/how-to-create-post': typeof HowToCreatePostRoute
+  '/how-to-reply-review': typeof HowToReplyReviewRoute
   '/login': typeof LoginRoute
 }
 export interface FileRoutesById {
@@ -61,20 +69,33 @@ export interface FileRoutesById {
   '/demo': typeof DemoRoute
   '/how-to-connect-gbp': typeof HowToConnectGbpRoute
   '/how-to-create-post': typeof HowToCreatePostRoute
+  '/how-to-reply-review': typeof HowToReplyReviewRoute
   '/login': typeof LoginRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/demo' | '/how-to-connect-gbp' | '/how-to-create-post' | '/login'
+    | '/'
+    | '/demo'
+    | '/how-to-connect-gbp'
+    | '/how-to-create-post'
+    | '/how-to-reply-review'
+    | '/login'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/demo' | '/how-to-connect-gbp' | '/how-to-create-post' | '/login'
+  to:
+    | '/'
+    | '/demo'
+    | '/how-to-connect-gbp'
+    | '/how-to-create-post'
+    | '/how-to-reply-review'
+    | '/login'
   id:
     | '__root__'
     | '/'
     | '/demo'
     | '/how-to-connect-gbp'
     | '/how-to-create-post'
+    | '/how-to-reply-review'
     | '/login'
   fileRoutesById: FileRoutesById
 }
@@ -83,6 +104,7 @@ export interface RootRouteChildren {
   DemoRoute: typeof DemoRoute
   HowToConnectGbpRoute: typeof HowToConnectGbpRoute
   HowToCreatePostRoute: typeof HowToCreatePostRoute
+  HowToReplyReviewRoute: typeof HowToReplyReviewRoute
   LoginRoute: typeof LoginRoute
 }
 
@@ -116,6 +138,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HowToCreatePostRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/how-to-reply-review': {
+      id: '/how-to-reply-review'
+      path: '/how-to-reply-review'
+      fullPath: '/how-to-reply-review'
+      preLoaderRoute: typeof HowToReplyReviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/login': {
       id: '/login'
       path: '/login'
@@ -131,6 +160,7 @@ const rootRouteChildren: RootRouteChildren = {
   DemoRoute: DemoRoute,
   HowToConnectGbpRoute: HowToConnectGbpRoute,
   HowToCreatePostRoute: HowToCreatePostRoute,
+  HowToReplyReviewRoute: HowToReplyReviewRoute,
   LoginRoute: LoginRoute,
 }
 export const routeTree = rootRouteImport
