@@ -1,0 +1,134 @@
+import {
+  Apple,
+  Facebook,
+  Instagram,
+  Linkedin,
+  Mail,
+  MapPin,
+  MessageCircle,
+  Phone,
+  Play,
+  Sparkles,
+  Youtube,
+} from "lucide-react";
+
+const columns = [
+  {
+    title: "Platform",
+    items: ["Features", "Pricing", "AI Post Generation", "Review Management", "Magic QR"],
+  },
+  {
+    title: "Company",
+    items: ["About us", "Blog", "Careers", "Privacy Policy", "Terms of Service"],
+  },
+];
+
+const socials = [
+  { icon: Instagram, label: "Instagram" },
+  { icon: Facebook, label: "Facebook" },
+  { icon: Linkedin, label: "LinkedIn" },
+  { icon: Youtube, label: "YouTube" },
+];
+
+export function Footer() {
+  return (
+    <footer className="relative bg-navy pt-16 text-navy-foreground">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid gap-12 lg:grid-cols-[1.3fr_1fr_1fr_1.2fr]">
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="grid size-9 place-items-center rounded-xl gradient-brand text-primary-foreground">
+                <Sparkles className="size-4" />
+              </span>
+              <span className="text-lg font-bold tracking-tight font-display">Vizogen</span>
+            </div>
+            <p className="mt-4 max-w-xs text-sm leading-relaxed text-navy-foreground/65">
+              AI automation for Google Business Profiles — daily posts, authentic reviews and
+              local ranking growth on autopilot.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <a
+                href="#"
+                className="flex items-center gap-2 rounded-xl border border-navy-foreground/15 bg-navy-foreground/5 px-4 py-2.5 text-xs font-semibold transition-colors hover:bg-navy-foreground/10"
+              >
+                <Play className="size-4" /> Google Play
+              </a>
+              <a
+                href="#"
+                className="flex items-center gap-2 rounded-xl border border-navy-foreground/15 bg-navy-foreground/5 px-4 py-2.5 text-xs font-semibold transition-colors hover:bg-navy-foreground/10"
+              >
+                <Apple className="size-4" /> App Store
+              </a>
+            </div>
+          </div>
+
+          {columns.map((col) => (
+            <div key={col.title}>
+              <p className="text-sm font-semibold">{col.title}</p>
+              <ul className="mt-4 space-y-3">
+                {col.items.map((item) => (
+                  <li key={item}>
+                    <a
+                      href="#"
+                      className="text-sm text-navy-foreground/65 transition-colors hover:text-navy-foreground"
+                    >
+                      {item}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+
+          <div>
+            <p className="text-sm font-semibold">Connect With Us</p>
+            <ul className="mt-4 space-y-3 text-sm text-navy-foreground/65">
+              <li className="flex gap-2.5">
+                <Mail className="mt-0.5 size-4 shrink-0 text-primary" />
+                <a href="mailto:hello@vizogen.com" className="min-w-0 break-all hover:text-navy-foreground">
+                  hello@vizogen.com
+                </a>
+              </li>
+              <li className="flex gap-2.5">
+                <Phone className="mt-0.5 size-4 shrink-0 text-primary" />
+                <a href="tel:+919000000000" className="hover:text-navy-foreground">
+                  +91 90000 00000
+                </a>
+              </li>
+              <li className="flex gap-2.5">
+                <MapPin className="mt-0.5 size-4 shrink-0 text-primary" />
+                <span className="min-w-0">
+                  4th Floor, Cyber Hub, Sector 29, Gurgaon, Haryana 122002
+                </span>
+              </li>
+            </ul>
+            <div className="mt-6 flex gap-2">
+              {socials.map((s) => (
+                <a
+                  key={s.label}
+                  href="#"
+                  aria-label={s.label}
+                  className="grid size-9 place-items-center rounded-full border border-navy-foreground/15 bg-navy-foreground/5 transition-all duration-300 hover:-translate-y-1 hover:bg-navy-foreground/10"
+                >
+                  <s.icon className="size-4" />
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-14 border-t border-navy-foreground/10 py-6 text-center text-xs text-navy-foreground/55">
+          © {new Date().getFullYear()} Vizogen. All rights reserved.
+        </div>
+      </div>
+
+      <a
+        href="https://wa.me/919000000000"
+        aria-label="Chat on WhatsApp"
+        className="fixed bottom-5 right-5 z-50 grid size-14 place-items-center rounded-full gradient-brand text-primary-foreground shadow-glow transition-transform hover:scale-110"
+      >
+        <MessageCircle className="size-6" />
+      </a>
+    </footer>
+  );
+}

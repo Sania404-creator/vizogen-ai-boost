@@ -1,24 +1,54 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Navbar } from "@/components/landing/navbar";
+import { Hero } from "@/components/landing/hero";
+import { Stats } from "@/components/landing/stats";
+import { Industries } from "@/components/landing/industries";
+import { Locations } from "@/components/landing/locations";
+import { PostGallery } from "@/components/landing/post-gallery";
+import { Features } from "@/components/landing/features";
+import { Growth } from "@/components/landing/growth";
+import { Testimonials } from "@/components/landing/testimonials";
+import { AppDownload } from "@/components/landing/app-download";
+import { OldVsNew } from "@/components/landing/old-vs-new";
+import { Faq } from "@/components/landing/faq";
+import { Footer } from "@/components/landing/footer";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+const title = "Vizogen — AI Google Business Profile Automation";
+const description =
+  "Automate your Google Business Profile with Vizogen AI: daily AI posts, authentic 5-star reviews, instant review replies and local rank tracking.";
+
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title },
+      { name: "description", content: description },
+      { property: "og:title", content: title },
+      { property: "og:description", content: description },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="min-h-screen bg-background">
+      <Navbar />
+      <main>
+        <Hero />
+        <Stats />
+        <Industries />
+        <Locations />
+        <PostGallery />
+        <Features />
+        <Growth />
+        <Testimonials />
+        <AppDownload />
+        <OldVsNew />
+        <Faq />
+      </main>
+      <Footer />
     </div>
   );
 }
