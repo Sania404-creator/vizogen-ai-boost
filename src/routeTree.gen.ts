@@ -14,6 +14,7 @@ import { Route as DemoRouteImport } from './routes/demo'
 import { Route as HowToConnectGbpRouteImport } from './routes/how-to-connect-gbp'
 import { Route as HowToCreatePostRouteImport } from './routes/how-to-create-post'
 import { Route as HowToGenerateMagicQrRouteImport } from './routes/how-to-generate-magic-qr'
+import { Route as HowToPostOnGbpRouteImport } from './routes/how-to-post-on-gbp'
 import { Route as HowToReplyReviewRouteImport } from './routes/how-to-reply-review'
 import { Route as LoginRouteImport } from './routes/login'
 
@@ -42,6 +43,11 @@ const HowToGenerateMagicQrRoute = HowToGenerateMagicQrRouteImport.update({
   path: '/how-to-generate-magic-qr',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HowToPostOnGbpRoute = HowToPostOnGbpRouteImport.update({
+  id: '/how-to-post-on-gbp',
+  path: '/how-to-post-on-gbp',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const HowToReplyReviewRoute = HowToReplyReviewRouteImport.update({
   id: '/how-to-reply-review',
   path: '/how-to-reply-review',
@@ -59,6 +65,7 @@ export interface FileRoutesByFullPath {
   '/how-to-connect-gbp': typeof HowToConnectGbpRoute
   '/how-to-create-post': typeof HowToCreatePostRoute
   '/how-to-generate-magic-qr': typeof HowToGenerateMagicQrRoute
+  '/how-to-post-on-gbp': typeof HowToPostOnGbpRoute
   '/how-to-reply-review': typeof HowToReplyReviewRoute
   '/login': typeof LoginRoute
 }
@@ -68,6 +75,7 @@ export interface FileRoutesByTo {
   '/how-to-connect-gbp': typeof HowToConnectGbpRoute
   '/how-to-create-post': typeof HowToCreatePostRoute
   '/how-to-generate-magic-qr': typeof HowToGenerateMagicQrRoute
+  '/how-to-post-on-gbp': typeof HowToPostOnGbpRoute
   '/how-to-reply-review': typeof HowToReplyReviewRoute
   '/login': typeof LoginRoute
 }
@@ -78,6 +86,7 @@ export interface FileRoutesById {
   '/how-to-connect-gbp': typeof HowToConnectGbpRoute
   '/how-to-create-post': typeof HowToCreatePostRoute
   '/how-to-generate-magic-qr': typeof HowToGenerateMagicQrRoute
+  '/how-to-post-on-gbp': typeof HowToPostOnGbpRoute
   '/how-to-reply-review': typeof HowToReplyReviewRoute
   '/login': typeof LoginRoute
 }
@@ -89,6 +98,7 @@ export interface FileRouteTypes {
     | '/how-to-connect-gbp'
     | '/how-to-create-post'
     | '/how-to-generate-magic-qr'
+    | '/how-to-post-on-gbp'
     | '/how-to-reply-review'
     | '/login'
   fileRoutesByTo: FileRoutesByTo
@@ -98,6 +108,7 @@ export interface FileRouteTypes {
     | '/how-to-connect-gbp'
     | '/how-to-create-post'
     | '/how-to-generate-magic-qr'
+    | '/how-to-post-on-gbp'
     | '/how-to-reply-review'
     | '/login'
   id:
@@ -107,6 +118,7 @@ export interface FileRouteTypes {
     | '/how-to-connect-gbp'
     | '/how-to-create-post'
     | '/how-to-generate-magic-qr'
+    | '/how-to-post-on-gbp'
     | '/how-to-reply-review'
     | '/login'
   fileRoutesById: FileRoutesById
@@ -117,6 +129,7 @@ export interface RootRouteChildren {
   HowToConnectGbpRoute: typeof HowToConnectGbpRoute
   HowToCreatePostRoute: typeof HowToCreatePostRoute
   HowToGenerateMagicQrRoute: typeof HowToGenerateMagicQrRoute
+  HowToPostOnGbpRoute: typeof HowToPostOnGbpRoute
   HowToReplyReviewRoute: typeof HowToReplyReviewRoute
   LoginRoute: typeof LoginRoute
 }
@@ -158,6 +171,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HowToGenerateMagicQrRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/how-to-post-on-gbp': {
+      id: '/how-to-post-on-gbp'
+      path: '/how-to-post-on-gbp'
+      fullPath: '/how-to-post-on-gbp'
+      preLoaderRoute: typeof HowToPostOnGbpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/how-to-reply-review': {
       id: '/how-to-reply-review'
       path: '/how-to-reply-review'
@@ -181,6 +201,7 @@ const rootRouteChildren: RootRouteChildren = {
   HowToConnectGbpRoute: HowToConnectGbpRoute,
   HowToCreatePostRoute: HowToCreatePostRoute,
   HowToGenerateMagicQrRoute: HowToGenerateMagicQrRoute,
+  HowToPostOnGbpRoute: HowToPostOnGbpRoute,
   HowToReplyReviewRoute: HowToReplyReviewRoute,
   LoginRoute: LoginRoute,
 }
