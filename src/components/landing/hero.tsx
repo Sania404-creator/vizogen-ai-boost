@@ -1,4 +1,5 @@
 import { motion } from "motion/react";
+import { Link } from "@tanstack/react-router";
 import { Play, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import dashboard from "@/assets/dashboard.jpg";
@@ -43,10 +44,11 @@ export function Hero() {
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Button
+              asChild
               size="lg"
               className="w-full rounded-full gradient-brand px-7 shadow-glow transition-transform hover:scale-[1.03] hover:opacity-95 sm:w-auto"
             >
-              Start Today — Get 500 Coins
+              <Link to="/demo">Start Free Demo</Link>
             </Button>
             <Button
               size="lg"
