@@ -38,7 +38,7 @@ export type IndustryConfig = {
   seoDescription: string;
 };
 
-export const WHATSAPP_NUMBER = "919000000000";
+export const WHATSAPP_NUMBER = "918488918358";
 
 export function whatsappLink(message: string) {
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
