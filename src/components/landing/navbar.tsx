@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Menu, Phone, Sparkles, X } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 
 const links = [
@@ -59,11 +60,11 @@ export function Navbar() {
             <Phone className="size-4" />
             +91 90000 00000
           </a>
-          <Button variant="outline" size="lg" className="rounded-full">
-            Start Now
+          <Button asChild variant="outline" size="lg" className="rounded-full">
+            <Link to="/login">Login</Link>
           </Button>
-          <Button size="lg" className="rounded-full gradient-brand shadow-soft transition-transform hover:scale-[1.03] hover:opacity-95">
-            Free Demo →
+          <Button asChild size="lg" className="rounded-full gradient-brand shadow-soft transition-transform hover:scale-[1.03] hover:opacity-95">
+            <Link to="/demo">Start Free Demo →</Link>
           </Button>
         </div>
 
@@ -92,10 +93,16 @@ export function Navbar() {
             ))}
           </div>
           <div className="mt-3 flex flex-col gap-2">
-            <Button variant="outline" className="w-full rounded-full">
-              Start Now
+            <Button asChild variant="outline" className="w-full rounded-full">
+              <Link to="/login" onClick={() => setOpen(false)}>
+                Login
+              </Link>
             </Button>
-            <Button className="w-full rounded-full gradient-brand">Free Demo →</Button>
+            <Button asChild className="w-full rounded-full gradient-brand">
+              <Link to="/demo" onClick={() => setOpen(false)}>
+                Start Free Demo →
+              </Link>
+            </Button>
           </div>
         </div>
       ) : null}
