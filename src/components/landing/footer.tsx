@@ -99,22 +99,23 @@ export function Footer() {
             <ul className="mt-4 space-y-3 text-sm text-navy-foreground/65">
               <li className="flex gap-2.5">
                 <Mail className="mt-0.5 size-4 shrink-0 text-primary" />
-                <a href="mailto:hello@vizogen.com" className="min-w-0 break-all hover:text-navy-foreground">
-                  hello@vizogen.com
+                <a href="mailto:info.vizogen@gmail.com" className="min-w-0 break-all hover:text-navy-foreground">
+                  info.vizogen@gmail.com
                 </a>
               </li>
               <li className="flex gap-2.5">
                 <Phone className="mt-0.5 size-4 shrink-0 text-primary" />
-                <a href="tel:+919000000000" className="hover:text-navy-foreground">
-                  +91 90000 00000
+                <a href="tel:+918488918358" className="hover:text-navy-foreground">
+                  +91 84889 18358
                 </a>
               </li>
               <li className="flex gap-2.5">
                 <MapPin className="mt-0.5 size-4 shrink-0 text-primary" />
                 <span className="min-w-0">
-                  4th Floor, Cyber Hub, Sector 29, Gurgaon, Haryana 122002
+                  Tower-B, RK ICONIC, 923, 150 Feet Ring Rd, nr. Ayodhya Chowk, Sheetal Park, Puneet Nagar, Bajrang Wadi, Rajkot, Gujarat 360006
                 </span>
               </li>
+
             </ul>
             <div className="mt-6 flex gap-2">
               {socials.map((s) => (
@@ -137,12 +138,13 @@ export function Footer() {
       </div>
 
       <a
-        href="https://wa.me/919000000000"
+        href="https://wa.me/918488918358"
         aria-label="Chat on WhatsApp"
         className="fixed bottom-5 right-5 z-50 grid size-14 place-items-center rounded-full gradient-brand text-primary-foreground shadow-glow transition-transform hover:scale-110"
       >
         <MessageCircle className="size-6" />
       </a>
+
     </footer>
   );
 }

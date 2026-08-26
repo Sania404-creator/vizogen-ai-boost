@@ -149,12 +149,13 @@ export function Navbar() {
 
         <div className="hidden items-center gap-3 xl:flex">
           <a
-            href="tel:+919000000000"
+            href="tel:+918488918358"
             className="flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
           >
             <Phone className="size-4" />
-            +91 90000 00000
+            +91 84889 18358
           </a>
+
           <Button asChild variant="outline" size="lg" className="rounded-full">
             <Link to="/login">Login</Link>
           </Button>

@@ -221,7 +221,7 @@ function DemoPage() {
                     type="tel"
                     value={values.phone}
                     onChange={(e) => set("phone")(e.target.value)}
-                    placeholder="+91 90000 00000"
+                    placeholder="+91 84889 18358"
                     maxLength={20}
                   />
                 </Field>
