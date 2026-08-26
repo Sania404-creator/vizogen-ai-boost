@@ -10,13 +10,23 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BlogRouteImport } from './routes/blog'
 import { Route as DemoRouteImport } from './routes/demo'
 import { Route as HowToConnectGbpRouteImport } from './routes/how-to-connect-gbp'
+import { Route as HowToCreatePostRouteImport } from './routes/how-to-create-post'
+import { Route as HowToGenerateMagicQrRouteImport } from './routes/how-to-generate-magic-qr'
+import { Route as HowToPostOnGbpRouteImport } from './routes/how-to-post-on-gbp'
+import { Route as HowToReplyReviewRouteImport } from './routes/how-to-reply-review'
 import { Route as LoginRouteImport } from './routes/login'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogRoute = BlogRouteImport.update({
+  id: '/blog',
+  path: '/blog',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DemoRoute = DemoRouteImport.update({
@@ -29,6 +39,26 @@ const HowToConnectGbpRoute = HowToConnectGbpRouteImport.update({
   path: '/how-to-connect-gbp',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HowToCreatePostRoute = HowToCreatePostRouteImport.update({
+  id: '/how-to-create-post',
+  path: '/how-to-create-post',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HowToGenerateMagicQrRoute = HowToGenerateMagicQrRouteImport.update({
+  id: '/how-to-generate-magic-qr',
+  path: '/how-to-generate-magic-qr',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HowToPostOnGbpRoute = HowToPostOnGbpRouteImport.update({
+  id: '/how-to-post-on-gbp',
+  path: '/how-to-post-on-gbp',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HowToReplyReviewRoute = HowToReplyReviewRouteImport.update({
+  id: '/how-to-reply-review',
+  path: '/how-to-reply-review',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
@@ -37,35 +67,83 @@ const LoginRoute = LoginRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/blog': typeof BlogRoute
   '/demo': typeof DemoRoute
   '/how-to-connect-gbp': typeof HowToConnectGbpRoute
+  '/how-to-create-post': typeof HowToCreatePostRoute
+  '/how-to-generate-magic-qr': typeof HowToGenerateMagicQrRoute
+  '/how-to-post-on-gbp': typeof HowToPostOnGbpRoute
+  '/how-to-reply-review': typeof HowToReplyReviewRoute
   '/login': typeof LoginRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/blog': typeof BlogRoute
   '/demo': typeof DemoRoute
   '/how-to-connect-gbp': typeof HowToConnectGbpRoute
+  '/how-to-create-post': typeof HowToCreatePostRoute
+  '/how-to-generate-magic-qr': typeof HowToGenerateMagicQrRoute
+  '/how-to-post-on-gbp': typeof HowToPostOnGbpRoute
+  '/how-to-reply-review': typeof HowToReplyReviewRoute
   '/login': typeof LoginRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/blog': typeof BlogRoute
   '/demo': typeof DemoRoute
   '/how-to-connect-gbp': typeof HowToConnectGbpRoute
+  '/how-to-create-post': typeof HowToCreatePostRoute
+  '/how-to-generate-magic-qr': typeof HowToGenerateMagicQrRoute
+  '/how-to-post-on-gbp': typeof HowToPostOnGbpRoute
+  '/how-to-reply-review': typeof HowToReplyReviewRoute
   '/login': typeof LoginRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/demo' | '/how-to-connect-gbp' | '/login'
+  fullPaths:
+    | '/'
+    | '/blog'
+    | '/demo'
+    | '/how-to-connect-gbp'
+    | '/how-to-create-post'
+    | '/how-to-generate-magic-qr'
+    | '/how-to-post-on-gbp'
+    | '/how-to-reply-review'
+    | '/login'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/demo' | '/how-to-connect-gbp' | '/login'
-  id: '__root__' | '/' | '/demo' | '/how-to-connect-gbp' | '/login'
+  to:
+    | '/'
+    | '/blog'
+    | '/demo'
+    | '/how-to-connect-gbp'
+    | '/how-to-create-post'
+    | '/how-to-generate-magic-qr'
+    | '/how-to-post-on-gbp'
+    | '/how-to-reply-review'
+    | '/login'
+  id:
+    | '__root__'
+    | '/'
+    | '/blog'
+    | '/demo'
+    | '/how-to-connect-gbp'
+    | '/how-to-create-post'
+    | '/how-to-generate-magic-qr'
+    | '/how-to-post-on-gbp'
+    | '/how-to-reply-review'
+    | '/login'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BlogRoute: typeof BlogRoute
   DemoRoute: typeof DemoRoute
   HowToConnectGbpRoute: typeof HowToConnectGbpRoute
+  HowToCreatePostRoute: typeof HowToCreatePostRoute
+  HowToGenerateMagicQrRoute: typeof HowToGenerateMagicQrRoute
+  HowToPostOnGbpRoute: typeof HowToPostOnGbpRoute
+  HowToReplyReviewRoute: typeof HowToReplyReviewRoute
   LoginRoute: typeof LoginRoute
 }
 
@@ -76,6 +154,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog': {
+      id: '/blog'
+      path: '/blog'
+      fullPath: '/blog'
+      preLoaderRoute: typeof BlogRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/demo': {
@@ -92,6 +177,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HowToConnectGbpRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/how-to-create-post': {
+      id: '/how-to-create-post'
+      path: '/how-to-create-post'
+      fullPath: '/how-to-create-post'
+      preLoaderRoute: typeof HowToCreatePostRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/how-to-generate-magic-qr': {
+      id: '/how-to-generate-magic-qr'
+      path: '/how-to-generate-magic-qr'
+      fullPath: '/how-to-generate-magic-qr'
+      preLoaderRoute: typeof HowToGenerateMagicQrRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/how-to-post-on-gbp': {
+      id: '/how-to-post-on-gbp'
+      path: '/how-to-post-on-gbp'
+      fullPath: '/how-to-post-on-gbp'
+      preLoaderRoute: typeof HowToPostOnGbpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/how-to-reply-review': {
+      id: '/how-to-reply-review'
+      path: '/how-to-reply-review'
+      fullPath: '/how-to-reply-review'
+      preLoaderRoute: typeof HowToReplyReviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/login': {
       id: '/login'
       path: '/login'
@@ -104,8 +217,13 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BlogRoute: BlogRoute,
   DemoRoute: DemoRoute,
   HowToConnectGbpRoute: HowToConnectGbpRoute,
+  HowToCreatePostRoute: HowToCreatePostRoute,
+  HowToGenerateMagicQrRoute: HowToGenerateMagicQrRoute,
+  HowToPostOnGbpRoute: HowToPostOnGbpRoute,
+  HowToReplyReviewRoute: HowToReplyReviewRoute,
   LoginRoute: LoginRoute,
 }
 export const routeTree = rootRouteImport
