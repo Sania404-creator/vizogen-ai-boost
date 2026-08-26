@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DemoRouteImport } from './routes/demo'
+import { Route as HowToConnectGbpRouteImport } from './routes/how-to-connect-gbp'
 import { Route as LoginRouteImport } from './routes/login'
 
 const IndexRoute = IndexRouteImport.update({
@@ -23,6 +24,11 @@ const DemoRoute = DemoRouteImport.update({
   path: '/demo',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HowToConnectGbpRoute = HowToConnectGbpRouteImport.update({
+  id: '/how-to-connect-gbp',
+  path: '/how-to-connect-gbp',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
@@ -32,30 +38,34 @@ const LoginRoute = LoginRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/demo': typeof DemoRoute
+  '/how-to-connect-gbp': typeof HowToConnectGbpRoute
   '/login': typeof LoginRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/demo': typeof DemoRoute
+  '/how-to-connect-gbp': typeof HowToConnectGbpRoute
   '/login': typeof LoginRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/demo': typeof DemoRoute
+  '/how-to-connect-gbp': typeof HowToConnectGbpRoute
   '/login': typeof LoginRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/demo' | '/login'
+  fullPaths: '/' | '/demo' | '/how-to-connect-gbp' | '/login'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/demo' | '/login'
-  id: '__root__' | '/' | '/demo' | '/login'
+  to: '/' | '/demo' | '/how-to-connect-gbp' | '/login'
+  id: '__root__' | '/' | '/demo' | '/how-to-connect-gbp' | '/login'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DemoRoute: typeof DemoRoute
+  HowToConnectGbpRoute: typeof HowToConnectGbpRoute
   LoginRoute: typeof LoginRoute
 }
 
@@ -75,6 +85,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DemoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/how-to-connect-gbp': {
+      id: '/how-to-connect-gbp'
+      path: '/how-to-connect-gbp'
+      fullPath: '/how-to-connect-gbp'
+      preLoaderRoute: typeof HowToConnectGbpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/login': {
       id: '/login'
       path: '/login'
@@ -88,6 +105,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DemoRoute: DemoRoute,
+  HowToConnectGbpRoute: HowToConnectGbpRoute,
   LoginRoute: LoginRoute,
 }
 export const routeTree = rootRouteImport
