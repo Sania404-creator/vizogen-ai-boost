@@ -13,6 +13,8 @@ import {
 } from "lucide-react";
 import { GuideWithExamples } from "@/components/landing/guide-with-examples";
 import { guideHead } from "@/components/landing/guide-placeholder";
+import magicQrImage from "@/assets/guide-magic-qr.jpg";
+
 
 export const Route = createFileRoute("/how-to-generate-magic-qr")({
   head: guideHead(

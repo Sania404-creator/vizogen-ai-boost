@@ -13,6 +13,8 @@ import {
 } from "lucide-react";
 import { GuideWithExamples } from "@/components/landing/guide-with-examples";
 import { guideHead } from "@/components/landing/guide-placeholder";
+import replyReviewImage from "@/assets/guide-reply-review.jpg";
+
 
 export const Route = createFileRoute("/how-to-reply-review")({
   head: guideHead(
