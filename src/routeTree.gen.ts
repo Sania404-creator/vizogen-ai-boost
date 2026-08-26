@@ -10,19 +10,35 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BakeryMarketingSoftwareRouteImport } from './routes/bakery-marketing-software'
 import { Route as BlogRouteImport } from './routes/blog'
+import { Route as CarGarageMarketingSoftwareRouteImport } from './routes/car-garage-marketing-software'
+import { Route as ClinicMarketingSoftwareRouteImport } from './routes/clinic-marketing-software'
 import { Route as DemoRouteImport } from './routes/demo'
+import { Route as EducationMarketingSoftwareRouteImport } from './routes/education-marketing-software'
 import { Route as GymMarketingSoftwareRouteImport } from './routes/gym-marketing-software'
+import { Route as HandymanMarketingSoftwareRouteImport } from './routes/handyman-marketing-software'
 import { Route as HowToConnectGbpRouteImport } from './routes/how-to-connect-gbp'
 import { Route as HowToCreatePostRouteImport } from './routes/how-to-create-post'
 import { Route as HowToGenerateMagicQrRouteImport } from './routes/how-to-generate-magic-qr'
 import { Route as HowToPostOnGbpRouteImport } from './routes/how-to-post-on-gbp'
 import { Route as HowToReplyReviewRouteImport } from './routes/how-to-reply-review'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as PestControlMarketingSoftwareRouteImport } from './routes/pest-control-marketing-software'
+import { Route as RealestateMarketingSoftwareRouteImport } from './routes/realestate-marketing-software'
+import { Route as RestaurantMarketingSoftwareRouteImport } from './routes/restaurant-marketing-software'
+import { Route as SalonMarketingSoftwareRouteImport } from './routes/salon-marketing-software'
+import { Route as TourTravelMarketingSoftwareRouteImport } from './routes/tour-travel-marketing-software'
+import { Route as YogaWellnessMarketingSoftwareRouteImport } from './routes/yoga-wellness-marketing-software'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BakeryMarketingSoftwareRoute = BakeryMarketingSoftwareRouteImport.update({
+  id: '/bakery-marketing-software',
+  path: '/bakery-marketing-software',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BlogRoute = BlogRouteImport.update({
@@ -30,16 +46,39 @@ const BlogRoute = BlogRouteImport.update({
   path: '/blog',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CarGarageMarketingSoftwareRoute =
+  CarGarageMarketingSoftwareRouteImport.update({
+    id: '/car-garage-marketing-software',
+    path: '/car-garage-marketing-software',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ClinicMarketingSoftwareRoute = ClinicMarketingSoftwareRouteImport.update({
+  id: '/clinic-marketing-software',
+  path: '/clinic-marketing-software',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DemoRoute = DemoRouteImport.update({
   id: '/demo',
   path: '/demo',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EducationMarketingSoftwareRoute =
+  EducationMarketingSoftwareRouteImport.update({
+    id: '/education-marketing-software',
+    path: '/education-marketing-software',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const GymMarketingSoftwareRoute = GymMarketingSoftwareRouteImport.update({
   id: '/gym-marketing-software',
   path: '/gym-marketing-software',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HandymanMarketingSoftwareRoute =
+  HandymanMarketingSoftwareRouteImport.update({
+    id: '/handyman-marketing-software',
+    path: '/handyman-marketing-software',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const HowToConnectGbpRoute = HowToConnectGbpRouteImport.update({
   id: '/how-to-connect-gbp',
   path: '/how-to-connect-gbp',
@@ -70,94 +109,206 @@ const LoginRoute = LoginRouteImport.update({
   path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PestControlMarketingSoftwareRoute =
+  PestControlMarketingSoftwareRouteImport.update({
+    id: '/pest-control-marketing-software',
+    path: '/pest-control-marketing-software',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const RealestateMarketingSoftwareRoute =
+  RealestateMarketingSoftwareRouteImport.update({
+    id: '/realestate-marketing-software',
+    path: '/realestate-marketing-software',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const RestaurantMarketingSoftwareRoute =
+  RestaurantMarketingSoftwareRouteImport.update({
+    id: '/restaurant-marketing-software',
+    path: '/restaurant-marketing-software',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const SalonMarketingSoftwareRoute = SalonMarketingSoftwareRouteImport.update({
+  id: '/salon-marketing-software',
+  path: '/salon-marketing-software',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TourTravelMarketingSoftwareRoute =
+  TourTravelMarketingSoftwareRouteImport.update({
+    id: '/tour-travel-marketing-software',
+    path: '/tour-travel-marketing-software',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const YogaWellnessMarketingSoftwareRoute =
+  YogaWellnessMarketingSoftwareRouteImport.update({
+    id: '/yoga-wellness-marketing-software',
+    path: '/yoga-wellness-marketing-software',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/bakery-marketing-software': typeof BakeryMarketingSoftwareRoute
   '/blog': typeof BlogRoute
+  '/car-garage-marketing-software': typeof CarGarageMarketingSoftwareRoute
+  '/clinic-marketing-software': typeof ClinicMarketingSoftwareRoute
   '/demo': typeof DemoRoute
+  '/education-marketing-software': typeof EducationMarketingSoftwareRoute
   '/gym-marketing-software': typeof GymMarketingSoftwareRoute
+  '/handyman-marketing-software': typeof HandymanMarketingSoftwareRoute
   '/how-to-connect-gbp': typeof HowToConnectGbpRoute
   '/how-to-create-post': typeof HowToCreatePostRoute
   '/how-to-generate-magic-qr': typeof HowToGenerateMagicQrRoute
   '/how-to-post-on-gbp': typeof HowToPostOnGbpRoute
   '/how-to-reply-review': typeof HowToReplyReviewRoute
   '/login': typeof LoginRoute
+  '/pest-control-marketing-software': typeof PestControlMarketingSoftwareRoute
+  '/realestate-marketing-software': typeof RealestateMarketingSoftwareRoute
+  '/restaurant-marketing-software': typeof RestaurantMarketingSoftwareRoute
+  '/salon-marketing-software': typeof SalonMarketingSoftwareRoute
+  '/tour-travel-marketing-software': typeof TourTravelMarketingSoftwareRoute
+  '/yoga-wellness-marketing-software': typeof YogaWellnessMarketingSoftwareRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/bakery-marketing-software': typeof BakeryMarketingSoftwareRoute
   '/blog': typeof BlogRoute
+  '/car-garage-marketing-software': typeof CarGarageMarketingSoftwareRoute
+  '/clinic-marketing-software': typeof ClinicMarketingSoftwareRoute
   '/demo': typeof DemoRoute
+  '/education-marketing-software': typeof EducationMarketingSoftwareRoute
   '/gym-marketing-software': typeof GymMarketingSoftwareRoute
+  '/handyman-marketing-software': typeof HandymanMarketingSoftwareRoute
   '/how-to-connect-gbp': typeof HowToConnectGbpRoute
   '/how-to-create-post': typeof HowToCreatePostRoute
   '/how-to-generate-magic-qr': typeof HowToGenerateMagicQrRoute
   '/how-to-post-on-gbp': typeof HowToPostOnGbpRoute
   '/how-to-reply-review': typeof HowToReplyReviewRoute
   '/login': typeof LoginRoute
+  '/pest-control-marketing-software': typeof PestControlMarketingSoftwareRoute
+  '/realestate-marketing-software': typeof RealestateMarketingSoftwareRoute
+  '/restaurant-marketing-software': typeof RestaurantMarketingSoftwareRoute
+  '/salon-marketing-software': typeof SalonMarketingSoftwareRoute
+  '/tour-travel-marketing-software': typeof TourTravelMarketingSoftwareRoute
+  '/yoga-wellness-marketing-software': typeof YogaWellnessMarketingSoftwareRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/bakery-marketing-software': typeof BakeryMarketingSoftwareRoute
   '/blog': typeof BlogRoute
+  '/car-garage-marketing-software': typeof CarGarageMarketingSoftwareRoute
+  '/clinic-marketing-software': typeof ClinicMarketingSoftwareRoute
   '/demo': typeof DemoRoute
+  '/education-marketing-software': typeof EducationMarketingSoftwareRoute
   '/gym-marketing-software': typeof GymMarketingSoftwareRoute
+  '/handyman-marketing-software': typeof HandymanMarketingSoftwareRoute
   '/how-to-connect-gbp': typeof HowToConnectGbpRoute
   '/how-to-create-post': typeof HowToCreatePostRoute
   '/how-to-generate-magic-qr': typeof HowToGenerateMagicQrRoute
   '/how-to-post-on-gbp': typeof HowToPostOnGbpRoute
   '/how-to-reply-review': typeof HowToReplyReviewRoute
   '/login': typeof LoginRoute
+  '/pest-control-marketing-software': typeof PestControlMarketingSoftwareRoute
+  '/realestate-marketing-software': typeof RealestateMarketingSoftwareRoute
+  '/restaurant-marketing-software': typeof RestaurantMarketingSoftwareRoute
+  '/salon-marketing-software': typeof SalonMarketingSoftwareRoute
+  '/tour-travel-marketing-software': typeof TourTravelMarketingSoftwareRoute
+  '/yoga-wellness-marketing-software': typeof YogaWellnessMarketingSoftwareRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/bakery-marketing-software'
     | '/blog'
+    | '/car-garage-marketing-software'
+    | '/clinic-marketing-software'
     | '/demo'
+    | '/education-marketing-software'
     | '/gym-marketing-software'
+    | '/handyman-marketing-software'
     | '/how-to-connect-gbp'
     | '/how-to-create-post'
     | '/how-to-generate-magic-qr'
     | '/how-to-post-on-gbp'
     | '/how-to-reply-review'
     | '/login'
+    | '/pest-control-marketing-software'
+    | '/realestate-marketing-software'
+    | '/restaurant-marketing-software'
+    | '/salon-marketing-software'
+    | '/tour-travel-marketing-software'
+    | '/yoga-wellness-marketing-software'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/bakery-marketing-software'
     | '/blog'
+    | '/car-garage-marketing-software'
+    | '/clinic-marketing-software'
     | '/demo'
+    | '/education-marketing-software'
     | '/gym-marketing-software'
+    | '/handyman-marketing-software'
     | '/how-to-connect-gbp'
     | '/how-to-create-post'
     | '/how-to-generate-magic-qr'
     | '/how-to-post-on-gbp'
     | '/how-to-reply-review'
     | '/login'
+    | '/pest-control-marketing-software'
+    | '/realestate-marketing-software'
+    | '/restaurant-marketing-software'
+    | '/salon-marketing-software'
+    | '/tour-travel-marketing-software'
+    | '/yoga-wellness-marketing-software'
   id:
     | '__root__'
     | '/'
+    | '/bakery-marketing-software'
     | '/blog'
+    | '/car-garage-marketing-software'
+    | '/clinic-marketing-software'
     | '/demo'
+    | '/education-marketing-software'
     | '/gym-marketing-software'
+    | '/handyman-marketing-software'
     | '/how-to-connect-gbp'
     | '/how-to-create-post'
     | '/how-to-generate-magic-qr'
     | '/how-to-post-on-gbp'
     | '/how-to-reply-review'
     | '/login'
+    | '/pest-control-marketing-software'
+    | '/realestate-marketing-software'
+    | '/restaurant-marketing-software'
+    | '/salon-marketing-software'
+    | '/tour-travel-marketing-software'
+    | '/yoga-wellness-marketing-software'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BakeryMarketingSoftwareRoute: typeof BakeryMarketingSoftwareRoute
   BlogRoute: typeof BlogRoute
+  CarGarageMarketingSoftwareRoute: typeof CarGarageMarketingSoftwareRoute
+  ClinicMarketingSoftwareRoute: typeof ClinicMarketingSoftwareRoute
   DemoRoute: typeof DemoRoute
+  EducationMarketingSoftwareRoute: typeof EducationMarketingSoftwareRoute
   GymMarketingSoftwareRoute: typeof GymMarketingSoftwareRoute
+  HandymanMarketingSoftwareRoute: typeof HandymanMarketingSoftwareRoute
   HowToConnectGbpRoute: typeof HowToConnectGbpRoute
   HowToCreatePostRoute: typeof HowToCreatePostRoute
   HowToGenerateMagicQrRoute: typeof HowToGenerateMagicQrRoute
   HowToPostOnGbpRoute: typeof HowToPostOnGbpRoute
   HowToReplyReviewRoute: typeof HowToReplyReviewRoute
   LoginRoute: typeof LoginRoute
+  PestControlMarketingSoftwareRoute: typeof PestControlMarketingSoftwareRoute
+  RealestateMarketingSoftwareRoute: typeof RealestateMarketingSoftwareRoute
+  RestaurantMarketingSoftwareRoute: typeof RestaurantMarketingSoftwareRoute
+  SalonMarketingSoftwareRoute: typeof SalonMarketingSoftwareRoute
+  TourTravelMarketingSoftwareRoute: typeof TourTravelMarketingSoftwareRoute
+  YogaWellnessMarketingSoftwareRoute: typeof YogaWellnessMarketingSoftwareRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -169,11 +320,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/bakery-marketing-software': {
+      id: '/bakery-marketing-software'
+      path: '/bakery-marketing-software'
+      fullPath: '/bakery-marketing-software'
+      preLoaderRoute: typeof BakeryMarketingSoftwareRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/blog': {
       id: '/blog'
       path: '/blog'
       fullPath: '/blog'
       preLoaderRoute: typeof BlogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/car-garage-marketing-software': {
+      id: '/car-garage-marketing-software'
+      path: '/car-garage-marketing-software'
+      fullPath: '/car-garage-marketing-software'
+      preLoaderRoute: typeof CarGarageMarketingSoftwareRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/clinic-marketing-software': {
+      id: '/clinic-marketing-software'
+      path: '/clinic-marketing-software'
+      fullPath: '/clinic-marketing-software'
+      preLoaderRoute: typeof ClinicMarketingSoftwareRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/demo': {
@@ -183,11 +355,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DemoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/education-marketing-software': {
+      id: '/education-marketing-software'
+      path: '/education-marketing-software'
+      fullPath: '/education-marketing-software'
+      preLoaderRoute: typeof EducationMarketingSoftwareRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/gym-marketing-software': {
       id: '/gym-marketing-software'
       path: '/gym-marketing-software'
       fullPath: '/gym-marketing-software'
       preLoaderRoute: typeof GymMarketingSoftwareRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/handyman-marketing-software': {
+      id: '/handyman-marketing-software'
+      path: '/handyman-marketing-software'
+      fullPath: '/handyman-marketing-software'
+      preLoaderRoute: typeof HandymanMarketingSoftwareRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/how-to-connect-gbp': {
@@ -232,20 +418,73 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/pest-control-marketing-software': {
+      id: '/pest-control-marketing-software'
+      path: '/pest-control-marketing-software'
+      fullPath: '/pest-control-marketing-software'
+      preLoaderRoute: typeof PestControlMarketingSoftwareRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/realestate-marketing-software': {
+      id: '/realestate-marketing-software'
+      path: '/realestate-marketing-software'
+      fullPath: '/realestate-marketing-software'
+      preLoaderRoute: typeof RealestateMarketingSoftwareRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/restaurant-marketing-software': {
+      id: '/restaurant-marketing-software'
+      path: '/restaurant-marketing-software'
+      fullPath: '/restaurant-marketing-software'
+      preLoaderRoute: typeof RestaurantMarketingSoftwareRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/salon-marketing-software': {
+      id: '/salon-marketing-software'
+      path: '/salon-marketing-software'
+      fullPath: '/salon-marketing-software'
+      preLoaderRoute: typeof SalonMarketingSoftwareRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tour-travel-marketing-software': {
+      id: '/tour-travel-marketing-software'
+      path: '/tour-travel-marketing-software'
+      fullPath: '/tour-travel-marketing-software'
+      preLoaderRoute: typeof TourTravelMarketingSoftwareRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/yoga-wellness-marketing-software': {
+      id: '/yoga-wellness-marketing-software'
+      path: '/yoga-wellness-marketing-software'
+      fullPath: '/yoga-wellness-marketing-software'
+      preLoaderRoute: typeof YogaWellnessMarketingSoftwareRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BakeryMarketingSoftwareRoute: BakeryMarketingSoftwareRoute,
   BlogRoute: BlogRoute,
+  CarGarageMarketingSoftwareRoute: CarGarageMarketingSoftwareRoute,
+  ClinicMarketingSoftwareRoute: ClinicMarketingSoftwareRoute,
   DemoRoute: DemoRoute,
+  EducationMarketingSoftwareRoute: EducationMarketingSoftwareRoute,
   GymMarketingSoftwareRoute: GymMarketingSoftwareRoute,
+  HandymanMarketingSoftwareRoute: HandymanMarketingSoftwareRoute,
   HowToConnectGbpRoute: HowToConnectGbpRoute,
   HowToCreatePostRoute: HowToCreatePostRoute,
   HowToGenerateMagicQrRoute: HowToGenerateMagicQrRoute,
   HowToPostOnGbpRoute: HowToPostOnGbpRoute,
   HowToReplyReviewRoute: HowToReplyReviewRoute,
   LoginRoute: LoginRoute,
+  PestControlMarketingSoftwareRoute: PestControlMarketingSoftwareRoute,
+  RealestateMarketingSoftwareRoute: RealestateMarketingSoftwareRoute,
+  RestaurantMarketingSoftwareRoute: RestaurantMarketingSoftwareRoute,
+  SalonMarketingSoftwareRoute: SalonMarketingSoftwareRoute,
+  TourTravelMarketingSoftwareRoute: TourTravelMarketingSoftwareRoute,
+  YogaWellnessMarketingSoftwareRoute: YogaWellnessMarketingSoftwareRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
