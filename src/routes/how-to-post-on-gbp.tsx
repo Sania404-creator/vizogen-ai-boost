@@ -1,9 +1,23 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "motion/react";
-import { ArrowRight, Megaphone, Newspaper, Sparkles, TrendingUp, Users } from "lucide-react";
+import {
+  ArrowRight,
+  BadgePercent,
+  CalendarDays,
+  Camera,
+  Gift,
+  Heart,
+  HelpCircle,
+  Megaphone,
+  Newspaper,
+  Sparkles,
+  Star,
+  TrendingUp,
+  Users,
+} from "lucide-react";
 import { Navbar } from "@/components/landing/navbar";
 import { Footer } from "@/components/landing/footer";
-import { Reveal } from "@/components/landing/reveal";
+import { Reveal, SectionHeading } from "@/components/landing/reveal";
 import { Button } from "@/components/ui/button";
 
 const title = "How to Post on Google Business Profile — Vizogen";
