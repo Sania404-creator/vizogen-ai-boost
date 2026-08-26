@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from "react";
-import { ChevronDown, Menu, Phone, Sparkles, X } from "lucide-react";
+import { ChevronDown, Menu, Phone, X } from "lucide-react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { AnimatePresence, motion } from "motion/react";
 import { Button } from "@/components/ui/button";
 import { gbpGuideLinks } from "@/components/landing/gbp-guide-menu";
+import logoAsset from "@/assets/vizogen-logo.png.asset.json";
 
 const links = [
   { label: "Features", href: "#features" },
@@ -49,12 +50,11 @@ export function Navbar() {
     >
       <nav className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
         <a href="/#top" className="flex min-w-0 items-center gap-2">
-          <span className="grid size-9 shrink-0 place-items-center rounded-xl gradient-brand text-primary-foreground shadow-soft">
-            <Sparkles className="size-4" />
-          </span>
-          <span className="truncate text-lg font-bold tracking-tight text-foreground font-display">
-            Vizogen
-          </span>
+          <img
+            src={logoAsset.url}
+            alt="Vizogen"
+            className="h-8 w-auto max-w-[140px] object-contain"
+          />
         </a>
 
         <div className="hidden items-center gap-1 lg:flex">
