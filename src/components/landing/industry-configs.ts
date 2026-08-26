@@ -106,7 +106,7 @@ function buildConfig(spec: IndustrySpec): IndustryConfig {
       "Offer and service creatives designed in seconds",
     ],
     galleryPosts: galleryTitles.map((title, i) => ({
-      src: galleryImages[i],
+      src: galleryImages[i]!,
       alt: `AI generated ${industrySingular.toLowerCase()} post — ${title}`,
       title,
     })),
