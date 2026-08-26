@@ -51,12 +51,41 @@ export function Navbar() {
           {links.map((l) => (
             <a
               key={l.label}
-              href={l.href}
+              href={onHome ? l.href : `/${l.href}`}
               className="rounded-full px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
             >
               {l.label}
             </a>
           ))}
+
+          <DropdownMenu>
+            <DropdownMenuTrigger
+              className={`flex items-center gap-1 rounded-full px-3 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-foreground ${
+                pathname.startsWith("/how-to") ? "text-primary" : "text-muted-foreground"
+              }`}
+            >
+              GBP Guide <ChevronDown className="size-4" />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-56 rounded-2xl">
+              {gbpGuideLinks.map((g) => (
+                <DropdownMenuItem key={g.label} asChild className="rounded-xl">
+                  <Link
+                    to={g.to}
+                    className={`flex items-center justify-between ${
+                      g.ready && pathname === g.to ? "text-primary font-semibold" : ""
+                    }`}
+                  >
+                    {g.label}
+                    {g.ready ? null : (
+                      <span className="ml-2 rounded-full bg-muted px-2 py-0.5 text-[10px] font-semibold uppercase text-muted-foreground">
+                        Soon
+                      </span>
+                    )}
+                  </Link>
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
 
         <div className="hidden items-center gap-3 xl:flex">
