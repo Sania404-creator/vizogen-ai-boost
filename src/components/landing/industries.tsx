@@ -14,8 +14,8 @@ import {
 } from "lucide-react";
 import { Reveal, SectionHeading } from "./reveal";
 
-const industries = [
-  { label: "Gyms", icon: Dumbbell },
+const industries: { label: string; icon: typeof Dumbbell; to?: string }[] = [
+  { label: "Gyms", icon: Dumbbell, to: "/gym-marketing-software" },
   { label: "Clinics", icon: HeartPulse },
   { label: "Bakeries", icon: Croissant },
   { label: "Salons", icon: Scissors },
@@ -28,6 +28,7 @@ const industries = [
   { label: "Education", icon: GraduationCap },
   { label: "Real Estate", icon: Building2 },
 ];
+
 
 export function Industries() {
   return (
