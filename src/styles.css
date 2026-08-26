@@ -194,7 +194,7 @@
     inset: 0;
     border-radius: inherit;
     padding: 1px;
-    background: linear-gradient(140deg, oklch(from var(--brand) l c h / 0.55), oklch(from var(--brand-2) l c h / 0.35), transparent 70%);
+    background: linear-gradient(140deg, color-mix(in oklab, var(--brand) 55%, transparent), color-mix(in oklab, var(--brand-2) 30%, transparent), transparent 70%);
     -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
     mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
     -webkit-mask-composite: xor;
