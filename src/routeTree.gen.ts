@@ -31,6 +31,7 @@ import { Route as RestaurantMarketingSoftwareRouteImport } from './routes/restau
 import { Route as SalonMarketingSoftwareRouteImport } from './routes/salon-marketing-software'
 import { Route as TourTravelMarketingSoftwareRouteImport } from './routes/tour-travel-marketing-software'
 import { Route as YogaWellnessMarketingSoftwareRouteImport } from './routes/yoga-wellness-marketing-software'
+import { Route as ServicesLocalSeoRouteImport } from './routes/services.local-seo'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -150,6 +151,11 @@ const YogaWellnessMarketingSoftwareRoute =
     path: '/yoga-wellness-marketing-software',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ServicesLocalSeoRoute = ServicesLocalSeoRouteImport.update({
+  id: '/services/local-seo',
+  path: '/services/local-seo',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -174,6 +180,7 @@ export interface FileRoutesByFullPath {
   '/salon-marketing-software': typeof SalonMarketingSoftwareRoute
   '/tour-travel-marketing-software': typeof TourTravelMarketingSoftwareRoute
   '/yoga-wellness-marketing-software': typeof YogaWellnessMarketingSoftwareRoute
+  '/services/local-seo': typeof ServicesLocalSeoRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -198,6 +205,7 @@ export interface FileRoutesByTo {
   '/salon-marketing-software': typeof SalonMarketingSoftwareRoute
   '/tour-travel-marketing-software': typeof TourTravelMarketingSoftwareRoute
   '/yoga-wellness-marketing-software': typeof YogaWellnessMarketingSoftwareRoute
+  '/services/local-seo': typeof ServicesLocalSeoRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -223,6 +231,7 @@ export interface FileRoutesById {
   '/salon-marketing-software': typeof SalonMarketingSoftwareRoute
   '/tour-travel-marketing-software': typeof TourTravelMarketingSoftwareRoute
   '/yoga-wellness-marketing-software': typeof YogaWellnessMarketingSoftwareRoute
+  '/services/local-seo': typeof ServicesLocalSeoRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -249,6 +258,7 @@ export interface FileRouteTypes {
     | '/salon-marketing-software'
     | '/tour-travel-marketing-software'
     | '/yoga-wellness-marketing-software'
+    | '/services/local-seo'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -273,6 +283,7 @@ export interface FileRouteTypes {
     | '/salon-marketing-software'
     | '/tour-travel-marketing-software'
     | '/yoga-wellness-marketing-software'
+    | '/services/local-seo'
   id:
     | '__root__'
     | '/'
@@ -297,6 +308,7 @@ export interface FileRouteTypes {
     | '/salon-marketing-software'
     | '/tour-travel-marketing-software'
     | '/yoga-wellness-marketing-software'
+    | '/services/local-seo'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -322,6 +334,7 @@ export interface RootRouteChildren {
   SalonMarketingSoftwareRoute: typeof SalonMarketingSoftwareRoute
   TourTravelMarketingSoftwareRoute: typeof TourTravelMarketingSoftwareRoute
   YogaWellnessMarketingSoftwareRoute: typeof YogaWellnessMarketingSoftwareRoute
+  ServicesLocalSeoRoute: typeof ServicesLocalSeoRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -480,6 +493,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof YogaWellnessMarketingSoftwareRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/services/local-seo': {
+      id: '/services/local-seo'
+      path: '/services/local-seo'
+      fullPath: '/services/local-seo'
+      preLoaderRoute: typeof ServicesLocalSeoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -506,6 +526,7 @@ const rootRouteChildren: RootRouteChildren = {
   SalonMarketingSoftwareRoute: SalonMarketingSoftwareRoute,
   TourTravelMarketingSoftwareRoute: TourTravelMarketingSoftwareRoute,
   YogaWellnessMarketingSoftwareRoute: YogaWellnessMarketingSoftwareRoute,
+  ServicesLocalSeoRoute: ServicesLocalSeoRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
