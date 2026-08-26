@@ -25,6 +25,7 @@ import { Route as HowToPostOnGbpRouteImport } from './routes/how-to-post-on-gbp'
 import { Route as HowToReplyReviewRouteImport } from './routes/how-to-reply-review'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as PestControlMarketingSoftwareRouteImport } from './routes/pest-control-marketing-software'
+import { Route as PostManagementRouteImport } from './routes/post-management'
 import { Route as RealestateMarketingSoftwareRouteImport } from './routes/realestate-marketing-software'
 import { Route as RestaurantMarketingSoftwareRouteImport } from './routes/restaurant-marketing-software'
 import { Route as SalonMarketingSoftwareRouteImport } from './routes/salon-marketing-software'
@@ -115,6 +116,11 @@ const PestControlMarketingSoftwareRoute =
     path: '/pest-control-marketing-software',
     getParentRoute: () => rootRouteImport,
   } as any)
+const PostManagementRoute = PostManagementRouteImport.update({
+  id: '/post-management',
+  path: '/post-management',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RealestateMarketingSoftwareRoute =
   RealestateMarketingSoftwareRouteImport.update({
     id: '/realestate-marketing-software',
@@ -162,6 +168,7 @@ export interface FileRoutesByFullPath {
   '/how-to-reply-review': typeof HowToReplyReviewRoute
   '/login': typeof LoginRoute
   '/pest-control-marketing-software': typeof PestControlMarketingSoftwareRoute
+  '/post-management': typeof PostManagementRoute
   '/realestate-marketing-software': typeof RealestateMarketingSoftwareRoute
   '/restaurant-marketing-software': typeof RestaurantMarketingSoftwareRoute
   '/salon-marketing-software': typeof SalonMarketingSoftwareRoute
@@ -185,6 +192,7 @@ export interface FileRoutesByTo {
   '/how-to-reply-review': typeof HowToReplyReviewRoute
   '/login': typeof LoginRoute
   '/pest-control-marketing-software': typeof PestControlMarketingSoftwareRoute
+  '/post-management': typeof PostManagementRoute
   '/realestate-marketing-software': typeof RealestateMarketingSoftwareRoute
   '/restaurant-marketing-software': typeof RestaurantMarketingSoftwareRoute
   '/salon-marketing-software': typeof SalonMarketingSoftwareRoute
@@ -209,6 +217,7 @@ export interface FileRoutesById {
   '/how-to-reply-review': typeof HowToReplyReviewRoute
   '/login': typeof LoginRoute
   '/pest-control-marketing-software': typeof PestControlMarketingSoftwareRoute
+  '/post-management': typeof PostManagementRoute
   '/realestate-marketing-software': typeof RealestateMarketingSoftwareRoute
   '/restaurant-marketing-software': typeof RestaurantMarketingSoftwareRoute
   '/salon-marketing-software': typeof SalonMarketingSoftwareRoute
@@ -234,6 +243,7 @@ export interface FileRouteTypes {
     | '/how-to-reply-review'
     | '/login'
     | '/pest-control-marketing-software'
+    | '/post-management'
     | '/realestate-marketing-software'
     | '/restaurant-marketing-software'
     | '/salon-marketing-software'
@@ -257,6 +267,7 @@ export interface FileRouteTypes {
     | '/how-to-reply-review'
     | '/login'
     | '/pest-control-marketing-software'
+    | '/post-management'
     | '/realestate-marketing-software'
     | '/restaurant-marketing-software'
     | '/salon-marketing-software'
@@ -280,6 +291,7 @@ export interface FileRouteTypes {
     | '/how-to-reply-review'
     | '/login'
     | '/pest-control-marketing-software'
+    | '/post-management'
     | '/realestate-marketing-software'
     | '/restaurant-marketing-software'
     | '/salon-marketing-software'
@@ -304,6 +316,7 @@ export interface RootRouteChildren {
   HowToReplyReviewRoute: typeof HowToReplyReviewRoute
   LoginRoute: typeof LoginRoute
   PestControlMarketingSoftwareRoute: typeof PestControlMarketingSoftwareRoute
+  PostManagementRoute: typeof PostManagementRoute
   RealestateMarketingSoftwareRoute: typeof RealestateMarketingSoftwareRoute
   RestaurantMarketingSoftwareRoute: typeof RestaurantMarketingSoftwareRoute
   SalonMarketingSoftwareRoute: typeof SalonMarketingSoftwareRoute
@@ -425,6 +438,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PestControlMarketingSoftwareRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/post-management': {
+      id: '/post-management'
+      path: '/post-management'
+      fullPath: '/post-management'
+      preLoaderRoute: typeof PostManagementRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/realestate-marketing-software': {
       id: '/realestate-marketing-software'
       path: '/realestate-marketing-software'
@@ -480,6 +500,7 @@ const rootRouteChildren: RootRouteChildren = {
   HowToReplyReviewRoute: HowToReplyReviewRoute,
   LoginRoute: LoginRoute,
   PestControlMarketingSoftwareRoute: PestControlMarketingSoftwareRoute,
+  PostManagementRoute: PostManagementRoute,
   RealestateMarketingSoftwareRoute: RealestateMarketingSoftwareRoute,
   RestaurantMarketingSoftwareRoute: RestaurantMarketingSoftwareRoute,
   SalonMarketingSoftwareRoute: SalonMarketingSoftwareRoute,
