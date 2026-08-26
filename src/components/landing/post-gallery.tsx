@@ -7,7 +7,7 @@ import p4 from "@/assets/post-4.jpg";
 import p5 from "@/assets/post-5.jpg";
 import p6 from "@/assets/post-6.jpg";
 
-const posts = [
+const defaultPosts = [
   { src: p1, alt: "AI generated gym promotion post", title: "FitPeak Gym" },
   { src: p2, alt: "AI generated bakery promotion post", title: "Butter & Crumb" },
   { src: p3, alt: "AI generated dental clinic post", title: "Sunrise Dental" },
@@ -16,15 +16,20 @@ const posts = [
   { src: p6, alt: "AI generated yoga studio post", title: "Zen Yoga" },
 ];
 
-export function PostGallery() {
+export function PostGallery({
+  title = "AI Generated Post Examples",
+  subtitle = "Every post is written, designed and scheduled for your profile — no designer, no agency.",
+  posts = defaultPosts,
+}: {
+  title?: string;
+  subtitle?: string;
+  posts?: { src: string; alt: string; title: string }[];
+}) {
   return (
     <section className="bg-card/60 py-20 sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <SectionHeading
-          eyebrow="Gallery"
-          title="AI Generated Post Examples"
-          subtitle="Every post is written, designed and scheduled for your profile — no designer, no agency."
-        />
+        <SectionHeading eyebrow="Gallery" title={title} subtitle={subtitle} />
+
         <div className="mt-12 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {posts.map((post, i) => (
             <Reveal key={post.title} delay={(i % 3) * 0.08}>

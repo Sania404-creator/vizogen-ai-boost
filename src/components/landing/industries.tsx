@@ -12,10 +12,12 @@ import {
   UtensilsCrossed,
   Flower2,
 } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import { Reveal, SectionHeading } from "./reveal";
 
-const industries = [
-  { label: "Gyms", icon: Dumbbell },
+
+const industries: { label: string; icon: typeof Dumbbell; to?: string }[] = [
+  { label: "Gyms", icon: Dumbbell, to: "/gym-marketing-software" },
   { label: "Clinics", icon: HeartPulse },
   { label: "Bakeries", icon: Croissant },
   { label: "Salons", icon: Scissors },
@@ -29,6 +31,7 @@ const industries = [
   { label: "Real Estate", icon: Building2 },
 ];
 
+
 export function Industries() {
   return (
     <section id="how-it-works" className="py-20 sm:py-28">
@@ -39,9 +42,9 @@ export function Industries() {
           subtitle="Whatever you run locally, Vizogen writes, schedules and replies like a full marketing team — tuned to your category."
         />
         <div className="mt-12 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
-          {industries.map((item, i) => (
-            <Reveal key={item.label} delay={(i % 4) * 0.06}>
-              <div className="gradient-border group flex items-center gap-3 rounded-2xl border border-border/70 bg-card p-4 shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lift">
+          {industries.map((item, i) => {
+            const card = (
+              <div className="gradient-border group flex h-full items-center gap-3 rounded-2xl border border-border/70 bg-card p-4 shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lift">
                 <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-accent text-primary transition-colors group-hover:gradient-brand group-hover:text-primary-foreground">
                   <item.icon className="size-5" />
                 </span>
@@ -49,8 +52,20 @@ export function Industries() {
                   {item.label}
                 </span>
               </div>
-            </Reveal>
-          ))}
+            );
+            return (
+              <Reveal key={item.label} delay={(i % 4) * 0.06}>
+                {item.to ? (
+                  <Link to={item.to} className="block h-full">
+                    {card}
+                  </Link>
+                ) : (
+                  card
+                )}
+              </Reveal>
+            );
+          })}
+
         </div>
       </div>
     </section>
