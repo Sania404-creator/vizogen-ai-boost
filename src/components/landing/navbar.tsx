@@ -29,7 +29,7 @@ export function Navbar() {
           : "bg-background/60 backdrop-blur-md"
       }`}
     >
-      <nav className="mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-4 px-4 py-3 sm:px-6 lg:px-8">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6 lg:px-8">
         <a href="#top" className="flex min-w-0 items-center gap-2">
           <span className="grid size-9 shrink-0 place-items-center rounded-xl gradient-brand text-primary-foreground shadow-soft">
             <Sparkles className="size-4" />
@@ -51,7 +51,7 @@ export function Navbar() {
           ))}
         </div>
 
-        <div className="hidden items-center gap-3 lg:flex">
+        <div className="hidden items-center gap-3 xl:flex">
           <a
             href="tel:+919000000000"
             className="flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
@@ -71,15 +71,15 @@ export function Navbar() {
           type="button"
           onClick={() => setOpen((v) => !v)}
           aria-label="Toggle menu"
-          className="grid size-10 shrink-0 place-items-center rounded-xl border border-border bg-card text-foreground lg:hidden"
+          className="grid size-10 shrink-0 place-items-center rounded-xl border border-border bg-card text-foreground xl:hidden"
         >
           {open ? <X className="size-5" /> : <Menu className="size-5" />}
         </button>
       </nav>
 
       {open ? (
-        <div className="border-t border-border bg-background px-4 pb-5 pt-3 lg:hidden">
-          <div className="flex flex-col">
+        <div className="border-t border-border bg-background px-4 pb-5 pt-3 xl:hidden">
+          <div className="flex flex-col lg:hidden">
             {links.map((l) => (
               <a
                 key={l.label}
