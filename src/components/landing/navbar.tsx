@@ -53,7 +53,7 @@ export function Navbar() {
           <img
             src={logoAsset.url}
             alt="Vizogen"
-            className="h-8 w-auto max-w-[140px] object-contain"
+            className="h-12 w-auto max-w-[220px] object-contain sm:h-14"
           />
         </a>
 
