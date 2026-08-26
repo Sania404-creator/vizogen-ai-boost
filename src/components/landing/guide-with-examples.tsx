@@ -45,20 +45,10 @@ export function GuideWithExamples({
   ctaSubtitle,
   ctaTo = "/demo",
   ctaLabel = "Start Free Demo",
-}: {
-  eyebrow: string;
-  title: string;
-  highlight: string;
-  subtitle: string;
-  steps: GuideStep[];
-  examplesTitle: string;
-  examplesSubtitle: string;
-  examples: GuideExample[];
-  ctaTitle: string;
-  ctaSubtitle: string;
-  ctaTo?: string;
-  ctaLabel?: string;
-}) {
+  heroImage,
+  heroImageAlt,
+}: GuideWithExamplesProps) {
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
