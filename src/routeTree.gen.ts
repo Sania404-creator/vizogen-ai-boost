@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as DemoRouteImport } from './routes/demo'
+import { Route as GymMarketingSoftwareRouteImport } from './routes/gym-marketing-software'
 import { Route as HowToConnectGbpRouteImport } from './routes/how-to-connect-gbp'
 import { Route as HowToCreatePostRouteImport } from './routes/how-to-create-post'
 import { Route as HowToGenerateMagicQrRouteImport } from './routes/how-to-generate-magic-qr'
@@ -32,6 +33,11 @@ const BlogRoute = BlogRouteImport.update({
 const DemoRoute = DemoRouteImport.update({
   id: '/demo',
   path: '/demo',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GymMarketingSoftwareRoute = GymMarketingSoftwareRouteImport.update({
+  id: '/gym-marketing-software',
+  path: '/gym-marketing-software',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HowToConnectGbpRoute = HowToConnectGbpRouteImport.update({
@@ -69,6 +75,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/blog': typeof BlogRoute
   '/demo': typeof DemoRoute
+  '/gym-marketing-software': typeof GymMarketingSoftwareRoute
   '/how-to-connect-gbp': typeof HowToConnectGbpRoute
   '/how-to-create-post': typeof HowToCreatePostRoute
   '/how-to-generate-magic-qr': typeof HowToGenerateMagicQrRoute
@@ -80,6 +87,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/blog': typeof BlogRoute
   '/demo': typeof DemoRoute
+  '/gym-marketing-software': typeof GymMarketingSoftwareRoute
   '/how-to-connect-gbp': typeof HowToConnectGbpRoute
   '/how-to-create-post': typeof HowToCreatePostRoute
   '/how-to-generate-magic-qr': typeof HowToGenerateMagicQrRoute
@@ -92,6 +100,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/blog': typeof BlogRoute
   '/demo': typeof DemoRoute
+  '/gym-marketing-software': typeof GymMarketingSoftwareRoute
   '/how-to-connect-gbp': typeof HowToConnectGbpRoute
   '/how-to-create-post': typeof HowToCreatePostRoute
   '/how-to-generate-magic-qr': typeof HowToGenerateMagicQrRoute
@@ -105,6 +114,7 @@ export interface FileRouteTypes {
     | '/'
     | '/blog'
     | '/demo'
+    | '/gym-marketing-software'
     | '/how-to-connect-gbp'
     | '/how-to-create-post'
     | '/how-to-generate-magic-qr'
@@ -116,6 +126,7 @@ export interface FileRouteTypes {
     | '/'
     | '/blog'
     | '/demo'
+    | '/gym-marketing-software'
     | '/how-to-connect-gbp'
     | '/how-to-create-post'
     | '/how-to-generate-magic-qr'
@@ -127,6 +138,7 @@ export interface FileRouteTypes {
     | '/'
     | '/blog'
     | '/demo'
+    | '/gym-marketing-software'
     | '/how-to-connect-gbp'
     | '/how-to-create-post'
     | '/how-to-generate-magic-qr'
@@ -139,6 +151,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BlogRoute: typeof BlogRoute
   DemoRoute: typeof DemoRoute
+  GymMarketingSoftwareRoute: typeof GymMarketingSoftwareRoute
   HowToConnectGbpRoute: typeof HowToConnectGbpRoute
   HowToCreatePostRoute: typeof HowToCreatePostRoute
   HowToGenerateMagicQrRoute: typeof HowToGenerateMagicQrRoute
@@ -168,6 +181,13 @@ declare module '@tanstack/react-router' {
       path: '/demo'
       fullPath: '/demo'
       preLoaderRoute: typeof DemoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gym-marketing-software': {
+      id: '/gym-marketing-software'
+      path: '/gym-marketing-software'
+      fullPath: '/gym-marketing-software'
+      preLoaderRoute: typeof GymMarketingSoftwareRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/how-to-connect-gbp': {
@@ -219,6 +239,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BlogRoute: BlogRoute,
   DemoRoute: DemoRoute,
+  GymMarketingSoftwareRoute: GymMarketingSoftwareRoute,
   HowToConnectGbpRoute: HowToConnectGbpRoute,
   HowToCreatePostRoute: HowToCreatePostRoute,
   HowToGenerateMagicQrRoute: HowToGenerateMagicQrRoute,
