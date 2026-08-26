@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DemoRouteImport } from './routes/demo'
 import { Route as HowToConnectGbpRouteImport } from './routes/how-to-connect-gbp'
+import { Route as HowToCreatePostRouteImport } from './routes/how-to-create-post'
 import { Route as LoginRouteImport } from './routes/login'
 
 const IndexRoute = IndexRouteImport.update({
@@ -29,6 +30,11 @@ const HowToConnectGbpRoute = HowToConnectGbpRouteImport.update({
   path: '/how-to-connect-gbp',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HowToCreatePostRoute = HowToCreatePostRouteImport.update({
+  id: '/how-to-create-post',
+  path: '/how-to-create-post',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
@@ -39,12 +45,14 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/demo': typeof DemoRoute
   '/how-to-connect-gbp': typeof HowToConnectGbpRoute
+  '/how-to-create-post': typeof HowToCreatePostRoute
   '/login': typeof LoginRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/demo': typeof DemoRoute
   '/how-to-connect-gbp': typeof HowToConnectGbpRoute
+  '/how-to-create-post': typeof HowToCreatePostRoute
   '/login': typeof LoginRoute
 }
 export interface FileRoutesById {
@@ -52,20 +60,29 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/demo': typeof DemoRoute
   '/how-to-connect-gbp': typeof HowToConnectGbpRoute
+  '/how-to-create-post': typeof HowToCreatePostRoute
   '/login': typeof LoginRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/demo' | '/how-to-connect-gbp' | '/login'
+  fullPaths:
+    '/' | '/demo' | '/how-to-connect-gbp' | '/how-to-create-post' | '/login'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/demo' | '/how-to-connect-gbp' | '/login'
-  id: '__root__' | '/' | '/demo' | '/how-to-connect-gbp' | '/login'
+  to: '/' | '/demo' | '/how-to-connect-gbp' | '/how-to-create-post' | '/login'
+  id:
+    | '__root__'
+    | '/'
+    | '/demo'
+    | '/how-to-connect-gbp'
+    | '/how-to-create-post'
+    | '/login'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DemoRoute: typeof DemoRoute
   HowToConnectGbpRoute: typeof HowToConnectGbpRoute
+  HowToCreatePostRoute: typeof HowToCreatePostRoute
   LoginRoute: typeof LoginRoute
 }
 
@@ -92,6 +109,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HowToConnectGbpRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/how-to-create-post': {
+      id: '/how-to-create-post'
+      path: '/how-to-create-post'
+      fullPath: '/how-to-create-post'
+      preLoaderRoute: typeof HowToCreatePostRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/login': {
       id: '/login'
       path: '/login'
@@ -106,6 +130,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DemoRoute: DemoRoute,
   HowToConnectGbpRoute: HowToConnectGbpRoute,
+  HowToCreatePostRoute: HowToCreatePostRoute,
   LoginRoute: LoginRoute,
 }
 export const routeTree = rootRouteImport
