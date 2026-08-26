@@ -122,12 +122,36 @@ export function Navbar() {
             {links.map((l) => (
               <a
                 key={l.label}
-                href={l.href}
+                href={onHome ? l.href : `/${l.href}`}
                 onClick={() => setOpen(false)}
                 className="rounded-lg px-2 py-2.5 text-sm font-medium text-muted-foreground hover:bg-accent hover:text-foreground"
               >
                 {l.label}
               </a>
+            ))}
+          </div>
+          <div className="mt-2 border-t border-border pt-2 lg:hidden">
+            <p className="px-2 py-1 text-xs font-semibold uppercase tracking-widest text-primary">
+              GBP Guide
+            </p>
+            {gbpGuideLinks.map((g) => (
+              <Link
+                key={g.label}
+                to={g.to}
+                onClick={() => setOpen(false)}
+                className={`flex items-center justify-between rounded-lg px-2 py-2.5 text-sm font-medium hover:bg-accent ${
+                  g.ready && pathname === g.to
+                    ? "text-primary font-semibold"
+                    : "text-muted-foreground"
+                }`}
+              >
+                {g.label}
+                {g.ready ? null : (
+                  <span className="rounded-full bg-muted px-2 py-0.5 text-[10px] font-semibold uppercase">
+                    Soon
+                  </span>
+                )}
+              </Link>
             ))}
           </div>
           <div className="mt-3 flex flex-col gap-2">
