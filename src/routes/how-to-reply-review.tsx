@@ -113,6 +113,9 @@ export const Route = createFileRoute("/how-to-reply-review")({
       ctaSubtitle="Vizogen drafts and publishes personalised replies to every Google review — in minutes, in your voice."
       ctaTo="/demo"
       ctaLabel="Start Free Demo"
+      heroImage={replyReviewImage}
+      heroImageAlt="AI-drafted Google review reply preview"
     />
+
   ),
 });
