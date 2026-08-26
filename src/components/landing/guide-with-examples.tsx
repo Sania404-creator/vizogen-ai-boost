@@ -14,6 +14,24 @@ export type GuideExample = {
   sample: string;
 };
 
+export type GuideWithExamplesProps = {
+  eyebrow: string;
+  title: string;
+  highlight: string;
+  subtitle: string;
+  steps: GuideStep[];
+  examplesTitle: string;
+  examplesSubtitle: string;
+  examples: GuideExample[];
+  ctaTitle: string;
+  ctaSubtitle: string;
+  ctaTo?: string;
+  ctaLabel?: string;
+  heroImage?: string;
+  heroImageAlt?: string;
+};
+
+
 export function GuideWithExamples({
   eyebrow,
   title,
