@@ -26,6 +26,7 @@ import { Route as HowToReplyReviewRouteImport } from './routes/how-to-reply-revi
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as PestControlMarketingSoftwareRouteImport } from './routes/pest-control-marketing-software'
 import { Route as PostManagementRouteImport } from './routes/post-management'
+import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as RealestateMarketingSoftwareRouteImport } from './routes/realestate-marketing-software'
 import { Route as RestaurantMarketingSoftwareRouteImport } from './routes/restaurant-marketing-software'
 import { Route as SalonMarketingSoftwareRouteImport } from './routes/salon-marketing-software'
@@ -122,6 +123,11 @@ const PostManagementRoute = PostManagementRouteImport.update({
   path: '/post-management',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PricingRoute = PricingRouteImport.update({
+  id: '/pricing',
+  path: '/pricing',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RealestateMarketingSoftwareRoute =
   RealestateMarketingSoftwareRouteImport.update({
     id: '/realestate-marketing-software',
@@ -175,6 +181,7 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/pest-control-marketing-software': typeof PestControlMarketingSoftwareRoute
   '/post-management': typeof PostManagementRoute
+  '/pricing': typeof PricingRoute
   '/realestate-marketing-software': typeof RealestateMarketingSoftwareRoute
   '/restaurant-marketing-software': typeof RestaurantMarketingSoftwareRoute
   '/salon-marketing-software': typeof SalonMarketingSoftwareRoute
@@ -200,6 +207,7 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/pest-control-marketing-software': typeof PestControlMarketingSoftwareRoute
   '/post-management': typeof PostManagementRoute
+  '/pricing': typeof PricingRoute
   '/realestate-marketing-software': typeof RealestateMarketingSoftwareRoute
   '/restaurant-marketing-software': typeof RestaurantMarketingSoftwareRoute
   '/salon-marketing-software': typeof SalonMarketingSoftwareRoute
@@ -226,6 +234,7 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/pest-control-marketing-software': typeof PestControlMarketingSoftwareRoute
   '/post-management': typeof PostManagementRoute
+  '/pricing': typeof PricingRoute
   '/realestate-marketing-software': typeof RealestateMarketingSoftwareRoute
   '/restaurant-marketing-software': typeof RestaurantMarketingSoftwareRoute
   '/salon-marketing-software': typeof SalonMarketingSoftwareRoute
@@ -253,6 +262,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/pest-control-marketing-software'
     | '/post-management'
+    | '/pricing'
     | '/realestate-marketing-software'
     | '/restaurant-marketing-software'
     | '/salon-marketing-software'
@@ -278,6 +288,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/pest-control-marketing-software'
     | '/post-management'
+    | '/pricing'
     | '/realestate-marketing-software'
     | '/restaurant-marketing-software'
     | '/salon-marketing-software'
@@ -303,6 +314,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/pest-control-marketing-software'
     | '/post-management'
+    | '/pricing'
     | '/realestate-marketing-software'
     | '/restaurant-marketing-software'
     | '/salon-marketing-software'
@@ -329,6 +341,7 @@ export interface RootRouteChildren {
   LoginRoute: typeof LoginRoute
   PestControlMarketingSoftwareRoute: typeof PestControlMarketingSoftwareRoute
   PostManagementRoute: typeof PostManagementRoute
+  PricingRoute: typeof PricingRoute
   RealestateMarketingSoftwareRoute: typeof RealestateMarketingSoftwareRoute
   RestaurantMarketingSoftwareRoute: typeof RestaurantMarketingSoftwareRoute
   SalonMarketingSoftwareRoute: typeof SalonMarketingSoftwareRoute
@@ -458,6 +471,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PostManagementRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/pricing': {
+      id: '/pricing'
+      path: '/pricing'
+      fullPath: '/pricing'
+      preLoaderRoute: typeof PricingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/realestate-marketing-software': {
       id: '/realestate-marketing-software'
       path: '/realestate-marketing-software'
@@ -521,6 +541,7 @@ const rootRouteChildren: RootRouteChildren = {
   LoginRoute: LoginRoute,
   PestControlMarketingSoftwareRoute: PestControlMarketingSoftwareRoute,
   PostManagementRoute: PostManagementRoute,
+  PricingRoute: PricingRoute,
   RealestateMarketingSoftwareRoute: RealestateMarketingSoftwareRoute,
   RestaurantMarketingSoftwareRoute: RestaurantMarketingSoftwareRoute,
   SalonMarketingSoftwareRoute: SalonMarketingSoftwareRoute,
