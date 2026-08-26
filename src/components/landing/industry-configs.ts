@@ -2,7 +2,6 @@ import {
   Bug,
   Building2,
   Car,
-  CalendarCheck,
   Croissant,
   Flower2,
   GraduationCap,
@@ -973,19 +972,4 @@ export const allIndustryConfigs: Record<string, IndustryConfig> = {
   "Handyman Services": handymanConfig,
   "Education & Coaching": educationConfig,
   "Real Estate Agents": realEstateConfig,
-};
-
-export const industryGridIcons: Record<string, LucideIcon> = {
-  "Doctors & Health Clinics": HeartPulse,
-  "Bakers & Cake Shops": Croissant,
-  "Salon Owners": Scissors,
-  "Restaurants & Bars": UtensilsCrossed,
-  "Pest Control Businesses": Bug,
-  "Car Garages & Mechanics": Car,
-  "Tours & Travels": Plane,
-  "Yoga & Wellness": Flower2,
-  "Handyman Services": Hammer,
-  "Education & Coaching": GraduationCap,
-  "Real Estate Agents": Building2,
-  Appointments: CalendarCheck,
 };
