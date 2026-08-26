@@ -352,7 +352,7 @@ function LocalSeoPage() {
                   className="grid items-center gap-8 lg:grid-cols-2 lg:gap-14"
                 >
                   <Reveal
-                    className={i % 2 === 1 ? "lg:order-2" : undefined}
+                    className={i % 2 === 1 ? "lg:order-2" : ""}
                     delay={0.05}
                   >
                     <div className="rounded-2xl border border-border/70 bg-card p-6 shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lift sm:p-8">
@@ -384,7 +384,7 @@ function LocalSeoPage() {
                   </Reveal>
 
                   <Reveal
-                    className={i % 2 === 1 ? "lg:order-1" : undefined}
+                    className={i % 2 === 1 ? "lg:order-1" : ""}
                     delay={0.12}
                   >
                     <div className="rounded-2xl border border-border/70 bg-card p-2 shadow-soft">
