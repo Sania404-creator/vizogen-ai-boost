@@ -1,7 +1,14 @@
 import { useEffect, useState } from "react";
-import { Menu, Phone, Sparkles, X } from "lucide-react";
-import { Link } from "@tanstack/react-router";
+import { ChevronDown, Menu, Phone, Sparkles, X } from "lucide-react";
+import { Link, useRouterState } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { gbpGuideLinks } from "@/components/landing/gbp-guide-menu";
 
 const links = [
   { label: "Features", href: "#features" },
