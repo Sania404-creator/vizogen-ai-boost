@@ -32,6 +32,10 @@ import { Route as RestaurantMarketingSoftwareRouteImport } from './routes/restau
 import { Route as SalonMarketingSoftwareRouteImport } from './routes/salon-marketing-software'
 import { Route as TourTravelMarketingSoftwareRouteImport } from './routes/tour-travel-marketing-software'
 import { Route as YogaWellnessMarketingSoftwareRouteImport } from './routes/yoga-wellness-marketing-software'
+import { Route as FeaturesAiPostGenerationRouteImport } from './routes/features.ai-post-generation'
+import { Route as FeaturesMagicQrRouteImport } from './routes/features.magic-qr'
+import { Route as FeaturesReviewManagementRouteImport } from './routes/features.review-management'
+import { Route as FeaturesSmartSchedulingRouteImport } from './routes/features.smart-scheduling'
 import { Route as ServicesLocalSeoRouteImport } from './routes/services.local-seo'
 
 const IndexRoute = IndexRouteImport.update({
@@ -157,6 +161,28 @@ const YogaWellnessMarketingSoftwareRoute =
     path: '/yoga-wellness-marketing-software',
     getParentRoute: () => rootRouteImport,
   } as any)
+const FeaturesAiPostGenerationRoute =
+  FeaturesAiPostGenerationRouteImport.update({
+    id: '/features/ai-post-generation',
+    path: '/features/ai-post-generation',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const FeaturesMagicQrRoute = FeaturesMagicQrRouteImport.update({
+  id: '/features/magic-qr',
+  path: '/features/magic-qr',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FeaturesReviewManagementRoute =
+  FeaturesReviewManagementRouteImport.update({
+    id: '/features/review-management',
+    path: '/features/review-management',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const FeaturesSmartSchedulingRoute = FeaturesSmartSchedulingRouteImport.update({
+  id: '/features/smart-scheduling',
+  path: '/features/smart-scheduling',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ServicesLocalSeoRoute = ServicesLocalSeoRouteImport.update({
   id: '/services/local-seo',
   path: '/services/local-seo',
@@ -187,6 +213,10 @@ export interface FileRoutesByFullPath {
   '/salon-marketing-software': typeof SalonMarketingSoftwareRoute
   '/tour-travel-marketing-software': typeof TourTravelMarketingSoftwareRoute
   '/yoga-wellness-marketing-software': typeof YogaWellnessMarketingSoftwareRoute
+  '/features/ai-post-generation': typeof FeaturesAiPostGenerationRoute
+  '/features/magic-qr': typeof FeaturesMagicQrRoute
+  '/features/review-management': typeof FeaturesReviewManagementRoute
+  '/features/smart-scheduling': typeof FeaturesSmartSchedulingRoute
   '/services/local-seo': typeof ServicesLocalSeoRoute
 }
 export interface FileRoutesByTo {
@@ -213,6 +243,10 @@ export interface FileRoutesByTo {
   '/salon-marketing-software': typeof SalonMarketingSoftwareRoute
   '/tour-travel-marketing-software': typeof TourTravelMarketingSoftwareRoute
   '/yoga-wellness-marketing-software': typeof YogaWellnessMarketingSoftwareRoute
+  '/features/ai-post-generation': typeof FeaturesAiPostGenerationRoute
+  '/features/magic-qr': typeof FeaturesMagicQrRoute
+  '/features/review-management': typeof FeaturesReviewManagementRoute
+  '/features/smart-scheduling': typeof FeaturesSmartSchedulingRoute
   '/services/local-seo': typeof ServicesLocalSeoRoute
 }
 export interface FileRoutesById {
@@ -240,6 +274,10 @@ export interface FileRoutesById {
   '/salon-marketing-software': typeof SalonMarketingSoftwareRoute
   '/tour-travel-marketing-software': typeof TourTravelMarketingSoftwareRoute
   '/yoga-wellness-marketing-software': typeof YogaWellnessMarketingSoftwareRoute
+  '/features/ai-post-generation': typeof FeaturesAiPostGenerationRoute
+  '/features/magic-qr': typeof FeaturesMagicQrRoute
+  '/features/review-management': typeof FeaturesReviewManagementRoute
+  '/features/smart-scheduling': typeof FeaturesSmartSchedulingRoute
   '/services/local-seo': typeof ServicesLocalSeoRoute
 }
 export interface FileRouteTypes {
@@ -268,6 +306,10 @@ export interface FileRouteTypes {
     | '/salon-marketing-software'
     | '/tour-travel-marketing-software'
     | '/yoga-wellness-marketing-software'
+    | '/features/ai-post-generation'
+    | '/features/magic-qr'
+    | '/features/review-management'
+    | '/features/smart-scheduling'
     | '/services/local-seo'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -294,6 +336,10 @@ export interface FileRouteTypes {
     | '/salon-marketing-software'
     | '/tour-travel-marketing-software'
     | '/yoga-wellness-marketing-software'
+    | '/features/ai-post-generation'
+    | '/features/magic-qr'
+    | '/features/review-management'
+    | '/features/smart-scheduling'
     | '/services/local-seo'
   id:
     | '__root__'
@@ -320,6 +366,10 @@ export interface FileRouteTypes {
     | '/salon-marketing-software'
     | '/tour-travel-marketing-software'
     | '/yoga-wellness-marketing-software'
+    | '/features/ai-post-generation'
+    | '/features/magic-qr'
+    | '/features/review-management'
+    | '/features/smart-scheduling'
     | '/services/local-seo'
   fileRoutesById: FileRoutesById
 }
@@ -347,6 +397,10 @@ export interface RootRouteChildren {
   SalonMarketingSoftwareRoute: typeof SalonMarketingSoftwareRoute
   TourTravelMarketingSoftwareRoute: typeof TourTravelMarketingSoftwareRoute
   YogaWellnessMarketingSoftwareRoute: typeof YogaWellnessMarketingSoftwareRoute
+  FeaturesAiPostGenerationRoute: typeof FeaturesAiPostGenerationRoute
+  FeaturesMagicQrRoute: typeof FeaturesMagicQrRoute
+  FeaturesReviewManagementRoute: typeof FeaturesReviewManagementRoute
+  FeaturesSmartSchedulingRoute: typeof FeaturesSmartSchedulingRoute
   ServicesLocalSeoRoute: typeof ServicesLocalSeoRoute
 }
 
@@ -513,6 +567,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof YogaWellnessMarketingSoftwareRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/features/ai-post-generation': {
+      id: '/features/ai-post-generation'
+      path: '/features/ai-post-generation'
+      fullPath: '/features/ai-post-generation'
+      preLoaderRoute: typeof FeaturesAiPostGenerationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/features/magic-qr': {
+      id: '/features/magic-qr'
+      path: '/features/magic-qr'
+      fullPath: '/features/magic-qr'
+      preLoaderRoute: typeof FeaturesMagicQrRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/features/review-management': {
+      id: '/features/review-management'
+      path: '/features/review-management'
+      fullPath: '/features/review-management'
+      preLoaderRoute: typeof FeaturesReviewManagementRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/features/smart-scheduling': {
+      id: '/features/smart-scheduling'
+      path: '/features/smart-scheduling'
+      fullPath: '/features/smart-scheduling'
+      preLoaderRoute: typeof FeaturesSmartSchedulingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/services/local-seo': {
       id: '/services/local-seo'
       path: '/services/local-seo'
@@ -547,6 +629,10 @@ const rootRouteChildren: RootRouteChildren = {
   SalonMarketingSoftwareRoute: SalonMarketingSoftwareRoute,
   TourTravelMarketingSoftwareRoute: TourTravelMarketingSoftwareRoute,
   YogaWellnessMarketingSoftwareRoute: YogaWellnessMarketingSoftwareRoute,
+  FeaturesAiPostGenerationRoute: FeaturesAiPostGenerationRoute,
+  FeaturesMagicQrRoute: FeaturesMagicQrRoute,
+  FeaturesReviewManagementRoute: FeaturesReviewManagementRoute,
+  FeaturesSmartSchedulingRoute: FeaturesSmartSchedulingRoute,
   ServicesLocalSeoRoute: ServicesLocalSeoRoute,
 }
 export const routeTree = rootRouteImport

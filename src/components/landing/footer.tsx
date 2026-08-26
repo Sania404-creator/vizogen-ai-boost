@@ -11,15 +11,29 @@ import {
   Sparkles,
   Youtube,
 } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 
 const columns = [
   {
     title: "Platform",
-    items: ["Features", "Pricing", "AI Post Generation", "Review Management", "Magic QR"],
+    items: [
+      { label: "Features", to: "/" },
+      { label: "Pricing", to: "/pricing" },
+      { label: "AI Post Generation", to: "/features/ai-post-generation" },
+      { label: "Smart Scheduling", to: "/features/smart-scheduling" },
+      { label: "Review Management", to: "/features/review-management" },
+      { label: "Magic QR", to: "/features/magic-qr" },
+    ],
   },
   {
     title: "Company",
-    items: ["About us", "Blog", "Careers", "Privacy Policy", "Terms of Service"],
+    items: [
+      { label: "Blog", to: "/blog" },
+      { label: "Local SEO", to: "/services/local-seo" },
+      { label: "GBP Guide", to: "/how-to-connect-gbp" },
+      { label: "Book a demo", to: "/demo" },
+      { label: "Log in", to: "/login" },
+    ],
   },
 ];
 
@@ -67,13 +81,13 @@ export function Footer() {
               <p className="text-sm font-semibold">{col.title}</p>
               <ul className="mt-4 space-y-3">
                 {col.items.map((item) => (
-                  <li key={item}>
-                    <a
-                      href="#"
+                  <li key={item.label}>
+                    <Link
+                      to={item.to}
                       className="text-sm text-navy-foreground/65 transition-colors hover:text-navy-foreground"
                     >
-                      {item}
-                    </a>
+                      {item.label}
+                    </Link>
                   </li>
                 ))}
               </ul>
