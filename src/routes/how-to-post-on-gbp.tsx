@@ -19,6 +19,8 @@ import { Navbar } from "@/components/landing/navbar";
 import { Footer } from "@/components/landing/footer";
 import { Reveal, SectionHeading } from "@/components/landing/reveal";
 import { Button } from "@/components/ui/button";
+import postGbpImage from "@/assets/guide-post-gbp.jpg";
+
 
 const title = "How to Post on Google Business Profile — Vizogen";
 const description =
