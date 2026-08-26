@@ -49,7 +49,12 @@ export function Features() {
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {features.map((f, i) => (
             <Reveal key={f.n} delay={i * 0.08}>
-              <Link to={f.href} className="gradient-border group flex h-full flex-col rounded-2xl border border-border/70 bg-card p-6 shadow-soft transition-all duration-300 hover:-translate-y-2 hover:shadow-lift">
+              <Link
+                to={f.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="gradient-border group flex h-full flex-col rounded-2xl border border-border/70 bg-card p-6 shadow-soft transition-all duration-300 hover:-translate-y-2 hover:shadow-lift"
+              >
                 <div className="flex items-center justify-between gap-3">
                   <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-accent text-primary transition-colors group-hover:gradient-brand group-hover:text-primary-foreground">
                     <f.icon className="size-5" />
@@ -66,6 +71,7 @@ export function Features() {
                   Explore →
                 </span>
               </Link>
+
             </Reveal>
           ))}
         </div>
