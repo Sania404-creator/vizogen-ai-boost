@@ -8,10 +8,10 @@ import {
   MessageCircle,
   Phone,
   Play,
-  Sparkles,
   Youtube,
 } from "lucide-react";
 import { Link } from "@tanstack/react-router";
+import logoAsset from "@/assets/vizogen-logo.png.asset.json";
 
 const columns = [
   {
@@ -51,10 +51,11 @@ export function Footer() {
         <div className="grid gap-12 lg:grid-cols-[1.3fr_1fr_1fr_1.2fr]">
           <div>
             <div className="flex items-center gap-2">
-              <span className="grid size-9 place-items-center rounded-xl gradient-brand text-primary-foreground">
-                <Sparkles className="size-4" />
-              </span>
-              <span className="text-lg font-bold tracking-tight font-display">Vizogen</span>
+              <img
+                src={logoAsset.url}
+                alt="Vizogen"
+                className="h-8 w-auto max-w-[140px] object-contain rounded-lg bg-white/90 p-1"
+              />
             </div>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-navy-foreground/65">
               AI automation for Google Business Profiles — daily posts, authentic reviews and
