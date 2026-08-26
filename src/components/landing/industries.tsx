@@ -17,19 +17,20 @@ import { Reveal, SectionHeading } from "./reveal";
 
 
 const industries: { label: string; icon: typeof Dumbbell; to?: string }[] = [
-  { label: "Gyms", icon: Dumbbell, to: "/gym-marketing-software" },
-  { label: "Clinics", icon: HeartPulse },
-  { label: "Bakeries", icon: Croissant },
-  { label: "Salons", icon: Scissors },
-  { label: "Restaurants", icon: UtensilsCrossed },
-  { label: "Pest Control", icon: Bug },
-  { label: "Garages", icon: Car },
-  { label: "Travel", icon: Plane },
-  { label: "Yoga", icon: Flower2 },
-  { label: "Handyman", icon: Hammer },
-  { label: "Education", icon: GraduationCap },
-  { label: "Real Estate", icon: Building2 },
+  { label: "Gym & Fitness Centres", icon: Dumbbell, to: "/gym-marketing-software" },
+  { label: "Doctors & Health Clinics", icon: HeartPulse, to: "/clinic-marketing-software" },
+  { label: "Bakers & Cake Shops", icon: Croissant, to: "/bakery-marketing-software" },
+  { label: "Salon Owners", icon: Scissors, to: "/salon-marketing-software" },
+  { label: "Restaurants & Bars", icon: UtensilsCrossed, to: "/restaurant-marketing-software" },
+  { label: "Pest Control Businesses", icon: Bug, to: "/pest-control-marketing-software" },
+  { label: "Car Garages & Mechanics", icon: Car, to: "/car-garage-marketing-software" },
+  { label: "Tours & Travels", icon: Plane, to: "/tour-travel-marketing-software" },
+  { label: "Yoga & Wellness", icon: Flower2, to: "/yoga-wellness-marketing-software" },
+  { label: "Handyman Services", icon: Hammer, to: "/handyman-marketing-software" },
+  { label: "Education & Coaching", icon: GraduationCap, to: "/education-marketing-software" },
+  { label: "Real Estate Agents", icon: Building2, to: "/realestate-marketing-software" },
 ];
+
 
 
 export function Industries() {
