@@ -11,6 +11,7 @@ import { Testimonials } from "@/components/landing/testimonials";
 import { AppDownload } from "@/components/landing/app-download";
 import { OldVsNew } from "@/components/landing/old-vs-new";
 import { Faq } from "@/components/landing/faq";
+import { Pricing } from "@/components/landing/pricing";
 import { Footer } from "@/components/landing/footer";
 
 const title = "Vizogen — AI Google Business Profile Automation";
@@ -46,6 +47,7 @@ function Index() {
         <Testimonials />
         <AppDownload />
         <OldVsNew />
+        <Pricing condensed />
         <Faq />
       </main>
       <Footer />
