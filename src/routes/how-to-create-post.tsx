@@ -13,6 +13,8 @@ import {
 } from "lucide-react";
 import { GuideWithExamples } from "@/components/landing/guide-with-examples";
 import { guideHead } from "@/components/landing/guide-placeholder";
+import aiPostImage from "@/assets/guide-ai-post.jpg";
+
 
 export const Route = createFileRoute("/how-to-create-post")({
   head: guideHead(
