@@ -47,6 +47,7 @@ function Index() {
         <Testimonials />
         <AppDownload />
         <OldVsNew />
+        <Pricing condensed />
         <Faq />
       </main>
       <Footer />
