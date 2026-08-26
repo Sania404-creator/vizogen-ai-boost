@@ -13,6 +13,8 @@ import {
 } from "lucide-react";
 import { GuideWithExamples } from "@/components/landing/guide-with-examples";
 import { guideHead } from "@/components/landing/guide-placeholder";
+import aiPostImage from "@/assets/guide-ai-post.jpg";
+
 
 export const Route = createFileRoute("/how-to-create-post")({
   head: guideHead(
@@ -111,6 +113,9 @@ export const Route = createFileRoute("/how-to-create-post")({
       ctaSubtitle="Vizogen writes, designs and schedules your Google Business Profile posts — daily, automatically."
       ctaTo="/demo"
       ctaLabel="Start Free Demo"
+      heroImage={aiPostImage}
+      heroImageAlt="AI-generated Google Business Profile post preview"
     />
+
   ),
 });

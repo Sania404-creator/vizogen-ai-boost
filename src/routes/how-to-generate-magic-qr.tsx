@@ -13,6 +13,8 @@ import {
 } from "lucide-react";
 import { GuideWithExamples } from "@/components/landing/guide-with-examples";
 import { guideHead } from "@/components/landing/guide-placeholder";
+import magicQrImage from "@/assets/guide-magic-qr.jpg";
+
 
 export const Route = createFileRoute("/how-to-generate-magic-qr")({
   head: guideHead(
@@ -111,6 +113,9 @@ export const Route = createFileRoute("/how-to-generate-magic-qr")({
       ctaSubtitle="Generate your branded Magic QR in 60 seconds — and watch your Google rating climb on autopilot."
       ctaTo="/demo"
       ctaLabel="Start Free Demo"
+      heroImage={magicQrImage}
+      heroImageAlt="Branded Magic QR table tent preview"
     />
+
   ),
 });

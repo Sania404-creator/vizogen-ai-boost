@@ -14,6 +14,24 @@ export type GuideExample = {
   sample: string;
 };
 
+export type GuideWithExamplesProps = {
+  eyebrow: string;
+  title: string;
+  highlight: string;
+  subtitle: string;
+  steps: GuideStep[];
+  examplesTitle: string;
+  examplesSubtitle: string;
+  examples: GuideExample[];
+  ctaTitle: string;
+  ctaSubtitle: string;
+  ctaTo?: string;
+  ctaLabel?: string;
+  heroImage?: string;
+  heroImageAlt?: string;
+};
+
+
 export function GuideWithExamples({
   eyebrow,
   title,
@@ -27,20 +45,10 @@ export function GuideWithExamples({
   ctaSubtitle,
   ctaTo = "/demo",
   ctaLabel = "Start Free Demo",
-}: {
-  eyebrow: string;
-  title: string;
-  highlight: string;
-  subtitle: string;
-  steps: GuideStep[];
-  examplesTitle: string;
-  examplesSubtitle: string;
-  examples: GuideExample[];
-  ctaTitle: string;
-  ctaSubtitle: string;
-  ctaTo?: string;
-  ctaLabel?: string;
-}) {
+  heroImage,
+  heroImageAlt,
+}: GuideWithExamplesProps) {
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -66,7 +74,28 @@ export function GuideWithExamples({
           </div>
         </section>
 
+        {/* Hero image */}
+        {heroImage ? (
+          <section className="pb-8 sm:pb-12">
+            <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+              <Reveal>
+                <div className="overflow-hidden rounded-2xl border border-border/70 bg-card shadow-lift">
+                  <img
+                    src={heroImage}
+                    alt={heroImageAlt || ""}
+                    className="w-full object-cover"
+                    width={1024}
+                    height={768}
+                    loading="lazy"
+                  />
+                </div>
+              </Reveal>
+            </div>
+          </section>
+        ) : null}
+
         {/* Steps */}
+
         <section className="pb-20 sm:pb-28">
           <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
             <Reveal>

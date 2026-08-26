@@ -19,6 +19,8 @@ import { Navbar } from "@/components/landing/navbar";
 import { Footer } from "@/components/landing/footer";
 import { Reveal, SectionHeading } from "@/components/landing/reveal";
 import { Button } from "@/components/ui/button";
+import postGbpImage from "@/assets/guide-post-gbp.jpg";
+
 
 const title = "How to Post on Google Business Profile — Vizogen";
 const description =
@@ -210,7 +212,26 @@ function HowToPostOnGbp() {
           </div>
         </section>
 
+        {/* Hero image */}
+        <section className="pb-8 sm:pb-12">
+          <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
+            <Reveal>
+              <div className="overflow-hidden rounded-2xl border border-border/70 bg-card shadow-lift">
+                <img
+                  src={postGbpImage}
+                  alt="Vizogen post scheduling dashboard preview"
+                  className="w-full object-cover"
+                  width={1024}
+                  height={768}
+                  loading="lazy"
+                />
+              </div>
+            </Reveal>
+          </div>
+        </section>
+
         {/* Steps */}
+
         <section className="pb-20 sm:pb-28">
           <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
             <Reveal>
