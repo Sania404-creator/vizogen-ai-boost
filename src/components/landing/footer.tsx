@@ -1,5 +1,4 @@
 import {
-  Apple,
   Facebook,
   Instagram,
   Linkedin,
@@ -7,7 +6,6 @@ import {
   MapPin,
   MessageCircle,
   Phone,
-  Play,
   Youtube,
 } from "lucide-react";
 import { Link } from "@tanstack/react-router";
