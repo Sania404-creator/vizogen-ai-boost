@@ -20,7 +20,7 @@ import {
 } from "lucide-react";
 import aiPostsImg from "@/assets/feature-ai-posts.jpg";
 import schedulingImg from "@/assets/feature-scheduling.jpg";
-import reviewsImg from "@/assets/feature-reviews.jpg";
+import reviewsImg from "@/assets/review-management-dashboard.png.asset.json";
 import magicQrImg from "@/assets/feature-magic-qr.jpg";
 import type { FeaturePageConfig } from "./feature-page";
 
@@ -141,8 +141,8 @@ export const reviewManagement: FeaturePageConfig = {
   headline: "Reply to every review in seconds, not days.",
   subtitle:
     "Vizogen pulls every Google review into one inbox, detects sentiment and drafts a personalised reply you can send with one tap — so your rating, response rate and local ranking all keep climbing.",
-  image: reviewsImg,
-  imageAlt: "Vizogen review inbox with an AI suggested reply to a Google review",
+  image: reviewsImg.url,
+  imageAlt: "Vizogen Google Reviews dashboard with AI replies and sentiment analytics",
   heroBadge: { value: "100%", label: "reviews answered" },
   stats: [
     { value: "<2 min", label: "Average response time" },
