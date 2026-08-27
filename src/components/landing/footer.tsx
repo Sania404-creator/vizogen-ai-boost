@@ -54,7 +54,7 @@ export function Footer() {
               <img
                 src={logoAsset.url}
                 alt="Vizogen"
-                className="h-12 w-auto rounded-lg object-contain sm:h-14"
+                className="h-11 w-auto rounded-lg bg-white/95 px-2 py-1 object-contain shadow-soft sm:h-12"
               />
             </div>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-navy-foreground/65">
