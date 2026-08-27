@@ -5,7 +5,6 @@ import {
   Globe,
   HelpCircle,
   LayoutDashboard,
-  LifeBuoy,
   LogOut,
   MapPin,
   Phone,
