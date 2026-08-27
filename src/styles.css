@@ -161,10 +161,11 @@
 }
 
 .dark {
-  --navy: oklch(0.19 0.045 265);
-  --navy-foreground: oklch(0.97 0.008 265);
-  --brand: oklch(0.62 0.2 277);
-  --brand-2: oklch(0.62 0.21 302);
+  --navy: oklch(0.17 0.015 274);
+  --navy-foreground: oklch(0.97 0.006 285);
+  --brand: oklch(0.66 0.19 262);
+  --brand-2: oklch(0.60 0.24 301);
+  --accent-pink: oklch(0.65 0.23 353);
   --success: oklch(0.72 0.16 150);
 }
 
