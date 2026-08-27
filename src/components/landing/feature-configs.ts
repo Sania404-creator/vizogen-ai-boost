@@ -20,7 +20,7 @@ import {
 } from "lucide-react";
 import aiPostsImg from "@/assets/feature-ai-posts.jpg";
 import schedulingImg from "@/assets/feature-scheduling.jpg";
-import reviewsImg from "@/assets/feature-reviews.jpg";
+import reviewsImg from "@/assets/review-management-dashboard.png.asset.json";
 import magicQrImg from "@/assets/feature-magic-qr.jpg";
 import type { FeaturePageConfig } from "./feature-page";
 
