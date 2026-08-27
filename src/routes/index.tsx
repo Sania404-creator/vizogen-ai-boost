@@ -1,5 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { Button } from "@/components/ui/button";
+import { createFileRoute } from "@tanstack/react-router";
 import { Navbar } from "@/components/landing/navbar";
 import { Hero } from "@/components/landing/hero";
 import { Stats } from "@/components/landing/stats";
@@ -13,6 +12,8 @@ import { AppDownload } from "@/components/landing/app-download";
 import { OldVsNew } from "@/components/landing/old-vs-new";
 import { Faq } from "@/components/landing/faq";
 import { Footer } from "@/components/landing/footer";
+import { SubscriptionPlans } from "@/components/landing/pricing";
+import { SectionHeading } from "@/components/landing/reveal";
 
 const title = "Vizogen — AI Google Business Profile Automation";
 const description =
@@ -47,22 +48,22 @@ function Index() {
         <Testimonials />
         <AppDownload />
         <OldVsNew />
-        <section id="pricing" className="py-16 text-center sm:py-20">
-          <div className="mx-auto max-w-2xl px-4">
-            <h2 className="font-display text-3xl font-bold text-foreground sm:text-4xl">
-              Plans that grow with your business
-            </h2>
-            <p className="mt-3 text-base leading-relaxed text-muted-foreground">
-              Subscription plans plus one-time Google Business Profile services — all on our
-              pricing page.
-            </p>
-            <Button
-              asChild
-              size="lg"
-              className="mt-7 rounded-full gradient-brand shadow-soft transition-transform hover:scale-[1.03] hover:opacity-95"
-            >
-              <Link to="/pricing">See Pricing →</Link>
-            </Button>
+        <section id="pricing" className="relative overflow-hidden py-20 sm:py-24">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute -top-40 left-1/2 h-[420px] w-[720px] -translate-x-1/2 rounded-full bg-brand/15 blur-3xl"
+          />
+          <div
+            aria-hidden
+            className="pointer-events-none absolute bottom-0 right-0 h-[320px] w-[520px] rounded-full bg-brand-2/10 blur-3xl"
+          />
+          <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <SectionHeading
+              eyebrow="Simple, Transparent Pricing"
+              title="Plans that grow with your business"
+              subtitle="Pick a plan that scales with your business — prices shown in INR by default."
+            />
+            <SubscriptionPlans />
           </div>
         </section>
         <Faq />
