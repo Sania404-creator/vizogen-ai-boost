@@ -180,15 +180,27 @@ export function GuideWithExamples({
                 {ctaSubtitle}
               </p>
               <div className="mt-8">
-                <Button
-                  asChild
-                  size="lg"
-                  className="rounded-full gradient-brand px-8 text-primary-foreground shadow-lift transition-transform hover:scale-[1.03] hover:opacity-95"
-                >
-                  <Link to={ctaTo}>
-                    {ctaLabel} <ArrowRight className="size-4" />
-                  </Link>
-                </Button>
+                {ctaTo?.startsWith("http") ? (
+                  <Button
+                    asChild
+                    size="lg"
+                    className="rounded-full gradient-brand px-8 text-primary-foreground shadow-lift transition-transform hover:scale-[1.03] hover:opacity-95"
+                  >
+                    <a href={ctaTo} target="_blank" rel="noopener noreferrer">
+                      {ctaLabel} <ArrowRight className="size-4" />
+                    </a>
+                  </Button>
+                ) : (
+                  <Button
+                    asChild
+                    size="lg"
+                    className="rounded-full gradient-brand px-8 text-primary-foreground shadow-lift transition-transform hover:scale-[1.03] hover:opacity-95"
+                  >
+                    <Link to={ctaTo}>
+                      {ctaLabel} <ArrowRight className="size-4" />
+                    </Link>
+                  </Button>
+                )}
               </div>
             </Reveal>
           </div>

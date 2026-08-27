@@ -111,8 +111,8 @@ export const Route = createFileRoute("/how-to-generate-magic-qr")({
       ]}
       ctaTitle="Turn walk-ins into 5-star reviews"
       ctaSubtitle="Generate your branded Magic QR in 60 seconds — and watch your Google rating climb on autopilot."
-      ctaTo="/demo"
-      ctaLabel="Start Free Demo"
+      ctaTo="https://login.vizogen.in/magic-qr"
+      ctaLabel="Open Magic QR"
       heroImage={magicQrImage}
       heroImageAlt="Branded Magic QR table tent preview"
     />
