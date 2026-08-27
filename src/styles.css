@@ -74,21 +74,22 @@
 
 :root {
   --radius: 0.625rem;
-  --background: oklch(0.988 0.004 90);
-  --foreground: oklch(0.19 0.035 265);
+  --background: oklch(0.982 0.003 285);
+  --foreground: oklch(0.19 0.017 274);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.129 0.042 264.695);
+  --card-foreground: oklch(0.19 0.017 274);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.511 0.239 276.966);
+  --popover-foreground: oklch(0.19 0.017 274);
+  --primary: oklch(0.605 0.208 262);
   --primary-foreground: oklch(0.99 0.005 280);
-  --navy: oklch(0.24 0.055 265);
-  --navy-foreground: oklch(0.97 0.008 265);
-  --brand: oklch(0.511 0.239 276.966);
-  --brand-2: oklch(0.508 0.245 302.3);
+  --navy: oklch(0.19 0.017 274);
+  --navy-foreground: oklch(0.97 0.006 285);
+  --brand: oklch(0.605 0.208 262);
+  --brand-2: oklch(0.503 0.253 301);
+  --accent-pink: oklch(0.598 0.244 353);
   --success: oklch(0.62 0.17 150);
   --secondary: oklch(0.968 0.007 247.896);
-  --secondary-foreground: oklch(0.208 0.042 265.755);
+  --secondary-foreground: oklch(0.19 0.017 274);
   --muted: oklch(0.968 0.007 247.896);
   --muted-foreground: oklch(0.554 0.046 257.417);
   --accent: oklch(0.968 0.007 247.896);
