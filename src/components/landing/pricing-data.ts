@@ -1,83 +1,156 @@
-export const USD_RATE = 83;
-
 export type BillingCycle = "yearly" | "quarterly";
 export type Currency = "INR" | "USD";
+
+export type PlanFeature = { label: string; included: boolean };
 
 export type Plan = {
   name: string;
   tagline: string;
-  yearly: number;
-  quarterly: number;
+  inrYearly: number;
+  inrQuarterly: number;
+  usdYearly: number;
   popular?: boolean;
   cta: string;
-  features: string[];
+  features: PlanFeature[];
 };
+
+const f = (label: string, included = true): PlanFeature => ({ label, included });
 
 export const plans: Plan[] = [
   {
     name: "Starter",
-    tagline: "For solo owners just getting started with GBP automation.",
-    yearly: 9999,
-    quarterly: 3499,
-    cta: "Get Started",
+    tagline: "For solo owners getting started with GBP automation.",
+    inrYearly: 9999,
+    inrQuarterly: 3499,
+    usdYearly: 100,
+    cta: "Start Free Trial",
     features: [
-      "1 Business Location",
-      "AI Post Generation (up to 15 posts/month)",
-      "Basic Review Auto-Reply",
-      "1 Magic QR Code",
-      "Email Support",
+      f("Magic QR – (Feedback Collection QR)"),
+      f("GMB AI Agent"),
+      f("Performance Analysis"),
+      f("GMB Profile Optimization"),
+      f("AI Review Reply Automation"),
+      f("15 Media / Post Publishing"),
+      f("Content Scheduler"),
+      f("Keyword Ranking Tracker", false),
+      f("Citation", false),
+      f("AI Google Posts & Media Generation", false),
+      f("Instant Free Website", false),
+      f("Connect Domain", false),
+      f("Feature Support"),
     ],
   },
   {
     name: "Growth",
     tagline: "For growing businesses that need daily automation and insights.",
-    yearly: 14999,
-    quarterly: 4499,
+    inrYearly: 14999,
+    inrQuarterly: 4499,
+    usdYearly: 150,
     popular: true,
     cta: "Start Free Trial",
     features: [
-      "Up to 3 Business Locations",
-      "Unlimited AI Post Generation",
-      "Smart Review Auto-Reply + Review Shield",
-      "3 Magic QR Codes",
-      "Local Ranking Tracker",
-      "Priority Chat Support",
+      f("Magic QR – (Feedback Collection QR)"),
+      f("Feedback Collection"),
+      f("GMB AI Agent"),
+      f("Performance Analysis"),
+      f("Profile Optimization"),
+      f("AI Review Reply Automation"),
+      f("30 Media / Post Publishing"),
+      f("Content Scheduler"),
+      f("Keyword Ranking Tracker"),
+      f("Citation"),
+      f("AI Google Posts & Media Generation"),
+      f("Instant Free Website", false),
+      f("Connect Domain", false),
+      f("Feature Support"),
     ],
   },
   {
     name: "Pro",
-    tagline: "For multi-location businesses and agencies managing several profiles.",
-    yearly: 19999,
-    quarterly: 5999,
-    cta: "Get Started",
+    tagline: "For multi-location businesses and agencies.",
+    inrYearly: 19999,
+    inrQuarterly: 5999,
+    usdYearly: 200,
+    cta: "Start Free Trial",
     features: [
-      "Up to 10 Business Locations",
-      "Unlimited AI Post Generation + Multi-language Posts",
-      "Smart Review Auto-Reply + Review Shield",
-      "Unlimited Magic QR Codes",
-      "Local Ranking Tracker + Competitor Insights",
-      "Dedicated Account Manager",
-      "API Access",
+      f("Magic QR – (Feedback Collection QR)"),
+      f("Feedback Collection"),
+      f("GMB AI Agent"),
+      f("Performance Analysis"),
+      f("Profile Optimization"),
+      f("AI Review Reply Automation"),
+      f("45 Media / Post Publishing"),
+      f("Content Scheduler"),
+      f("Keyword Ranking Tracker"),
+      f("Citation"),
+      f("AI Google Posts & Media Generation"),
+      f("Instant Free Website"),
+      f("Connect Domain"),
+      f("Feature Support"),
     ],
   },
 ];
 
-export const comparisonRows: {
-  label: string;
-  values: [string | boolean, string | boolean, string | boolean];
-}[] = [
-  { label: "Business Locations", values: ["1", "Up to 3", "Up to 10"] },
-  { label: "AI Post Generation", values: ["15 / month", "Unlimited", "Unlimited"] },
-  { label: "Multi-language Posts", values: [false, false, true] },
-  { label: "Review Auto-Reply", values: ["Basic", "Smart", "Smart"] },
-  { label: "Review Shield", values: [false, true, true] },
-  { label: "Magic QR Codes", values: ["1", "3", "Unlimited"] },
-  { label: "Local Ranking Tracker", values: [false, true, true] },
-  { label: "Competitor Insights", values: [false, false, true] },
-  { label: "Dedicated Account Manager", values: [false, false, true] },
-  { label: "API Access", values: [false, false, true] },
-  { label: "Support", values: ["Email", "Priority Chat", "24/7 Priority"] },
+export type OneTimeService = {
+  name: string;
+  price: number;
+  priceNote?: string;
+  items: string[];
+  whatsappMessage: string;
+};
+
+export const WHATSAPP_NUMBER = "918488918358";
+
+export const oneTimeServices: OneTimeService[] = [
+  {
+    name: "GMB Assistance & Update Plan",
+    price: 1500,
+    items: [
+      "Google Business Profile Functionality Check",
+      "Website URL Update",
+      "Mobile Number Update",
+      "Basic Profile Verification Check",
+      "Minor Corrections",
+      "1 Month Support",
+    ],
+    whatsappMessage: "Hi Vizogen, I want the GMB Assistance & Update Plan.",
+  },
+  {
+    name: "GMB Creation & Management Plan (From Scratch)",
+    price: 3000,
+    priceNote: "+ 18% GST",
+    items: [
+      "GMB Creation From Scratch",
+      "Address Verification Guidance",
+      "Category Selection",
+      "Product Listing Setup",
+      "Service Management",
+      "Business Optimization",
+      "1 Month Support",
+    ],
+    whatsappMessage: "Hi Vizogen, I want the GMB Creation & Management Plan.",
+  },
 ];
+
+export function whatsappLink(message: string) {
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+}
+
+export function planPrice(plan: Plan, cycle: BillingCycle, currency: Currency) {
+  if (currency === "INR") {
+    const amount = cycle === "yearly" ? plan.inrYearly : plan.inrQuarterly;
+    return `₹${amount.toLocaleString("en-IN")}`;
+  }
+  const amount =
+    cycle === "yearly"
+      ? plan.usdYearly
+      : Math.round(plan.usdYearly * (plan.inrQuarterly / plan.inrYearly));
+  return `$${amount.toLocaleString("en-US")}`;
+}
+
+export function formatInr(amount: number) {
+  return `₹${amount.toLocaleString("en-IN")}`;
+}
 
 export const pricingFaqs = [
   {
@@ -97,14 +170,3 @@ export const pricingFaqs = [
     a: "No. Onboarding, Google Business Profile connection and brand-tone setup are included in every plan.",
   },
 ];
-
-export function convert(amountInr: number, currency: Currency) {
-  return currency === "INR" ? amountInr : Math.round(amountInr / USD_RATE);
-}
-
-export function formatPrice(amountInr: number, currency: Currency) {
-  const value = convert(amountInr, currency);
-  return currency === "INR"
-    ? `₹${value.toLocaleString("en-IN")}`
-    : `$${value.toLocaleString("en-US")}`;
-}
