@@ -29,7 +29,40 @@ export type FeaturePageConfig = {
   faqs: { q: string; a: string }[];
   ctaHeading: string;
   ctaText: string;
+  ctaHref?: string;
 };
+
+function CtaButton({
+  href,
+  children,
+  variant = "primary",
+}: {
+  href?: string;
+  children: React.ReactNode;
+  variant?: "primary" | "outline";
+}) {
+  const isExternal = href?.startsWith("http");
+  const className =
+    variant === "primary"
+      ? "rounded-xl"
+      : "rounded-xl border-navy-foreground/20 bg-transparent text-navy-foreground hover:bg-navy-foreground/10 hover:text-navy-foreground";
+
+  if (isExternal) {
+    return (
+      <Button asChild size="lg" variant={variant === "primary" ? "default" : "outline"} className={className}>
+        <a href={href} target="_blank" rel="noopener noreferrer">
+          {children}
+        </a>
+      </Button>
+    );
+  }
+
+  return (
+    <Button asChild size="lg" variant={variant === "primary" ? "default" : "outline"} className={className}>
+      <Link to={href ?? "/demo"}>{children}</Link>
+    </Button>
+  );
+}
 
 export function FeaturePage({ config }: { config: FeaturePageConfig }) {
   return (
