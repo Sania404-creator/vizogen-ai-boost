@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import type { IndustryConfig } from "./industry-config";
+import { buildIndustryTestimonials } from "./industry-testimonials";
 import { gymConfig } from "./industry-config";
 import dashboard from "@/assets/dashboard.jpg";
 import p1 from "@/assets/post-1.jpg";
@@ -67,7 +68,10 @@ type IndustrySpec = {
 
 const galleryImages = [p1, p6, p3, p4, p5, p2];
 
+let seedCounter = 1;
+
 function buildConfig(spec: IndustrySpec): IndustryConfig {
+  const seed = ++seedCounter;
   const {
     industryName,
     industrySingular,
@@ -105,6 +109,14 @@ function buildConfig(spec: IndustrySpec): IndustryConfig {
       "Live local rank tracking by keyword & city",
       "Offer and service creatives designed in seconds",
     ],
+    testimonials: buildIndustryTestimonials({
+      industrySingular: industrySingular,
+      industryPlural: industryPlural,
+      customerNoun,
+      contentNoun,
+      brandSuffix: industrySingular,
+      seed,
+    }),
     galleryPosts: galleryTitles.map((title, i) => ({
       src: galleryImages[i]!,
       alt: `AI generated ${industrySingular.toLowerCase()} post — ${title}`,
