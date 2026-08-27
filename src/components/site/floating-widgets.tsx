@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
+import { useRouterState } from "@tanstack/react-router";
 import { ChatWidget } from "@/components/site/chat-widget";
 import { DemoScheduler } from "@/components/site/demo-scheduler";
-import { OPEN_DEMO_EVENT, WHATSAPP_URL } from "@/lib/site-contact";
+import { FreeDemoPopup } from "@/components/site/free-demo-popup";
+import { OPEN_DEMO_EVENT, OPEN_FREE_DEMO_EVENT, WHATSAPP_URL } from "@/lib/site-contact";
+
+const POPUP_FLAG = "demoPopupShown";
 
 function WhatsAppIcon({ className }: { className?: string }) {
   return (
@@ -14,12 +18,31 @@ function WhatsAppIcon({ className }: { className?: string }) {
 export function FloatingWidgets() {
   const [chatOpen, setChatOpen] = useState(false);
   const [demoOpen, setDemoOpen] = useState(false);
+  const [freeDemoOpen, setFreeDemoOpen] = useState(false);
+  const pathname = useRouterState({ select: (state) => state.location.pathname });
 
   useEffect(() => {
     const onOpen = () => setDemoOpen(true);
+    const onOpenFree = () => setFreeDemoOpen(true);
     window.addEventListener(OPEN_DEMO_EVENT, onOpen);
-    return () => window.removeEventListener(OPEN_DEMO_EVENT, onOpen);
+    window.addEventListener(OPEN_FREE_DEMO_EVENT, onOpenFree);
+    return () => {
+      window.removeEventListener(OPEN_DEMO_EVENT, onOpen);
+      window.removeEventListener(OPEN_FREE_DEMO_EVENT, onOpenFree);
+    };
   }, []);
+
+  // Auto-open the free demo popup once per session, shortly after landing on the homepage.
+  useEffect(() => {
+    if (pathname !== "/") return;
+    if (sessionStorage.getItem(POPUP_FLAG)) return;
+    const timer = window.setTimeout(() => {
+      if (sessionStorage.getItem(POPUP_FLAG)) return;
+      sessionStorage.setItem(POPUP_FLAG, "1");
+      setFreeDemoOpen(true);
+    }, 4500);
+    return () => window.clearTimeout(timer);
+  }, [pathname]);
 
   return (
     <>
@@ -49,6 +72,15 @@ export function FloatingWidgets() {
           <ChatWidget open={chatOpen} onOpenChange={setChatOpen} />
         </div>
       </div>
+
+      <FreeDemoPopup
+        open={freeDemoOpen}
+        onClose={() => {
+          sessionStorage.setItem(POPUP_FLAG, "1");
+          setFreeDemoOpen(false);
+        }}
+        onSubmitted={() => sessionStorage.setItem(POPUP_FLAG, "1")}
+      />
 
       <DemoScheduler open={demoOpen} onClose={() => setDemoOpen(false)} />
     </>
