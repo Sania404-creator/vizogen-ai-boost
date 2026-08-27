@@ -87,11 +87,9 @@ export function FeaturePage({ config }: { config: FeaturePageConfig }) {
               {config.subtitle}
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Button asChild size="lg" className="rounded-xl">
-                <Link to="/demo">
-                  Start Free Demo <ArrowRight className="ml-1 size-4" />
-                </Link>
-              </Button>
+              <CtaButton href={config.ctaHref}>
+                Start Free Demo <ArrowRight className="ml-1 size-4" />
+              </CtaButton>
               <Button asChild size="lg" variant="outline" className="rounded-xl">
                 <Link to="/pricing">See pricing</Link>
               </Button>
@@ -264,19 +262,12 @@ export function FeaturePage({ config }: { config: FeaturePageConfig }) {
                 {config.ctaText}
               </p>
               <div className="relative mt-8 flex flex-wrap justify-center gap-3">
-                <Button asChild size="lg" className="rounded-xl">
-                  <Link to="/demo">
-                    Book your free demo <ArrowRight className="ml-1 size-4" />
-                  </Link>
-                </Button>
-                <Button
-                  asChild
-                  size="lg"
-                  variant="outline"
-                  className="rounded-xl border-navy-foreground/20 bg-transparent text-navy-foreground hover:bg-navy-foreground/10 hover:text-navy-foreground"
-                >
-                  <Link to="/login">Log in to Vizogen</Link>
-                </Button>
+                <CtaButton href={config.ctaHref}>
+                  Book your free demo <ArrowRight className="ml-1 size-4" />
+                </CtaButton>
+                <CtaButton href="/login" variant="outline">
+                  Log in to Vizogen
+                </CtaButton>
               </div>
             </div>
           </Reveal>
