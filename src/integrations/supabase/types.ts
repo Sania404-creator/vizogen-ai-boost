@@ -14,7 +14,54 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      demo_bookings: {
+        Row: {
+          admin_email_sent: boolean
+          business_name: string
+          created_at: string
+          customer_email_sent: boolean
+          email: string
+          id: string
+          name: string
+          note: string | null
+          phone: string
+          slot_date: string
+          slot_time: string
+          source: string
+          timezone: string
+        }
+        Insert: {
+          admin_email_sent?: boolean
+          business_name: string
+          created_at?: string
+          customer_email_sent?: boolean
+          email: string
+          id?: string
+          name: string
+          note?: string | null
+          phone: string
+          slot_date: string
+          slot_time: string
+          source?: string
+          timezone?: string
+        }
+        Update: {
+          admin_email_sent?: boolean
+          business_name?: string
+          created_at?: string
+          customer_email_sent?: boolean
+          email?: string
+          id?: string
+          name?: string
+          note?: string | null
+          phone?: string
+          slot_date?: string
+          slot_time?: string
+          source?: string
+          timezone?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
