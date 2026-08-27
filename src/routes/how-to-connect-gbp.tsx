@@ -304,7 +304,7 @@ function HowToConnectGbp() {
                             className={`relative mt-4 flex items-start gap-2.5 rounded-2xl border p-3.5 text-sm ${
                               s.callout.tone === "red"
                                 ? "border-destructive/25 bg-destructive/5 text-destructive"
-                                : "border-amber-500/30 bg-amber-500/10 text-amber-700 dark:text-amber-400"
+                                : "border-brand/30 bg-brand/10 text-brand dark:text-brand"
                             }`}
                           >
                             {s.callout.tone === "red" ? (
