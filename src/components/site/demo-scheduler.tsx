@@ -107,7 +107,7 @@ export function DemoScheduler({ open, onClose }: { open: boolean; onClose: () =>
   });
   const [errors, setErrors] = useState<Errors>({});
   const [submitting, setSubmitting] = useState(false);
-  const [done, setDone] = useState<{ slotLabel: string } | null>(null);
+  const [done, setDone] = useState<{ slotLabel: string; waUrl: string } | null>(null);
   const book = useServerFn(createDemoBooking);
 
   useEffect(() => {
