@@ -37,7 +37,7 @@ function CtaButton({
   children,
   variant = "primary",
 }: {
-  href?: string;
+  href?: string | undefined;
   children: React.ReactNode;
   variant?: "primary" | "outline";
 }) {
