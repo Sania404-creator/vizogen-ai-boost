@@ -1,13 +1,22 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { CalendarDays, CheckCircle2, Clock, Loader2, X } from "lucide-react";
+import {
+  ArrowLeft,
+  CalendarDays,
+  CheckCircle2,
+  Clock,
+  Loader2,
+  X,
+} from "lucide-react";
 import { z } from "zod";
 import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { cn } from "@/lib/utils";
 import { createDemoBooking } from "@/lib/bookings.functions";
 
 const SLOTS = [
@@ -37,21 +46,32 @@ const schema = z.object({
 type Values = z.infer<typeof schema>;
 type Errors = Partial<Record<keyof Values, string>>;
 
-function nextBusinessDays(count: number) {
-  const days: Date[] = [];
-  const cursor = new Date();
-  cursor.setHours(0, 0, 0, 0);
-  while (days.length < count) {
-    cursor.setDate(cursor.getDate() + 1);
-    if (cursor.getDay() !== 0) days.push(new Date(cursor));
-  }
-  return days;
-}
-
 function toISO(date: Date) {
   return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(
     date.getDate(),
   ).padStart(2, "0")}`;
+}
+
+function startOfToday() {
+  const d = new Date();
+  d.setHours(0, 0, 0, 0);
+  return d;
+}
+
+function firstSelectableDay() {
+  const d = startOfToday();
+  do {
+    d.setDate(d.getDate() + 1);
+  } while (d.getDay() === 0);
+  return d;
+}
+
+function prettyDate(date: Date) {
+  return date.toLocaleDateString("en-IN", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+  });
 }
 
 function googleCalendarLink(slotDate: string, slotTime: string) {
@@ -75,9 +95,9 @@ function googleCalendarLink(slotDate: string, slotTime: string) {
 }
 
 export function DemoScheduler({ open, onClose }: { open: boolean; onClose: () => void }) {
-  const days = useMemo(() => nextBusinessDays(8), []);
-  const [date, setDate] = useState(() => toISO(days[0]!));
-  const [time, setTime] = useState(SLOTS[0]!);
+  const [step, setStep] = useState<1 | 2>(1);
+  const [day, setDay] = useState<Date | undefined>(undefined);
+  const [time, setTime] = useState<string | null>(null);
   const [values, setValues] = useState<Values>({
     name: "",
     businessName: "",
@@ -92,6 +112,10 @@ export function DemoScheduler({ open, onClose }: { open: boolean; onClose: () =>
 
   useEffect(() => {
     if (!open) return;
+    setStep(1);
+    setDone(null);
+    setDay(firstSelectableDay());
+    setTime(null);
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
     document.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
@@ -108,6 +132,10 @@ export function DemoScheduler({ open, onClose }: { open: boolean; onClose: () =>
 
   const submit = async (event: React.FormEvent) => {
     event.preventDefault();
+    if (!day || !time) {
+      setStep(1);
+      return;
+    }
     const parsed = schema.safeParse(values);
     if (!parsed.success) {
       const next: Errors = {};
@@ -120,7 +148,12 @@ export function DemoScheduler({ open, onClose }: { open: boolean; onClose: () =>
     setSubmitting(true);
     try {
       const result = await book({
-        data: { ...parsed.data, note: parsed.data.note ?? "", slotDate: date, slotTime: time },
+        data: {
+          ...parsed.data,
+          note: parsed.data.note ?? "",
+          slotDate: toISO(day),
+          slotTime: time,
+        },
       });
       setDone({ slotLabel: result.slotLabel });
     } catch (error) {
@@ -153,13 +186,34 @@ export function DemoScheduler({ open, onClose }: { open: boolean; onClose: () =>
             className="relative z-10 flex h-full w-full max-w-3xl flex-col overflow-hidden bg-card shadow-glow sm:h-auto sm:max-h-[90vh] sm:rounded-3xl sm:border sm:border-border"
           >
             <div className="flex items-start justify-between gap-4 border-b border-border px-5 py-4 sm:px-7">
-              <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">
-                  30-minute call
-                </p>
-                <h2 className="mt-1 text-xl font-bold tracking-tight text-foreground">
-                  Book your Vizogen demo
-                </h2>
+              <div className="flex items-start gap-3">
+                {step === 2 && !done ? (
+                  <button
+                    type="button"
+                    onClick={() => setStep(1)}
+                    aria-label="Back to date selection"
+                    className="mt-1 grid size-9 shrink-0 place-items-center rounded-xl border border-border text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+                  >
+                    <ArrowLeft className="size-4" />
+                  </button>
+                ) : null}
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-primary">
+                    {done
+                      ? "Confirmed"
+                      : step === 1
+                        ? "Step 1 of 2 · Pick a slot"
+                        : "Step 2 of 2 · Your details"}
+                  </p>
+                  <h2 className="mt-1 text-xl font-bold tracking-tight text-foreground">
+                    Book your Vizogen demo
+                  </h2>
+                  {step === 2 && !done && day && time ? (
+                    <p className="mt-1 text-sm text-muted-foreground">
+                      {prettyDate(day)} · {time} IST
+                    </p>
+                  ) : null}
+                </div>
               </div>
               <button
                 type="button"
@@ -190,7 +244,7 @@ export function DemoScheduler({ open, onClose }: { open: boolean; onClose: () =>
                   <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
                     <Button asChild className="rounded-full gradient-brand px-6">
                       <a
-                        href={googleCalendarLink(date, time)}
+                        href={googleCalendarLink(day ? toISO(day) : "", time ?? "")}
                         target="_blank"
                         rel="noopener noreferrer"
                       >
@@ -202,146 +256,144 @@ export function DemoScheduler({ open, onClose }: { open: boolean; onClose: () =>
                     </Button>
                   </div>
                 </div>
-              ) : (
-                <form onSubmit={submit} className="grid gap-6 md:grid-cols-2">
-                  <div className="space-y-5">
-                    <div>
-                      <p className="flex items-center gap-2 text-sm font-semibold text-foreground">
-                        <CalendarDays className="size-4 text-primary" /> Pick a date
-                      </p>
-                      <div className="mt-3 grid grid-cols-4 gap-2">
-                        {days.map((d) => {
-                          const iso = toISO(d);
-                          const active = iso === date;
-                          return (
-                            <button
-                              key={iso}
-                              type="button"
-                              onClick={() => setDate(iso)}
-                              className={`rounded-xl border px-2 py-2 text-center transition-all ${
-                                active
-                                  ? "border-transparent gradient-brand text-white shadow-soft"
-                                  : "border-border bg-card text-foreground hover:border-brand/50"
-                              }`}
-                            >
-                              <span className="block text-[10px] font-semibold uppercase opacity-80">
-                                {d.toLocaleDateString("en-IN", { weekday: "short" })}
-                              </span>
-                              <span className="block font-display text-base font-bold">
-                                {d.getDate()}
-                              </span>
-                              <span className="block text-[10px] opacity-80">
-                                {d.toLocaleDateString("en-IN", { month: "short" })}
-                              </span>
-                            </button>
-                          );
-                        })}
-                      </div>
-                    </div>
-
-                    <div>
-                      <p className="flex items-center gap-2 text-sm font-semibold text-foreground">
-                        <Clock className="size-4 text-primary" /> Pick a time (IST)
-                      </p>
-                      <div className="mt-3 grid grid-cols-4 gap-2">
-                        {SLOTS.map((slot) => {
-                          const active = slot === time;
-                          return (
-                            <button
-                              key={slot}
-                              type="button"
-                              onClick={() => setTime(slot)}
-                              className={`rounded-xl border px-2 py-2 text-xs font-semibold transition-all ${
-                                active
-                                  ? "border-transparent gradient-brand text-white shadow-soft"
-                                  : "border-border bg-card text-muted-foreground hover:border-brand/50 hover:text-foreground"
-                              }`}
-                            >
-                              {slot}
-                            </button>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="space-y-3">
-                    <div>
-                      <Label htmlFor="ds-name">Full name</Label>
-                      <Input
-                        id="ds-name"
-                        value={values.name}
-                        onChange={(e) => set("name", e.target.value)}
-                        placeholder="Rahul Mehta"
-                      />
-                      {errors.name ? (
-                        <p className="mt-1 text-xs text-destructive">{errors.name}</p>
-                      ) : null}
-                    </div>
-                    <div>
-                      <Label htmlFor="ds-business">Business name</Label>
-                      <Input
-                        id="ds-business"
-                        value={values.businessName}
-                        onChange={(e) => set("businessName", e.target.value)}
-                        placeholder="FitPeak Gym"
-                      />
-                      {errors.businessName ? (
-                        <p className="mt-1 text-xs text-destructive">{errors.businessName}</p>
-                      ) : null}
-                    </div>
-                    <div>
-                      <Label htmlFor="ds-email">Email</Label>
-                      <Input
-                        id="ds-email"
-                        type="email"
-                        value={values.email}
-                        onChange={(e) => set("email", e.target.value)}
-                        placeholder="you@business.com"
-                      />
-                      {errors.email ? (
-                        <p className="mt-1 text-xs text-destructive">{errors.email}</p>
-                      ) : null}
-                    </div>
-                    <div>
-                      <Label htmlFor="ds-phone">Phone number</Label>
-                      <Input
-                        id="ds-phone"
-                        value={values.phone}
-                        onChange={(e) => set("phone", e.target.value)}
-                        placeholder="+91 98765 43210"
-                      />
-                      {errors.phone ? (
-                        <p className="mt-1 text-xs text-destructive">{errors.phone}</p>
-                      ) : null}
-                    </div>
-                    <div>
-                      <Label htmlFor="ds-note">Anything we should know? (optional)</Label>
-                      <Textarea
-                        id="ds-note"
-                        rows={2}
-                        value={values.note}
-                        onChange={(e) => set("note", e.target.value)}
-                        placeholder="City, category, current challenges…"
-                      />
-                    </div>
-                    <Button
-                      type="submit"
-                      disabled={submitting}
-                      className="w-full rounded-full gradient-brand py-6 text-base shadow-glow transition-transform hover:scale-[1.02] hover:opacity-95"
-                    >
-                      {submitting ? (
-                        <>
-                          <Loader2 className="size-4 animate-spin" /> Booking…
-                        </>
-                      ) : (
-                        "Confirm my demo →"
-                      )}
-                    </Button>
-                    <p className="text-center text-xs text-muted-foreground">
-                      You'll get an instant email confirmation. Our team is notified too.
+              ) : step === 1 ? (
+                <div className="grid gap-6 md:grid-cols-[auto_1fr]">
+                  <div>
+                    <p className="flex items-center gap-2 text-sm font-semibold text-foreground">
+                      <CalendarDays className="size-4 text-primary" /> Select a date
                     </p>
+                    <div className="mt-3 rounded-2xl border border-border bg-card">
+                      <Calendar
+                        mode="single"
+                        selected={day}
+                        onSelect={(d) => {
+                          if (!d) return;
+                          setDay(d);
+                          setTime(null);
+                        }}
+                        disabled={(d) => d <= startOfToday() || d.getDay() === 0}
+                        className={cn("p-3 pointer-events-auto")}
+                      />
+                    </div>
                   </div>
+
+                  <div className="flex flex-col">
+                    <p className="flex items-center gap-2 text-sm font-semibold text-foreground">
+                      <Clock className="size-4 text-primary" /> Select a time (IST)
+                    </p>
+                    <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3">
+                      {SLOTS.map((slot) => {
+                        const active = slot === time;
+                        return (
+                          <button
+                            key={slot}
+                            type="button"
+                            onClick={() => setTime(slot)}
+                            className={`rounded-xl border px-2 py-2.5 text-xs font-semibold transition-all ${
+                              active
+                                ? "border-transparent gradient-brand text-white shadow-soft"
+                                : "border-border bg-card text-muted-foreground hover:border-brand/50 hover:text-foreground"
+                            }`}
+                          >
+                            {slot}
+                          </button>
+                        );
+                      })}
+                    </div>
+                    <div className="mt-auto pt-6">
+                      <p className="mb-3 text-xs text-muted-foreground">
+                        {day && time
+                          ? `Selected: ${prettyDate(day)} at ${time} IST`
+                          : "Choose a date and a time slot to continue."}
+                      </p>
+                      <Button
+                        type="button"
+                        disabled={!day || !time}
+                        onClick={() => setStep(2)}
+                        className="w-full rounded-full gradient-brand py-6 text-base shadow-glow transition-transform hover:scale-[1.02] hover:opacity-95 disabled:opacity-50"
+                      >
+                        Continue →
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <form onSubmit={submit} className="mx-auto max-w-xl space-y-3">
+                  <div>
+                    <Label htmlFor="ds-name">Full name</Label>
+                    <Input
+                      id="ds-name"
+                      value={values.name}
+                      onChange={(e) => set("name", e.target.value)}
+                      placeholder="Rahul Mehta"
+                    />
+                    {errors.name ? (
+                      <p className="mt-1 text-xs text-destructive">{errors.name}</p>
+                    ) : null}
+                  </div>
+                  <div>
+                    <Label htmlFor="ds-business">Business name</Label>
+                    <Input
+                      id="ds-business"
+                      value={values.businessName}
+                      onChange={(e) => set("businessName", e.target.value)}
+                      placeholder="FitPeak Gym"
+                    />
+                    {errors.businessName ? (
+                      <p className="mt-1 text-xs text-destructive">{errors.businessName}</p>
+                    ) : null}
+                  </div>
+                  <div>
+                    <Label htmlFor="ds-email">Email</Label>
+                    <Input
+                      id="ds-email"
+                      type="email"
+                      value={values.email}
+                      onChange={(e) => set("email", e.target.value)}
+                      placeholder="you@business.com"
+                    />
+                    {errors.email ? (
+                      <p className="mt-1 text-xs text-destructive">{errors.email}</p>
+                    ) : null}
+                  </div>
+                  <div>
+                    <Label htmlFor="ds-phone">Phone number</Label>
+                    <Input
+                      id="ds-phone"
+                      value={values.phone}
+                      onChange={(e) => set("phone", e.target.value)}
+                      placeholder="+91 98765 43210"
+                    />
+                    {errors.phone ? (
+                      <p className="mt-1 text-xs text-destructive">{errors.phone}</p>
+                    ) : null}
+                  </div>
+                  <div>
+                    <Label htmlFor="ds-note">Anything we should know? (optional)</Label>
+                    <Textarea
+                      id="ds-note"
+                      rows={2}
+                      value={values.note}
+                      onChange={(e) => set("note", e.target.value)}
+                      placeholder="City, category, current challenges…"
+                    />
+                  </div>
+                  <Button
+                    type="submit"
+                    disabled={submitting}
+                    className="w-full rounded-full gradient-brand py-6 text-base shadow-glow transition-transform hover:scale-[1.02] hover:opacity-95"
+                  >
+                    {submitting ? (
+                      <>
+                        <Loader2 className="size-4 animate-spin" /> Booking…
+                      </>
+                    ) : (
+                      "Confirm my demo →"
+                    )}
+                  </Button>
+                  <p className="text-center text-xs text-muted-foreground">
+                    You'll get an instant email confirmation. Our team is notified too.
+                  </p>
                 </form>
               )}
             </div>
