@@ -57,7 +57,7 @@ export function GuideWithExamples({
         <section className="relative overflow-hidden pt-16 pb-14 sm:pt-24 sm:pb-20">
           <div
             aria-hidden
-            className="pointer-events-none absolute inset-x-0 -top-32 mx-auto h-[360px] max-w-3xl rounded-full bg-amber-400/25 opacity-60 blur-3xl"
+            className="pointer-events-none absolute inset-x-0 -top-32 mx-auto h-[360px] max-w-3xl rounded-full bg-brand/25 opacity-60 blur-3xl"
           />
           <div className="relative mx-auto max-w-3xl px-4 text-center sm:px-6 lg:px-8">
             <Reveal>
@@ -144,7 +144,7 @@ export function GuideWithExamples({
                 <Reveal key={ex.title} delay={(i % 3) * 0.08}>
                   <div className="gradient-border flex h-full flex-col rounded-2xl border border-border/70 bg-card p-6 shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lift">
                     <div className="flex items-center gap-3">
-                      <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-amber-500/15 text-amber-600 dark:text-amber-400">
+                      <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-brand/15 text-brand dark:text-brand">
                         <ex.icon className="size-5" />
                       </span>
                       <div className="min-w-0">
@@ -156,7 +156,7 @@ export function GuideWithExamples({
                         </h3>
                       </div>
                     </div>
-                    <span className="mt-4 inline-flex w-fit items-center rounded-full bg-amber-500/10 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider text-amber-600 dark:text-amber-400">
+                    <span className="mt-4 inline-flex w-fit items-center rounded-full bg-brand/10 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wider text-brand dark:text-brand">
                       {ex.label}
                     </span>
                     <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
@@ -183,7 +183,7 @@ export function GuideWithExamples({
                 <Button
                   asChild
                   size="lg"
-                  className="rounded-full bg-amber-500 px-8 text-navy shadow-lift transition-transform hover:scale-[1.03] hover:bg-amber-400"
+                  className="rounded-full gradient-brand px-8 text-primary-foreground shadow-lift transition-transform hover:scale-[1.03] hover:opacity-95"
                 >
                   <Link to={ctaTo}>
                     {ctaLabel} <ArrowRight className="size-4" />

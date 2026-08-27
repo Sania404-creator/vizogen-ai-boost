@@ -279,7 +279,7 @@ function LocalSeoPage() {
         <section className="relative overflow-hidden pt-14 pb-16 sm:pt-20 sm:pb-24">
           <div
             aria-hidden
-            className="pointer-events-none absolute -top-40 left-1/2 h-[420px] w-[720px] -translate-x-1/2 rounded-full bg-amber-400/25 opacity-70 blur-3xl"
+            className="pointer-events-none absolute -top-40 left-1/2 h-[420px] w-[720px] -translate-x-1/2 rounded-full bg-brand/25 opacity-70 blur-3xl"
           />
           <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-2 lg:gap-14 lg:px-8">
             <Reveal>
@@ -371,8 +371,8 @@ function LocalSeoPage() {
                             {s.concept}
                           </p>
                         </div>
-                        <div className="rounded-xl border border-amber-500/25 bg-amber-500/[0.07] p-4">
-                          <p className="text-xs font-bold uppercase tracking-widest text-amber-600 dark:text-amber-400">
+                        <div className="rounded-xl border border-brand/25 bg-brand/[0.07] p-4">
+                          <p className="text-xs font-bold uppercase tracking-widest text-brand dark:text-brand">
                             Vizogen Solution:
                           </p>
                           <p className="mt-2 text-sm leading-relaxed text-foreground/85">
@@ -416,7 +416,7 @@ function LocalSeoPage() {
               {included.map((f, i) => (
                 <Reveal key={f.title} delay={i * 0.07}>
                   <div className="h-full rounded-2xl border border-border/70 bg-card p-6 shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lift">
-                    <span className="grid size-11 place-items-center rounded-xl bg-amber-500/15 text-amber-600 dark:text-amber-400">
+                    <span className="grid size-11 place-items-center rounded-xl bg-brand/15 text-brand dark:text-brand">
                       <f.icon className="size-5" />
                     </span>
                     <h3 className="mt-5 font-display text-lg font-bold text-foreground">
@@ -482,7 +482,7 @@ function LocalSeoPage() {
                       <th className="p-5 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
                         Capability
                       </th>
-                      <th className="border-x border-amber-500/30 bg-amber-500/10 p-5 font-display text-base font-bold text-amber-600 dark:text-amber-400">
+                      <th className="border-x border-brand/30 bg-brand/10 p-5 font-display text-base font-bold text-brand dark:text-brand">
                         Vizogen
                       </th>
                       <th className="p-5 font-display text-base font-bold text-foreground">
@@ -502,7 +502,7 @@ function LocalSeoPage() {
                         <td className="p-5 text-sm font-semibold text-foreground">
                           {row.label}
                         </td>
-                        <td className="border-x border-amber-500/30 bg-amber-500/[0.07] p-5 text-sm font-semibold text-foreground">
+                        <td className="border-x border-brand/30 bg-brand/[0.07] p-5 text-sm font-semibold text-foreground">
                           <span className="flex items-center gap-2">
                             <Check className="size-4 shrink-0 text-success" />
                             {row.vizogen}
@@ -595,7 +595,7 @@ function LocalSeoPage() {
           >
             {trustStats.map((s, i) => (
               <Reveal key={s.label} delay={i * 0.08} className="text-center">
-                <p className="font-display text-4xl font-bold text-amber-400 sm:text-5xl">
+                <p className="font-display text-4xl font-bold text-brand sm:text-5xl">
                   <Counter
                     to={s.value}
                     decimals={s.decimals ?? 0}
@@ -623,7 +623,7 @@ function LocalSeoPage() {
               {benefits.map((b, i) => (
                 <Reveal key={b.title} delay={i * 0.08}>
                   <div className="h-full rounded-2xl border border-border/70 bg-card p-7 shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lift">
-                    <span className="grid size-11 place-items-center rounded-xl bg-amber-500/15 text-amber-600 dark:text-amber-400">
+                    <span className="grid size-11 place-items-center rounded-xl bg-brand/15 text-brand dark:text-brand">
                       <b.icon className="size-5" />
                     </span>
                     <h3 className="mt-5 font-display text-lg font-bold text-foreground">
@@ -678,9 +678,9 @@ function LocalSeoPage() {
                   <a
                     key={city}
                     href={`/services/local-seo-${slugify(city)}`}
-                    className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-card px-4 py-2 text-sm font-semibold text-foreground shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:border-amber-500/50 hover:text-amber-600 hover:shadow-lift dark:hover:text-amber-400"
+                    className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-card px-4 py-2 text-sm font-semibold text-foreground shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:border-brand/50 hover:text-brand hover:shadow-lift dark:hover:text-brand"
                   >
-                    <MapPin className="size-4 text-amber-500" />
+                    <MapPin className="size-4 text-brand" />
                     {city}
                   </a>
                 ))}
@@ -695,7 +695,7 @@ function LocalSeoPage() {
             <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-navy via-navy to-primary/60 px-6 py-14 text-center shadow-lift sm:px-12 sm:py-20">
               <div
                 aria-hidden
-                className="pointer-events-none absolute -right-16 -top-16 size-64 rounded-full bg-amber-400/20 blur-3xl"
+                className="pointer-events-none absolute -right-16 -top-16 size-64 rounded-full bg-brand/20 blur-3xl"
               />
               <div className="relative">
                 <h2 className="text-balance font-display text-3xl font-bold tracking-tight text-navy-foreground sm:text-4xl">
@@ -723,7 +723,7 @@ function LocalSeoPage() {
                   </Button>
                 </div>
                 <p className="mt-6 flex items-center justify-center gap-2 text-sm text-navy-foreground/70">
-                  <Star className="size-4 fill-amber-400 text-amber-400" /> Rated 4.9/5 by
+                  <Star className="size-4 fill-brand text-brand" /> Rated 4.9/5 by
                   small business owners
                 </p>
               </div>

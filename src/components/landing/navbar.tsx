@@ -53,7 +53,7 @@ export function Navbar() {
           <img
             src={logoAsset.url}
             alt="Vizogen"
-            className="h-12 w-auto rounded-lg object-contain sm:h-14"
+            className="h-9 w-auto object-contain drop-shadow-sm sm:h-10"
           />
         </a>
 
@@ -111,12 +111,12 @@ export function Navbar() {
                         key={g.label}
                         to={g.to}
                         onClick={() => setGuideOpen(false)}
-                        className={`group flex items-start gap-3.5 rounded-xl px-2.5 py-3 transition-all hover:bg-amber-500/5 hover:pl-4 ${
-                          pathname === g.to ? "bg-amber-500/10" : ""
+                        className={`group flex items-start gap-3.5 rounded-xl px-2.5 py-3 transition-all hover:bg-brand/5 hover:pl-4 ${
+                          pathname === g.to ? "bg-brand/10" : ""
                         }`}
                       >
-                        <span className="grid size-9 shrink-0 place-items-center rounded-lg transition-colors group-hover:bg-amber-500/15">
-                          <g.icon className="size-[26px] text-amber-500" strokeWidth={1.75} />
+                        <span className="grid size-9 shrink-0 place-items-center rounded-lg transition-colors group-hover:bg-brand/15">
+                          <g.icon className="size-[26px] text-brand" strokeWidth={1.75} />
                         </span>
                         <span className="min-w-0">
                           <span className="block text-[17px] font-semibold leading-tight text-foreground">
@@ -223,11 +223,11 @@ export function Navbar() {
                       key={g.label}
                       to={g.to}
                       onClick={() => setOpen(false)}
-                      className={`flex items-start gap-3 rounded-xl px-2 py-2.5 hover:bg-amber-500/5 ${
-                        pathname === g.to ? "bg-amber-500/10" : ""
+                      className={`flex items-start gap-3 rounded-xl px-2 py-2.5 hover:bg-brand/5 ${
+                        pathname === g.to ? "bg-brand/10" : ""
                       }`}
                     >
-                      <g.icon className="mt-0.5 size-[24px] shrink-0 text-amber-500" strokeWidth={1.75} />
+                      <g.icon className="mt-0.5 size-[24px] shrink-0 text-brand" strokeWidth={1.75} />
                       <span className="min-w-0">
                         <span className="block text-[15px] font-semibold leading-tight text-foreground">
                           {g.label}
