@@ -70,7 +70,7 @@ const perks = [
   "Live walkthrough of the Vizogen dashboard",
   "Custom AI post samples for your business",
   "Local ranking audit of your Google profile",
-  "500 free coins to start automating today",
+  "Free trial access to the full Vizogen web platform",
 ];
 
 function DemoPage() {

@@ -1,5 +1,4 @@
 import {
-  Apple,
   Facebook,
   Instagram,
   Linkedin,
@@ -7,7 +6,6 @@ import {
   MapPin,
   MessageCircle,
   Phone,
-  Play,
   Youtube,
 } from "lucide-react";
 import { Link } from "@tanstack/react-router";
@@ -62,19 +60,20 @@ export function Footer() {
               local ranking growth on autopilot.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
-              <a
-                href="#"
+              <Link
+                to="/demo"
                 className="flex items-center gap-2 rounded-xl border border-navy-foreground/15 bg-navy-foreground/5 px-4 py-2.5 text-xs font-semibold transition-colors hover:bg-navy-foreground/10"
               >
-                <Play className="size-4" /> Google Play
-              </a>
-              <a
-                href="#"
+                Start Free Trial
+              </Link>
+              <Link
+                to="/login"
                 className="flex items-center gap-2 rounded-xl border border-navy-foreground/15 bg-navy-foreground/5 px-4 py-2.5 text-xs font-semibold transition-colors hover:bg-navy-foreground/10"
               >
-                <Apple className="size-4" /> App Store
-              </a>
+                Sign In
+              </Link>
             </div>
+
           </div>
 
           {columns.map((col) => (
