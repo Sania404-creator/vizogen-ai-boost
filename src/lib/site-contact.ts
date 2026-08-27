@@ -14,7 +14,7 @@ export type DemoWhatsAppDetails = {
   phone: string;
   email: string;
   slotLabel: string;
-  note?: string;
+  note?: string | undefined;
 };
 
 /** Template-based WhatsApp confirmation for a booked demo. */
