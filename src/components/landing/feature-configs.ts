@@ -242,4 +242,5 @@ export const magicQr: FeaturePageConfig = {
   ],
   ctaHeading: "Put a review engine on every counter.",
   ctaText: "Get your branded Magic QR in a free demo and start collecting reviews the same day.",
+  ctaHref: "https://login.vizogen.in/magic-qr",
 };

@@ -29,7 +29,40 @@ export type FeaturePageConfig = {
   faqs: { q: string; a: string }[];
   ctaHeading: string;
   ctaText: string;
+  ctaHref?: string;
 };
+
+function CtaButton({
+  href,
+  children,
+  variant = "primary",
+}: {
+  href?: string | undefined;
+  children: React.ReactNode;
+  variant?: "primary" | "outline";
+}) {
+  const isExternal = href?.startsWith("http");
+  const className =
+    variant === "primary"
+      ? "rounded-xl"
+      : "rounded-xl border-navy-foreground/20 bg-transparent text-navy-foreground hover:bg-navy-foreground/10 hover:text-navy-foreground";
+
+  if (isExternal) {
+    return (
+      <Button asChild size="lg" variant={variant === "primary" ? "default" : "outline"} className={className}>
+        <a href={href} target="_blank" rel="noopener noreferrer">
+          {children}
+        </a>
+      </Button>
+    );
+  }
+
+  return (
+    <Button asChild size="lg" variant={variant === "primary" ? "default" : "outline"} className={className}>
+      <Link to={href ?? "/demo"}>{children}</Link>
+    </Button>
+  );
+}
 
 export function FeaturePage({ config }: { config: FeaturePageConfig }) {
   return (
@@ -54,11 +87,9 @@ export function FeaturePage({ config }: { config: FeaturePageConfig }) {
               {config.subtitle}
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Button asChild size="lg" className="rounded-xl">
-                <Link to="/demo">
-                  Start Free Demo <ArrowRight className="ml-1 size-4" />
-                </Link>
-              </Button>
+              <CtaButton href={config.ctaHref}>
+                Start Free Demo <ArrowRight className="ml-1 size-4" />
+              </CtaButton>
               <Button asChild size="lg" variant="outline" className="rounded-xl">
                 <Link to="/pricing">See pricing</Link>
               </Button>
@@ -231,19 +262,12 @@ export function FeaturePage({ config }: { config: FeaturePageConfig }) {
                 {config.ctaText}
               </p>
               <div className="relative mt-8 flex flex-wrap justify-center gap-3">
-                <Button asChild size="lg" className="rounded-xl">
-                  <Link to="/demo">
-                    Book your free demo <ArrowRight className="ml-1 size-4" />
-                  </Link>
-                </Button>
-                <Button
-                  asChild
-                  size="lg"
-                  variant="outline"
-                  className="rounded-xl border-navy-foreground/20 bg-transparent text-navy-foreground hover:bg-navy-foreground/10 hover:text-navy-foreground"
-                >
-                  <Link to="/login">Log in to Vizogen</Link>
-                </Button>
+                <CtaButton href={config.ctaHref}>
+                  Book your free demo <ArrowRight className="ml-1 size-4" />
+                </CtaButton>
+                <CtaButton href="/login" variant="outline">
+                  Log in to Vizogen
+                </CtaButton>
               </div>
             </div>
           </Reveal>
