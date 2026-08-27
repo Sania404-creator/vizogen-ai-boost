@@ -29,6 +29,7 @@ const columns = [
       { label: "Blog", to: "/blog" },
       { label: "Local SEO", to: "/services/local-seo" },
       { label: "GBP Guide", to: "/how-to-connect-gbp" },
+      { label: "Official Partner", to: "/official-partner" },
       { label: "Book a demo", to: "/demo" },
       { label: "Log in", to: "/login" },
     ],
