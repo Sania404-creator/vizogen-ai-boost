@@ -62,7 +62,7 @@ export function Footer() {
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <a
-                href="https://vizogen.in"
+                href="https://login.vizogen.in/sign-in"
                 className="flex items-center gap-2 rounded-xl border border-navy-foreground/15 bg-navy-foreground/5 px-4 py-2.5 text-xs font-semibold transition-colors hover:bg-navy-foreground/10"
               >
                 Start Free Trial
