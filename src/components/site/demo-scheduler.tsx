@@ -18,6 +18,8 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import { createDemoBooking } from "@/lib/bookings.functions";
+import { demoWhatsAppUrl } from "@/lib/site-contact";
+
 
 const SLOTS = [
   "10:00 AM",
@@ -107,7 +109,7 @@ export function DemoScheduler({ open, onClose }: { open: boolean; onClose: () =>
   });
   const [errors, setErrors] = useState<Errors>({});
   const [submitting, setSubmitting] = useState(false);
-  const [done, setDone] = useState<{ slotLabel: string } | null>(null);
+  const [done, setDone] = useState<{ slotLabel: string; waUrl: string } | null>(null);
   const book = useServerFn(createDemoBooking);
 
   useEffect(() => {
@@ -155,7 +157,15 @@ export function DemoScheduler({ open, onClose }: { open: boolean; onClose: () =>
           slotTime: time,
         },
       });
-      setDone({ slotLabel: result.slotLabel });
+      const waUrl = demoWhatsAppUrl({
+        ...parsed.data,
+        slotLabel: result.slotLabel,
+        note: parsed.data.note,
+      });
+      setDone({ slotLabel: result.slotLabel, waUrl });
+      // Open WhatsApp with the booking template prefilled (admin + customer copy)
+      window.open(waUrl, "_blank", "noopener,noreferrer");
+
     } catch (error) {
       console.error(error);
       toast.error("Couldn't book that slot. Please try again or WhatsApp us.");
@@ -241,8 +251,21 @@ export function DemoScheduler({ open, onClose }: { open: boolean; onClose: () =>
                     We've sent a confirmation to your email. Your demo is scheduled for{" "}
                     <span className="font-semibold text-foreground">{done.slotLabel}</span>.
                   </p>
+                  <p className="mx-auto mt-3 max-w-md text-sm text-muted-foreground">
+                    WhatsApp just opened with your booking details — tap{" "}
+                    <span className="font-semibold text-foreground">Send</span> to confirm on
+                    WhatsApp too.
+                  </p>
                   <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
-                    <Button asChild className="rounded-full gradient-brand px-6">
+                    <Button
+                      asChild
+                      className="rounded-full bg-[#25D366] px-6 text-white hover:bg-[#25D366]/90"
+                    >
+                      <a href={done.waUrl} target="_blank" rel="noopener noreferrer">
+                        Confirm on WhatsApp
+                      </a>
+                    </Button>
+                    <Button asChild variant="outline" className="rounded-full px-6">
                       <a
                         href={googleCalendarLink(day ? toISO(day) : "", time ?? "")}
                         target="_blank"
@@ -251,10 +274,11 @@ export function DemoScheduler({ open, onClose }: { open: boolean; onClose: () =>
                         Add to Calendar
                       </a>
                     </Button>
-                    <Button variant="outline" className="rounded-full px-6" onClick={onClose}>
+                    <Button variant="ghost" className="rounded-full px-6" onClick={onClose}>
                       Done
                     </Button>
                   </div>
+
                 </div>
               ) : step === 1 ? (
                 <div className="grid gap-6 md:grid-cols-[auto_1fr]">
