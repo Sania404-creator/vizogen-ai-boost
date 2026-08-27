@@ -155,7 +155,15 @@ export function DemoScheduler({ open, onClose }: { open: boolean; onClose: () =>
           slotTime: time,
         },
       });
-      setDone({ slotLabel: result.slotLabel });
+      const waUrl = demoWhatsAppUrl({
+        ...parsed.data,
+        slotLabel: result.slotLabel,
+        note: parsed.data.note,
+      });
+      setDone({ slotLabel: result.slotLabel, waUrl });
+      // Open WhatsApp with the booking template prefilled (admin + customer copy)
+      window.open(waUrl, "_blank", "noopener,noreferrer");
+
     } catch (error) {
       console.error(error);
       toast.error("Couldn't book that slot. Please try again or WhatsApp us.");
