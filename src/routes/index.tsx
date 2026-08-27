@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Navbar } from "@/components/landing/navbar";
 import { Hero } from "@/components/landing/hero";
 import { Stats } from "@/components/landing/stats";
+import { PoweredBy } from "@/components/landing/powered-by";
 import { Industries } from "@/components/landing/industries";
 import { Locations } from "@/components/landing/locations";
 import { PostGallery } from "@/components/landing/post-gallery";
