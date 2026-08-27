@@ -707,9 +707,9 @@ function LocalSeoPage() {
                 </p>
                 <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
                   <Button asChild size="lg" className="rounded-full">
-                    <Link to="/demo">
+                    <a href="https://vizogen.in">
                       Start Free Trial <ArrowRight className="size-4" />
-                    </Link>
+                    </a>
                   </Button>
                   <Button
                     asChild

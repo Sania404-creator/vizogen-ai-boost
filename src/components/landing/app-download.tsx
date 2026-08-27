@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 import { CalendarDays, Globe, Star } from "lucide-react";
-import { Link } from "@tanstack/react-router";
+
 import { Reveal } from "./reveal";
 import { Button } from "@/components/ui/button";
 import { openFreeDemo } from "@/lib/site-contact";
@@ -32,7 +32,7 @@ export function AppDownload() {
               size="lg"
               className="rounded-full gradient-brand px-7 shadow-glow transition-transform hover:scale-[1.03] hover:opacity-95"
             >
-              <Link to="/demo">Start Free Trial</Link>
+              <a href="https://vizogen.in">Start Free Trial</a>
             </Button>
             <Button
               size="lg"

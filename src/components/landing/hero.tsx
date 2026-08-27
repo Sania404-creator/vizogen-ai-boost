@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { Link } from "@tanstack/react-router";
+
 import { CalendarDays, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { openFreeDemo } from "@/lib/site-contact";
@@ -83,7 +83,7 @@ export function Hero() {
               size="lg"
               className="w-full rounded-full gradient-brand px-7 shadow-glow transition-transform hover:scale-[1.03] hover:opacity-95 sm:w-auto"
             >
-              <Link to="/demo">Start Free Trial</Link>
+              <a href="https://vizogen.in">Start Free Trial</a>
             </Button>
             <Button
               size="lg"

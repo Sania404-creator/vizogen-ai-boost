@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { Check, CheckCircle2, XCircle } from "lucide-react";
-import { Link } from "@tanstack/react-router";
+
 import { Button } from "@/components/ui/button";
 import {
   Accordion,
@@ -176,7 +176,7 @@ export function SubscriptionPlans({ plans = defaultPlans }: { plans?: Plan[] }) 
             <Reveal
               key={plan.name}
               delay={i * 0.08}
-              className={`h-full ${plan.popular ? "order-first lg:order-none" : ""}`}
+              className="h-full"
             >
               <div
                 className={`relative flex h-full flex-col rounded-2xl border bg-card p-6 transition-all duration-300 hover:-translate-y-1.5 sm:p-8 ${
@@ -239,7 +239,7 @@ export function SubscriptionPlans({ plans = defaultPlans }: { plans?: Plan[] }) 
                     plan.popular ? "gradient-brand shadow-soft hover:opacity-95" : ""
                   }`}
                 >
-                  <Link to="/demo">{plan.cta}</Link>
+                  <a href="https://vizogen.in">{plan.cta}</a>
                 </Button>
               </div>
             </Reveal>
