@@ -3,7 +3,7 @@ import { Navbar } from "@/components/landing/navbar";
 import { Hero } from "@/components/landing/hero";
 import { Stats } from "@/components/landing/stats";
 import { Industries } from "@/components/landing/industries";
-import { Locations } from "@/components/locations";
+import { Locations } from "@/components/landing/locations";
 import { PostGallery } from "@/components/landing/post-gallery";
 import { Features } from "@/components/landing/features";
 import { Growth } from "@/components/landing/growth";
