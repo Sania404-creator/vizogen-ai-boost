@@ -1,10 +1,9 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { Button } from "@/components/ui/button";
+import { createFileRoute } from "@tanstack/react-router";
 import { Navbar } from "@/components/landing/navbar";
 import { Hero } from "@/components/landing/hero";
 import { Stats } from "@/components/landing/stats";
 import { Industries } from "@/components/landing/industries";
-import { Locations } from "@/components/landing/locations";
+import { Locations } from "@/components/locations";
 import { PostGallery } from "@/components/landing/post-gallery";
 import { Features } from "@/components/landing/features";
 import { Growth } from "@/components/landing/growth";
@@ -13,6 +12,8 @@ import { AppDownload } from "@/components/landing/app-download";
 import { OldVsNew } from "@/components/landing/old-vs-new";
 import { Faq } from "@/components/landing/faq";
 import { Footer } from "@/components/landing/footer";
+import { SubscriptionPlans } from "@/components/landing/pricing";
+import { SectionHeading } from "@/components/landing/reveal";
 
 const title = "Vizogen — AI Google Business Profile Automation";
 const description =
