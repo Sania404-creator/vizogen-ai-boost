@@ -33,6 +33,7 @@
   --color-navy-foreground: var(--navy-foreground);
   --color-brand: var(--brand);
   --color-brand-2: var(--brand-2);
+  --color-accent-pink: var(--accent-pink);
   --color-success: var(--success);
   --animate-marquee: marquee 32s linear infinite;
 
