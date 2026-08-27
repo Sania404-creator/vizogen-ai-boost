@@ -252,7 +252,7 @@ function HowToConnectGbp() {
         </section>
 
         {/* Final CTA */}
-        <section className="bg-navy py-16 text-navy-foreground sm:py-20">
+        <section className="bg-gradient-to-br from-navy via-navy to-brand-2/40 py-16 text-navy-foreground sm:py-20">
           <div className="mx-auto max-w-3xl px-4 text-center sm:px-6">
             <Reveal>
               <h2 className="text-balance text-3xl font-bold tracking-tight sm:text-4xl font-display">
