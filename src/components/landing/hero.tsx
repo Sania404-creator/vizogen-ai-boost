@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from "motion/react";
 
 import { CalendarDays, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { openFreeDemo } from "@/lib/site-contact";
+import { openDemoScheduler } from "@/lib/site-contact";
 import dashboard from "@/assets/dashboard.jpg";
 
 const HEADLINE_PREFIX = "Automate Your Google Business Profile and";
@@ -88,7 +88,7 @@ export function Hero() {
             <Button
               size="lg"
               variant="outline"
-              onClick={openFreeDemo}
+              onClick={openDemoScheduler}
               className="w-full rounded-full px-6 text-foreground sm:w-auto"
             >
               <CalendarDays className="size-4" /> Book a Demo
