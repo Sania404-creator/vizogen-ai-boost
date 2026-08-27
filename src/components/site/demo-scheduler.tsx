@@ -18,7 +18,6 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import { createDemoBooking } from "@/lib/bookings.functions";
-import { demoWhatsAppUrl } from "@/lib/site-contact";
 
 
 const SLOTS = [
