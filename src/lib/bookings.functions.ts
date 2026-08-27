@@ -68,3 +68,66 @@ export const createDemoBooking = createServerFn({ method: "POST" })
 
     return { id: row.id, slotLabel: pretty, emailSent: customerSent };
   });
+
+const leadSchema = z.object({
+  name: z.string().trim().min(2).max(100),
+  businessName: z.string().trim().min(2).max(120),
+  phone: z
+    .string()
+    .trim()
+    .min(8)
+    .max(20)
+    .regex(/^[0-9+\-\s()]+$/),
+  email: z.string().trim().email().max(255),
+  industry: z.string().trim().min(2).max(60),
+});
+
+export type DemoLeadInput = z.infer<typeof leadSchema>;
+
+export const createDemoLead = createServerFn({ method: "POST" })
+  .inputValidator((input: unknown) => leadSchema.parse(input))
+  .handler(async ({ data }) => {
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { sendGmail } = await import("@/lib/email.server");
+    const { buildLeadAdminEmail, buildLeadCustomerEmail } = await import("@/lib/lead-emails");
+
+    const today = new Date().toISOString().slice(0, 10);
+
+    const { data: row, error } = await supabaseAdmin
+      .from("demo_bookings")
+      .insert({
+        name: data.name,
+        email: data.email,
+        phone: data.phone,
+        business_name: data.businessName,
+        slot_date: today,
+        slot_time: "To be confirmed",
+        source: "popup",
+        note: `Industry: ${data.industry}`,
+      })
+      .select("id")
+      .single();
+
+    if (error) {
+      console.error("Failed to save demo lead", error);
+      throw new Error("We couldn't save your request. Please try again.");
+    }
+
+    const adminSent = await sendGmail(
+      ADMIN_EMAIL,
+      `New Free Demo Request — ${data.businessName} (${data.industry})`,
+      buildLeadAdminEmail(data),
+    );
+    const customerSent = await sendGmail(
+      data.email,
+      "We've received your Vizogen demo request",
+      buildLeadCustomerEmail(data),
+    );
+
+    await supabaseAdmin
+      .from("demo_bookings")
+      .update({ admin_email_sent: adminSent, customer_email_sent: customerSent })
+      .eq("id", row.id);
+
+    return { id: row.id, emailSent: customerSent };
+  });
