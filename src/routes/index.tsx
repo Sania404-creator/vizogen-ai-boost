@@ -40,6 +40,7 @@ function Index() {
       <Navbar />
       <main>
         <Hero />
+        <PoweredBy />
         <Stats />
         <Industries />
         <Locations />
