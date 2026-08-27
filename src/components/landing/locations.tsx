@@ -1,6 +1,6 @@
 import { MapPin } from "lucide-react";
 import { motion } from "motion/react";
-import { Reveal, SectionHeading } from "./reveal";
+import { SectionHeading } from "./reveal";
 
 const cities = [
   "Mumbai",
@@ -13,28 +13,38 @@ const cities = [
   "Chandigarh",
   "Jaipur",
   "Surat",
+  "Rajkot",
+  "Ahmedabad",
+  "Pune",
+  "Indore",
 ];
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.08,
-      delayChildren: 0.15,
-    },
-  },
-};
+function CityChip({ city }: { city: string }) {
+  return (
+    <div className="flex shrink-0 items-center gap-2 rounded-full border border-border/70 bg-card px-5 py-3 text-sm font-semibold text-foreground shadow-soft transition-colors duration-300 hover:border-primary/40">
+      <MapPin className="size-4 text-primary" />
+      {city}
+    </div>
+  );
+}
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 18, scale: 0.96 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: { duration: 0.45, ease: "easeOut" as const },
-  },
-};
+function Marquee({ reverse = false, duration = 34 }: { reverse?: boolean; duration?: number }) {
+  return (
+    <div className="relative overflow-hidden">
+      <motion.div
+        className="flex w-max gap-3"
+        animate={{ x: reverse ? ["-50%", "0%"] : ["0%", "-50%"] }}
+        transition={{ duration, ease: "linear", repeat: Infinity }}
+      >
+        {[...cities, ...cities].map((city, i) => (
+          <CityChip key={`${city}-${i}`} city={city} />
+        ))}
+      </motion.div>
+      <div className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-background to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-background to-transparent" />
+    </div>
+  );
+}
 
 export function Locations() {
   return (
@@ -44,27 +54,11 @@ export function Locations() {
           title="Serving Local Businesses Across India"
           subtitle="Local intent, local language, local ranking wins — city by city."
         />
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          className="no-scrollbar -mx-4 mt-10 flex snap-x gap-3 overflow-x-auto px-4 pb-2 sm:mx-0 sm:px-0"
-        >
-          {cities.map((city) => (
-            <motion.div
-              key={city}
-              variants={itemVariants}
-              whileHover={{ y: -4, transition: { duration: 0.2 } }}
-              className="flex shrink-0 snap-start items-center gap-2 rounded-full border border-border/70 bg-card px-5 py-3 text-sm font-semibold text-foreground shadow-soft transition-shadow duration-300 hover:border-primary/40 hover:shadow-lift"
-            >
-              <MapPin className="size-4 text-primary" />
-              {city}
-            </motion.div>
-          ))}
-        </motion.div>
+      </div>
+      <div className="mt-10 space-y-3">
+        <Marquee />
+        <Marquee reverse duration={40} />
       </div>
     </section>
   );
 }
-
