@@ -1,5 +1,6 @@
 import { Dumbbell, MessageSquareHeart, ShieldCheck, Sparkles, Star, TrendingUp } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
+import { buildIndustryTestimonials, type IndustryTestimonial } from "./industry-testimonials";
 import gymHero from "@/assets/industry-gym.jpg";
 import dashboard from "@/assets/dashboard.jpg";
 import p1 from "@/assets/post-1.jpg";
@@ -33,6 +34,8 @@ export type IndustryConfig = {
   newWay: string[];
   galleryPosts: { src: string; alt: string; title: string }[];
   faqs: { question: string; answer: string }[];
+  /** 10 industry-specific customer testimonials */
+  testimonials: IndustryTestimonial[];
   whatsappMessage: string;
   seoTitle: string;
   seoDescription: string;
@@ -158,6 +161,15 @@ export const gymConfig: IndustryConfig = {
         "Most gyms see measurable growth in profile views and calls within the first 30 days, with Top 3 map movement typically inside 90 days of consistent posting and review activity.",
     },
   ],
+  testimonials: buildIndustryTestimonials({
+    industrySingular: "Gym",
+    industryPlural: "Gyms",
+    customerNoun: "members",
+    contentNoun: "workout and offer posts",
+    brandSuffix: "Fitness",
+    searchTerm: "gym near me",
+    seed: 1,
+  }),
   whatsappMessage: "Hi Vizogen, I want to grow my Gym business.",
   seoTitle: "Gym Marketing Software — Grow Gym Memberships | Vizogen",
   seoDescription:

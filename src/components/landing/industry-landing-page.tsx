@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useInView, useScroll, useSpring } from "motion/react";
-import { ArrowRight, Check, Sparkles } from "lucide-react";
+import { ArrowRight, Check, Quote, Sparkles, Star } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -253,6 +253,50 @@ export function IndustryLandingPage({ config }: { config: IndustryConfig }) {
           oldWay={config.oldWay}
           newWay={config.newWay}
         />
+
+        {/* 7.5 INDUSTRY TESTIMONIALS */}
+        <section className="py-20 sm:py-28">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <SectionHeading
+              eyebrow="Customer Stories"
+              title={`What ${config.industryPlural} Say About Vizogen`}
+              subtitle={`10 real-world style results from ${config.industryPlural.toLowerCase()} using Vizogen to automate their Google Business Profile.`}
+            />
+            <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+              {config.testimonials.map((t, i) => (
+                <Reveal key={`${t.name}-${i}`} delay={(i % 3) * 0.08}>
+                  <div className="flex h-full flex-col rounded-2xl border border-border/70 bg-card p-6 shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lift">
+                    <div className="flex items-center justify-between">
+                      <Quote className="size-6 text-primary/40" />
+                      <span className="flex items-center gap-0.5">
+                        {Array.from({ length: 5 }).map((_, s) => (
+                          <Star key={s} className="size-3.5 fill-current text-primary" />
+                        ))}
+                      </span>
+                    </div>
+                    <p className="mt-4 flex-1 text-sm leading-relaxed text-foreground">
+                      “{t.quote}”
+                    </p>
+                    <div className="mt-6 flex min-w-0 items-center gap-3">
+                      <span className="grid size-11 shrink-0 place-items-center rounded-full gradient-brand text-sm font-bold text-primary-foreground">
+                        {t.initials}
+                      </span>
+                      <div className="min-w-0">
+                        <p className="truncate text-sm font-semibold text-foreground">{t.name}</p>
+                        <p className="truncate text-xs text-muted-foreground">
+                          {t.business} — {t.city}
+                        </p>
+                      </div>
+                    </div>
+                    <p className="mt-5 rounded-xl border border-border/70 bg-accent/40 px-4 py-2.5 text-xs font-semibold text-foreground">
+                      {t.result}
+                    </p>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
 
         {/* 8. FAQ */}
         <section className="bg-card/60 py-20 sm:py-28">
