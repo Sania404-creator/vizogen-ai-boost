@@ -33,6 +33,8 @@ export type IndustryConfig = {
   newWay: string[];
   galleryPosts: { src: string; alt: string; title: string }[];
   faqs: { question: string; answer: string }[];
+  /** 10 industry-specific customer testimonials */
+  testimonials: IndustryTestimonial[];
   whatsappMessage: string;
   seoTitle: string;
   seoDescription: string;
