@@ -24,6 +24,7 @@ import { Route as HowToGenerateMagicQrRouteImport } from './routes/how-to-genera
 import { Route as HowToPostOnGbpRouteImport } from './routes/how-to-post-on-gbp'
 import { Route as HowToReplyReviewRouteImport } from './routes/how-to-reply-review'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as OfficialPartnerRouteImport } from './routes/official-partner'
 import { Route as PestControlMarketingSoftwareRouteImport } from './routes/pest-control-marketing-software'
 import { Route as PostManagementRouteImport } from './routes/post-management'
 import { Route as PricingRouteImport } from './routes/pricing'
@@ -116,6 +117,11 @@ const LoginRoute = LoginRouteImport.update({
   path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const OfficialPartnerRoute = OfficialPartnerRouteImport.update({
+  id: '/official-partner',
+  path: '/official-partner',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PestControlMarketingSoftwareRoute =
   PestControlMarketingSoftwareRouteImport.update({
     id: '/pest-control-marketing-software',
@@ -205,6 +211,7 @@ export interface FileRoutesByFullPath {
   '/how-to-post-on-gbp': typeof HowToPostOnGbpRoute
   '/how-to-reply-review': typeof HowToReplyReviewRoute
   '/login': typeof LoginRoute
+  '/official-partner': typeof OfficialPartnerRoute
   '/pest-control-marketing-software': typeof PestControlMarketingSoftwareRoute
   '/post-management': typeof PostManagementRoute
   '/pricing': typeof PricingRoute
@@ -235,6 +242,7 @@ export interface FileRoutesByTo {
   '/how-to-post-on-gbp': typeof HowToPostOnGbpRoute
   '/how-to-reply-review': typeof HowToReplyReviewRoute
   '/login': typeof LoginRoute
+  '/official-partner': typeof OfficialPartnerRoute
   '/pest-control-marketing-software': typeof PestControlMarketingSoftwareRoute
   '/post-management': typeof PostManagementRoute
   '/pricing': typeof PricingRoute
@@ -266,6 +274,7 @@ export interface FileRoutesById {
   '/how-to-post-on-gbp': typeof HowToPostOnGbpRoute
   '/how-to-reply-review': typeof HowToReplyReviewRoute
   '/login': typeof LoginRoute
+  '/official-partner': typeof OfficialPartnerRoute
   '/pest-control-marketing-software': typeof PestControlMarketingSoftwareRoute
   '/post-management': typeof PostManagementRoute
   '/pricing': typeof PricingRoute
@@ -298,6 +307,7 @@ export interface FileRouteTypes {
     | '/how-to-post-on-gbp'
     | '/how-to-reply-review'
     | '/login'
+    | '/official-partner'
     | '/pest-control-marketing-software'
     | '/post-management'
     | '/pricing'
@@ -328,6 +338,7 @@ export interface FileRouteTypes {
     | '/how-to-post-on-gbp'
     | '/how-to-reply-review'
     | '/login'
+    | '/official-partner'
     | '/pest-control-marketing-software'
     | '/post-management'
     | '/pricing'
@@ -358,6 +369,7 @@ export interface FileRouteTypes {
     | '/how-to-post-on-gbp'
     | '/how-to-reply-review'
     | '/login'
+    | '/official-partner'
     | '/pest-control-marketing-software'
     | '/post-management'
     | '/pricing'
@@ -389,6 +401,7 @@ export interface RootRouteChildren {
   HowToPostOnGbpRoute: typeof HowToPostOnGbpRoute
   HowToReplyReviewRoute: typeof HowToReplyReviewRoute
   LoginRoute: typeof LoginRoute
+  OfficialPartnerRoute: typeof OfficialPartnerRoute
   PestControlMarketingSoftwareRoute: typeof PestControlMarketingSoftwareRoute
   PostManagementRoute: typeof PostManagementRoute
   PricingRoute: typeof PricingRoute
@@ -511,6 +524,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/official-partner': {
+      id: '/official-partner'
+      path: '/official-partner'
+      fullPath: '/official-partner'
+      preLoaderRoute: typeof OfficialPartnerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/pest-control-marketing-software': {
       id: '/pest-control-marketing-software'
       path: '/pest-control-marketing-software'
@@ -621,6 +641,7 @@ const rootRouteChildren: RootRouteChildren = {
   HowToPostOnGbpRoute: HowToPostOnGbpRoute,
   HowToReplyReviewRoute: HowToReplyReviewRoute,
   LoginRoute: LoginRoute,
+  OfficialPartnerRoute: OfficialPartnerRoute,
   PestControlMarketingSoftwareRoute: PestControlMarketingSoftwareRoute,
   PostManagementRoute: PostManagementRoute,
   PricingRoute: PricingRoute,
