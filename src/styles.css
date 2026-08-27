@@ -172,7 +172,7 @@
 @theme {
   --shadow-soft: 0 1px 2px oklch(0.24 0.055 265 / 0.04), 0 12px 32px -12px oklch(0.24 0.055 265 / 0.14);
   --shadow-lift: 0 24px 60px -24px oklch(0.24 0.055 265 / 0.32);
-  --shadow-glow: 0 0 0 1px oklch(0.511 0.239 276.966 / 0.14), 0 40px 90px -32px oklch(0.511 0.239 276.966 / 0.42);
+  --shadow-glow: 0 0 0 1px oklch(0.605 0.208 262 / 0.16), 0 30px 70px -28px oklch(0.503 0.253 301 / 0.38);
 }
 
 @keyframes marquee {
