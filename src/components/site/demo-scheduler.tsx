@@ -242,20 +242,7 @@ export function DemoScheduler({ open, onClose }: { open: boolean; onClose: () =>
                     We've sent a confirmation to your email. Your demo is scheduled for{" "}
                     <span className="font-semibold text-foreground">{done.slotLabel}</span>.
                   </p>
-                  <p className="mx-auto mt-3 max-w-md text-sm text-muted-foreground">
-                    WhatsApp just opened with your booking details — tap{" "}
-                    <span className="font-semibold text-foreground">Send</span> to confirm on
-                    WhatsApp too.
-                  </p>
                   <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
-                    <Button
-                      asChild
-                      className="rounded-full bg-[#25D366] px-6 text-white hover:bg-[#25D366]/90"
-                    >
-                      <a href={done.waUrl} target="_blank" rel="noopener noreferrer">
-                        Confirm on WhatsApp
-                      </a>
-                    </Button>
                     <Button asChild variant="outline" className="rounded-full px-6">
                       <a
                         href={googleCalendarLink(day ? toISO(day) : "", time ?? "")}
