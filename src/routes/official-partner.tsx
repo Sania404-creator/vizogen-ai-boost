@@ -98,13 +98,13 @@ function OfficialPartnerPage() {
                 AI-driven local marketing automation.
               </p>
               <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-                <Link
-                  to="/demo"
+                <a
+                  href="https://vizogen.in"
                   className="group inline-flex items-center gap-2 rounded-xl gradient-brand px-6 py-3 text-sm font-semibold text-primary-foreground shadow-glow transition-transform hover:scale-[1.02]"
                 >
                   Start Free Trial
                   <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
-                </Link>
+                </a>
                 <Link
                   to="/pricing"
                   className="inline-flex items-center gap-2 rounded-xl border border-border bg-card px-6 py-3 text-sm font-semibold text-foreground shadow-soft transition-all hover:-translate-y-0.5 hover:shadow-lift"
