@@ -99,7 +99,7 @@ function OfficialPartnerPage() {
               </p>
               <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
                 <a
-                  href="https://vizogen.in"
+                  href="https://login.vizogen.in/sign-in"
                   className="group inline-flex items-center gap-2 rounded-xl gradient-brand px-6 py-3 text-sm font-semibold text-primary-foreground shadow-glow transition-transform hover:scale-[1.02]"
                 >
                   Start Free Trial

@@ -32,7 +32,7 @@ export function AppDownload() {
               size="lg"
               className="rounded-full gradient-brand px-7 shadow-glow transition-transform hover:scale-[1.03] hover:opacity-95"
             >
-              <a href="https://vizogen.in">Start Free Trial</a>
+              <a href="https://login.vizogen.in/sign-in">Start Free Trial</a>
             </Button>
             <Button
               size="lg"

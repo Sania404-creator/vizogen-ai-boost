@@ -239,7 +239,7 @@ export function SubscriptionPlans({ plans = defaultPlans }: { plans?: Plan[] }) 
                     plan.popular ? "gradient-brand shadow-soft hover:opacity-95" : ""
                   }`}
                 >
-                  <a href="https://vizogen.in">{plan.cta}</a>
+                  <a href="https://login.vizogen.in/sign-in">{plan.cta}</a>
                 </Button>
               </div>
             </Reveal>
