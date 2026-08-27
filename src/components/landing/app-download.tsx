@@ -3,7 +3,7 @@ import { CalendarDays, Globe, Star } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { Reveal } from "./reveal";
 import { Button } from "@/components/ui/button";
-import { openDemoScheduler } from "@/lib/site-contact";
+import { openFreeDemo } from "@/lib/site-contact";
 import logoAsset from "@/assets/vizogen-logo.png.asset.json";
 import dashboard from "@/assets/seo-dashboard.jpg";
 
@@ -37,7 +37,7 @@ export function AppDownload() {
             <Button
               size="lg"
               variant="outline"
-              onClick={openDemoScheduler}
+              onClick={openFreeDemo}
               className="rounded-full border-navy-foreground/20 bg-navy-foreground/5 px-6 text-navy-foreground hover:bg-navy-foreground/10 hover:text-navy-foreground"
             >
               <CalendarDays className="size-4" /> Book a Demo

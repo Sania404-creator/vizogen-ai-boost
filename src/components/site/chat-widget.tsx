@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { MessageSquareText, Send, X } from "lucide-react";
 import { useServerFn } from "@tanstack/react-start";
 import { askVizogenAssistant } from "@/lib/chat.functions";
-import { WHATSAPP_URL, openDemoScheduler } from "@/lib/site-contact";
+import { WHATSAPP_URL, openFreeDemo } from "@/lib/site-contact";
 import logoAsset from "@/assets/vizogen-logo.png.asset.json";
 
 type Msg = { role: "user" | "assistant"; content: string };
@@ -68,7 +68,7 @@ export function ChatWidget({
   const onQuickReply = (label: string) => {
     if (label === "Book a demo") {
       onOpenChange(false);
-      openDemoScheduler();
+      openFreeDemo();
       return;
     }
     if (label === "Talk to a human") {
