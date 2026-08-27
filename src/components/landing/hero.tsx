@@ -1,8 +1,20 @@
-import { motion } from "motion/react";
+import { useEffect, useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
 import { Link } from "@tanstack/react-router";
-import { Play, Star } from "lucide-react";
+import { CalendarDays, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { openDemoScheduler } from "@/lib/site-contact";
 import dashboard from "@/assets/dashboard.jpg";
+
+const HEADLINE_PREFIX = "Automate Your Google Business Profile and";
+
+const ROTATING_WORDS = [
+  "Rank Higher on Google Maps",
+  "Win More Local Customers",
+  "Get More 5-Star Reviews",
+  "Save 20+ Hours Every Month",
+  "Grow Without Hiring an Agency",
+];
 
 const clients = [
   "FitPeak Gym",
@@ -17,7 +29,17 @@ const clients = [
   "FixIt Handyman",
 ];
 
+
 export function Hero() {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setIndex((i) => (i + 1) % ROTATING_WORDS.length);
+    }, 2500);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <section id="top" className="relative overflow-hidden pt-14 sm:pt-20">
       <div
@@ -34,9 +56,22 @@ export function Hero() {
           <span className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3.5 py-1.5 text-xs font-semibold text-primary shadow-soft">
             <Star className="size-3.5" /> AI automation for Google Business Profiles
           </span>
-          <h1 className="mt-6 text-balance text-4xl font-bold leading-[1.08] tracking-tight text-foreground sm:text-5xl md:text-6xl">
-            Grow Your Business on Google —<br className="hidden sm:block" />{" "}
-            <span className="text-gradient">Manage Your GBP with Vizogen AI</span>
+          <h1 className="mt-6 text-balance text-4xl font-bold leading-[1.12] tracking-tight text-foreground sm:text-5xl md:text-6xl">
+            {HEADLINE_PREFIX}{" "}
+            <span className="inline-block align-top">
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.span
+                  key={ROTATING_WORDS[index]}
+                  initial={{ opacity: 0, y: 18 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -18 }}
+                  transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                  className="inline-block text-gradient"
+                >
+                  {ROTATING_WORDS[index]}
+                </motion.span>
+              </AnimatePresence>
+            </span>
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
             Automate your Google Business Profile. Get daily AI posts, authentic 5-star
@@ -48,17 +83,19 @@ export function Hero() {
               size="lg"
               className="w-full rounded-full gradient-brand px-7 shadow-glow transition-transform hover:scale-[1.03] hover:opacity-95 sm:w-auto"
             >
-              <Link to="/demo">Start Free Demo</Link>
+              <Link to="/demo">Start Free Trial</Link>
             </Button>
             <Button
               size="lg"
-              variant="ghost"
+              variant="outline"
+              onClick={openDemoScheduler}
               className="w-full rounded-full px-6 text-foreground sm:w-auto"
             >
-              <Play className="size-4" /> Watch Demo →
+              <CalendarDays className="size-4" /> Book a Demo
             </Button>
           </div>
         </motion.div>
+
 
         <motion.div
           initial={{ opacity: 0, y: 40, scale: 0.97 }}
