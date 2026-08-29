@@ -1,0 +1,37 @@
+/* Static-site only helpers (appended to the compiled Tailwind stylesheet). */
+.vz-hidden {
+  display: none !important;
+}
+
+.vz-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.vz-reveal.vz-in {
+  opacity: 1;
+  transform: none;
+}
+
+summary {
+  list-style: none;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+.vz-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: rgba(10, 12, 20, 0.55);
+  backdrop-filter: blur(6px);
+  overflow-y: auto;
+}
