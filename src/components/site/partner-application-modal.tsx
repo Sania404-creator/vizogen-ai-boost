@@ -101,8 +101,8 @@ export function PartnerApplicationModal({
         'a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),[tabindex]:not([tabindex="-1"])',
       );
       if (nodes.length === 0) return;
-      const first = nodes[0];
-      const last = nodes[nodes.length - 1];
+      const first = nodes[0]!;
+      const last = nodes[nodes.length - 1]!;
       const active = document.activeElement;
       if (e.shiftKey && (active === first || !panelRef.current.contains(active))) {
         e.preventDefault();
