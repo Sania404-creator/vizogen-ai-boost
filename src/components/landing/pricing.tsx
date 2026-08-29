@@ -251,33 +251,43 @@ export function SubscriptionPlans({ plans = defaultPlans }: { plans?: Plan[] }) 
           processed in INR.
         </p>
 
-        <Reveal className="mx-auto mt-16 max-w-3xl">
-          <h3 className="text-center font-display text-2xl font-bold text-foreground">
-            Pricing questions
-          </h3>
-          <Accordion type="single" collapsible className="mt-6 w-full">
-            {pricingFaqs.map((f, i) => (
-              <AccordionItem key={f.q} value={`price-faq-${i}`} className="border-border/70">
-                <AccordionTrigger className="text-left text-base font-semibold text-foreground hover:no-underline">
-                  {f.q}
-                </AccordionTrigger>
-                <AccordionContent className="text-sm leading-relaxed text-muted-foreground">
-                  {f.a}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-        </Reveal>
+        {showFaqs ? <PricingFaqs /> : null}
       </div>
     </section>
+  );
+}
+
+export function PricingFaqs() {
+  return (
+    <Reveal className="mx-auto mt-16 max-w-3xl">
+      <h3 className="text-center font-display text-2xl font-bold text-foreground">
+        Pricing questions
+      </h3>
+      <Accordion type="single" collapsible className="mt-6 w-full">
+        {pricingFaqs.map((f, i) => (
+          <AccordionItem key={f.q} value={`price-faq-${i}`} className="border-border/70">
+            <AccordionTrigger className="text-left text-base font-semibold text-foreground hover:no-underline">
+              {f.q}
+            </AccordionTrigger>
+            <AccordionContent className="text-sm leading-relaxed text-muted-foreground">
+              {f.a}
+            </AccordionContent>
+          </AccordionItem>
+        ))}
+      </Accordion>
+    </Reveal>
   );
 }
 
 export function Pricing({ plans = defaultPlans }: { plans?: Plan[] }) {
   return (
     <>
-      <SubscriptionPlans plans={plans} />
+      <SubscriptionPlans plans={plans} showFaqs={false} />
       <OneTimeServices />
+      <div className="mx-auto max-w-7xl px-4 pb-20 sm:px-6 sm:pb-24 lg:px-8">
+        <PricingFaqs />
+      </div>
     </>
   );
 }
+
