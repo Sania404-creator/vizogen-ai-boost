@@ -62,6 +62,51 @@ export type Database = {
         }
         Relationships: []
       }
+      partner_applications: {
+        Row: {
+          about: string | null
+          admin_email_sent: boolean
+          applicant_email_sent: boolean
+          business_count: string
+          business_name: string
+          created_at: string
+          email: string
+          full_name: string
+          id: string
+          phone: string
+          program: string
+          website: string | null
+        }
+        Insert: {
+          about?: string | null
+          admin_email_sent?: boolean
+          applicant_email_sent?: boolean
+          business_count: string
+          business_name: string
+          created_at?: string
+          email: string
+          full_name: string
+          id?: string
+          phone: string
+          program: string
+          website?: string | null
+        }
+        Update: {
+          about?: string | null
+          admin_email_sent?: boolean
+          applicant_email_sent?: boolean
+          business_count?: string
+          business_name?: string
+          created_at?: string
+          email?: string
+          full_name?: string
+          id?: string
+          phone?: string
+          program?: string
+          website?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
