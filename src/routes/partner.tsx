@@ -1,33 +1,13 @@
-import { useCallback, useEffect, useState } from "react";
+import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { AnimatePresence, motion } from "motion/react";
 import { Navbar } from "@/components/landing/navbar";
 import { Footer } from "@/components/landing/footer";
 import { Reveal, SectionHeading } from "@/components/landing/reveal";
+import { ArrowRight, BadgeCheck, Handshake, Rocket, Wallet } from "lucide-react";
 import {
-  ArrowRight,
-  BadgeCheck,
-  Handshake,
-  Loader2,
-  Rocket,
-  Wallet,
-  X,
-} from "lucide-react";
-
-// ─────────────────────────────────────────────────────────────────────────────
-// Google Form embed URLs for the partner application.
-// Replace with the real published Google Form embed links
-// (Google Forms → Send → Embed HTML <iframe> → copy the src ending in
-// "?embedded=true"). If Affiliate and Prime Plus use the SAME form, point both
-// constants at that URL and append a pre-filled entry param, e.g.
-// `${PARTNER_FORM_URL}&entry.XXXXXXX=Affiliate`.
-// ─────────────────────────────────────────────────────────────────────────────
-const AFFILIATE_FORM_URL =
-  "https://docs.google.com/forms/d/e/REPLACE_WITH_AFFILIATE_FORM_ID/viewform?embedded=true";
-const PRIME_PLUS_FORM_URL =
-  "https://docs.google.com/forms/d/e/REPLACE_WITH_PRIME_PLUS_FORM_ID/viewform?embedded=true";
-
-type Program = "affiliate" | "prime-plus";
+  PartnerApplicationModal,
+  type PartnerProgram,
+} from "@/components/site/partner-application-modal";
 
 const title = "Partner with Vizogen — Affiliate & Prime Plus Programs";
 const description =
@@ -47,105 +27,16 @@ export const Route = createFileRoute("/partner")({
   component: PartnerPage,
 });
 
-function PartnerFormModal({
-  program,
-  onClose,
-}: {
-  program: Program | null;
-  onClose: () => void;
-}) {
-  const [loaded, setLoaded] = useState(false);
-
-  const handleKey = useCallback(
-    (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-    },
-    [onClose],
-  );
-
-  useEffect(() => {
-    if (!program) return;
-    setLoaded(false);
-    document.addEventListener("keydown", handleKey);
-    document.body.style.overflow = "hidden";
-    return () => {
-      document.removeEventListener("keydown", handleKey);
-      document.body.style.overflow = "";
-    };
-  }, [program, handleKey]);
-
-  const formUrl = program === "prime-plus" ? PRIME_PLUS_FORM_URL : AFFILIATE_FORM_URL;
-
-  return (
-    <AnimatePresence>
-      {program ? (
-        <motion.div
-          key="partner-modal"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          className="fixed inset-0 z-[95] flex items-center justify-center bg-navy/60 p-4 backdrop-blur-sm"
-          onClick={onClose}
-          role="dialog"
-          aria-modal="true"
-          aria-label="Partner Application"
-        >
-          <motion.div
-            initial={{ opacity: 0, y: 24, scale: 0.97 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 24, scale: 0.97 }}
-            transition={{ type: "spring", stiffness: 300, damping: 28 }}
-            onClick={(e) => e.stopPropagation()}
-            className="relative flex h-[95vh] w-[95vw] flex-col overflow-hidden rounded-2xl bg-card shadow-lift sm:h-[720px] sm:w-[640px]"
-          >
-            <div className="flex items-center justify-between border-b border-border px-5 py-3.5">
-              <p className="text-sm font-bold text-foreground">
-                Partner Application
-                <span className="ml-2 rounded-full bg-primary/10 px-2 py-0.5 text-xs font-semibold text-primary">
-                  {program === "prime-plus" ? "Prime Plus" : "Affiliate"}
-                </span>
-              </p>
-              <button
-                type="button"
-                onClick={onClose}
-                aria-label="Close application form"
-                className="grid size-8 place-items-center rounded-full text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-              >
-                <X className="size-4" />
-              </button>
-            </div>
-            <div className="relative flex-1">
-              {!loaded ? (
-                <div className="absolute inset-0 grid place-items-center">
-                  <div className="flex flex-col items-center gap-3 text-muted-foreground">
-                    <Loader2 className="size-7 animate-spin text-primary" />
-                    <p className="text-sm font-medium">Loading application form…</p>
-                  </div>
-                </div>
-              ) : null}
-              <iframe
-                key={program}
-                src={formUrl}
-                title="Partner Application Form"
-                className="h-full w-full border-0"
-                onLoad={() => setLoaded(true)}
-              >
-                Loading…
-              </iframe>
-            </div>
-          </motion.div>
-        </motion.div>
-      ) : null}
-    </AnimatePresence>
-  );
-}
-
 const ctaClass =
   "group inline-flex items-center justify-center gap-2 rounded-xl gradient-brand px-6 py-3 text-sm font-semibold text-primary-foreground shadow-glow transition-transform hover:scale-[1.02]";
 
 function PartnerPage() {
-  const [program, setProgram] = useState<Program | null>(null);
-  const open = (p: Program) => () => setProgram(p);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [program, setProgram] = useState<PartnerProgram>("Affiliate Partner");
+  const open = (p: PartnerProgram) => () => {
+    setProgram(p);
+    setModalOpen(true);
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -176,7 +67,7 @@ function PartnerPage() {
                 businesses in your network.
               </p>
               <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-                <button type="button" onClick={open("affiliate")} className={ctaClass}>
+                <button type="button" onClick={open("Affiliate Partner")} className={ctaClass}>
                   Become a Partner Today
                   <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
                 </button>
@@ -222,7 +113,7 @@ function PartnerPage() {
                   </ul>
                   <button
                     type="button"
-                    onClick={open("affiliate")}
+                    onClick={open("Affiliate Partner")}
                     className={`${ctaClass} mt-8 w-full sm:w-auto`}
                   >
                     Become an Affiliate Partner
@@ -262,7 +153,7 @@ function PartnerPage() {
                   </ul>
                   <button
                     type="button"
-                    onClick={open("prime-plus")}
+                    onClick={open("Prime Plus Partnership")}
                     className={`${ctaClass} mt-8 w-full sm:w-auto`}
                   >
                     Apply for Prime Plus
@@ -296,7 +187,7 @@ function PartnerPage() {
                   </div>
                   <button
                     type="button"
-                    onClick={open("affiliate")}
+                    onClick={open("Affiliate Partner")}
                     className="inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3 text-sm font-semibold text-navy shadow-soft transition-transform hover:scale-[1.02]"
                   >
                     Become Partner Today
@@ -309,7 +200,11 @@ function PartnerPage() {
         </section>
       </main>
       <Footer />
-      <PartnerFormModal program={program} onClose={() => setProgram(null)} />
+      <PartnerApplicationModal
+        isOpen={modalOpen}
+        onClose={() => setModalOpen(false)}
+        initialProgram={program}
+      />
     </div>
   );
 }
