@@ -5,28 +5,26 @@ import { basename, join } from "node:path";
 const ROOT = process.cwd();
 const IMG_PREFIX = "/assets/img/";
 
-const alias: Record<string, string> = {
-  "@tanstack/react-router": join(ROOT, "tools/static/stubs/router.tsx"),
-  "@tanstack/react-start": join(ROOT, "tools/static/stubs/start.ts"),
-  "@/components/ui/accordion": join(ROOT, "tools/static/stubs/accordion.tsx"),
-  "@/components/landing/pricing": join(ROOT, "tools/static/components/pricing-static.tsx"),
-};
+const reexport = (stub: string) => ({
+  loader: "js" as const,
+  contents: `export * from ${JSON.stringify(join(ROOT, stub))};`,
+});
 
 plugin({
   name: "static-export-alias",
   setup(build) {
-    build.onResolve({ filter: /^@tanstack\/react-router$/ }, () => ({
-      path: alias["@tanstack/react-router"]!,
-    }));
-    build.onResolve({ filter: /^@tanstack\/react-start$/ }, () => ({
-      path: alias["@tanstack/react-start"]!,
-    }));
-    build.onResolve({ filter: /(^@\/components\/ui\/accordion$|\/components\/ui\/accordion$)/ }, () => ({
-      path: alias["@/components/ui/accordion"]!,
-    }));
-    build.onResolve({ filter: /(^@\/components\/landing\/pricing$|\/components\/landing\/pricing$)/ }, () => ({
-      path: alias["@/components/landing/pricing"]!,
-    }));
+    build.onLoad({ filter: /@tanstack[\\/]react-router[\\/]dist[\\/]esm[\\/]index\.js$/ }, () =>
+      reexport("tools/static/stubs/router.tsx"),
+    );
+    build.onLoad({ filter: /@tanstack[\\/]react-start[\\/]dist[\\/]esm[\\/]index\.js$/ }, () =>
+      reexport("tools/static/stubs/start.ts"),
+    );
+    build.onLoad({ filter: /src[\\/]components[\\/]ui[\\/]accordion\.tsx$/ }, () =>
+      reexport("tools/static/stubs/accordion.tsx"),
+    );
+    build.onLoad({ filter: /src[\\/]components[\\/]landing[\\/]pricing\.tsx$/ }, () =>
+      reexport("tools/static/components/pricing-static.tsx"),
+    );
     build.onLoad({ filter: /\.(png|jpe?g|webp|svg|gif|avif)$/ }, (args) => ({
       loader: "js",
       contents: `export default ${JSON.stringify(IMG_PREFIX + basename(args.path))};`,
