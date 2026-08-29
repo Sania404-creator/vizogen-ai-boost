@@ -129,7 +129,13 @@ function OneTimeServices() {
   );
 }
 
-export function SubscriptionPlans({ plans = defaultPlans }: { plans?: Plan[] }) {
+export function SubscriptionPlans({
+  plans = defaultPlans,
+  showFaqs = true,
+}: {
+  plans?: Plan[];
+  showFaqs?: boolean;
+}) {
   const [billingCycle, setBillingCycle] = useState<BillingCycle>("yearly");
   const [currency, setCurrency] = useState<Currency>("INR");
   const period = billingCycle === "yearly" ? "/year" : "/quarter";
