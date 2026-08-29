@@ -18,3 +18,12 @@ export function openFreeDemo() {
     window.dispatchEvent(new Event(OPEN_FREE_DEMO_EVENT));
   }
 }
+
+export const OVERLAY_EVENT = "vizogen:overlay";
+
+/** Lets full-screen modals hide the floating WhatsApp / chat launchers. */
+export function setOverlayOpen(open: boolean) {
+  if (typeof window !== "undefined") {
+    window.dispatchEvent(new CustomEvent(OVERLAY_EVENT, { detail: open }));
+  }
+}
