@@ -171,6 +171,8 @@ for (const page of pages.concat([{ url: "/404", file: join(OUT, "404.html") }]))
     /\/__l5e\/assets-v1\/[^/"]+\/([^"']+?)(?=["'])/g,
     (_m, name: string) => IMG_PREFIX + name,
   );
+  // City chips point at pages that don't exist; send them to the service page.
+  html = html.replace(/\/services\/local-seo-[a-z-]+/g, "/services/local-seo");
   await Bun.write(page.file, html);
 }
 
