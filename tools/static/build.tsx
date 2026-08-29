@@ -7,7 +7,6 @@
  * Run: bun tools/static/build.tsx
  * Output: static-site/  (upload its contents to public_html on shared hosting)
  */
-import { plugin } from "bun";
 import { mkdir, rm, cp, readdir } from "node:fs/promises";
 import { existsSync } from "node:fs";
 import { join, basename, dirname } from "node:path";
@@ -16,28 +15,6 @@ const ROOT = process.cwd();
 const OUT = join(ROOT, "static-site");
 const IMG_PREFIX = "/assets/img/";
 
-/* ---------- module interception ---------- */
-const alias: Record<string, string> = {
-  "@tanstack/react-router": join(ROOT, "tools/static/stubs/router.tsx"),
-  "@tanstack/react-start": join(ROOT, "tools/static/stubs/start.ts"),
-  "@/components/ui/accordion": join(ROOT, "tools/static/stubs/accordion.tsx"),
-  "@/components/landing/pricing": join(ROOT, "tools/static/components/pricing-static.tsx"),
-};
-
-plugin({
-  name: "static-export",
-  setup(build) {
-    build.onResolve({ filter: /.*/ }, (args) => {
-      const hit = alias[args.path];
-      if (hit) return { path: hit };
-      return undefined;
-    });
-    build.onLoad({ filter: /\.(png|jpe?g|webp|svg|gif|avif)$/ }, (args) => ({
-      loader: "js",
-      contents: `export default ${JSON.stringify(IMG_PREFIX + basename(args.path))};`,
-    }));
-  },
-});
 
 /* ---------- routes ---------- */
 function urlFromFile(file: string) {
