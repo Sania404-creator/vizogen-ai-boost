@@ -201,7 +201,16 @@ for (const page of pages.concat([{ url: "/404", file: join(OUT, "404.html") }]))
 await cp(join(ROOT, "tools/static/assets/app.js"), join(OUT, "assets/app.js"));
 
 /* ---------- css ---------- */
-const cssEntry = join(ROOT, "tools/static/assets/styles.entry.css");
+// Build the CSS entry from the app's own design tokens so the theme matches 1:1.
+const appCss = await Bun.file(join(ROOT, "src/styles.css")).text();
+const extra = await Bun.file(join(ROOT, "tools/static/assets/extra.css")).text();
+const cssEntry = join(ROOT, "static-site/.styles.entry.css");
+await Bun.write(
+  cssEntry,
+  appCss
+    .replace('@source "../src";', `@source "${join(ROOT, "src")}";\n@source "${OUT}";`)
+    + "\n" + extra,
+);
 const proc = Bun.spawnSync([
   "bunx",
   "@tailwindcss/cli",
