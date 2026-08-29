@@ -202,6 +202,26 @@ if (proc.exitCode !== 0) {
   throw new Error("Tailwind build failed");
 }
 
+/* ---------- prune unreferenced images ---------- */
+const htmlFiles: string[] = [];
+async function walkHtml(dir: string) {
+  for (const e of await readdir(dir, { withFileTypes: true })) {
+    const p = join(dir, e.name);
+    if (e.isDirectory()) await walkHtml(p);
+    else if (e.name.endsWith(".html")) htmlFiles.push(p);
+  }
+}
+await walkHtml(OUT);
+const used = new Set<string>();
+for (const f of htmlFiles) {
+  const text = await Bun.file(f).text();
+  for (const m of text.matchAll(/\/assets\/img\/([A-Za-z0-9._-]+)/g)) used.add(m[1]!);
+}
+for (const img of await readdir(join(OUT, "assets/img"))) {
+  if (!used.has(img)) await rm(join(OUT, "assets/img", img));
+}
+await rm(cssEntry, { force: true });
+
 /* ---------- sitemap ---------- */
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemap  s.org/schemas/sitemap/0.9">
