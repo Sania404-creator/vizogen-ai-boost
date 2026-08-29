@@ -71,7 +71,7 @@ function OneTimeServices() {
     <section id="one-time-services" className="py-20 sm:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <SectionHeading
-          eyebrow="No Subscription Needed"
+          eyebrow="Other Services"
           title="One-Time GMB Services"
           subtitle="Need a quick fix or a fresh setup? These one-time services get your Google Business Profile sorted — no subscription required."
         />
@@ -276,8 +276,8 @@ export function SubscriptionPlans({ plans = defaultPlans }: { plans?: Plan[] }) 
 export function Pricing({ plans = defaultPlans }: { plans?: Plan[] }) {
   return (
     <>
-      <OneTimeServices />
       <SubscriptionPlans plans={plans} />
+      <OneTimeServices />
     </>
   );
 }
