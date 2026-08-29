@@ -3,7 +3,12 @@ import { useRouterState } from "@tanstack/react-router";
 import { ChatWidget } from "@/components/site/chat-widget";
 import { DemoScheduler } from "@/components/site/demo-scheduler";
 import { FreeDemoPopup } from "@/components/site/free-demo-popup";
-import { OPEN_DEMO_EVENT, OPEN_FREE_DEMO_EVENT, WHATSAPP_URL } from "@/lib/site-contact";
+import {
+  OPEN_DEMO_EVENT,
+  OPEN_FREE_DEMO_EVENT,
+  OVERLAY_EVENT,
+  WHATSAPP_URL,
+} from "@/lib/site-contact";
 
 const POPUP_FLAG = "demoPopupShown";
 
@@ -19,16 +24,21 @@ export function FloatingWidgets() {
   const [chatOpen, setChatOpen] = useState(false);
   const [demoOpen, setDemoOpen] = useState(false);
   const [freeDemoOpen, setFreeDemoOpen] = useState(false);
+  const [overlayOpen, setOverlayOpen] = useState(false);
   const pathname = useRouterState({ select: (state) => state.location.pathname });
 
   useEffect(() => {
     const onOpen = () => setDemoOpen(true);
     const onOpenFree = () => setFreeDemoOpen(true);
+    const onOverlay = (e: Event) =>
+      setOverlayOpen(Boolean((e as CustomEvent<boolean>).detail));
     window.addEventListener(OPEN_DEMO_EVENT, onOpen);
     window.addEventListener(OPEN_FREE_DEMO_EVENT, onOpenFree);
+    window.addEventListener(OVERLAY_EVENT, onOverlay);
     return () => {
       window.removeEventListener(OPEN_DEMO_EVENT, onOpen);
       window.removeEventListener(OPEN_FREE_DEMO_EVENT, onOpenFree);
+      window.removeEventListener(OVERLAY_EVENT, onOverlay);
     };
   }, []);
 
@@ -46,7 +56,11 @@ export function FloatingWidgets() {
 
   return (
     <>
-      <div className="pointer-events-none fixed bottom-6 right-6 z-[85] flex flex-col items-end gap-4">
+      <div
+        className={`pointer-events-none fixed bottom-6 right-6 z-[85] flex flex-col items-end gap-4 ${
+          overlayOpen ? "hidden" : ""
+        }`}
+      >
         {!chatOpen ? (
           <a
             href={WHATSAPP_URL}
