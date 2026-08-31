@@ -32,6 +32,7 @@ import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as RealestateMarketingSoftwareRouteImport } from './routes/realestate-marketing-software'
 import { Route as RestaurantMarketingSoftwareRouteImport } from './routes/restaurant-marketing-software'
 import { Route as SalonMarketingSoftwareRouteImport } from './routes/salon-marketing-software'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as TermsAndConditionsRouteImport } from './routes/terms-and-conditions'
 import { Route as TourTravelMarketingSoftwareRouteImport } from './routes/tour-travel-marketing-software'
 import { Route as YogaWellnessMarketingSoftwareRouteImport } from './routes/yoga-wellness-marketing-software'
@@ -176,6 +177,11 @@ const RestaurantMarketingSoftwareRoute =
 const SalonMarketingSoftwareRoute = SalonMarketingSoftwareRouteImport.update({
   id: '/salon-marketing-software',
   path: '/salon-marketing-software',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TermsAndConditionsRoute = TermsAndConditionsRouteImport.update({
@@ -331,6 +337,7 @@ export interface FileRoutesByFullPath {
   '/realestate-marketing-software': typeof RealestateMarketingSoftwareRoute
   '/restaurant-marketing-software': typeof RestaurantMarketingSoftwareRoute
   '/salon-marketing-software': typeof SalonMarketingSoftwareRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/tour-travel-marketing-software': typeof TourTravelMarketingSoftwareRoute
   '/yoga-wellness-marketing-software': typeof YogaWellnessMarketingSoftwareRoute
@@ -380,6 +387,7 @@ export interface FileRoutesByTo {
   '/realestate-marketing-software': typeof RealestateMarketingSoftwareRoute
   '/restaurant-marketing-software': typeof RestaurantMarketingSoftwareRoute
   '/salon-marketing-software': typeof SalonMarketingSoftwareRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/tour-travel-marketing-software': typeof TourTravelMarketingSoftwareRoute
   '/yoga-wellness-marketing-software': typeof YogaWellnessMarketingSoftwareRoute
@@ -430,6 +438,7 @@ export interface FileRoutesById {
   '/realestate-marketing-software': typeof RealestateMarketingSoftwareRoute
   '/restaurant-marketing-software': typeof RestaurantMarketingSoftwareRoute
   '/salon-marketing-software': typeof SalonMarketingSoftwareRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/tour-travel-marketing-software': typeof TourTravelMarketingSoftwareRoute
   '/yoga-wellness-marketing-software': typeof YogaWellnessMarketingSoftwareRoute
@@ -481,6 +490,7 @@ export interface FileRouteTypes {
     | '/realestate-marketing-software'
     | '/restaurant-marketing-software'
     | '/salon-marketing-software'
+    | '/sitemap.xml'
     | '/terms-and-conditions'
     | '/tour-travel-marketing-software'
     | '/yoga-wellness-marketing-software'
@@ -530,6 +540,7 @@ export interface FileRouteTypes {
     | '/realestate-marketing-software'
     | '/restaurant-marketing-software'
     | '/salon-marketing-software'
+    | '/sitemap.xml'
     | '/terms-and-conditions'
     | '/tour-travel-marketing-software'
     | '/yoga-wellness-marketing-software'
@@ -579,6 +590,7 @@ export interface FileRouteTypes {
     | '/realestate-marketing-software'
     | '/restaurant-marketing-software'
     | '/salon-marketing-software'
+    | '/sitemap.xml'
     | '/terms-and-conditions'
     | '/tour-travel-marketing-software'
     | '/yoga-wellness-marketing-software'
@@ -629,6 +641,7 @@ export interface RootRouteChildren {
   RealestateMarketingSoftwareRoute: typeof RealestateMarketingSoftwareRoute
   RestaurantMarketingSoftwareRoute: typeof RestaurantMarketingSoftwareRoute
   SalonMarketingSoftwareRoute: typeof SalonMarketingSoftwareRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermsAndConditionsRoute: typeof TermsAndConditionsRoute
   TourTravelMarketingSoftwareRoute: typeof TourTravelMarketingSoftwareRoute
   YogaWellnessMarketingSoftwareRoute: typeof YogaWellnessMarketingSoftwareRoute
@@ -816,6 +829,13 @@ declare module '@tanstack/react-router' {
       path: '/salon-marketing-software'
       fullPath: '/salon-marketing-software'
       preLoaderRoute: typeof SalonMarketingSoftwareRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/terms-and-conditions': {
@@ -1013,6 +1033,7 @@ const rootRouteChildren: RootRouteChildren = {
   RealestateMarketingSoftwareRoute: RealestateMarketingSoftwareRoute,
   RestaurantMarketingSoftwareRoute: RestaurantMarketingSoftwareRoute,
   SalonMarketingSoftwareRoute: SalonMarketingSoftwareRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermsAndConditionsRoute: TermsAndConditionsRoute,
   TourTravelMarketingSoftwareRoute: TourTravelMarketingSoftwareRoute,
   YogaWellnessMarketingSoftwareRoute: YogaWellnessMarketingSoftwareRoute,
