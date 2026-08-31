@@ -34,13 +34,14 @@ type Block =
   | { type: "h2"; text: string }
   | { type: "p"; text: string; callout: boolean }
   | { type: "ul"; items: string[] }
-  | { type: "ol"; items: string[] };
+  | { type: "ol"; items: { num: number; text: string }[] };
 
 function parse(markdown: string): Block[] {
   const blocks: Block[] = [];
   const lines = markdown.split("\n");
   let paragraph: string[] = [];
   let list: string[] = [];
+  let olList: { num: number; text: string }[] = [];
   let listType: "ul" | "ol" | null = null;
 
   const flushParagraph = () => {
@@ -54,9 +55,10 @@ function parse(markdown: string): Block[] {
     });
   };
   const flushList = () => {
-    if (!list.length || !listType) return;
-    blocks.push({ type: listType, items: list });
+    if (listType === "ol" && olList.length) blocks.push({ type: "ol", items: olList });
+    if (listType === "ul" && list.length) blocks.push({ type: "ul", items: list });
     list = [];
+    olList = [];
     listType = null;
   };
 
@@ -79,7 +81,7 @@ function parse(markdown: string): Block[] {
       flushParagraph();
       if (listType !== "ol") flushList();
       listType = "ol";
-      list.push(ol[2]);
+      olList.push({ num: Number(ol[1]), text: ol[2] });
       continue;
     }
     if (line.startsWith("- ")) {
@@ -150,9 +152,9 @@ export function Markdown({ content }: { content: string }) {
             {block.items.map((item, i) => (
               <li key={`${key}-${i}`} className="flex gap-3">
                 <span className="mt-0.5 flex size-6 shrink-0 items-center justify-center rounded-lg gradient-brand text-xs font-semibold text-white font-mono">
-                  {i + 1}
+                  {item.num}
                 </span>
-                <span>{renderInline(item, `${key}-${i}`)}</span>
+                <span>{renderInline(item.text, `${key}-${i}`)}</span>
               </li>
             ))}
           </ol>
