@@ -35,6 +35,7 @@ import { Route as SalonMarketingSoftwareRouteImport } from './routes/salon-marke
 import { Route as TermsAndConditionsRouteImport } from './routes/terms-and-conditions'
 import { Route as TourTravelMarketingSoftwareRouteImport } from './routes/tour-travel-marketing-software'
 import { Route as YogaWellnessMarketingSoftwareRouteImport } from './routes/yoga-wellness-marketing-software'
+import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as FeaturesAiPostGenerationRouteImport } from './routes/features.ai-post-generation'
 import { Route as FeaturesMagicQrRouteImport } from './routes/features.magic-qr'
 import { Route as FeaturesReviewManagementRouteImport } from './routes/features.review-management'
@@ -193,6 +194,11 @@ const YogaWellnessMarketingSoftwareRoute =
     path: '/yoga-wellness-marketing-software',
     getParentRoute: () => rootRouteImport,
   } as any)
+const BlogIndexRoute = BlogIndexRouteImport.update({
+  id: '/blog/',
+  path: '/blog/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const FeaturesAiPostGenerationRoute =
   FeaturesAiPostGenerationRouteImport.update({
     id: '/features/ai-post-generation',
@@ -341,6 +347,7 @@ export interface FileRoutesByFullPath {
   '/services/local-seo-rajkot': typeof ServicesLocalSeoRajkotRoute
   '/services/local-seo-surat': typeof ServicesLocalSeoSuratRoute
   '/services/local-seo-vadodara': typeof ServicesLocalSeoVadodaraRoute
+  '/blog/': typeof BlogIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -388,6 +395,7 @@ export interface FileRoutesByTo {
   '/services/local-seo-rajkot': typeof ServicesLocalSeoRajkotRoute
   '/services/local-seo-surat': typeof ServicesLocalSeoSuratRoute
   '/services/local-seo-vadodara': typeof ServicesLocalSeoVadodaraRoute
+  '/blog': typeof BlogIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -436,6 +444,7 @@ export interface FileRoutesById {
   '/services/local-seo-rajkot': typeof ServicesLocalSeoRajkotRoute
   '/services/local-seo-surat': typeof ServicesLocalSeoSuratRoute
   '/services/local-seo-vadodara': typeof ServicesLocalSeoVadodaraRoute
+  '/blog/': typeof BlogIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -485,6 +494,7 @@ export interface FileRouteTypes {
     | '/services/local-seo-rajkot'
     | '/services/local-seo-surat'
     | '/services/local-seo-vadodara'
+    | '/blog/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -532,6 +542,7 @@ export interface FileRouteTypes {
     | '/services/local-seo-rajkot'
     | '/services/local-seo-surat'
     | '/services/local-seo-vadodara'
+    | '/blog'
   id:
     | '__root__'
     | '/'
@@ -579,6 +590,7 @@ export interface FileRouteTypes {
     | '/services/local-seo-rajkot'
     | '/services/local-seo-surat'
     | '/services/local-seo-vadodara'
+    | '/blog/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -627,6 +639,7 @@ export interface RootRouteChildren {
   ServicesLocalSeoRajkotRoute: typeof ServicesLocalSeoRajkotRoute
   ServicesLocalSeoSuratRoute: typeof ServicesLocalSeoSuratRoute
   ServicesLocalSeoVadodaraRoute: typeof ServicesLocalSeoVadodaraRoute
+  BlogIndexRoute: typeof BlogIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -813,6 +826,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof YogaWellnessMarketingSoftwareRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog/': {
+      id: '/blog/'
+      path: '/blog'
+      fullPath: '/blog/'
+      preLoaderRoute: typeof BlogIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/features/ai-post-generation': {
       id: '/features/ai-post-generation'
       path: '/features/ai-post-generation'
@@ -995,6 +1015,7 @@ const rootRouteChildren: RootRouteChildren = {
   ServicesLocalSeoRajkotRoute: ServicesLocalSeoRajkotRoute,
   ServicesLocalSeoSuratRoute: ServicesLocalSeoSuratRoute,
   ServicesLocalSeoVadodaraRoute: ServicesLocalSeoVadodaraRoute,
+  BlogIndexRoute: BlogIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
