@@ -86,6 +86,33 @@ export function LocationSeoPage({ config }: { config: LocationConfig }) {
           </div>
         </section>
 
+        {/* QUICK ANSWER (AEO/GEO direct-answer block) */}
+        <section className="px-4 pb-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-3xl">
+            <div className="rounded-2xl border border-border bg-card p-6 shadow-soft sm:p-8">
+              <span className="inline-flex items-center gap-2 rounded-full border border-border bg-muted/50 px-3 py-1 text-xs font-semibold text-primary">
+                <BadgeCheck className="size-3.5" /> Quick answer
+              </span>
+              <h2 className="mt-4 font-display text-xl font-bold text-foreground sm:text-2xl">
+                What is Vizogen in {config.city}?
+              </h2>
+              <p className="mt-3 text-base leading-relaxed text-muted-foreground">
+                {quickAnswer(config.city)}
+              </p>
+              <dl className="mt-6 space-y-4 border-t border-border pt-6">
+                {aeoFaqs(config.city).map((f) => (
+                  <div key={f.q}>
+                    <dt className="text-sm font-semibold text-foreground">{f.q}</dt>
+                    <dd className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{f.a}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          </div>
+        </section>
+
+
+
         {/* RANKING PILLARS */}
         <section className="px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
           <div className="mx-auto max-w-6xl">
