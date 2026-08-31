@@ -18,16 +18,15 @@ import { SubscriptionPlans } from "@/components/landing/pricing";
 import { SectionHeading } from "@/components/landing/reveal";
 import { ServiceAreas } from "@/components/landing/service-areas";
 
-const title =
-  "Vizogen — Best SEO Agency in Ahmedabad, Gujarat & India | Google Business Profile Automation";
-const socialTitle = "Vizogen — Best SEO Agency in Ahmedabad, Gujarat & India";
+const title = "Vizogen.ai - GMB Automation Tool";
+const socialTitle = "Vizogen.ai - GMB Automation Tool";
 const description =
   "Vizogen is a trusted local SEO and Google Business Profile automation platform serving businesses across Ahmedabad, Gujarat, and India. Rank higher on Google Maps with AI-powered posts, reviews, and local SEO tools. Owned and operated by NG Marketing Solution.";
 const socialDescription =
   "AI-powered local SEO and Google Business Profile automation trusted by businesses across Ahmedabad, Gujarat, and India.";
 const keywords =
   "best SEO agency Ahmedabad, best SEO agency Gujarat, best SEO agency India, local SEO services Ahmedabad, Google Business Profile management, GMB automation, local SEO software, Google Maps ranking Ahmedabad";
-const siteUrl = "https://seo.vizogen.in";
+const siteUrl = "https://www.vizogen.in";
 
 export const Route = createFileRoute("/")({
   head: () => ({

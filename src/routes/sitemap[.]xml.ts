@@ -6,7 +6,7 @@ import { locations } from "@/components/landing/location-configs";
 
 // Sitemap is generated at request time from the route list + data files
 // (blogs, locations), so new blog posts and city pages appear automatically.
-const BASE_URL = "https://vizogen.in";
+const BASE_URL = "https://www.vizogen.in";
 
 interface SitemapEntry {
   path: string;

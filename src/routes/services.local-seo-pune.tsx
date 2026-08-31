@@ -3,7 +3,7 @@ import { LocationSeoPage } from "@/components/landing/location-seo-page";
 import { locationBySlug } from "@/components/landing/location-configs";
 
 const config = locationBySlug["pune"]!;
-const url = "https://seo.vizogen.in/services/local-seo-pune";
+const url = "https://www.vizogen.in/services/local-seo-pune";
 
 export const Route = createFileRoute("/services/local-seo-pune")({
   head: () => ({
