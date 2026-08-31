@@ -81,7 +81,7 @@ function parse(markdown: string): Block[] {
       flushParagraph();
       if (listType !== "ol") flushList();
       listType = "ol";
-      olList.push({ num: Number(ol[1]), text: ol[2] });
+      olList.push({ num: Number(ol[1]), text: ol[2] ?? "" });
       continue;
     }
     if (line.startsWith("- ")) {
