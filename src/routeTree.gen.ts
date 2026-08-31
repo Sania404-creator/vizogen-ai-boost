@@ -41,6 +41,20 @@ import { Route as FeaturesMagicQrRouteImport } from './routes/features.magic-qr'
 import { Route as FeaturesReviewManagementRouteImport } from './routes/features.review-management'
 import { Route as FeaturesSmartSchedulingRouteImport } from './routes/features.smart-scheduling'
 import { Route as ServicesLocalSeoRouteImport } from './routes/services.local-seo'
+import { Route as ServicesLocalSeoAhmedabadRouteImport } from './routes/services.local-seo-ahmedabad'
+import { Route as ServicesLocalSeoBangaloreRouteImport } from './routes/services.local-seo-bangalore'
+import { Route as ServicesLocalSeoChennaiRouteImport } from './routes/services.local-seo-chennai'
+import { Route as ServicesLocalSeoDelhiRouteImport } from './routes/services.local-seo-delhi'
+import { Route as ServicesLocalSeoGujaratRouteImport } from './routes/services.local-seo-gujarat'
+import { Route as ServicesLocalSeoHyderabadRouteImport } from './routes/services.local-seo-hyderabad'
+import { Route as ServicesLocalSeoJaipurRouteImport } from './routes/services.local-seo-jaipur'
+import { Route as ServicesLocalSeoKolkataRouteImport } from './routes/services.local-seo-kolkata'
+import { Route as ServicesLocalSeoLucknowRouteImport } from './routes/services.local-seo-lucknow'
+import { Route as ServicesLocalSeoMumbaiRouteImport } from './routes/services.local-seo-mumbai'
+import { Route as ServicesLocalSeoPuneRouteImport } from './routes/services.local-seo-pune'
+import { Route as ServicesLocalSeoRajkotRouteImport } from './routes/services.local-seo-rajkot'
+import { Route as ServicesLocalSeoSuratRouteImport } from './routes/services.local-seo-surat'
+import { Route as ServicesLocalSeoVadodaraRouteImport } from './routes/services.local-seo-vadodara'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -212,6 +226,80 @@ const ServicesLocalSeoRoute = ServicesLocalSeoRouteImport.update({
   path: '/services/local-seo',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ServicesLocalSeoAhmedabadRoute =
+  ServicesLocalSeoAhmedabadRouteImport.update({
+    id: '/services/local-seo-ahmedabad',
+    path: '/services/local-seo-ahmedabad',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ServicesLocalSeoBangaloreRoute =
+  ServicesLocalSeoBangaloreRouteImport.update({
+    id: '/services/local-seo-bangalore',
+    path: '/services/local-seo-bangalore',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ServicesLocalSeoChennaiRoute = ServicesLocalSeoChennaiRouteImport.update({
+  id: '/services/local-seo-chennai',
+  path: '/services/local-seo-chennai',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesLocalSeoDelhiRoute = ServicesLocalSeoDelhiRouteImport.update({
+  id: '/services/local-seo-delhi',
+  path: '/services/local-seo-delhi',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesLocalSeoGujaratRoute = ServicesLocalSeoGujaratRouteImport.update({
+  id: '/services/local-seo-gujarat',
+  path: '/services/local-seo-gujarat',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesLocalSeoHyderabadRoute =
+  ServicesLocalSeoHyderabadRouteImport.update({
+    id: '/services/local-seo-hyderabad',
+    path: '/services/local-seo-hyderabad',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ServicesLocalSeoJaipurRoute = ServicesLocalSeoJaipurRouteImport.update({
+  id: '/services/local-seo-jaipur',
+  path: '/services/local-seo-jaipur',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesLocalSeoKolkataRoute = ServicesLocalSeoKolkataRouteImport.update({
+  id: '/services/local-seo-kolkata',
+  path: '/services/local-seo-kolkata',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesLocalSeoLucknowRoute = ServicesLocalSeoLucknowRouteImport.update({
+  id: '/services/local-seo-lucknow',
+  path: '/services/local-seo-lucknow',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesLocalSeoMumbaiRoute = ServicesLocalSeoMumbaiRouteImport.update({
+  id: '/services/local-seo-mumbai',
+  path: '/services/local-seo-mumbai',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesLocalSeoPuneRoute = ServicesLocalSeoPuneRouteImport.update({
+  id: '/services/local-seo-pune',
+  path: '/services/local-seo-pune',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesLocalSeoRajkotRoute = ServicesLocalSeoRajkotRouteImport.update({
+  id: '/services/local-seo-rajkot',
+  path: '/services/local-seo-rajkot',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesLocalSeoSuratRoute = ServicesLocalSeoSuratRouteImport.update({
+  id: '/services/local-seo-surat',
+  path: '/services/local-seo-surat',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesLocalSeoVadodaraRoute =
+  ServicesLocalSeoVadodaraRouteImport.update({
+    id: '/services/local-seo-vadodara',
+    path: '/services/local-seo-vadodara',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -246,6 +334,20 @@ export interface FileRoutesByFullPath {
   '/features/review-management': typeof FeaturesReviewManagementRoute
   '/features/smart-scheduling': typeof FeaturesSmartSchedulingRoute
   '/services/local-seo': typeof ServicesLocalSeoRoute
+  '/services/local-seo-ahmedabad': typeof ServicesLocalSeoAhmedabadRoute
+  '/services/local-seo-bangalore': typeof ServicesLocalSeoBangaloreRoute
+  '/services/local-seo-chennai': typeof ServicesLocalSeoChennaiRoute
+  '/services/local-seo-delhi': typeof ServicesLocalSeoDelhiRoute
+  '/services/local-seo-gujarat': typeof ServicesLocalSeoGujaratRoute
+  '/services/local-seo-hyderabad': typeof ServicesLocalSeoHyderabadRoute
+  '/services/local-seo-jaipur': typeof ServicesLocalSeoJaipurRoute
+  '/services/local-seo-kolkata': typeof ServicesLocalSeoKolkataRoute
+  '/services/local-seo-lucknow': typeof ServicesLocalSeoLucknowRoute
+  '/services/local-seo-mumbai': typeof ServicesLocalSeoMumbaiRoute
+  '/services/local-seo-pune': typeof ServicesLocalSeoPuneRoute
+  '/services/local-seo-rajkot': typeof ServicesLocalSeoRajkotRoute
+  '/services/local-seo-surat': typeof ServicesLocalSeoSuratRoute
+  '/services/local-seo-vadodara': typeof ServicesLocalSeoVadodaraRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -280,6 +382,20 @@ export interface FileRoutesByTo {
   '/features/review-management': typeof FeaturesReviewManagementRoute
   '/features/smart-scheduling': typeof FeaturesSmartSchedulingRoute
   '/services/local-seo': typeof ServicesLocalSeoRoute
+  '/services/local-seo-ahmedabad': typeof ServicesLocalSeoAhmedabadRoute
+  '/services/local-seo-bangalore': typeof ServicesLocalSeoBangaloreRoute
+  '/services/local-seo-chennai': typeof ServicesLocalSeoChennaiRoute
+  '/services/local-seo-delhi': typeof ServicesLocalSeoDelhiRoute
+  '/services/local-seo-gujarat': typeof ServicesLocalSeoGujaratRoute
+  '/services/local-seo-hyderabad': typeof ServicesLocalSeoHyderabadRoute
+  '/services/local-seo-jaipur': typeof ServicesLocalSeoJaipurRoute
+  '/services/local-seo-kolkata': typeof ServicesLocalSeoKolkataRoute
+  '/services/local-seo-lucknow': typeof ServicesLocalSeoLucknowRoute
+  '/services/local-seo-mumbai': typeof ServicesLocalSeoMumbaiRoute
+  '/services/local-seo-pune': typeof ServicesLocalSeoPuneRoute
+  '/services/local-seo-rajkot': typeof ServicesLocalSeoRajkotRoute
+  '/services/local-seo-surat': typeof ServicesLocalSeoSuratRoute
+  '/services/local-seo-vadodara': typeof ServicesLocalSeoVadodaraRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -315,6 +431,20 @@ export interface FileRoutesById {
   '/features/review-management': typeof FeaturesReviewManagementRoute
   '/features/smart-scheduling': typeof FeaturesSmartSchedulingRoute
   '/services/local-seo': typeof ServicesLocalSeoRoute
+  '/services/local-seo-ahmedabad': typeof ServicesLocalSeoAhmedabadRoute
+  '/services/local-seo-bangalore': typeof ServicesLocalSeoBangaloreRoute
+  '/services/local-seo-chennai': typeof ServicesLocalSeoChennaiRoute
+  '/services/local-seo-delhi': typeof ServicesLocalSeoDelhiRoute
+  '/services/local-seo-gujarat': typeof ServicesLocalSeoGujaratRoute
+  '/services/local-seo-hyderabad': typeof ServicesLocalSeoHyderabadRoute
+  '/services/local-seo-jaipur': typeof ServicesLocalSeoJaipurRoute
+  '/services/local-seo-kolkata': typeof ServicesLocalSeoKolkataRoute
+  '/services/local-seo-lucknow': typeof ServicesLocalSeoLucknowRoute
+  '/services/local-seo-mumbai': typeof ServicesLocalSeoMumbaiRoute
+  '/services/local-seo-pune': typeof ServicesLocalSeoPuneRoute
+  '/services/local-seo-rajkot': typeof ServicesLocalSeoRajkotRoute
+  '/services/local-seo-surat': typeof ServicesLocalSeoSuratRoute
+  '/services/local-seo-vadodara': typeof ServicesLocalSeoVadodaraRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -351,6 +481,20 @@ export interface FileRouteTypes {
     | '/features/review-management'
     | '/features/smart-scheduling'
     | '/services/local-seo'
+    | '/services/local-seo-ahmedabad'
+    | '/services/local-seo-bangalore'
+    | '/services/local-seo-chennai'
+    | '/services/local-seo-delhi'
+    | '/services/local-seo-gujarat'
+    | '/services/local-seo-hyderabad'
+    | '/services/local-seo-jaipur'
+    | '/services/local-seo-kolkata'
+    | '/services/local-seo-lucknow'
+    | '/services/local-seo-mumbai'
+    | '/services/local-seo-pune'
+    | '/services/local-seo-rajkot'
+    | '/services/local-seo-surat'
+    | '/services/local-seo-vadodara'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -385,6 +529,20 @@ export interface FileRouteTypes {
     | '/features/review-management'
     | '/features/smart-scheduling'
     | '/services/local-seo'
+    | '/services/local-seo-ahmedabad'
+    | '/services/local-seo-bangalore'
+    | '/services/local-seo-chennai'
+    | '/services/local-seo-delhi'
+    | '/services/local-seo-gujarat'
+    | '/services/local-seo-hyderabad'
+    | '/services/local-seo-jaipur'
+    | '/services/local-seo-kolkata'
+    | '/services/local-seo-lucknow'
+    | '/services/local-seo-mumbai'
+    | '/services/local-seo-pune'
+    | '/services/local-seo-rajkot'
+    | '/services/local-seo-surat'
+    | '/services/local-seo-vadodara'
   id:
     | '__root__'
     | '/'
@@ -419,6 +577,20 @@ export interface FileRouteTypes {
     | '/features/review-management'
     | '/features/smart-scheduling'
     | '/services/local-seo'
+    | '/services/local-seo-ahmedabad'
+    | '/services/local-seo-bangalore'
+    | '/services/local-seo-chennai'
+    | '/services/local-seo-delhi'
+    | '/services/local-seo-gujarat'
+    | '/services/local-seo-hyderabad'
+    | '/services/local-seo-jaipur'
+    | '/services/local-seo-kolkata'
+    | '/services/local-seo-lucknow'
+    | '/services/local-seo-mumbai'
+    | '/services/local-seo-pune'
+    | '/services/local-seo-rajkot'
+    | '/services/local-seo-surat'
+    | '/services/local-seo-vadodara'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -454,6 +626,20 @@ export interface RootRouteChildren {
   FeaturesReviewManagementRoute: typeof FeaturesReviewManagementRoute
   FeaturesSmartSchedulingRoute: typeof FeaturesSmartSchedulingRoute
   ServicesLocalSeoRoute: typeof ServicesLocalSeoRoute
+  ServicesLocalSeoAhmedabadRoute: typeof ServicesLocalSeoAhmedabadRoute
+  ServicesLocalSeoBangaloreRoute: typeof ServicesLocalSeoBangaloreRoute
+  ServicesLocalSeoChennaiRoute: typeof ServicesLocalSeoChennaiRoute
+  ServicesLocalSeoDelhiRoute: typeof ServicesLocalSeoDelhiRoute
+  ServicesLocalSeoGujaratRoute: typeof ServicesLocalSeoGujaratRoute
+  ServicesLocalSeoHyderabadRoute: typeof ServicesLocalSeoHyderabadRoute
+  ServicesLocalSeoJaipurRoute: typeof ServicesLocalSeoJaipurRoute
+  ServicesLocalSeoKolkataRoute: typeof ServicesLocalSeoKolkataRoute
+  ServicesLocalSeoLucknowRoute: typeof ServicesLocalSeoLucknowRoute
+  ServicesLocalSeoMumbaiRoute: typeof ServicesLocalSeoMumbaiRoute
+  ServicesLocalSeoPuneRoute: typeof ServicesLocalSeoPuneRoute
+  ServicesLocalSeoRajkotRoute: typeof ServicesLocalSeoRajkotRoute
+  ServicesLocalSeoSuratRoute: typeof ServicesLocalSeoSuratRoute
+  ServicesLocalSeoVadodaraRoute: typeof ServicesLocalSeoVadodaraRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -682,6 +868,104 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesLocalSeoRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/services/local-seo-ahmedabad': {
+      id: '/services/local-seo-ahmedabad'
+      path: '/services/local-seo-ahmedabad'
+      fullPath: '/services/local-seo-ahmedabad'
+      preLoaderRoute: typeof ServicesLocalSeoAhmedabadRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/local-seo-bangalore': {
+      id: '/services/local-seo-bangalore'
+      path: '/services/local-seo-bangalore'
+      fullPath: '/services/local-seo-bangalore'
+      preLoaderRoute: typeof ServicesLocalSeoBangaloreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/local-seo-chennai': {
+      id: '/services/local-seo-chennai'
+      path: '/services/local-seo-chennai'
+      fullPath: '/services/local-seo-chennai'
+      preLoaderRoute: typeof ServicesLocalSeoChennaiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/local-seo-delhi': {
+      id: '/services/local-seo-delhi'
+      path: '/services/local-seo-delhi'
+      fullPath: '/services/local-seo-delhi'
+      preLoaderRoute: typeof ServicesLocalSeoDelhiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/local-seo-gujarat': {
+      id: '/services/local-seo-gujarat'
+      path: '/services/local-seo-gujarat'
+      fullPath: '/services/local-seo-gujarat'
+      preLoaderRoute: typeof ServicesLocalSeoGujaratRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/local-seo-hyderabad': {
+      id: '/services/local-seo-hyderabad'
+      path: '/services/local-seo-hyderabad'
+      fullPath: '/services/local-seo-hyderabad'
+      preLoaderRoute: typeof ServicesLocalSeoHyderabadRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/local-seo-jaipur': {
+      id: '/services/local-seo-jaipur'
+      path: '/services/local-seo-jaipur'
+      fullPath: '/services/local-seo-jaipur'
+      preLoaderRoute: typeof ServicesLocalSeoJaipurRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/local-seo-kolkata': {
+      id: '/services/local-seo-kolkata'
+      path: '/services/local-seo-kolkata'
+      fullPath: '/services/local-seo-kolkata'
+      preLoaderRoute: typeof ServicesLocalSeoKolkataRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/local-seo-lucknow': {
+      id: '/services/local-seo-lucknow'
+      path: '/services/local-seo-lucknow'
+      fullPath: '/services/local-seo-lucknow'
+      preLoaderRoute: typeof ServicesLocalSeoLucknowRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/local-seo-mumbai': {
+      id: '/services/local-seo-mumbai'
+      path: '/services/local-seo-mumbai'
+      fullPath: '/services/local-seo-mumbai'
+      preLoaderRoute: typeof ServicesLocalSeoMumbaiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/local-seo-pune': {
+      id: '/services/local-seo-pune'
+      path: '/services/local-seo-pune'
+      fullPath: '/services/local-seo-pune'
+      preLoaderRoute: typeof ServicesLocalSeoPuneRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/local-seo-rajkot': {
+      id: '/services/local-seo-rajkot'
+      path: '/services/local-seo-rajkot'
+      fullPath: '/services/local-seo-rajkot'
+      preLoaderRoute: typeof ServicesLocalSeoRajkotRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/local-seo-surat': {
+      id: '/services/local-seo-surat'
+      path: '/services/local-seo-surat'
+      fullPath: '/services/local-seo-surat'
+      preLoaderRoute: typeof ServicesLocalSeoSuratRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/local-seo-vadodara': {
+      id: '/services/local-seo-vadodara'
+      path: '/services/local-seo-vadodara'
+      fullPath: '/services/local-seo-vadodara'
+      preLoaderRoute: typeof ServicesLocalSeoVadodaraRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -718,6 +1002,20 @@ const rootRouteChildren: RootRouteChildren = {
   FeaturesReviewManagementRoute: FeaturesReviewManagementRoute,
   FeaturesSmartSchedulingRoute: FeaturesSmartSchedulingRoute,
   ServicesLocalSeoRoute: ServicesLocalSeoRoute,
+  ServicesLocalSeoAhmedabadRoute: ServicesLocalSeoAhmedabadRoute,
+  ServicesLocalSeoBangaloreRoute: ServicesLocalSeoBangaloreRoute,
+  ServicesLocalSeoChennaiRoute: ServicesLocalSeoChennaiRoute,
+  ServicesLocalSeoDelhiRoute: ServicesLocalSeoDelhiRoute,
+  ServicesLocalSeoGujaratRoute: ServicesLocalSeoGujaratRoute,
+  ServicesLocalSeoHyderabadRoute: ServicesLocalSeoHyderabadRoute,
+  ServicesLocalSeoJaipurRoute: ServicesLocalSeoJaipurRoute,
+  ServicesLocalSeoKolkataRoute: ServicesLocalSeoKolkataRoute,
+  ServicesLocalSeoLucknowRoute: ServicesLocalSeoLucknowRoute,
+  ServicesLocalSeoMumbaiRoute: ServicesLocalSeoMumbaiRoute,
+  ServicesLocalSeoPuneRoute: ServicesLocalSeoPuneRoute,
+  ServicesLocalSeoRajkotRoute: ServicesLocalSeoRajkotRoute,
+  ServicesLocalSeoSuratRoute: ServicesLocalSeoSuratRoute,
+  ServicesLocalSeoVadodaraRoute: ServicesLocalSeoVadodaraRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
