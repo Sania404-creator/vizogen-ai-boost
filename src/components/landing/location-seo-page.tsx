@@ -22,6 +22,8 @@ import { Reveal, SectionHeading } from "@/components/landing/reveal";
 import { ServiceAreas } from "@/components/landing/service-areas";
 import { whatsappLink } from "@/components/landing/industry-config";
 import type { LocationConfig } from "@/components/landing/location-configs";
+import { aeoFaqs, quickAnswer } from "@/lib/aeo";
+
 
 const pillars = [
   {
