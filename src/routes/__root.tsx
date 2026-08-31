@@ -13,6 +13,8 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Toaster } from "@/components/ui/sonner";
 import { FloatingWidgets } from "@/components/site/floating-widgets";
+import { softwareApplicationSchema } from "@/lib/aeo";
+
 
 function NotFoundComponent() {
   return (
