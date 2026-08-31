@@ -31,11 +31,15 @@ const columns = [
       { label: "GBP Guide", to: "/how-to-connect-gbp" },
       { label: "Official Partner", to: "/official-partner" },
       { label: "Become a Partner", to: "/partner" },
-      { label: "Privacy Policy", to: "/privacy-policy" },
-      { label: "Terms & Conditions", to: "/terms-and-conditions" },
       { label: "Book a demo", to: "/demo" },
       { label: "Log in", to: "/login" },
-
+    ],
+  },
+  {
+    title: "Legal",
+    items: [
+      { label: "Privacy Policy", to: "/privacy-policy" },
+      { label: "Terms & Conditions", to: "/terms-and-conditions" },
     ],
   },
 ];
@@ -51,7 +55,7 @@ export function Footer() {
   return (
     <footer className="relative bg-navy pt-16 text-navy-foreground">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-12 lg:grid-cols-[1.3fr_1fr_1fr_1.2fr]">
+        <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1fr_1fr_1.2fr]">
           <div>
             <div className="flex items-center gap-2">
               <img
