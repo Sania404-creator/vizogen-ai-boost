@@ -179,8 +179,28 @@ export function SubscriptionPlans({
           />
         </Reveal>
 
+        <Reveal className="mx-auto mt-8 max-w-2xl">
+          <label className="flex cursor-pointer items-start gap-3 rounded-2xl border border-border bg-card/70 p-4 text-sm text-muted-foreground shadow-soft">
+            <input
+              type="checkbox"
+              checked={agreed}
+              onChange={(e) => setAgreed(e.target.checked)}
+              className="mt-0.5 size-4 shrink-0 accent-[var(--brand)]"
+              aria-required
+            />
+            <span className="leading-relaxed">
+              I agree to the{" "}
+              <Link to="/terms-and-conditions" className="font-semibold text-brand hover:underline">
+                Terms &amp; Conditions
+              </Link>
+              , including the non-refundable payment policy.
+            </span>
+          </label>
+        </Reveal>
+
         <div className="mt-12 grid items-start gap-6 lg:grid-cols-3">
           {plans.map((plan, i) => (
+
             <Reveal
               key={plan.name}
               delay={i * 0.08}
