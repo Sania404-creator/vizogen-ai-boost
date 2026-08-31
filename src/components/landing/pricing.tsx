@@ -138,7 +138,9 @@ export function SubscriptionPlans({
 }) {
   const [billingCycle, setBillingCycle] = useState<BillingCycle>("yearly");
   const [currency, setCurrency] = useState<Currency>("INR");
+  const [agreed, setAgreed] = useState(false);
   const period = billingCycle === "yearly" ? "/year" : "/quarter";
+
 
   return (
     <section id="pricing" className="relative overflow-hidden py-20 sm:py-24">
