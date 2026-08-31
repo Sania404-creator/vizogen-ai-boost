@@ -31,8 +31,11 @@ const columns = [
       { label: "GBP Guide", to: "/how-to-connect-gbp" },
       { label: "Official Partner", to: "/official-partner" },
       { label: "Become a Partner", to: "/partner" },
+      { label: "Privacy Policy", to: "/privacy-policy" },
+      { label: "Terms & Conditions", to: "/terms-and-conditions" },
       { label: "Book a demo", to: "/demo" },
       { label: "Log in", to: "/login" },
+
     ],
   },
 ];
@@ -61,6 +64,10 @@ export function Footer() {
               AI automation for Google Business Profiles — daily posts, authentic reviews and
               local ranking growth on autopilot.
             </p>
+            <p className="mt-3 max-w-xs text-sm leading-relaxed text-navy-foreground/65">
+              Vizogen.in is owned and operated by NG Marketing Solution.
+            </p>
+
             <div className="mt-6 flex flex-wrap gap-3">
               <a
                 href="https://login.vizogen.in/sign-in"
@@ -135,7 +142,8 @@ export function Footer() {
         </div>
 
         <div className="mt-14 border-t border-navy-foreground/10 py-6 text-center text-xs text-navy-foreground/55">
-          © {new Date().getFullYear()} Vizogen. All rights reserved.
+          © {new Date().getFullYear()} Vizogen.in, operated by NG Marketing Solution. All rights
+          reserved.
         </div>
       </div>
 

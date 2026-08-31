@@ -29,9 +29,11 @@ import { Route as PartnerRouteImport } from './routes/partner'
 import { Route as PestControlMarketingSoftwareRouteImport } from './routes/pest-control-marketing-software'
 import { Route as PostManagementRouteImport } from './routes/post-management'
 import { Route as PricingRouteImport } from './routes/pricing'
+import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as RealestateMarketingSoftwareRouteImport } from './routes/realestate-marketing-software'
 import { Route as RestaurantMarketingSoftwareRouteImport } from './routes/restaurant-marketing-software'
 import { Route as SalonMarketingSoftwareRouteImport } from './routes/salon-marketing-software'
+import { Route as TermsAndConditionsRouteImport } from './routes/terms-and-conditions'
 import { Route as TourTravelMarketingSoftwareRouteImport } from './routes/tour-travel-marketing-software'
 import { Route as YogaWellnessMarketingSoftwareRouteImport } from './routes/yoga-wellness-marketing-software'
 import { Route as FeaturesAiPostGenerationRouteImport } from './routes/features.ai-post-generation'
@@ -144,6 +146,11 @@ const PricingRoute = PricingRouteImport.update({
   path: '/pricing',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
+  id: '/privacy-policy',
+  path: '/privacy-policy',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RealestateMarketingSoftwareRoute =
   RealestateMarketingSoftwareRouteImport.update({
     id: '/realestate-marketing-software',
@@ -159,6 +166,11 @@ const RestaurantMarketingSoftwareRoute =
 const SalonMarketingSoftwareRoute = SalonMarketingSoftwareRouteImport.update({
   id: '/salon-marketing-software',
   path: '/salon-marketing-software',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsAndConditionsRoute = TermsAndConditionsRouteImport.update({
+  id: '/terms-and-conditions',
+  path: '/terms-and-conditions',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TourTravelMarketingSoftwareRoute =
@@ -222,9 +234,11 @@ export interface FileRoutesByFullPath {
   '/pest-control-marketing-software': typeof PestControlMarketingSoftwareRoute
   '/post-management': typeof PostManagementRoute
   '/pricing': typeof PricingRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
   '/realestate-marketing-software': typeof RealestateMarketingSoftwareRoute
   '/restaurant-marketing-software': typeof RestaurantMarketingSoftwareRoute
   '/salon-marketing-software': typeof SalonMarketingSoftwareRoute
+  '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/tour-travel-marketing-software': typeof TourTravelMarketingSoftwareRoute
   '/yoga-wellness-marketing-software': typeof YogaWellnessMarketingSoftwareRoute
   '/features/ai-post-generation': typeof FeaturesAiPostGenerationRoute
@@ -254,9 +268,11 @@ export interface FileRoutesByTo {
   '/pest-control-marketing-software': typeof PestControlMarketingSoftwareRoute
   '/post-management': typeof PostManagementRoute
   '/pricing': typeof PricingRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
   '/realestate-marketing-software': typeof RealestateMarketingSoftwareRoute
   '/restaurant-marketing-software': typeof RestaurantMarketingSoftwareRoute
   '/salon-marketing-software': typeof SalonMarketingSoftwareRoute
+  '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/tour-travel-marketing-software': typeof TourTravelMarketingSoftwareRoute
   '/yoga-wellness-marketing-software': typeof YogaWellnessMarketingSoftwareRoute
   '/features/ai-post-generation': typeof FeaturesAiPostGenerationRoute
@@ -287,9 +303,11 @@ export interface FileRoutesById {
   '/pest-control-marketing-software': typeof PestControlMarketingSoftwareRoute
   '/post-management': typeof PostManagementRoute
   '/pricing': typeof PricingRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
   '/realestate-marketing-software': typeof RealestateMarketingSoftwareRoute
   '/restaurant-marketing-software': typeof RestaurantMarketingSoftwareRoute
   '/salon-marketing-software': typeof SalonMarketingSoftwareRoute
+  '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/tour-travel-marketing-software': typeof TourTravelMarketingSoftwareRoute
   '/yoga-wellness-marketing-software': typeof YogaWellnessMarketingSoftwareRoute
   '/features/ai-post-generation': typeof FeaturesAiPostGenerationRoute
@@ -321,9 +339,11 @@ export interface FileRouteTypes {
     | '/pest-control-marketing-software'
     | '/post-management'
     | '/pricing'
+    | '/privacy-policy'
     | '/realestate-marketing-software'
     | '/restaurant-marketing-software'
     | '/salon-marketing-software'
+    | '/terms-and-conditions'
     | '/tour-travel-marketing-software'
     | '/yoga-wellness-marketing-software'
     | '/features/ai-post-generation'
@@ -353,9 +373,11 @@ export interface FileRouteTypes {
     | '/pest-control-marketing-software'
     | '/post-management'
     | '/pricing'
+    | '/privacy-policy'
     | '/realestate-marketing-software'
     | '/restaurant-marketing-software'
     | '/salon-marketing-software'
+    | '/terms-and-conditions'
     | '/tour-travel-marketing-software'
     | '/yoga-wellness-marketing-software'
     | '/features/ai-post-generation'
@@ -385,9 +407,11 @@ export interface FileRouteTypes {
     | '/pest-control-marketing-software'
     | '/post-management'
     | '/pricing'
+    | '/privacy-policy'
     | '/realestate-marketing-software'
     | '/restaurant-marketing-software'
     | '/salon-marketing-software'
+    | '/terms-and-conditions'
     | '/tour-travel-marketing-software'
     | '/yoga-wellness-marketing-software'
     | '/features/ai-post-generation'
@@ -418,9 +442,11 @@ export interface RootRouteChildren {
   PestControlMarketingSoftwareRoute: typeof PestControlMarketingSoftwareRoute
   PostManagementRoute: typeof PostManagementRoute
   PricingRoute: typeof PricingRoute
+  PrivacyPolicyRoute: typeof PrivacyPolicyRoute
   RealestateMarketingSoftwareRoute: typeof RealestateMarketingSoftwareRoute
   RestaurantMarketingSoftwareRoute: typeof RestaurantMarketingSoftwareRoute
   SalonMarketingSoftwareRoute: typeof SalonMarketingSoftwareRoute
+  TermsAndConditionsRoute: typeof TermsAndConditionsRoute
   TourTravelMarketingSoftwareRoute: typeof TourTravelMarketingSoftwareRoute
   YogaWellnessMarketingSoftwareRoute: typeof YogaWellnessMarketingSoftwareRoute
   FeaturesAiPostGenerationRoute: typeof FeaturesAiPostGenerationRoute
@@ -572,6 +598,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PricingRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/privacy-policy': {
+      id: '/privacy-policy'
+      path: '/privacy-policy'
+      fullPath: '/privacy-policy'
+      preLoaderRoute: typeof PrivacyPolicyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/realestate-marketing-software': {
       id: '/realestate-marketing-software'
       path: '/realestate-marketing-software'
@@ -591,6 +624,13 @@ declare module '@tanstack/react-router' {
       path: '/salon-marketing-software'
       fullPath: '/salon-marketing-software'
       preLoaderRoute: typeof SalonMarketingSoftwareRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms-and-conditions': {
+      id: '/terms-and-conditions'
+      path: '/terms-and-conditions'
+      fullPath: '/terms-and-conditions'
+      preLoaderRoute: typeof TermsAndConditionsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/tour-travel-marketing-software': {
@@ -666,9 +706,11 @@ const rootRouteChildren: RootRouteChildren = {
   PestControlMarketingSoftwareRoute: PestControlMarketingSoftwareRoute,
   PostManagementRoute: PostManagementRoute,
   PricingRoute: PricingRoute,
+  PrivacyPolicyRoute: PrivacyPolicyRoute,
   RealestateMarketingSoftwareRoute: RealestateMarketingSoftwareRoute,
   RestaurantMarketingSoftwareRoute: RestaurantMarketingSoftwareRoute,
   SalonMarketingSoftwareRoute: SalonMarketingSoftwareRoute,
+  TermsAndConditionsRoute: TermsAndConditionsRoute,
   TourTravelMarketingSoftwareRoute: TourTravelMarketingSoftwareRoute,
   YogaWellnessMarketingSoftwareRoute: YogaWellnessMarketingSoftwareRoute,
   FeaturesAiPostGenerationRoute: FeaturesAiPostGenerationRoute,
