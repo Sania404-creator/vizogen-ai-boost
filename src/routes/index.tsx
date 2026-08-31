@@ -17,6 +17,12 @@ import { Footer } from "@/components/landing/footer";
 import { SubscriptionPlans } from "@/components/landing/pricing";
 import { SectionHeading } from "@/components/landing/reveal";
 import { ServiceAreas } from "@/components/landing/service-areas";
+import {
+  SITE_URL,
+  faqPageSchema,
+  organizationEntity,
+  softwareApplicationSchema,
+} from "@/lib/aeo";
 
 const title = "Vizogen.ai - GMB Automation Tool";
 const socialTitle = "Vizogen.ai - GMB Automation Tool";
@@ -26,7 +32,7 @@ const socialDescription =
   "AI-powered local SEO and Google Business Profile automation trusted by businesses across Ahmedabad, Gujarat, and India.";
 const keywords =
   "best SEO agency Ahmedabad, best SEO agency Gujarat, best SEO agency India, local SEO services Ahmedabad, Google Business Profile management, GMB automation, local SEO software, Google Maps ranking Ahmedabad";
-const siteUrl = "https://www.vizogen.in";
+const siteUrl = SITE_URL;
 
 export const Route = createFileRoute("/")({
   head: () => ({
