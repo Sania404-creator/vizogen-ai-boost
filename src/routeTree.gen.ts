@@ -11,7 +11,6 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BakeryMarketingSoftwareRouteImport } from './routes/bakery-marketing-software'
-import { Route as BlogRouteImport } from './routes/blog'
 import { Route as CarGarageMarketingSoftwareRouteImport } from './routes/car-garage-marketing-software'
 import { Route as ClinicMarketingSoftwareRouteImport } from './routes/clinic-marketing-software'
 import { Route as DemoRouteImport } from './routes/demo'
@@ -36,6 +35,8 @@ import { Route as SalonMarketingSoftwareRouteImport } from './routes/salon-marke
 import { Route as TermsAndConditionsRouteImport } from './routes/terms-and-conditions'
 import { Route as TourTravelMarketingSoftwareRouteImport } from './routes/tour-travel-marketing-software'
 import { Route as YogaWellnessMarketingSoftwareRouteImport } from './routes/yoga-wellness-marketing-software'
+import { Route as BlogIndexRouteImport } from './routes/blog.index'
+import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as FeaturesAiPostGenerationRouteImport } from './routes/features.ai-post-generation'
 import { Route as FeaturesMagicQrRouteImport } from './routes/features.magic-qr'
 import { Route as FeaturesReviewManagementRouteImport } from './routes/features.review-management'
@@ -64,11 +65,6 @@ const IndexRoute = IndexRouteImport.update({
 const BakeryMarketingSoftwareRoute = BakeryMarketingSoftwareRouteImport.update({
   id: '/bakery-marketing-software',
   path: '/bakery-marketing-software',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BlogRoute = BlogRouteImport.update({
-  id: '/blog',
-  path: '/blog',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CarGarageMarketingSoftwareRoute =
@@ -199,6 +195,16 @@ const YogaWellnessMarketingSoftwareRoute =
     path: '/yoga-wellness-marketing-software',
     getParentRoute: () => rootRouteImport,
   } as any)
+const BlogIndexRoute = BlogIndexRouteImport.update({
+  id: '/blog/',
+  path: '/blog/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/blog/$slug',
+  path: '/blog/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const FeaturesAiPostGenerationRoute =
   FeaturesAiPostGenerationRouteImport.update({
     id: '/features/ai-post-generation',
@@ -304,7 +310,6 @@ const ServicesLocalSeoVadodaraRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/bakery-marketing-software': typeof BakeryMarketingSoftwareRoute
-  '/blog': typeof BlogRoute
   '/car-garage-marketing-software': typeof CarGarageMarketingSoftwareRoute
   '/clinic-marketing-software': typeof ClinicMarketingSoftwareRoute
   '/demo': typeof DemoRoute
@@ -329,6 +334,7 @@ export interface FileRoutesByFullPath {
   '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/tour-travel-marketing-software': typeof TourTravelMarketingSoftwareRoute
   '/yoga-wellness-marketing-software': typeof YogaWellnessMarketingSoftwareRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/features/ai-post-generation': typeof FeaturesAiPostGenerationRoute
   '/features/magic-qr': typeof FeaturesMagicQrRoute
   '/features/review-management': typeof FeaturesReviewManagementRoute
@@ -348,11 +354,11 @@ export interface FileRoutesByFullPath {
   '/services/local-seo-rajkot': typeof ServicesLocalSeoRajkotRoute
   '/services/local-seo-surat': typeof ServicesLocalSeoSuratRoute
   '/services/local-seo-vadodara': typeof ServicesLocalSeoVadodaraRoute
+  '/blog/': typeof BlogIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/bakery-marketing-software': typeof BakeryMarketingSoftwareRoute
-  '/blog': typeof BlogRoute
   '/car-garage-marketing-software': typeof CarGarageMarketingSoftwareRoute
   '/clinic-marketing-software': typeof ClinicMarketingSoftwareRoute
   '/demo': typeof DemoRoute
@@ -377,6 +383,7 @@ export interface FileRoutesByTo {
   '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/tour-travel-marketing-software': typeof TourTravelMarketingSoftwareRoute
   '/yoga-wellness-marketing-software': typeof YogaWellnessMarketingSoftwareRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/features/ai-post-generation': typeof FeaturesAiPostGenerationRoute
   '/features/magic-qr': typeof FeaturesMagicQrRoute
   '/features/review-management': typeof FeaturesReviewManagementRoute
@@ -396,12 +403,12 @@ export interface FileRoutesByTo {
   '/services/local-seo-rajkot': typeof ServicesLocalSeoRajkotRoute
   '/services/local-seo-surat': typeof ServicesLocalSeoSuratRoute
   '/services/local-seo-vadodara': typeof ServicesLocalSeoVadodaraRoute
+  '/blog': typeof BlogIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/bakery-marketing-software': typeof BakeryMarketingSoftwareRoute
-  '/blog': typeof BlogRoute
   '/car-garage-marketing-software': typeof CarGarageMarketingSoftwareRoute
   '/clinic-marketing-software': typeof ClinicMarketingSoftwareRoute
   '/demo': typeof DemoRoute
@@ -426,6 +433,7 @@ export interface FileRoutesById {
   '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/tour-travel-marketing-software': typeof TourTravelMarketingSoftwareRoute
   '/yoga-wellness-marketing-software': typeof YogaWellnessMarketingSoftwareRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/features/ai-post-generation': typeof FeaturesAiPostGenerationRoute
   '/features/magic-qr': typeof FeaturesMagicQrRoute
   '/features/review-management': typeof FeaturesReviewManagementRoute
@@ -445,13 +453,13 @@ export interface FileRoutesById {
   '/services/local-seo-rajkot': typeof ServicesLocalSeoRajkotRoute
   '/services/local-seo-surat': typeof ServicesLocalSeoSuratRoute
   '/services/local-seo-vadodara': typeof ServicesLocalSeoVadodaraRoute
+  '/blog/': typeof BlogIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/bakery-marketing-software'
-    | '/blog'
     | '/car-garage-marketing-software'
     | '/clinic-marketing-software'
     | '/demo'
@@ -476,6 +484,7 @@ export interface FileRouteTypes {
     | '/terms-and-conditions'
     | '/tour-travel-marketing-software'
     | '/yoga-wellness-marketing-software'
+    | '/blog/$slug'
     | '/features/ai-post-generation'
     | '/features/magic-qr'
     | '/features/review-management'
@@ -495,11 +504,11 @@ export interface FileRouteTypes {
     | '/services/local-seo-rajkot'
     | '/services/local-seo-surat'
     | '/services/local-seo-vadodara'
+    | '/blog/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/bakery-marketing-software'
-    | '/blog'
     | '/car-garage-marketing-software'
     | '/clinic-marketing-software'
     | '/demo'
@@ -524,6 +533,7 @@ export interface FileRouteTypes {
     | '/terms-and-conditions'
     | '/tour-travel-marketing-software'
     | '/yoga-wellness-marketing-software'
+    | '/blog/$slug'
     | '/features/ai-post-generation'
     | '/features/magic-qr'
     | '/features/review-management'
@@ -543,11 +553,11 @@ export interface FileRouteTypes {
     | '/services/local-seo-rajkot'
     | '/services/local-seo-surat'
     | '/services/local-seo-vadodara'
+    | '/blog'
   id:
     | '__root__'
     | '/'
     | '/bakery-marketing-software'
-    | '/blog'
     | '/car-garage-marketing-software'
     | '/clinic-marketing-software'
     | '/demo'
@@ -572,6 +582,7 @@ export interface FileRouteTypes {
     | '/terms-and-conditions'
     | '/tour-travel-marketing-software'
     | '/yoga-wellness-marketing-software'
+    | '/blog/$slug'
     | '/features/ai-post-generation'
     | '/features/magic-qr'
     | '/features/review-management'
@@ -591,12 +602,12 @@ export interface FileRouteTypes {
     | '/services/local-seo-rajkot'
     | '/services/local-seo-surat'
     | '/services/local-seo-vadodara'
+    | '/blog/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BakeryMarketingSoftwareRoute: typeof BakeryMarketingSoftwareRoute
-  BlogRoute: typeof BlogRoute
   CarGarageMarketingSoftwareRoute: typeof CarGarageMarketingSoftwareRoute
   ClinicMarketingSoftwareRoute: typeof ClinicMarketingSoftwareRoute
   DemoRoute: typeof DemoRoute
@@ -621,6 +632,7 @@ export interface RootRouteChildren {
   TermsAndConditionsRoute: typeof TermsAndConditionsRoute
   TourTravelMarketingSoftwareRoute: typeof TourTravelMarketingSoftwareRoute
   YogaWellnessMarketingSoftwareRoute: typeof YogaWellnessMarketingSoftwareRoute
+  BlogSlugRoute: typeof BlogSlugRoute
   FeaturesAiPostGenerationRoute: typeof FeaturesAiPostGenerationRoute
   FeaturesMagicQrRoute: typeof FeaturesMagicQrRoute
   FeaturesReviewManagementRoute: typeof FeaturesReviewManagementRoute
@@ -640,6 +652,7 @@ export interface RootRouteChildren {
   ServicesLocalSeoRajkotRoute: typeof ServicesLocalSeoRajkotRoute
   ServicesLocalSeoSuratRoute: typeof ServicesLocalSeoSuratRoute
   ServicesLocalSeoVadodaraRoute: typeof ServicesLocalSeoVadodaraRoute
+  BlogIndexRoute: typeof BlogIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -656,13 +669,6 @@ declare module '@tanstack/react-router' {
       path: '/bakery-marketing-software'
       fullPath: '/bakery-marketing-software'
       preLoaderRoute: typeof BakeryMarketingSoftwareRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/blog': {
-      id: '/blog'
-      path: '/blog'
-      fullPath: '/blog'
-      preLoaderRoute: typeof BlogRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/car-garage-marketing-software': {
@@ -833,6 +839,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof YogaWellnessMarketingSoftwareRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog/': {
+      id: '/blog/'
+      path: '/blog'
+      fullPath: '/blog/'
+      preLoaderRoute: typeof BlogIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/blog/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/features/ai-post-generation': {
       id: '/features/ai-post-generation'
       path: '/features/ai-post-generation'
@@ -972,7 +992,6 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BakeryMarketingSoftwareRoute: BakeryMarketingSoftwareRoute,
-  BlogRoute: BlogRoute,
   CarGarageMarketingSoftwareRoute: CarGarageMarketingSoftwareRoute,
   ClinicMarketingSoftwareRoute: ClinicMarketingSoftwareRoute,
   DemoRoute: DemoRoute,
@@ -997,6 +1016,7 @@ const rootRouteChildren: RootRouteChildren = {
   TermsAndConditionsRoute: TermsAndConditionsRoute,
   TourTravelMarketingSoftwareRoute: TourTravelMarketingSoftwareRoute,
   YogaWellnessMarketingSoftwareRoute: YogaWellnessMarketingSoftwareRoute,
+  BlogSlugRoute: BlogSlugRoute,
   FeaturesAiPostGenerationRoute: FeaturesAiPostGenerationRoute,
   FeaturesMagicQrRoute: FeaturesMagicQrRoute,
   FeaturesReviewManagementRoute: FeaturesReviewManagementRoute,
@@ -1016,6 +1036,7 @@ const rootRouteChildren: RootRouteChildren = {
   ServicesLocalSeoRajkotRoute: ServicesLocalSeoRajkotRoute,
   ServicesLocalSeoSuratRoute: ServicesLocalSeoSuratRoute,
   ServicesLocalSeoVadodaraRoute: ServicesLocalSeoVadodaraRoute,
+  BlogIndexRoute: BlogIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
