@@ -6,6 +6,14 @@ import { Link } from "@tanstack/react-router";
 
 import { Button } from "@/components/ui/button";
 import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import {
   Accordion,
   AccordionContent,
   AccordionItem,
@@ -140,6 +148,7 @@ export function SubscriptionPlans({
 }) {
   const [billingCycle, setBillingCycle] = useState<BillingCycle>("yearly");
   const [currency, setCurrency] = useState<Currency>("INR");
+  const [pendingPlan, setPendingPlan] = useState<string | null>(null);
   const [agreed, setAgreed] = useState(false);
   const period = billingCycle === "yearly" ? "/year" : "/quarter";
 
@@ -179,25 +188,6 @@ export function SubscriptionPlans({
               { value: "USD", label: "$ USD" },
             ]}
           />
-        </Reveal>
-
-        <Reveal className="mx-auto mt-8 max-w-2xl">
-          <label className="flex cursor-pointer items-start gap-3 rounded-2xl border border-border bg-card/70 p-4 text-sm text-muted-foreground shadow-soft">
-            <input
-              type="checkbox"
-              checked={agreed}
-              onChange={(e) => setAgreed(e.target.checked)}
-              className="mt-0.5 size-4 shrink-0 accent-[var(--brand)]"
-              aria-required
-            />
-            <span className="leading-relaxed">
-              I agree to the{" "}
-              <Link to="/terms-and-conditions" className="font-semibold text-brand hover:underline">
-                Terms &amp; Conditions
-              </Link>
-              , including the non-refundable payment policy.
-            </span>
-          </label>
         </Reveal>
 
         <div className="mt-12 grid items-start gap-6 lg:grid-cols-3">
@@ -261,30 +251,16 @@ export function SubscriptionPlans({
                   ))}
                 </ul>
 
-                {agreed ? (
-                  <Button
-                    asChild
-                    size="lg"
-                    variant={plan.popular ? "default" : "outline"}
-                    className={`mt-8 w-full rounded-full ${
-                      plan.popular ? "gradient-brand shadow-soft hover:opacity-95" : ""
-                    }`}
-                  >
-                    <a href="https://login.vizogen.in/sign-in">{plan.cta}</a>
-                  </Button>
-                ) : (
-                  <Button
-                    size="lg"
-                    disabled
-                    variant={plan.popular ? "default" : "outline"}
-                    title="Please accept the Terms & Conditions to continue"
-                    className={`mt-8 w-full rounded-full ${
-                      plan.popular ? "gradient-brand shadow-soft" : ""
-                    }`}
-                  >
-                    {plan.cta}
-                  </Button>
-                )}
+                <Button
+                  size="lg"
+                  onClick={() => setPendingPlan(plan.name)}
+                  variant={plan.popular ? "default" : "outline"}
+                  className={`mt-8 w-full rounded-full ${
+                    plan.popular ? "gradient-brand shadow-soft hover:opacity-95" : ""
+                  }`}
+                >
+                  {plan.cta}
+                </Button>
 
               </div>
             </Reveal>
