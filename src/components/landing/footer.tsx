@@ -64,6 +64,10 @@ export function Footer() {
               AI automation for Google Business Profiles — daily posts, authentic reviews and
               local ranking growth on autopilot.
             </p>
+            <p className="mt-3 max-w-xs text-sm leading-relaxed text-navy-foreground/65">
+              Vizogen.in is owned and operated by NG Marketing Solution.
+            </p>
+
             <div className="mt-6 flex flex-wrap gap-3">
               <a
                 href="https://login.vizogen.in/sign-in"
