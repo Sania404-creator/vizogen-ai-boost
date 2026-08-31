@@ -14,7 +14,7 @@ import { AppDownload } from "@/components/landing/app-download";
 import { OldVsNew } from "@/components/landing/old-vs-new";
 import { Faq } from "@/components/landing/faq";
 import { Footer } from "@/components/landing/footer";
-import { OneTimeServices, SubscriptionPlans } from "@/components/landing/pricing";
+import { SubscriptionPlans } from "@/components/landing/pricing";
 import { SectionHeading } from "@/components/landing/reveal";
 
 const title = "Vizogen — AI Google Business Profile Automation";
@@ -70,7 +70,6 @@ function Index() {
             <SubscriptionPlans showFaqs={false} />
           </div>
         </section>
-        <OneTimeServices />
         <Faq />
       </main>
       <Footer />

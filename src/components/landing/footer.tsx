@@ -45,13 +45,6 @@ const socials = [
   { icon: Youtube, label: "YouTube" },
 ];
 
-const partnerPerks = [
-  "Earn recurring commission on every client you refer",
-  "Grow your agency by offering AI-powered GBP automation",
-  "Dedicated partner support, training and onboarding",
-  "Co-marketing materials and ready-to-use demo assets",
-];
-
 export function Footer() {
   return (
     <footer className="relative bg-navy pt-16 text-navy-foreground">
