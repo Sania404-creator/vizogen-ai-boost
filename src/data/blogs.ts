@@ -3,6 +3,7 @@ import coverReviews from "@/assets/blog-google-reviews.jpg";
 import coverAi from "@/assets/blog-ai-content.jpg";
 import coverChecklist from "@/assets/blog-gbp-checklist.jpg";
 import coverSmallBiz from "@/assets/blog-small-business.jpg";
+import coverTools from "@/assets/blog-seo-tools-comparison.jpg";
 
 export type BlogPost = {
   slug: string;
