@@ -26,7 +26,7 @@ const wrap = (inner: string) => `
     ${inner}
     <p style="margin-top:28px;font-size:12px;color:#8a8f9c">
       Vizogen — AI automation for Google Business Profiles<br/>
-      info.vizogen@gmail.com · +91 84889 18358
+      info.bizzdigitalschool@gmail.com · +91 84889 18358
     </p>
   </div>
 </div>`;
