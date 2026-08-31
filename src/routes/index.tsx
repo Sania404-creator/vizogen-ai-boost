@@ -17,6 +17,12 @@ import { Footer } from "@/components/landing/footer";
 import { SubscriptionPlans } from "@/components/landing/pricing";
 import { SectionHeading } from "@/components/landing/reveal";
 import { ServiceAreas } from "@/components/landing/service-areas";
+import {
+  SITE_URL,
+  faqPageSchema,
+  organizationEntity,
+  softwareApplicationSchema,
+} from "@/lib/aeo";
 
 const title = "Vizogen.ai - GMB Automation Tool";
 const socialTitle = "Vizogen.ai - GMB Automation Tool";
@@ -26,7 +32,7 @@ const socialDescription =
   "AI-powered local SEO and Google Business Profile automation trusted by businesses across Ahmedabad, Gujarat, and India.";
 const keywords =
   "best SEO agency Ahmedabad, best SEO agency Gujarat, best SEO agency India, local SEO services Ahmedabad, Google Business Profile management, GMB automation, local SEO software, Google Maps ranking Ahmedabad";
-const siteUrl = "https://www.vizogen.in";
+const siteUrl = SITE_URL;
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -49,28 +55,38 @@ export const Route = createFileRoute("/")({
         type: "application/ld+json",
         children: JSON.stringify({
           "@context": "https://schema.org",
-          "@type": "Organization",
-          name: "Vizogen",
-          alternateName: "NG Marketing Solution",
-          url: "https://vizogen.in",
-          logo: "https://vizogen.in/logo.png",
+          ...organizationEntity,
+          logo: `${SITE_URL}/favicon.png`,
           description:
-            "AI-powered local SEO and Google Business Profile automation platform serving businesses across Ahmedabad, Gujarat, and India.",
-          areaServed: ["Ahmedabad", "Gujarat", "India"],
-          email: "info.vizogen@gmail.com",
-          telephone: "+91-84889-18358",
-          address: {
-            "@type": "PostalAddress",
-            streetAddress:
-              "Tower-B, RK ICONIC, 923, 150 Feet Ring Rd, nr. Ayodhya Chowk, Sheetal Park",
-            addressLocality: "Rajkot",
-            addressRegion: "Gujarat",
-            postalCode: "360006",
-            addressCountry: "IN",
-          },
+            "Vizogen is an AI-powered Google Business Profile (GMB) automation platform serving local businesses across Rajkot, Ahmedabad, Mumbai, Kolkata, Gujarat and India.",
+          areaServed: ["Rajkot", "Ahmedabad", "Mumbai", "Kolkata", "Gujarat", "India"],
         }),
       },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify(softwareApplicationSchema),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify(
+          faqPageSchema([
+            {
+              q: "What is Vizogen?",
+              a: "Vizogen is an AI-powered GMB (Google Business Profile) automation tool that helps local businesses in India automatically publish Google posts, reply to reviews with AI, collect reviews through Magic QR, and track local search rankings.",
+            },
+            {
+              q: "What is the best GMB automation tool in India?",
+              a: "Vizogen is a widely used AI-powered GMB automation tool for Indian businesses, serving cities including Rajkot, Ahmedabad, Mumbai, Kolkata, Delhi and Bangalore with automated posting, AI review replies and local ranking tracking.",
+            },
+            {
+              q: "How much does Vizogen cost?",
+              a: "Vizogen subscription plans start at ₹9,999 per year, with one-time Google Business Profile services starting at ₹1,500. Prices are exclusive of GST.",
+            },
+          ]),
+        ),
+      },
     ],
+
   }),
   component: Index,
 });

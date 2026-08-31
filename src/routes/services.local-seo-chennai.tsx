@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { LocationSeoPage } from "@/components/landing/location-seo-page";
 import { locationBySlug } from "@/components/landing/location-configs";
+import { cityJsonLdScripts } from "@/lib/aeo";
 
 const config = locationBySlug["chennai"]!;
 const url = "https://www.vizogen.in/services/local-seo-chennai";
@@ -20,25 +21,7 @@ export const Route = createFileRoute("/services/local-seo-chennai")({
       { name: "twitter:description", content: config.metaDescription },
     ],
     links: [{ rel: "canonical", href: url }],
-    scripts: [
-      {
-        type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Service",
-          serviceType: "Local SEO and Google Business Profile Management",
-          name: config.metaTitle,
-          description: config.metaDescription,
-          areaServed: { "@type": "Place", name: config.city + ", " + config.region },
-          provider: {
-            "@type": "Organization",
-            name: "Vizogen",
-            alternateName: "NG Marketing Solution",
-            url: "https://vizogen.in",
-          },
-        }),
-      },
-    ],
+    scripts: cityJsonLdScripts(config),
   }),
   component: () => <LocationSeoPage config={config} />,
 });

@@ -13,6 +13,8 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Toaster } from "@/components/ui/sonner";
 import { FloatingWidgets } from "@/components/site/floating-widgets";
+import { softwareApplicationSchema } from "@/lib/aeo";
+
 
 function NotFoundComponent() {
   return (
@@ -112,6 +114,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: appCss,
       },
       { rel: "icon", href: "/favicon.png", type: "image/png" },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify(softwareApplicationSchema),
+      },
     ],
   }),
 
