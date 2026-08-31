@@ -86,6 +86,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "Vizogen automates Google Business Profile posts, reviews and local SEO with AI.",
       },
       { name: "author", content: "Vizogen" },
+      {
+        name: "google-site-verification",
+        content: "ZknIJ-OGeCjmjytsRc2Om-vjdLnv7TkPdqVBZ4oGQIE",
+      },
       { property: "og:title", content: "Vizogen — AI Google Business Profile Automation" },
       {
         property: "og:description",
