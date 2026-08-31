@@ -31,8 +31,11 @@ const columns = [
       { label: "GBP Guide", to: "/how-to-connect-gbp" },
       { label: "Official Partner", to: "/official-partner" },
       { label: "Become a Partner", to: "/partner" },
+      { label: "Privacy Policy", to: "/privacy-policy" },
+      { label: "Terms & Conditions", to: "/terms-and-conditions" },
       { label: "Book a demo", to: "/demo" },
       { label: "Log in", to: "/login" },
+
     ],
   },
 ];
