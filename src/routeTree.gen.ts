@@ -11,7 +11,6 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BakeryMarketingSoftwareRouteImport } from './routes/bakery-marketing-software'
-import { Route as BlogRouteImport } from './routes/blog'
 import { Route as CarGarageMarketingSoftwareRouteImport } from './routes/car-garage-marketing-software'
 import { Route as ClinicMarketingSoftwareRouteImport } from './routes/clinic-marketing-software'
 import { Route as DemoRouteImport } from './routes/demo'
@@ -64,11 +63,6 @@ const IndexRoute = IndexRouteImport.update({
 const BakeryMarketingSoftwareRoute = BakeryMarketingSoftwareRouteImport.update({
   id: '/bakery-marketing-software',
   path: '/bakery-marketing-software',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BlogRoute = BlogRouteImport.update({
-  id: '/blog',
-  path: '/blog',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CarGarageMarketingSoftwareRoute =
@@ -304,7 +298,6 @@ const ServicesLocalSeoVadodaraRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/bakery-marketing-software': typeof BakeryMarketingSoftwareRoute
-  '/blog': typeof BlogRoute
   '/car-garage-marketing-software': typeof CarGarageMarketingSoftwareRoute
   '/clinic-marketing-software': typeof ClinicMarketingSoftwareRoute
   '/demo': typeof DemoRoute
@@ -352,7 +345,6 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/bakery-marketing-software': typeof BakeryMarketingSoftwareRoute
-  '/blog': typeof BlogRoute
   '/car-garage-marketing-software': typeof CarGarageMarketingSoftwareRoute
   '/clinic-marketing-software': typeof ClinicMarketingSoftwareRoute
   '/demo': typeof DemoRoute
@@ -401,7 +393,6 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/bakery-marketing-software': typeof BakeryMarketingSoftwareRoute
-  '/blog': typeof BlogRoute
   '/car-garage-marketing-software': typeof CarGarageMarketingSoftwareRoute
   '/clinic-marketing-software': typeof ClinicMarketingSoftwareRoute
   '/demo': typeof DemoRoute
@@ -451,7 +442,6 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/bakery-marketing-software'
-    | '/blog'
     | '/car-garage-marketing-software'
     | '/clinic-marketing-software'
     | '/demo'
@@ -499,7 +489,6 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/bakery-marketing-software'
-    | '/blog'
     | '/car-garage-marketing-software'
     | '/clinic-marketing-software'
     | '/demo'
@@ -547,7 +536,6 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/bakery-marketing-software'
-    | '/blog'
     | '/car-garage-marketing-software'
     | '/clinic-marketing-software'
     | '/demo'
@@ -596,7 +584,6 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BakeryMarketingSoftwareRoute: typeof BakeryMarketingSoftwareRoute
-  BlogRoute: typeof BlogRoute
   CarGarageMarketingSoftwareRoute: typeof CarGarageMarketingSoftwareRoute
   ClinicMarketingSoftwareRoute: typeof ClinicMarketingSoftwareRoute
   DemoRoute: typeof DemoRoute
@@ -656,13 +643,6 @@ declare module '@tanstack/react-router' {
       path: '/bakery-marketing-software'
       fullPath: '/bakery-marketing-software'
       preLoaderRoute: typeof BakeryMarketingSoftwareRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/blog': {
-      id: '/blog'
-      path: '/blog'
-      fullPath: '/blog'
-      preLoaderRoute: typeof BlogRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/car-garage-marketing-software': {
@@ -972,7 +952,6 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BakeryMarketingSoftwareRoute: BakeryMarketingSoftwareRoute,
-  BlogRoute: BlogRoute,
   CarGarageMarketingSoftwareRoute: CarGarageMarketingSoftwareRoute,
   ClinicMarketingSoftwareRoute: ClinicMarketingSoftwareRoute,
   DemoRoute: DemoRoute,
