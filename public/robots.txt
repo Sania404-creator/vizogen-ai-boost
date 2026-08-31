@@ -13,4 +13,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://vizogen.in/sitemap.xml
+Sitemap: https://www.vizogen.in/sitemap.xml

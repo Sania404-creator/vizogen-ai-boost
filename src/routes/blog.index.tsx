@@ -22,10 +22,10 @@ export const Route = createFileRoute("/blog/")({
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESCRIPTION },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://seo.vizogen.in/blog" },
+      { property: "og:url", content: "https://www.vizogen.in/blog" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
-    links: [{ rel: "canonical", href: "https://seo.vizogen.in/blog" }],
+    links: [{ rel: "canonical", href: "https://www.vizogen.in/blog" }],
   }),
   component: BlogListingPage,
 });

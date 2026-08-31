@@ -27,7 +27,7 @@ const socialDescription =
   "AI-powered local SEO and Google Business Profile automation trusted by businesses across Ahmedabad, Gujarat, and India.";
 const keywords =
   "best SEO agency Ahmedabad, best SEO agency Gujarat, best SEO agency India, local SEO services Ahmedabad, Google Business Profile management, GMB automation, local SEO software, Google Maps ranking Ahmedabad";
-const siteUrl = "https://seo.vizogen.in";
+const siteUrl = "https://www.vizogen.in";
 
 export const Route = createFileRoute("/")({
   head: () => ({

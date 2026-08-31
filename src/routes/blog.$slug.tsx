@@ -20,7 +20,7 @@ export const Route = createFileRoute("/blog/$slug")({
     if (!post) {
       return { meta: [{ title: "Article — Vizogen Blog" }, { name: "robots", content: "noindex" }] };
     }
-    const url = `https://seo.vizogen.in/blog/${params.slug}`;
+    const url = `https://www.vizogen.in/blog/${params.slug}`;
     return {
       meta: [
         { title: `${post.title} | Vizogen Blog` },
@@ -59,7 +59,7 @@ function BlogPostPage() {
   const related = getRelatedPosts(post);
   const [copied, setCopied] = useState(false);
 
-  const shareUrl = `https://seo.vizogen.in/blog/${post.slug}`;
+  const shareUrl = `https://www.vizogen.in/blog/${post.slug}`;
   const shareText = `${post.title} — ${shareUrl}`;
 
   const copyLink = async () => {
