@@ -16,6 +16,7 @@ import { Faq } from "@/components/landing/faq";
 import { Footer } from "@/components/landing/footer";
 import { SubscriptionPlans } from "@/components/landing/pricing";
 import { SectionHeading } from "@/components/landing/reveal";
+import { ServiceAreas } from "@/components/landing/service-areas";
 
 const title =
   "Vizogen — Best SEO Agency in Ahmedabad, Gujarat & India | Google Business Profile Automation";
@@ -86,6 +87,7 @@ function Index() {
         <Stats />
         <Industries />
         <Locations />
+        <ServiceAreas />
         <PostGallery />
         <Features />
         <Growth />
