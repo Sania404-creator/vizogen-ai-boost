@@ -274,6 +274,56 @@ export function SubscriptionPlans({
 
         {showFaqs ? <PricingFaqs /> : null}
       </div>
+
+      <Dialog
+        open={pendingPlan !== null}
+        onOpenChange={(open) => {
+          if (!open) {
+            setPendingPlan(null);
+            setAgreed(false);
+          }
+        }}
+      >
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle className="font-display">
+              Confirm your {pendingPlan} plan
+            </DialogTitle>
+            <DialogDescription>
+              Please review and accept our terms before continuing to checkout.
+            </DialogDescription>
+          </DialogHeader>
+
+          <label className="flex cursor-pointer items-start gap-3 rounded-2xl border border-border bg-card/70 p-4 text-sm text-muted-foreground">
+            <input
+              type="checkbox"
+              checked={agreed}
+              onChange={(e) => setAgreed(e.target.checked)}
+              className="mt-0.5 size-4 shrink-0 accent-[var(--brand)]"
+              aria-required
+            />
+            <span className="leading-relaxed">
+              I agree to the{" "}
+              <Link to="/terms-and-conditions" className="font-semibold text-brand hover:underline">
+                Terms &amp; Conditions
+              </Link>
+              , including the non-refundable payment policy.
+            </span>
+          </label>
+
+          <DialogFooter>
+            {agreed ? (
+              <Button asChild size="lg" className="w-full rounded-full gradient-brand">
+                <a href="https://login.vizogen.in/sign-in">Continue</a>
+              </Button>
+            ) : (
+              <Button size="lg" disabled className="w-full rounded-full gradient-brand">
+                Continue
+              </Button>
+            )}
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </section>
   );
 }
