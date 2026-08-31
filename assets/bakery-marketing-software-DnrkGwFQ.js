@@ -1,1 +1,0 @@
-import{r as e}from"./useRouter-B64lGpJS.js";import{o as t}from"./index-fp9cu4qI.js";import{t as n}from"./industry-landing-page-CfBu_4f6.js";var r=e();function i(){return(0,r.jsx)(n,{config:t})}export{i as component};

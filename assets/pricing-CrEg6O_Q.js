@@ -1,1 +1,0 @@
-import{r as e}from"./useRouter-B64lGpJS.js";import{n as t}from"./pricing-DPCyBLfo.js";import{a as n,i as r}from"./index-fp9cu4qI.js";var i=e();function a(){return(0,i.jsxs)(`div`,{className:`min-h-screen bg-background`,children:[(0,i.jsx)(n,{}),(0,i.jsx)(`main`,{children:(0,i.jsx)(t,{})}),(0,i.jsx)(r,{})]})}export{a as component};
