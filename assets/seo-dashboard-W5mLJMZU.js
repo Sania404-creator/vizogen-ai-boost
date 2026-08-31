@@ -1,0 +1,1 @@
+var e=`/assets/seo-dashboard-BqYB9T3Y.jpg`;export{e as t};

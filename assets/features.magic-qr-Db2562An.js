@@ -1,0 +1,1 @@
+import{r as e}from"./useRouter-B64lGpJS.js";import{a as t,n}from"./feature-configs-IWs6XNCR.js";var r=e(),i=()=>(0,r.jsx)(t,{config:n});export{i as component};

@@ -1,0 +1,1 @@
+import{r as e}from"./useRouter-B64lGpJS.js";import{t}from"./index-fp9cu4qI.js";var n=e(),r=()=>(0,n.jsx)(t,{eyebrow:`Vizogen Blog`,title:`Local growth insights`,description:`Our first playbooks on Google Business Profile automation, review velocity and local ranking are on the way. Check back soon.`});export{r as component};
