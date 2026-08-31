@@ -1,7 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 
-const ADMIN_EMAIL = "info.bizzdigitalschool@gmail.com";
+const ADMIN_EMAIL = "info.vizogen@gmail.com";
 
 const bookingSchema = z.object({
   name: z.string().trim().min(2).max(100),
