@@ -142,7 +142,8 @@ export function Footer() {
         </div>
 
         <div className="mt-14 border-t border-navy-foreground/10 py-6 text-center text-xs text-navy-foreground/55">
-          © {new Date().getFullYear()} Vizogen. All rights reserved.
+          © {new Date().getFullYear()} Vizogen.in, operated by NG Marketing Solution. All rights
+          reserved.
         </div>
       </div>
 
