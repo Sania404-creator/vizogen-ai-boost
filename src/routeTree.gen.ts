@@ -36,6 +36,7 @@ import { Route as TermsAndConditionsRouteImport } from './routes/terms-and-condi
 import { Route as TourTravelMarketingSoftwareRouteImport } from './routes/tour-travel-marketing-software'
 import { Route as YogaWellnessMarketingSoftwareRouteImport } from './routes/yoga-wellness-marketing-software'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
+import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as FeaturesAiPostGenerationRouteImport } from './routes/features.ai-post-generation'
 import { Route as FeaturesMagicQrRouteImport } from './routes/features.magic-qr'
 import { Route as FeaturesReviewManagementRouteImport } from './routes/features.review-management'
@@ -199,6 +200,11 @@ const BlogIndexRoute = BlogIndexRouteImport.update({
   path: '/blog/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/blog/$slug',
+  path: '/blog/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const FeaturesAiPostGenerationRoute =
   FeaturesAiPostGenerationRouteImport.update({
     id: '/features/ai-post-generation',
@@ -328,6 +334,7 @@ export interface FileRoutesByFullPath {
   '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/tour-travel-marketing-software': typeof TourTravelMarketingSoftwareRoute
   '/yoga-wellness-marketing-software': typeof YogaWellnessMarketingSoftwareRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/features/ai-post-generation': typeof FeaturesAiPostGenerationRoute
   '/features/magic-qr': typeof FeaturesMagicQrRoute
   '/features/review-management': typeof FeaturesReviewManagementRoute
@@ -376,6 +383,7 @@ export interface FileRoutesByTo {
   '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/tour-travel-marketing-software': typeof TourTravelMarketingSoftwareRoute
   '/yoga-wellness-marketing-software': typeof YogaWellnessMarketingSoftwareRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/features/ai-post-generation': typeof FeaturesAiPostGenerationRoute
   '/features/magic-qr': typeof FeaturesMagicQrRoute
   '/features/review-management': typeof FeaturesReviewManagementRoute
@@ -425,6 +433,7 @@ export interface FileRoutesById {
   '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/tour-travel-marketing-software': typeof TourTravelMarketingSoftwareRoute
   '/yoga-wellness-marketing-software': typeof YogaWellnessMarketingSoftwareRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/features/ai-post-generation': typeof FeaturesAiPostGenerationRoute
   '/features/magic-qr': typeof FeaturesMagicQrRoute
   '/features/review-management': typeof FeaturesReviewManagementRoute
@@ -475,6 +484,7 @@ export interface FileRouteTypes {
     | '/terms-and-conditions'
     | '/tour-travel-marketing-software'
     | '/yoga-wellness-marketing-software'
+    | '/blog/$slug'
     | '/features/ai-post-generation'
     | '/features/magic-qr'
     | '/features/review-management'
@@ -523,6 +533,7 @@ export interface FileRouteTypes {
     | '/terms-and-conditions'
     | '/tour-travel-marketing-software'
     | '/yoga-wellness-marketing-software'
+    | '/blog/$slug'
     | '/features/ai-post-generation'
     | '/features/magic-qr'
     | '/features/review-management'
@@ -571,6 +582,7 @@ export interface FileRouteTypes {
     | '/terms-and-conditions'
     | '/tour-travel-marketing-software'
     | '/yoga-wellness-marketing-software'
+    | '/blog/$slug'
     | '/features/ai-post-generation'
     | '/features/magic-qr'
     | '/features/review-management'
@@ -620,6 +632,7 @@ export interface RootRouteChildren {
   TermsAndConditionsRoute: typeof TermsAndConditionsRoute
   TourTravelMarketingSoftwareRoute: typeof TourTravelMarketingSoftwareRoute
   YogaWellnessMarketingSoftwareRoute: typeof YogaWellnessMarketingSoftwareRoute
+  BlogSlugRoute: typeof BlogSlugRoute
   FeaturesAiPostGenerationRoute: typeof FeaturesAiPostGenerationRoute
   FeaturesMagicQrRoute: typeof FeaturesMagicQrRoute
   FeaturesReviewManagementRoute: typeof FeaturesReviewManagementRoute
@@ -833,6 +846,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/blog/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/features/ai-post-generation': {
       id: '/features/ai-post-generation'
       path: '/features/ai-post-generation'
@@ -996,6 +1016,7 @@ const rootRouteChildren: RootRouteChildren = {
   TermsAndConditionsRoute: TermsAndConditionsRoute,
   TourTravelMarketingSoftwareRoute: TourTravelMarketingSoftwareRoute,
   YogaWellnessMarketingSoftwareRoute: YogaWellnessMarketingSoftwareRoute,
+  BlogSlugRoute: BlogSlugRoute,
   FeaturesAiPostGenerationRoute: FeaturesAiPostGenerationRoute,
   FeaturesMagicQrRoute: FeaturesMagicQrRoute,
   FeaturesReviewManagementRoute: FeaturesReviewManagementRoute,
