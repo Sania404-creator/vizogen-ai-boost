@@ -49,40 +49,6 @@ export function Footer() {
   return (
     <footer className="relative bg-navy pt-16 text-navy-foreground">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        {/* Upper footer — Partner With Us band */}
-        <div className="relative mb-16 overflow-hidden rounded-2xl border border-navy-foreground/10 bg-navy-foreground/5 p-6 sm:p-10">
-          <div
-            aria-hidden
-            className="pointer-events-none absolute -right-24 -top-24 size-72 rounded-full gradient-brand opacity-20 blur-3xl"
-          />
-          <div className="relative grid items-center gap-8 lg:grid-cols-[1fr_auto]">
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">
-                Partner With Us
-              </p>
-              <h2 className="mt-3 font-display text-2xl font-bold sm:text-3xl">
-                Why you should become a Vizogen partner
-              </h2>
-              <ul className="mt-5 grid gap-3 sm:grid-cols-2">
-                {partnerPerks.map((perk) => (
-                  <li key={perk} className="flex items-start gap-2.5 text-sm text-navy-foreground/75">
-                    <span className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full gradient-brand text-primary-foreground">
-                      <Check className="size-3" strokeWidth={3} />
-                    </span>
-                    {perk}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <Link
-              to="/partner"
-              className="inline-flex items-center justify-center gap-2 rounded-xl gradient-brand px-8 py-4 text-sm font-semibold text-primary-foreground shadow-glow transition-transform hover:scale-[1.02]"
-            >
-              Become a Partner →
-            </Link>
-          </div>
-        </div>
-
         <div className="grid gap-12 lg:grid-cols-[1.3fr_1fr_1fr_1.2fr]">
           <div>
             <div className="flex items-center gap-2">
