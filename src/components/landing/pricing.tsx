@@ -259,16 +259,31 @@ export function SubscriptionPlans({
                   ))}
                 </ul>
 
-                <Button
-                  asChild
-                  size="lg"
-                  variant={plan.popular ? "default" : "outline"}
-                  className={`mt-8 w-full rounded-full ${
-                    plan.popular ? "gradient-brand shadow-soft hover:opacity-95" : ""
-                  }`}
-                >
-                  <a href="https://login.vizogen.in/sign-in">{plan.cta}</a>
-                </Button>
+                {agreed ? (
+                  <Button
+                    asChild
+                    size="lg"
+                    variant={plan.popular ? "default" : "outline"}
+                    className={`mt-8 w-full rounded-full ${
+                      plan.popular ? "gradient-brand shadow-soft hover:opacity-95" : ""
+                    }`}
+                  >
+                    <a href="https://login.vizogen.in/sign-in">{plan.cta}</a>
+                  </Button>
+                ) : (
+                  <Button
+                    size="lg"
+                    disabled
+                    variant={plan.popular ? "default" : "outline"}
+                    title="Please accept the Terms & Conditions to continue"
+                    className={`mt-8 w-full rounded-full ${
+                      plan.popular ? "gradient-brand shadow-soft" : ""
+                    }`}
+                  >
+                    {plan.cta}
+                  </Button>
+                )}
+
               </div>
             </Reveal>
           ))}
