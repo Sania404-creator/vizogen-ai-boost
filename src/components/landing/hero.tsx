@@ -73,9 +73,6 @@ export function Hero() {
               </AnimatePresence>
             </span>
           </h1>
-          <p className="mx-auto mt-5 text-sm font-semibold text-foreground/80 sm:text-base">
-            Trusted by businesses across Ahmedabad, Gujarat &amp; India.
-          </p>
           <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
             Automate your Google Business Profile. Get daily AI posts, authentic 5-star
             reviews, and instant review replies to dominate local search.
@@ -119,7 +116,7 @@ export function Hero() {
 
         <div className="mt-14 pb-16 sm:pb-24">
           <p className="text-center text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-            Trusted by 2,000+ local businesses
+            Trusted by businesses across Ahmedabad, Gujarat & India
           </p>
           <div className="relative mt-6 overflow-hidden [mask-image:linear-gradient(90deg,transparent,#000_12%,#000_88%,transparent)]">
             <div className="flex w-max animate-marquee items-center gap-10">
