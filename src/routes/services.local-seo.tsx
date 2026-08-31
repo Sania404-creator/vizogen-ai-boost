@@ -25,6 +25,7 @@ import { Button } from "@/components/ui/button";
 import { Navbar } from "@/components/landing/navbar";
 import { Footer } from "@/components/landing/footer";
 import { Reveal, SectionHeading } from "@/components/landing/reveal";
+import { ServiceAreas } from "@/components/landing/service-areas";
 import { whatsappLink } from "@/components/landing/industry-config";
 import seoDashboard from "@/assets/seo-dashboard.jpg";
 import stepRelevance from "@/assets/seo-step-relevance.jpg";
@@ -213,23 +214,6 @@ const faqs = [
     a: "The three pillars of local ranking: Proximity (how close you are to the searcher, improved with service areas and location data), Relevance (categories, services, keywords and post content), and Prominence (reviews, engagement, activity and citations).",
   },
 ];
-
-const cities = [
-  "Mumbai",
-  "Delhi",
-  "Bangalore",
-  "Hyderabad",
-  "Ahmedabad",
-  "Chennai",
-  "Kolkata",
-  "Pune",
-  "Jaipur",
-  "Lucknow",
-];
-
-function slugify(city: string) {
-  return city.toLowerCase().replace(/\s+/g, "-");
-}
 
 function Counter({
   to,
@@ -664,30 +648,7 @@ function LocalSeoPage() {
           </div>
         </section>
 
-        {/* 10. SERVICE AREAS */}
-        <section className="py-20 sm:py-28">
-          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-            <SectionHeading
-              eyebrow="Service Areas"
-              title="Local SEO by City Focus"
-              subtitle="Select a city to view customized ranking strategies and localized keyword data."
-            />
-            <Reveal className="mt-10">
-              <div className="flex flex-wrap justify-center gap-3">
-                {cities.map((city) => (
-                  <a
-                    key={city}
-                    href={`/services/local-seo-${slugify(city)}`}
-                    className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-card px-4 py-2 text-sm font-semibold text-foreground shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:border-brand/50 hover:text-brand hover:shadow-lift dark:hover:text-brand"
-                  >
-                    <MapPin className="size-4 text-brand" />
-                    {city}
-                  </a>
-                ))}
-              </div>
-            </Reveal>
-          </div>
-        </section>
+        <ServiceAreas />
 
         {/* 11. FINAL CTA */}
         <section className="px-4 pb-20 sm:px-6 sm:pb-28 lg:px-8">

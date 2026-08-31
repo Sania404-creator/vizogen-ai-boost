@@ -16,20 +16,61 @@ import { Faq } from "@/components/landing/faq";
 import { Footer } from "@/components/landing/footer";
 import { SubscriptionPlans } from "@/components/landing/pricing";
 import { SectionHeading } from "@/components/landing/reveal";
+import { ServiceAreas } from "@/components/landing/service-areas";
 
-const title = "Vizogen — AI Google Business Profile Automation";
+const title =
+  "Vizogen — Best SEO Agency in Ahmedabad, Gujarat & India | Google Business Profile Automation";
+const socialTitle = "Vizogen — Best SEO Agency in Ahmedabad, Gujarat & India";
 const description =
-  "Automate your Google Business Profile with Vizogen AI: daily AI posts, authentic 5-star reviews, instant review replies and local rank tracking.";
+  "Vizogen is a trusted local SEO and Google Business Profile automation platform serving businesses across Ahmedabad, Gujarat, and India. Rank higher on Google Maps with AI-powered posts, reviews, and local SEO tools. Owned and operated by NG Marketing Solution.";
+const socialDescription =
+  "AI-powered local SEO and Google Business Profile automation trusted by businesses across Ahmedabad, Gujarat, and India.";
+const keywords =
+  "best SEO agency Ahmedabad, best SEO agency Gujarat, best SEO agency India, local SEO services Ahmedabad, Google Business Profile management, GMB automation, local SEO software, Google Maps ranking Ahmedabad";
+const siteUrl = "https://seo.vizogen.in";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title },
+      { name: "title", content: socialTitle },
       { name: "description", content: description },
-      { property: "og:title", content: title },
-      { property: "og:description", content: description },
+      { name: "keywords", content: keywords },
+      { property: "og:title", content: socialTitle },
+      { property: "og:description", content: socialDescription },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: siteUrl },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: socialTitle },
+      { name: "twitter:description", content: socialDescription },
+    ],
+    links: [{ rel: "canonical", href: siteUrl }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Organization",
+          name: "Vizogen",
+          alternateName: "NG Marketing Solution",
+          url: "https://vizogen.in",
+          logo: "https://vizogen.in/logo.png",
+          description:
+            "AI-powered local SEO and Google Business Profile automation platform serving businesses across Ahmedabad, Gujarat, and India.",
+          areaServed: ["Ahmedabad", "Gujarat", "India"],
+          email: "info.vizogen@gmail.com",
+          telephone: "+91-84889-18358",
+          address: {
+            "@type": "PostalAddress",
+            streetAddress:
+              "Tower-B, RK ICONIC, 923, 150 Feet Ring Rd, nr. Ayodhya Chowk, Sheetal Park",
+            addressLocality: "Rajkot",
+            addressRegion: "Gujarat",
+            postalCode: "360006",
+            addressCountry: "IN",
+          },
+        }),
+      },
     ],
   }),
   component: Index,
@@ -46,6 +87,7 @@ function Index() {
         <Stats />
         <Industries />
         <Locations />
+        <ServiceAreas />
         <PostGallery />
         <Features />
         <Growth />

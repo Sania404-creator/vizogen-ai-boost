@@ -73,7 +73,10 @@ export function Hero() {
               </AnimatePresence>
             </span>
           </h1>
-          <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+          <p className="mx-auto mt-5 text-sm font-semibold text-foreground/80 sm:text-base">
+            Trusted by businesses across Ahmedabad, Gujarat &amp; India.
+          </p>
+          <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
             Automate your Google Business Profile. Get daily AI posts, authentic 5-star
             reviews, and instant review replies to dominate local search.
           </p>
