@@ -311,6 +311,13 @@ function LoginPage() {
               </div>
             )}
 
+            {notice && (
+              <div className="flex items-start gap-2 rounded-2xl border border-primary/30 bg-primary/10 px-4 py-3 text-sm text-foreground">
+                <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-primary" />
+                <span>{notice}</span>
+              </div>
+            )}
+
             {error && (
               <div
                 role="alert"
@@ -330,15 +337,24 @@ function LoginPage() {
               {loading ? (
                 <>
                   <Loader2 className="size-4 animate-spin" />
-                  {mode === "signin" ? "Signing in…" : "Creating account…"}
+                  {mode === "signin"
+                    ? "Signing in…"
+                    : mode === "signup"
+                      ? "Creating account…"
+                      : "Sending…"}
                 </>
               ) : (
                 <>
-                  {mode === "signin" ? "Sign in to dashboard" : "Create account"}
+                  {mode === "signin"
+                    ? "Sign in to dashboard"
+                    : mode === "signup"
+                      ? "Create account"
+                      : "Send reset link"}
                   <ArrowRight className="size-4" />
                 </>
               )}
             </Button>
+
           </form>
 
           <p className="mt-6 text-center text-xs leading-relaxed text-muted-foreground">
