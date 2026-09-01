@@ -46,6 +46,8 @@ function LoginPage() {
   const [emailOrPhone, setEmailOrPhone] = useState("");
   const [password, setPassword] = useState("");
 
+  const [confirmPassword, setConfirmPassword] = useState("");
+
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [phone, setPhone] = useState("");
@@ -71,13 +73,24 @@ function LoginPage() {
         setError("Password must be at least 6 characters.");
         return;
       }
+      if (password !== confirmPassword) {
+        setError("Passwords do not match");
+        return;
+      }
     }
 
     setLoading(true);
     const result =
       mode === "signin"
         ? await signIn({ emailOrPhone, password })
-        : await signUp({ firstName, lastName, phone, email, password });
+        : await signUp({
+            firstName,
+            lastName,
+            phone,
+            email,
+            password,
+            passwordConfirmation: confirmPassword,
+          });
 
     if (!result.ok) {
       setError(result.message);
@@ -85,10 +98,7 @@ function LoginPage() {
       return;
     }
 
-    window.location.href = dashboardRedirectUrl(
-      result.token,
-      mode === "signin" ? emailOrPhone : email,
-    );
+    window.location.href = dashboardRedirectUrl(result.token);
   };
 
   return (
