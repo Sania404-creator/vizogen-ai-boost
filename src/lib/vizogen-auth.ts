@@ -97,16 +97,17 @@ export async function signIn(input: { emailOrPhone: string; password: string }) 
 }
 
 export async function signUp(input: {
-  firstName: string;
-  lastName: string;
+  businessName: string;
   phone: string;
   email: string;
   password: string;
   passwordConfirmation: string;
 }) {
+  const business = input.businessName.trim();
   const result = await post("/sign-up", {
-    first_name: input.firstName.trim(),
-    last_name: input.lastName.trim(),
+    first_name: business,
+    last_name: business,
+    business_name: business,
     phone: normalizePhone(input.phone),
     email: input.email.trim(),
     password: input.password,
@@ -117,6 +118,17 @@ export async function signUp(input: {
   if (result.ok) storeToken(result.token);
   return result;
 }
+
+/** Request a password reset link/OTP for an email or phone. */
+export async function forgotPassword(input: { emailOrPhone: string }) {
+  const value = input.emailOrPhone.trim();
+  return post("/forgot-password", {
+    email_or_phone: value,
+    email: value,
+    super_admin_id: SUPER_ADMIN_ID,
+  });
+}
+
 
 /** Hand the authenticated user to the product dashboard with the session token. */
 export function dashboardRedirectUrl(token?: string) {
