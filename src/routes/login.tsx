@@ -8,14 +8,16 @@ import {
   Lock,
   Mail,
   Phone,
-  User,
+  Building2,
   Sparkles,
   AlertCircle,
+  CheckCircle2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { dashboardRedirectUrl, signIn, signUp } from "@/lib/vizogen-auth";
+import { dashboardRedirectUrl, forgotPassword, signIn, signUp } from "@/lib/vizogen-auth";
+
 
 const title = "Vizogen Login — Sign in to your dashboard";
 const description =
