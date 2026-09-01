@@ -122,7 +122,7 @@ export async function signUp(input: {
 /** Request a password reset link/OTP for an email or phone. */
 export async function forgotPassword(input: { emailOrPhone: string }) {
   const value = input.emailOrPhone.trim();
-  return post("/forgot-password", {
+  return post("/forget-password", {
     email_or_phone: value,
     email: value,
     super_admin_id: SUPER_ADMIN_ID,
