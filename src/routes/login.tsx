@@ -8,14 +8,16 @@ import {
   Lock,
   Mail,
   Phone,
-  User,
+  Building2,
   Sparkles,
   AlertCircle,
+  CheckCircle2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { dashboardRedirectUrl, signIn, signUp } from "@/lib/vizogen-auth";
+import { dashboardRedirectUrl, forgotPassword, signIn, signUp } from "@/lib/vizogen-auth";
+
 
 const title = "Vizogen Login — Sign in to your dashboard";
 const description =
@@ -36,34 +38,56 @@ export const Route = createFileRoute("/login")({
   component: LoginPage,
 });
 
-type Mode = "signin" | "signup";
+type Mode = "signin" | "signup" | "forgot";
 
 function LoginPage() {
   const [mode, setMode] = useState<Mode>("signin");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [notice, setNotice] = useState<string | null>(null);
 
   const [emailOrPhone, setEmailOrPhone] = useState("");
   const [password, setPassword] = useState("");
 
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [businessName, setBusinessName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
 
   const switchMode = (next: Mode) => {
     setMode(next);
     setError(null);
+    setNotice(null);
   };
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (loading) return;
     setError(null);
+    setNotice(null);
+
+    if (mode === "forgot") {
+      if (!emailOrPhone.trim()) {
+        setError("Enter the email or phone linked to your account.");
+        return;
+      }
+      setLoading(true);
+      const res = await forgotPassword({ emailOrPhone });
+      setLoading(false);
+      if (!res.ok) {
+        setError(res.message);
+        return;
+      }
+      setNotice(res.message || "Password reset instructions have been sent.");
+      return;
+    }
 
     if (mode === "signup") {
+      if (businessName.trim().length < 2) {
+        setError("Enter your business name.");
+        return;
+      }
       const digits = phone.replace(/\D/g, "");
       if (digits.length < 10) {
         setError("Enter a valid phone number with country code (e.g. 918488918358).");
@@ -84,8 +108,7 @@ function LoginPage() {
       mode === "signin"
         ? await signIn({ emailOrPhone, password })
         : await signUp({
-            firstName,
-            lastName,
+            businessName,
             phone,
             email,
             password,
@@ -100,6 +123,7 @@ function LoginPage() {
 
     window.location.href = dashboardRedirectUrl(result.token);
   };
+
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-background">
@@ -126,12 +150,18 @@ function LoginPage() {
               <Sparkles className="size-5" />
             </span>
             <h1 className="mt-5 text-2xl font-bold tracking-tight text-foreground font-display">
-              {mode === "signin" ? "Sign in to Vizogen" : "Create your Vizogen account"}
+              {mode === "signin"
+                ? "Sign in to Vizogen"
+                : mode === "signup"
+                  ? "Create your Vizogen account"
+                  : "Reset your password"}
             </h1>
             <p className="mt-2 text-sm text-muted-foreground">
               {mode === "signin"
                 ? "Access your Google Business Profile automation dashboard."
-                : "Start automating posts, reviews and replies in minutes."}
+                : mode === "signup"
+                  ? "Start automating posts, reviews and replies in minutes."
+                  : "Enter your registered email or phone and we'll send reset instructions."}
             </p>
           </div>
 
@@ -155,33 +185,22 @@ function LoginPage() {
           <form onSubmit={onSubmit} className="mt-7 space-y-5">
             {mode === "signup" && (
               <>
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <div className="space-y-2">
-                    <Label htmlFor="firstName">First name</Label>
-                    <div className="relative">
-                      <User className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
-                      <Input
-                        id="firstName"
-                        value={firstName}
-                        onChange={(e) => setFirstName(e.target.value)}
-                        placeholder="John"
-                        className="pl-9"
-                        required
-                        maxLength={60}
-                      />
-                    </div>
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="lastName">Last name</Label>
+                <div className="space-y-2">
+                  <Label htmlFor="businessName">Business name</Label>
+                  <div className="relative">
+                    <Building2 className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
                     <Input
-                      id="lastName"
-                      value={lastName}
-                      onChange={(e) => setLastName(e.target.value)}
-                      placeholder="Doe"
-                      maxLength={60}
+                      id="businessName"
+                      value={businessName}
+                      onChange={(e) => setBusinessName(e.target.value)}
+                      placeholder="Vizogen Marketing"
+                      className="pl-9"
+                      required
+                      maxLength={100}
                     />
                   </div>
                 </div>
+
 
                 <div className="space-y-2">
                   <Label htmlFor="phone">Phone (with country code)</Label>
@@ -221,7 +240,7 @@ function LoginPage() {
               </>
             )}
 
-            {mode === "signin" && (
+            {mode !== "signup" && (
               <div className="space-y-2">
                 <Label htmlFor="emailOrPhone">Email or phone</Label>
                 <div className="relative">
@@ -240,23 +259,37 @@ function LoginPage() {
               </div>
             )}
 
-            <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
-              <div className="relative">
-                <Lock className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
-                <Input
-                  id="password"
-                  type="password"
-                  autoComplete={mode === "signin" ? "current-password" : "new-password"}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="••••••••"
-                  className="pl-9"
-                  required
-                  maxLength={100}
-                />
+            {mode !== "forgot" && (
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <Label htmlFor="password">Password</Label>
+                  {mode === "signin" && (
+                    <button
+                      type="button"
+                      onClick={() => switchMode("forgot")}
+                      className="text-xs font-semibold text-primary hover:underline"
+                    >
+                      Forgot password?
+                    </button>
+                  )}
+                </div>
+                <div className="relative">
+                  <Lock className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+                  <Input
+                    id="password"
+                    type="password"
+                    autoComplete={mode === "signin" ? "current-password" : "new-password"}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="••••••••"
+                    className="pl-9"
+                    required
+                    maxLength={100}
+                  />
+                </div>
               </div>
-            </div>
+            )}
+
 
             {mode === "signup" && (
               <div className="space-y-2">
@@ -275,6 +308,13 @@ function LoginPage() {
                     maxLength={100}
                   />
                 </div>
+              </div>
+            )}
+
+            {notice && (
+              <div className="flex items-start gap-2 rounded-2xl border border-primary/30 bg-primary/10 px-4 py-3 text-sm text-foreground">
+                <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-primary" />
+                <span>{notice}</span>
               </div>
             )}
 
@@ -297,15 +337,24 @@ function LoginPage() {
               {loading ? (
                 <>
                   <Loader2 className="size-4 animate-spin" />
-                  {mode === "signin" ? "Signing in…" : "Creating account…"}
+                  {mode === "signin"
+                    ? "Signing in…"
+                    : mode === "signup"
+                      ? "Creating account…"
+                      : "Sending…"}
                 </>
               ) : (
                 <>
-                  {mode === "signin" ? "Sign in to dashboard" : "Create account"}
+                  {mode === "signin"
+                    ? "Sign in to dashboard"
+                    : mode === "signup"
+                      ? "Create account"
+                      : "Send reset link"}
                   <ArrowRight className="size-4" />
                 </>
               )}
             </Button>
+
           </form>
 
           <p className="mt-6 text-center text-xs leading-relaxed text-muted-foreground">
