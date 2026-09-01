@@ -6,6 +6,8 @@ const ROLE_ID = 4;
 
 /** Where a successfully authenticated user lands. */
 export const DASHBOARD_URL = "https://login.vizogen.in/dashboard";
+/** The Vizogen app sign-in screen (creates the app's own browser session). */
+export const APP_SIGNIN_URL = "https://login.vizogen.in/sign-in";
 
 export type AuthResult = {
   ok: boolean;
@@ -93,7 +95,13 @@ export function signUp(input: {
   });
 }
 
-/** Hand the session token over to the Vizogen dashboard. */
-export function dashboardRedirectUrl(token?: string) {
-  return token ? `${DASHBOARD_URL}?token=${encodeURIComponent(token)}` : DASHBOARD_URL;
+/**
+ * Hand the user over to the Vizogen app.
+ * The dashboard authenticates from its own browser storage on login.vizogen.in,
+ * which we cannot write to from this domain, so we send verified users to the
+ * app sign-in screen (pre-filled) instead of a dashboard URL that would bounce.
+ */
+export function dashboardRedirectUrl(_token?: string, emailOrPhone?: string) {
+  if (!emailOrPhone) return APP_SIGNIN_URL;
+  return `${APP_SIGNIN_URL}?email=${encodeURIComponent(emailOrPhone.trim())}`;
 }
