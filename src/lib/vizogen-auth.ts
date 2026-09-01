@@ -86,41 +86,40 @@ async function post(path: string, body: Record<string, unknown>): Promise<AuthRe
   };
 }
 
-export function signIn(input: { emailOrPhone: string; password: string }) {
-  return post("/sign-in", {
+export async function signIn(input: { emailOrPhone: string; password: string }) {
+  const result = await post("/sign-in", {
     email_or_phone: input.emailOrPhone.trim(),
     password: input.password,
-    super_admin_id: SUPER_ADMIN,
+    super_admin_id: SUPER_ADMIN_ID,
   });
+  if (result.ok) storeToken(result.token);
+  return result;
 }
 
-export function signUp(input: {
+export async function signUp(input: {
   firstName: string;
   lastName: string;
   phone: string;
   email: string;
   password: string;
+  passwordConfirmation: string;
 }) {
-  return post("/sign-up", {
+  const result = await post("/sign-up", {
     first_name: input.firstName.trim(),
     last_name: input.lastName.trim(),
-    // country code, digits only, no + or spaces
-    phone: input.phone.replace(/[^\d]/g, ""),
+    phone: normalizePhone(input.phone),
     email: input.email.trim(),
     password: input.password,
-    password_confirmation: input.password,
+    password_confirmation: input.passwordConfirmation,
     super_admin: SUPER_ADMIN,
     role_id: ROLE_ID,
   });
+  if (result.ok) storeToken(result.token);
+  return result;
 }
 
-/**
- * Hand the user over to the Vizogen app.
- * The dashboard authenticates from its own browser storage on login.vizogen.in,
- * which we cannot write to from this domain, so we send verified users to the
- * app sign-in screen (pre-filled) instead of a dashboard URL that would bounce.
- */
-export function dashboardRedirectUrl(_token?: string, emailOrPhone?: string) {
-  if (!emailOrPhone) return APP_SIGNIN_URL;
-  return `${APP_SIGNIN_URL}?email=${encodeURIComponent(emailOrPhone.trim())}`;
+/** Hand the authenticated user to the product dashboard with the session token. */
+export function dashboardRedirectUrl(token?: string) {
+  if (!token) return DASHBOARD_URL;
+  return `${DASHBOARD_URL}?token=${encodeURIComponent(token)}`;
 }
