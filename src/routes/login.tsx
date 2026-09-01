@@ -46,6 +46,8 @@ function LoginPage() {
   const [emailOrPhone, setEmailOrPhone] = useState("");
   const [password, setPassword] = useState("");
 
+  const [confirmPassword, setConfirmPassword] = useState("");
+
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [phone, setPhone] = useState("");
@@ -71,13 +73,24 @@ function LoginPage() {
         setError("Password must be at least 6 characters.");
         return;
       }
+      if (password !== confirmPassword) {
+        setError("Passwords do not match");
+        return;
+      }
     }
 
     setLoading(true);
     const result =
       mode === "signin"
         ? await signIn({ emailOrPhone, password })
-        : await signUp({ firstName, lastName, phone, email, password });
+        : await signUp({
+            firstName,
+            lastName,
+            phone,
+            email,
+            password,
+            passwordConfirmation: confirmPassword,
+          });
 
     if (!result.ok) {
       setError(result.message);
@@ -85,10 +98,7 @@ function LoginPage() {
       return;
     }
 
-    window.location.href = dashboardRedirectUrl(
-      result.token,
-      mode === "signin" ? emailOrPhone : email,
-    );
+    window.location.href = dashboardRedirectUrl(result.token);
   };
 
   return (
@@ -247,6 +257,26 @@ function LoginPage() {
                 />
               </div>
             </div>
+
+            {mode === "signup" && (
+              <div className="space-y-2">
+                <Label htmlFor="confirmPassword">Confirm password</Label>
+                <div className="relative">
+                  <Lock className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+                  <Input
+                    id="confirmPassword"
+                    type="password"
+                    autoComplete="new-password"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    placeholder="••••••••"
+                    className="pl-9"
+                    required
+                    maxLength={100}
+                  />
+                </div>
+              </div>
+            )}
 
             {error && (
               <div

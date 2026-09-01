@@ -1,13 +1,32 @@
 const API_BASE = "https://api2.magicqr.in/auth";
 
 /** Fixed system values required by the Vizogen auth API. */
+const SUPER_ADMIN_ID = 70;
 const SUPER_ADMIN = 70;
 const ROLE_ID = 4;
+const DEFAULT_COUNTRY_CODE = "91";
 
 /** Where a successfully authenticated user lands. */
 export const DASHBOARD_URL = "https://login.vizogen.in/dashboard";
-/** The Vizogen app sign-in screen (creates the app's own browser session). */
-export const APP_SIGNIN_URL = "https://login.vizogen.in/sign-in";
+
+/** Key used to persist the auth token in browser storage. */
+export const TOKEN_STORAGE_KEY = "vizogen_auth_token";
+
+export function storeToken(token?: string) {
+  if (!token || typeof window === "undefined") return;
+  try {
+    window.localStorage.setItem(TOKEN_STORAGE_KEY, token);
+  } catch {
+    /* storage unavailable — the token still travels in the redirect URL */
+  }
+}
+
+/** Normalize a phone number to country code + digits (no + or spaces). */
+export function normalizePhone(raw: string) {
+  const digits = raw.replace(/\D/g, "");
+  if (digits.length === 10) return `${DEFAULT_COUNTRY_CODE}${digits}`;
+  return digits;
+}
 
 export type AuthResult = {
   ok: boolean;
@@ -67,41 +86,40 @@ async function post(path: string, body: Record<string, unknown>): Promise<AuthRe
   };
 }
 
-export function signIn(input: { emailOrPhone: string; password: string }) {
-  return post("/sign-in", {
+export async function signIn(input: { emailOrPhone: string; password: string }) {
+  const result = await post("/sign-in", {
     email_or_phone: input.emailOrPhone.trim(),
     password: input.password,
-    super_admin_id: SUPER_ADMIN,
+    super_admin_id: SUPER_ADMIN_ID,
   });
+  if (result.ok) storeToken(result.token);
+  return result;
 }
 
-export function signUp(input: {
+export async function signUp(input: {
   firstName: string;
   lastName: string;
   phone: string;
   email: string;
   password: string;
+  passwordConfirmation: string;
 }) {
-  return post("/sign-up", {
+  const result = await post("/sign-up", {
     first_name: input.firstName.trim(),
     last_name: input.lastName.trim(),
-    // country code, digits only, no + or spaces
-    phone: input.phone.replace(/[^\d]/g, ""),
+    phone: normalizePhone(input.phone),
     email: input.email.trim(),
     password: input.password,
-    password_confirmation: input.password,
+    password_confirmation: input.passwordConfirmation,
     super_admin: SUPER_ADMIN,
     role_id: ROLE_ID,
   });
+  if (result.ok) storeToken(result.token);
+  return result;
 }
 
-/**
- * Hand the user over to the Vizogen app.
- * The dashboard authenticates from its own browser storage on login.vizogen.in,
- * which we cannot write to from this domain, so we send verified users to the
- * app sign-in screen (pre-filled) instead of a dashboard URL that would bounce.
- */
-export function dashboardRedirectUrl(_token?: string, emailOrPhone?: string) {
-  if (!emailOrPhone) return APP_SIGNIN_URL;
-  return `${APP_SIGNIN_URL}?email=${encodeURIComponent(emailOrPhone.trim())}`;
+/** Hand the authenticated user to the product dashboard with the session token. */
+export function dashboardRedirectUrl(token?: string) {
+  if (!token) return DASHBOARD_URL;
+  return `${DASHBOARD_URL}?token=${encodeURIComponent(token)}`;
 }
