@@ -38,34 +38,56 @@ export const Route = createFileRoute("/login")({
   component: LoginPage,
 });
 
-type Mode = "signin" | "signup";
+type Mode = "signin" | "signup" | "forgot";
 
 function LoginPage() {
   const [mode, setMode] = useState<Mode>("signin");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [notice, setNotice] = useState<string | null>(null);
 
   const [emailOrPhone, setEmailOrPhone] = useState("");
   const [password, setPassword] = useState("");
 
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [businessName, setBusinessName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
 
   const switchMode = (next: Mode) => {
     setMode(next);
     setError(null);
+    setNotice(null);
   };
 
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (loading) return;
     setError(null);
+    setNotice(null);
+
+    if (mode === "forgot") {
+      if (!emailOrPhone.trim()) {
+        setError("Enter the email or phone linked to your account.");
+        return;
+      }
+      setLoading(true);
+      const res = await forgotPassword({ emailOrPhone });
+      setLoading(false);
+      if (!res.ok) {
+        setError(res.message);
+        return;
+      }
+      setNotice(res.message || "Password reset instructions have been sent.");
+      return;
+    }
 
     if (mode === "signup") {
+      if (businessName.trim().length < 2) {
+        setError("Enter your business name.");
+        return;
+      }
       const digits = phone.replace(/\D/g, "");
       if (digits.length < 10) {
         setError("Enter a valid phone number with country code (e.g. 918488918358).");
@@ -86,8 +108,7 @@ function LoginPage() {
       mode === "signin"
         ? await signIn({ emailOrPhone, password })
         : await signUp({
-            firstName,
-            lastName,
+            businessName,
             phone,
             email,
             password,
@@ -102,6 +123,7 @@ function LoginPage() {
 
     window.location.href = dashboardRedirectUrl(result.token);
   };
+
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-background">
