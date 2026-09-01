@@ -10,7 +10,7 @@ export const DASHBOARD_URL = "https://login.vizogen.in/dashboard";
 export type AuthResult = {
   ok: boolean;
   message: string;
-  token?: string;
+  token?: string | undefined;
   raw?: unknown;
 };
 
