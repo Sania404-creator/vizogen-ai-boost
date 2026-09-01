@@ -24,12 +24,12 @@ import {
   softwareApplicationSchema,
 } from "@/lib/aeo";
 
-const title = "Vizogen.ai - GMB Automation Tool";
-const socialTitle = "Vizogen.ai - GMB Automation Tool";
+const title = "Vizogen - Automate Your GMB Profile | Local SEO Agency in Ahmedabad";
+const socialTitle = "Vizogen - Automate Your GMB Profile | Local SEO Agency in Ahmedabad";
 const description =
-  "Vizogen is a trusted local SEO and Google Business Profile automation platform serving businesses across Ahmedabad, Gujarat, and India. Rank higher on Google Maps with AI-powered posts, reviews, and local SEO tools. Owned and operated by NG Marketing Solution.";
-const socialDescription =
-  "AI-powered local SEO and Google Business Profile automation trusted by businesses across Ahmedabad, Gujarat, and India.";
+  "Vizogen is a leading local SEO agency in Ahmedabad helping businesses automate their Google Business Profile (GMB), rank higher in local search, and get found by more customers.";
+const socialDescription = description;
+const ogImage = `${SITE_URL}/favicon.png`;
 const keywords =
   "best SEO agency Ahmedabad, best SEO agency Gujarat, best SEO agency India, local SEO services Ahmedabad, Google Business Profile management, GMB automation, local SEO software, Google Maps ranking Ahmedabad";
 const siteUrl = SITE_URL;
@@ -45,7 +45,9 @@ export const Route = createFileRoute("/")({
       { property: "og:description", content: socialDescription },
       { property: "og:type", content: "website" },
       { property: "og:url", content: siteUrl },
+      { property: "og:image", content: ogImage },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: ogImage },
       { name: "twitter:title", content: socialTitle },
       { name: "twitter:description", content: socialDescription },
     ],
