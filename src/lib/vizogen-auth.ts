@@ -1,13 +1,32 @@
 const API_BASE = "https://api2.magicqr.in/auth";
 
 /** Fixed system values required by the Vizogen auth API. */
+const SUPER_ADMIN_ID = 70;
 const SUPER_ADMIN = 70;
 const ROLE_ID = 4;
+const DEFAULT_COUNTRY_CODE = "91";
 
 /** Where a successfully authenticated user lands. */
 export const DASHBOARD_URL = "https://login.vizogen.in/dashboard";
-/** The Vizogen app sign-in screen (creates the app's own browser session). */
-export const APP_SIGNIN_URL = "https://login.vizogen.in/sign-in";
+
+/** Key used to persist the auth token in browser storage. */
+export const TOKEN_STORAGE_KEY = "vizogen_auth_token";
+
+export function storeToken(token?: string) {
+  if (!token || typeof window === "undefined") return;
+  try {
+    window.localStorage.setItem(TOKEN_STORAGE_KEY, token);
+  } catch {
+    /* storage unavailable — the token still travels in the redirect URL */
+  }
+}
+
+/** Normalize a phone number to country code + digits (no + or spaces). */
+export function normalizePhone(raw: string) {
+  const digits = raw.replace(/\D/g, "");
+  if (digits.length === 10) return `${DEFAULT_COUNTRY_CODE}${digits}`;
+  return digits;
+}
 
 export type AuthResult = {
   ok: boolean;
