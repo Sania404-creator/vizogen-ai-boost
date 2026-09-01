@@ -72,6 +72,9 @@ export function Hero() {
                 </motion.span>
               </AnimatePresence>
             </span>
+            <span className="mt-4 block text-balance font-display text-lg font-semibold leading-snug text-muted-foreground sm:text-xl">
+              Vizogen is a local SEO agency in Ahmedabad, built for businesses across Gujarat and India.
+            </span>
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
             Automate your Google Business Profile. Get daily AI posts, authentic 5-star
