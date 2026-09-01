@@ -115,6 +115,18 @@ export function LocationSeoPage({ config }: { config: LocationConfig }) {
 
 
 
+        {/* CITY SERVICES COPY (unique per city) */}
+        <section className="px-4 pt-12 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-3xl">
+            <h2 className="font-display text-2xl font-bold tracking-tight text-foreground sm:text-3xl">
+              Our best local SEO services in {config.city}
+            </h2>
+            <p className="mt-4 text-base leading-relaxed text-muted-foreground">
+              {config.servicesCopy}
+            </p>
+          </div>
+        </section>
+
         {/* RANKING PILLARS */}
         <section className="px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
           <div className="mx-auto max-w-6xl">
