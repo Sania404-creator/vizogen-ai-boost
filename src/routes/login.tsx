@@ -150,12 +150,18 @@ function LoginPage() {
               <Sparkles className="size-5" />
             </span>
             <h1 className="mt-5 text-2xl font-bold tracking-tight text-foreground font-display">
-              {mode === "signin" ? "Sign in to Vizogen" : "Create your Vizogen account"}
+              {mode === "signin"
+                ? "Sign in to Vizogen"
+                : mode === "signup"
+                  ? "Create your Vizogen account"
+                  : "Reset your password"}
             </h1>
             <p className="mt-2 text-sm text-muted-foreground">
               {mode === "signin"
                 ? "Access your Google Business Profile automation dashboard."
-                : "Start automating posts, reviews and replies in minutes."}
+                : mode === "signup"
+                  ? "Start automating posts, reviews and replies in minutes."
+                  : "Enter your registered email or phone and we'll send reset instructions."}
             </p>
           </div>
 
@@ -179,33 +185,22 @@ function LoginPage() {
           <form onSubmit={onSubmit} className="mt-7 space-y-5">
             {mode === "signup" && (
               <>
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <div className="space-y-2">
-                    <Label htmlFor="firstName">First name</Label>
-                    <div className="relative">
-                      <User className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
-                      <Input
-                        id="firstName"
-                        value={firstName}
-                        onChange={(e) => setFirstName(e.target.value)}
-                        placeholder="John"
-                        className="pl-9"
-                        required
-                        maxLength={60}
-                      />
-                    </div>
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="lastName">Last name</Label>
+                <div className="space-y-2">
+                  <Label htmlFor="businessName">Business name</Label>
+                  <div className="relative">
+                    <Building2 className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
                     <Input
-                      id="lastName"
-                      value={lastName}
-                      onChange={(e) => setLastName(e.target.value)}
-                      placeholder="Doe"
-                      maxLength={60}
+                      id="businessName"
+                      value={businessName}
+                      onChange={(e) => setBusinessName(e.target.value)}
+                      placeholder="Vizogen Marketing"
+                      className="pl-9"
+                      required
+                      maxLength={100}
                     />
                   </div>
                 </div>
+
 
                 <div className="space-y-2">
                   <Label htmlFor="phone">Phone (with country code)</Label>
