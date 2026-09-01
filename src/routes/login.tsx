@@ -85,7 +85,10 @@ function LoginPage() {
       return;
     }
 
-    window.location.href = dashboardRedirectUrl(result.token);
+    window.location.href = dashboardRedirectUrl(
+      result.token,
+      mode === "signin" ? emailOrPhone : email,
+    );
   };
 
   return (
