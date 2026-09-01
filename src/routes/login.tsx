@@ -240,7 +240,7 @@ function LoginPage() {
               </>
             )}
 
-            {mode === "signin" && (
+            {mode !== "signup" && (
               <div className="space-y-2">
                 <Label htmlFor="emailOrPhone">Email or phone</Label>
                 <div className="relative">
@@ -259,23 +259,37 @@ function LoginPage() {
               </div>
             )}
 
-            <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
-              <div className="relative">
-                <Lock className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
-                <Input
-                  id="password"
-                  type="password"
-                  autoComplete={mode === "signin" ? "current-password" : "new-password"}
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="••••••••"
-                  className="pl-9"
-                  required
-                  maxLength={100}
-                />
+            {mode !== "forgot" && (
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <Label htmlFor="password">Password</Label>
+                  {mode === "signin" && (
+                    <button
+                      type="button"
+                      onClick={() => switchMode("forgot")}
+                      className="text-xs font-semibold text-primary hover:underline"
+                    >
+                      Forgot password?
+                    </button>
+                  )}
+                </div>
+                <div className="relative">
+                  <Lock className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+                  <Input
+                    id="password"
+                    type="password"
+                    autoComplete={mode === "signin" ? "current-password" : "new-password"}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="••••••••"
+                    className="pl-9"
+                    required
+                    maxLength={100}
+                  />
+                </div>
               </div>
-            </div>
+            )}
+
 
             {mode === "signup" && (
               <div className="space-y-2">
