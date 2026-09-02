@@ -191,9 +191,9 @@ function PublicProposal() {
 
             <footer className="border-t border-border pt-6 text-sm text-muted-foreground">
               <p className="font-semibold text-foreground">{NAP.name}</p>
-              <p className="mt-1">{NAP.streetAddress}</p>
+              <p className="mt-1">{NAP.street}</p>
               <p>
-                {NAP.city}, {NAP.state} {NAP.postalCode}
+                {NAP.locality}, {NAP.region} {NAP.postalCode}
               </p>
               <p className="mt-3 flex flex-wrap gap-4">
                 <a href={`mailto:${NAP.email}`} className="inline-flex items-center gap-1.5">
