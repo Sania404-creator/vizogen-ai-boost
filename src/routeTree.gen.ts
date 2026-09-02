@@ -63,6 +63,7 @@ import { Route as ServicesLocalSeoRajkotRouteImport } from './routes/services.lo
 import { Route as ServicesLocalSeoSuratRouteImport } from './routes/services.local-seo-surat'
 import { Route as ServicesLocalSeoVadodaraRouteImport } from './routes/services.local-seo-vadodara'
 import { Route as AuthenticatedDashboardIndexRouteImport } from './routes/_authenticated/dashboard.index'
+import { Route as AuthenticatedDashboardMagicQrRouteImport } from './routes/_authenticated/dashboard.magic-qr'
 import { Route as AuthenticatedDashboardPostsRouteImport } from './routes/_authenticated/dashboard.posts'
 import { Route as AuthenticatedDashboardReviewsRouteImport } from './routes/_authenticated/dashboard.reviews'
 import { Route as ApiPublicCronPublishDueRouteImport } from './routes/api/public/cron/publish-due'
@@ -352,6 +353,12 @@ const AuthenticatedDashboardIndexRoute =
     path: '/',
     getParentRoute: () => AuthenticatedDashboardRoute,
   } as any)
+const AuthenticatedDashboardMagicQrRoute =
+  AuthenticatedDashboardMagicQrRouteImport.update({
+    id: '/magic-qr',
+    path: '/magic-qr',
+    getParentRoute: () => AuthenticatedDashboardRoute,
+  } as any)
 const AuthenticatedDashboardPostsRoute =
   AuthenticatedDashboardPostsRouteImport.update({
     id: '/posts',
@@ -428,6 +435,7 @@ export interface FileRoutesByFullPath {
   '/services/local-seo-surat': typeof ServicesLocalSeoSuratRoute
   '/services/local-seo-vadodara': typeof ServicesLocalSeoVadodaraRoute
   '/blog/': typeof BlogIndexRoute
+  '/dashboard/magic-qr': typeof AuthenticatedDashboardMagicQrRoute
   '/dashboard/posts': typeof AuthenticatedDashboardPostsRoute
   '/dashboard/reviews': typeof AuthenticatedDashboardReviewsRoute
   '/dashboard/': typeof AuthenticatedDashboardIndexRoute
@@ -486,6 +494,7 @@ export interface FileRoutesByTo {
   '/services/local-seo-surat': typeof ServicesLocalSeoSuratRoute
   '/services/local-seo-vadodara': typeof ServicesLocalSeoVadodaraRoute
   '/blog': typeof BlogIndexRoute
+  '/dashboard/magic-qr': typeof AuthenticatedDashboardMagicQrRoute
   '/dashboard/posts': typeof AuthenticatedDashboardPostsRoute
   '/dashboard/reviews': typeof AuthenticatedDashboardReviewsRoute
   '/dashboard': typeof AuthenticatedDashboardIndexRoute
@@ -547,6 +556,7 @@ export interface FileRoutesById {
   '/services/local-seo-surat': typeof ServicesLocalSeoSuratRoute
   '/services/local-seo-vadodara': typeof ServicesLocalSeoVadodaraRoute
   '/blog/': typeof BlogIndexRoute
+  '/_authenticated/dashboard/magic-qr': typeof AuthenticatedDashboardMagicQrRoute
   '/_authenticated/dashboard/posts': typeof AuthenticatedDashboardPostsRoute
   '/_authenticated/dashboard/reviews': typeof AuthenticatedDashboardReviewsRoute
   '/_authenticated/dashboard/': typeof AuthenticatedDashboardIndexRoute
@@ -608,6 +618,7 @@ export interface FileRouteTypes {
     | '/services/local-seo-surat'
     | '/services/local-seo-vadodara'
     | '/blog/'
+    | '/dashboard/magic-qr'
     | '/dashboard/posts'
     | '/dashboard/reviews'
     | '/dashboard/'
@@ -666,6 +677,7 @@ export interface FileRouteTypes {
     | '/services/local-seo-surat'
     | '/services/local-seo-vadodara'
     | '/blog'
+    | '/dashboard/magic-qr'
     | '/dashboard/posts'
     | '/dashboard/reviews'
     | '/dashboard'
@@ -726,6 +738,7 @@ export interface FileRouteTypes {
     | '/services/local-seo-surat'
     | '/services/local-seo-vadodara'
     | '/blog/'
+    | '/_authenticated/dashboard/magic-qr'
     | '/_authenticated/dashboard/posts'
     | '/_authenticated/dashboard/reviews'
     | '/_authenticated/dashboard/'
@@ -1170,6 +1183,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardIndexRouteImport
       parentRoute: typeof AuthenticatedDashboardRoute
     }
+    '/_authenticated/dashboard/magic-qr': {
+      id: '/_authenticated/dashboard/magic-qr'
+      path: '/magic-qr'
+      fullPath: '/dashboard/magic-qr'
+      preLoaderRoute: typeof AuthenticatedDashboardMagicQrRouteImport
+      parentRoute: typeof AuthenticatedDashboardRoute
+    }
     '/_authenticated/dashboard/posts': {
       id: '/_authenticated/dashboard/posts'
       path: '/posts'
@@ -1202,6 +1222,7 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedDashboardRouteChildren {
+  AuthenticatedDashboardMagicQrRoute: typeof AuthenticatedDashboardMagicQrRoute
   AuthenticatedDashboardPostsRoute: typeof AuthenticatedDashboardPostsRoute
   AuthenticatedDashboardReviewsRoute: typeof AuthenticatedDashboardReviewsRoute
   AuthenticatedDashboardIndexRoute: typeof AuthenticatedDashboardIndexRoute
@@ -1209,6 +1230,7 @@ interface AuthenticatedDashboardRouteChildren {
 
 const AuthenticatedDashboardRouteChildren: AuthenticatedDashboardRouteChildren =
   {
+    AuthenticatedDashboardMagicQrRoute: AuthenticatedDashboardMagicQrRoute,
     AuthenticatedDashboardPostsRoute: AuthenticatedDashboardPostsRoute,
     AuthenticatedDashboardReviewsRoute: AuthenticatedDashboardReviewsRoute,
     AuthenticatedDashboardIndexRoute: AuthenticatedDashboardIndexRoute,
