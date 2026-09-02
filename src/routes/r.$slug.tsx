@@ -66,9 +66,9 @@ function FeedbackPage() {
     const { error } = await supabase.rpc("submit_qr_feedback", {
       _slug: slug,
       _rating: rating,
-      _comment: comment || null,
-      _customer_name: name || null,
-      _customer_contact: contact || null,
+      _comment: comment || undefined,
+      _customer_name: name || undefined,
+      _customer_contact: contact || undefined,
     });
     setSending(false);
     if (error) {
