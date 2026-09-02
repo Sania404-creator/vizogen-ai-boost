@@ -52,6 +52,8 @@ function buildEntries(): SitemapEntry[] {
     { path: "/official-partner", changefreq: "monthly", priority: "0.6" },
     { path: "/post-management", changefreq: "monthly", priority: "0.6" },
     { path: "/services/local-seo", changefreq: "weekly", priority: "0.8" },
+    { path: "/contact", changefreq: "monthly", priority: "0.7" },
+
   ];
 
   for (const slug of industrySlugs) {

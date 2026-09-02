@@ -4,6 +4,7 @@ import coverAi from "@/assets/blog-ai-content.jpg";
 import coverChecklist from "@/assets/blog-gbp-checklist.jpg";
 import coverSmallBiz from "@/assets/blog-small-business.jpg";
 import coverTools from "@/assets/blog-seo-tools-comparison.jpg";
+import coverPhone from "@/assets/blog-phone-number-google.jpg";
 
 export type BlogPost = {
   slug: string;
@@ -341,6 +342,83 @@ Vizogen isn't trying to be a 40-feature agency reporting suite — it's built sp
 ## The Bottom Line
 
 There's no single "best" tool for every business — the right one depends on whether you need reporting depth for clients, enterprise-scale listing control, or simply want your own profile to stay active automatically. If it's the last one, that's exactly the gap Vizogen was built to close.`,
+  },
+  {
+    slug: "how-to-list-phone-number-on-google",
+    title: "How to List Your Phone Number on Google (Step-by-Step Guide)",
+    metaDescription:
+      "Learn how to add or update your business phone number on Google Business Profile so customers can find and call you directly from Search and Maps.",
+    excerpt:
+      "If customers can't find your number, they'll call a competitor. Here's how to add or update your business phone number on Google Business Profile — and keep it live.",
+    category: "Local SEO",
+    tags: ["Local SEO", "Google Business Profile", "GBP Ranking", "NAP"],
+    readTime: "5 min read",
+    date: "2026-09-02",
+    dateLabel: "2 September 2026",
+    cover: coverPhone,
+    coverAlt: "Business owner showing a Google Business Profile listing with a call button on a phone",
+    content: `If someone searches for your business and can't find a phone number, they'll likely call your competitor instead. Getting your phone number listed correctly on Google is one of the simplest — and most important — things you can do for your local visibility.
+
+Here's a complete walkthrough of how to add or update your business phone number on Google.
+
+## Why Your Phone Number on Google Matters
+
+Your Google Business Profile is often the first thing a potential customer sees before they even visit your website. A visible, accurate phone number:
+
+- Lets customers call you directly from Google Search and Maps
+- Builds trust and legitimacy for your business
+- Enables the "Call Now" button on your listing
+- Improves your local SEO signals when your number matches what's listed on your website and other directories
+
+## Step 1: Sign In to Your Google Business Profile
+
+Go to [Google Business Profile](https://business.google.com) and sign in with the Google account linked to your business. If you don't have a listing yet, click **"Add your business to Google"** and follow the setup prompts (business name, category, location, and service area).
+
+## Step 2: Open Your Business Dashboard
+
+Once signed in, you'll land on the **Home** tab of your Google Business Profile dashboard. This is your control center for managing everything customers see about your business.
+
+## Step 3: Go to the Info Tab
+
+In the left-hand menu, click **Info**. This is where all your business details — address, hours, website, and phone number — live.
+
+## Step 4: Find the Phone Number Field
+
+Scroll down to the phone icon:
+
+- If you haven't added a number yet, you'll see an **"Add Phone"** option.
+- If a number is already listed, it will appear next to the icon.
+
+## Step 5: Add or Edit Your Number
+
+Click the pencil (edit) icon next to the phone field. A pop-up will open where you can type in your business's primary phone number.
+
+## Step 6: Apply and Save
+
+After entering your number, click **Apply** to save the change.
+
+## What Happens Next
+
+Once submitted, you may see a red **"Pending"** label next to your phone number. Google typically reviews phone number edits within **2–3 business days** before they go live.
+
+If your update still hasn't appeared after that window:
+
+1. Confirm your Google Business Profile is **verified** — unverified listings can delay changes.
+2. Double-check that your number meets [Google's phone number guidelines](https://support.google.com/business/answer/3038177) — it should be a direct number for your specific business location, not a call center or shared tracking number, wherever possible.
+3. If it's still not resolved, contact [Google Business Profile support](https://support.google.com/business) directly.
+
+## Tips for Getting It Right
+
+- **Use a local number when possible.** Google favors local area codes over toll-free numbers for local search visibility.
+- **Keep it consistent everywhere.** Your phone number should match exactly across your website, Google listing, Yelp, Facebook, and any other directories — this consistency (called NAP: Name, Address, Phone) is a real local SEO ranking factor.
+- **Make sure it's actually answered.** A number that goes to voicemail or the wrong department hurts customer trust and your reviews.
+- **Avoid tracking numbers as your primary listing.** Google prefers a direct line reaching the specific business location.
+
+## Final Thoughts
+
+Adding your phone number to Google only takes a few minutes, but it directly affects how easily customers can reach you — and how much Google trusts your listing. Once it's live, keep an eye on it periodically to make sure it hasn't changed or reverted, especially if multiple team members manage your profile.
+
+**Tip:** Need help optimizing your Google Business Profile or local SEO strategy? [Get in touch with Vizogen](/contact) — we help businesses get found, and get called.`,
   },
 ];
 

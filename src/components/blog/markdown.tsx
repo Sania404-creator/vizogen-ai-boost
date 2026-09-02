@@ -1,23 +1,45 @@
 import type { ReactNode } from "react";
+import { Link } from "@tanstack/react-router";
 
 function renderInline(text: string, keyPrefix: string): ReactNode[] {
   const nodes: ReactNode[] = [];
-  const regex = /\*\*(.+?)\*\*|\*(.+?)\*/g;
+  const regex = /\[([^\]]+)\]\(([^)]+)\)|\*\*(.+?)\*\*|\*(.+?)\*/g;
   let last = 0;
   let match: RegExpExecArray | null;
   let i = 0;
   while ((match = regex.exec(text)) !== null) {
     if (match.index > last) nodes.push(text.slice(last, match.index));
-    if (match[1]) {
+    if (match[1] && match[2]) {
+      const href = match[2];
+      const label = match[1];
+      const linkClass = "font-medium text-primary underline underline-offset-4 hover:opacity-80";
+      nodes.push(
+        href.startsWith("/") ? (
+          <Link key={`${keyPrefix}-l-${i}`} to={href as "/"} className={linkClass}>
+            {label}
+          </Link>
+        ) : (
+          <a
+            key={`${keyPrefix}-l-${i}`}
+            href={href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={linkClass}
+          >
+            {label}
+          </a>
+        ),
+      );
+    } else if (match[3]) {
       nodes.push(
         <strong key={`${keyPrefix}-b-${i}`} className="font-semibold text-foreground">
-          {match[1]}
+          {match[3]}
         </strong>,
       );
-    } else if (match[2]) {
+    } else if (match[4]) {
       nodes.push(
         <em key={`${keyPrefix}-i-${i}`} className="italic">
-          {match[2]}
+          {match[4]}
         </em>,
       );
     }
@@ -27,6 +49,7 @@ function renderInline(text: string, keyPrefix: string): ReactNode[] {
   if (last < text.length) nodes.push(text.slice(last));
   return nodes;
 }
+
 
 const CALLOUT_PREFIXES = ["**Action step:**", "**Fix:**", "**Your advantage:**", "**Tip:**"];
 
