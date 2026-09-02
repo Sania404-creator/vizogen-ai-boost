@@ -21,7 +21,16 @@ async function run(request: Request) {
   if (!authorized && cronToken) {
     // Hourly pg_cron job authenticates with a token stored in the database.
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    const { data } = await supabaseAdmin
+    const lookup = supabaseAdmin as unknown as {
+      from(table: "crm_integration_settings"): {
+        select(columns: "value"): {
+          eq(column: "key", value: string): {
+            maybeSingle(): PromiseLike<{ data: { value: string } | null }>;
+          };
+        };
+      };
+    };
+    const { data } = await lookup
       .from("crm_integration_settings")
       .select("value")
       .eq("key", "meta_sync_token")
