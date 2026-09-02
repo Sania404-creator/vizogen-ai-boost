@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
-import googleG from "@/assets/google-g.png";
+import googleAsset from "@/assets/google-g.png.asset.json";
 
 const title = "Sign in to Vizogen — GMB automation dashboard";
 const description =
@@ -134,7 +134,7 @@ function AuthPage() {
             disabled={busy}
             className="mt-6 w-full gap-2"
           >
-            <img src={googleG} alt="" width={18} height={18} className="size-[18px]" />
+            <img src={googleAsset.url} alt="" width={18} height={18} className="size-[18px]" />
             Continue with Google
           </Button>
 
