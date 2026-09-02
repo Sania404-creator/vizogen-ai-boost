@@ -62,6 +62,7 @@ import { Route as ServicesLocalSeoPuneRouteImport } from './routes/services.loca
 import { Route as ServicesLocalSeoRajkotRouteImport } from './routes/services.local-seo-rajkot'
 import { Route as ServicesLocalSeoSuratRouteImport } from './routes/services.local-seo-surat'
 import { Route as ServicesLocalSeoVadodaraRouteImport } from './routes/services.local-seo-vadodara'
+import { Route as AuthenticatedDashboardIndexRouteImport } from './routes/_authenticated/dashboard.index'
 import { Route as ApiPublicCronPublishDueRouteImport } from './routes/api/public/cron/publish-due'
 import { Route as ApiPublicGoogleCallbackRouteImport } from './routes/api/public/google/callback'
 
@@ -343,6 +344,12 @@ const ServicesLocalSeoVadodaraRoute =
     path: '/services/local-seo-vadodara',
     getParentRoute: () => rootRouteImport,
   } as any)
+const AuthenticatedDashboardIndexRoute =
+  AuthenticatedDashboardIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedDashboardRoute,
+  } as any)
 const ApiPublicCronPublishDueRoute = ApiPublicCronPublishDueRouteImport.update({
   id: '/api/public/cron/publish-due',
   path: '/api/public/cron/publish-due',
@@ -384,7 +391,7 @@ export interface FileRoutesByFullPath {
   '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/tour-travel-marketing-software': typeof TourTravelMarketingSoftwareRoute
   '/yoga-wellness-marketing-software': typeof YogaWellnessMarketingSoftwareRoute
-  '/dashboard': typeof AuthenticatedDashboardRoute
+  '/dashboard': typeof AuthenticatedDashboardRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
   '/features/ai-post-generation': typeof FeaturesAiPostGenerationRoute
   '/features/magic-qr': typeof FeaturesMagicQrRoute
@@ -407,6 +414,7 @@ export interface FileRoutesByFullPath {
   '/services/local-seo-surat': typeof ServicesLocalSeoSuratRoute
   '/services/local-seo-vadodara': typeof ServicesLocalSeoVadodaraRoute
   '/blog/': typeof BlogIndexRoute
+  '/dashboard/': typeof AuthenticatedDashboardIndexRoute
   '/api/public/cron/publish-due': typeof ApiPublicCronPublishDueRoute
   '/api/public/google/callback': typeof ApiPublicGoogleCallbackRoute
 }
@@ -440,7 +448,6 @@ export interface FileRoutesByTo {
   '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/tour-travel-marketing-software': typeof TourTravelMarketingSoftwareRoute
   '/yoga-wellness-marketing-software': typeof YogaWellnessMarketingSoftwareRoute
-  '/dashboard': typeof AuthenticatedDashboardRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/features/ai-post-generation': typeof FeaturesAiPostGenerationRoute
   '/features/magic-qr': typeof FeaturesMagicQrRoute
@@ -463,6 +470,7 @@ export interface FileRoutesByTo {
   '/services/local-seo-surat': typeof ServicesLocalSeoSuratRoute
   '/services/local-seo-vadodara': typeof ServicesLocalSeoVadodaraRoute
   '/blog': typeof BlogIndexRoute
+  '/dashboard': typeof AuthenticatedDashboardIndexRoute
   '/api/public/cron/publish-due': typeof ApiPublicCronPublishDueRoute
   '/api/public/google/callback': typeof ApiPublicGoogleCallbackRoute
 }
@@ -498,7 +506,7 @@ export interface FileRoutesById {
   '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/tour-travel-marketing-software': typeof TourTravelMarketingSoftwareRoute
   '/yoga-wellness-marketing-software': typeof YogaWellnessMarketingSoftwareRoute
-  '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/dashboard': typeof AuthenticatedDashboardRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
   '/features/ai-post-generation': typeof FeaturesAiPostGenerationRoute
   '/features/magic-qr': typeof FeaturesMagicQrRoute
@@ -521,6 +529,7 @@ export interface FileRoutesById {
   '/services/local-seo-surat': typeof ServicesLocalSeoSuratRoute
   '/services/local-seo-vadodara': typeof ServicesLocalSeoVadodaraRoute
   '/blog/': typeof BlogIndexRoute
+  '/_authenticated/dashboard/': typeof AuthenticatedDashboardIndexRoute
   '/api/public/cron/publish-due': typeof ApiPublicCronPublishDueRoute
   '/api/public/google/callback': typeof ApiPublicGoogleCallbackRoute
 }
@@ -579,6 +588,7 @@ export interface FileRouteTypes {
     | '/services/local-seo-surat'
     | '/services/local-seo-vadodara'
     | '/blog/'
+    | '/dashboard/'
     | '/api/public/cron/publish-due'
     | '/api/public/google/callback'
   fileRoutesByTo: FileRoutesByTo
@@ -612,7 +622,6 @@ export interface FileRouteTypes {
     | '/terms-and-conditions'
     | '/tour-travel-marketing-software'
     | '/yoga-wellness-marketing-software'
-    | '/dashboard'
     | '/blog/$slug'
     | '/features/ai-post-generation'
     | '/features/magic-qr'
@@ -635,6 +644,7 @@ export interface FileRouteTypes {
     | '/services/local-seo-surat'
     | '/services/local-seo-vadodara'
     | '/blog'
+    | '/dashboard'
     | '/api/public/cron/publish-due'
     | '/api/public/google/callback'
   id:
@@ -692,6 +702,7 @@ export interface FileRouteTypes {
     | '/services/local-seo-surat'
     | '/services/local-seo-vadodara'
     | '/blog/'
+    | '/_authenticated/dashboard/'
     | '/api/public/cron/publish-due'
     | '/api/public/google/callback'
   fileRoutesById: FileRoutesById
@@ -1126,6 +1137,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesLocalSeoVadodaraRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/dashboard/': {
+      id: '/_authenticated/dashboard/'
+      path: '/'
+      fullPath: '/dashboard/'
+      preLoaderRoute: typeof AuthenticatedDashboardIndexRouteImport
+      parentRoute: typeof AuthenticatedDashboardRoute
+    }
     '/api/public/cron/publish-due': {
       id: '/api/public/cron/publish-due'
       path: '/api/public/cron/publish-due'
@@ -1143,12 +1161,26 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AuthenticatedDashboardRouteChildren {
+  AuthenticatedDashboardIndexRoute: typeof AuthenticatedDashboardIndexRoute
+}
+
+const AuthenticatedDashboardRouteChildren: AuthenticatedDashboardRouteChildren =
+  {
+    AuthenticatedDashboardIndexRoute: AuthenticatedDashboardIndexRoute,
+  }
+
+const AuthenticatedDashboardRouteWithChildren =
+  AuthenticatedDashboardRoute._addFileChildren(
+    AuthenticatedDashboardRouteChildren,
+  )
+
 interface AuthenticatedRouteRouteChildren {
-  AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRouteWithChildren
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
-  AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedDashboardRoute: AuthenticatedDashboardRouteWithChildren,
 }
 
 const AuthenticatedRouteRouteWithChildren =
