@@ -58,6 +58,7 @@ import { Route as ServicesLocalSeoPuneRouteImport } from './routes/services.loca
 import { Route as ServicesLocalSeoRajkotRouteImport } from './routes/services.local-seo-rajkot'
 import { Route as ServicesLocalSeoSuratRouteImport } from './routes/services.local-seo-surat'
 import { Route as ServicesLocalSeoVadodaraRouteImport } from './routes/services.local-seo-vadodara'
+import { Route as ApiPublicGoogleCallbackRouteImport } from './routes/api/public/google/callback'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -318,6 +319,11 @@ const ServicesLocalSeoVadodaraRoute =
     path: '/services/local-seo-vadodara',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiPublicGoogleCallbackRoute = ApiPublicGoogleCallbackRouteImport.update({
+  id: '/api/public/google/callback',
+  path: '/api/public/google/callback',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -369,6 +375,7 @@ export interface FileRoutesByFullPath {
   '/services/local-seo-surat': typeof ServicesLocalSeoSuratRoute
   '/services/local-seo-vadodara': typeof ServicesLocalSeoVadodaraRoute
   '/blog/': typeof BlogIndexRoute
+  '/api/public/google/callback': typeof ApiPublicGoogleCallbackRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -420,6 +427,7 @@ export interface FileRoutesByTo {
   '/services/local-seo-surat': typeof ServicesLocalSeoSuratRoute
   '/services/local-seo-vadodara': typeof ServicesLocalSeoVadodaraRoute
   '/blog': typeof BlogIndexRoute
+  '/api/public/google/callback': typeof ApiPublicGoogleCallbackRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -472,6 +480,7 @@ export interface FileRoutesById {
   '/services/local-seo-surat': typeof ServicesLocalSeoSuratRoute
   '/services/local-seo-vadodara': typeof ServicesLocalSeoVadodaraRoute
   '/blog/': typeof BlogIndexRoute
+  '/api/public/google/callback': typeof ApiPublicGoogleCallbackRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -525,6 +534,7 @@ export interface FileRouteTypes {
     | '/services/local-seo-surat'
     | '/services/local-seo-vadodara'
     | '/blog/'
+    | '/api/public/google/callback'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -576,6 +586,7 @@ export interface FileRouteTypes {
     | '/services/local-seo-surat'
     | '/services/local-seo-vadodara'
     | '/blog'
+    | '/api/public/google/callback'
   id:
     | '__root__'
     | '/'
@@ -627,6 +638,7 @@ export interface FileRouteTypes {
     | '/services/local-seo-surat'
     | '/services/local-seo-vadodara'
     | '/blog/'
+    | '/api/public/google/callback'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -679,6 +691,7 @@ export interface RootRouteChildren {
   ServicesLocalSeoSuratRoute: typeof ServicesLocalSeoSuratRoute
   ServicesLocalSeoVadodaraRoute: typeof ServicesLocalSeoVadodaraRoute
   BlogIndexRoute: typeof BlogIndexRoute
+  ApiPublicGoogleCallbackRoute: typeof ApiPublicGoogleCallbackRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -1026,6 +1039,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesLocalSeoVadodaraRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/google/callback': {
+      id: '/api/public/google/callback'
+      path: '/api/public/google/callback'
+      fullPath: '/api/public/google/callback'
+      preLoaderRoute: typeof ApiPublicGoogleCallbackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -1079,6 +1099,7 @@ const rootRouteChildren: RootRouteChildren = {
   ServicesLocalSeoSuratRoute: ServicesLocalSeoSuratRoute,
   ServicesLocalSeoVadodaraRoute: ServicesLocalSeoVadodaraRoute,
   BlogIndexRoute: BlogIndexRoute,
+  ApiPublicGoogleCallbackRoute: ApiPublicGoogleCallbackRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
