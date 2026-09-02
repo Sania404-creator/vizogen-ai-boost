@@ -58,6 +58,7 @@ import { Route as ServicesLocalSeoPuneRouteImport } from './routes/services.loca
 import { Route as ServicesLocalSeoRajkotRouteImport } from './routes/services.local-seo-rajkot'
 import { Route as ServicesLocalSeoSuratRouteImport } from './routes/services.local-seo-surat'
 import { Route as ServicesLocalSeoVadodaraRouteImport } from './routes/services.local-seo-vadodara'
+import { Route as ApiPublicCronPublishDueRouteImport } from './routes/api/public/cron/publish-due'
 import { Route as ApiPublicGoogleCallbackRouteImport } from './routes/api/public/google/callback'
 
 const IndexRoute = IndexRouteImport.update({
@@ -319,6 +320,11 @@ const ServicesLocalSeoVadodaraRoute =
     path: '/services/local-seo-vadodara',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ApiPublicCronPublishDueRoute = ApiPublicCronPublishDueRouteImport.update({
+  id: '/api/public/cron/publish-due',
+  path: '/api/public/cron/publish-due',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicGoogleCallbackRoute = ApiPublicGoogleCallbackRouteImport.update({
   id: '/api/public/google/callback',
   path: '/api/public/google/callback',
@@ -375,6 +381,7 @@ export interface FileRoutesByFullPath {
   '/services/local-seo-surat': typeof ServicesLocalSeoSuratRoute
   '/services/local-seo-vadodara': typeof ServicesLocalSeoVadodaraRoute
   '/blog/': typeof BlogIndexRoute
+  '/api/public/cron/publish-due': typeof ApiPublicCronPublishDueRoute
   '/api/public/google/callback': typeof ApiPublicGoogleCallbackRoute
 }
 export interface FileRoutesByTo {
@@ -427,6 +434,7 @@ export interface FileRoutesByTo {
   '/services/local-seo-surat': typeof ServicesLocalSeoSuratRoute
   '/services/local-seo-vadodara': typeof ServicesLocalSeoVadodaraRoute
   '/blog': typeof BlogIndexRoute
+  '/api/public/cron/publish-due': typeof ApiPublicCronPublishDueRoute
   '/api/public/google/callback': typeof ApiPublicGoogleCallbackRoute
 }
 export interface FileRoutesById {
@@ -480,6 +488,7 @@ export interface FileRoutesById {
   '/services/local-seo-surat': typeof ServicesLocalSeoSuratRoute
   '/services/local-seo-vadodara': typeof ServicesLocalSeoVadodaraRoute
   '/blog/': typeof BlogIndexRoute
+  '/api/public/cron/publish-due': typeof ApiPublicCronPublishDueRoute
   '/api/public/google/callback': typeof ApiPublicGoogleCallbackRoute
 }
 export interface FileRouteTypes {
@@ -534,6 +543,7 @@ export interface FileRouteTypes {
     | '/services/local-seo-surat'
     | '/services/local-seo-vadodara'
     | '/blog/'
+    | '/api/public/cron/publish-due'
     | '/api/public/google/callback'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -586,6 +596,7 @@ export interface FileRouteTypes {
     | '/services/local-seo-surat'
     | '/services/local-seo-vadodara'
     | '/blog'
+    | '/api/public/cron/publish-due'
     | '/api/public/google/callback'
   id:
     | '__root__'
@@ -638,6 +649,7 @@ export interface FileRouteTypes {
     | '/services/local-seo-surat'
     | '/services/local-seo-vadodara'
     | '/blog/'
+    | '/api/public/cron/publish-due'
     | '/api/public/google/callback'
   fileRoutesById: FileRoutesById
 }
@@ -691,6 +703,7 @@ export interface RootRouteChildren {
   ServicesLocalSeoSuratRoute: typeof ServicesLocalSeoSuratRoute
   ServicesLocalSeoVadodaraRoute: typeof ServicesLocalSeoVadodaraRoute
   BlogIndexRoute: typeof BlogIndexRoute
+  ApiPublicCronPublishDueRoute: typeof ApiPublicCronPublishDueRoute
   ApiPublicGoogleCallbackRoute: typeof ApiPublicGoogleCallbackRoute
 }
 
@@ -1039,6 +1052,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesLocalSeoVadodaraRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/cron/publish-due': {
+      id: '/api/public/cron/publish-due'
+      path: '/api/public/cron/publish-due'
+      fullPath: '/api/public/cron/publish-due'
+      preLoaderRoute: typeof ApiPublicCronPublishDueRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/google/callback': {
       id: '/api/public/google/callback'
       path: '/api/public/google/callback'
@@ -1099,6 +1119,7 @@ const rootRouteChildren: RootRouteChildren = {
   ServicesLocalSeoSuratRoute: ServicesLocalSeoSuratRoute,
   ServicesLocalSeoVadodaraRoute: ServicesLocalSeoVadodaraRoute,
   BlogIndexRoute: BlogIndexRoute,
+  ApiPublicCronPublishDueRoute: ApiPublicCronPublishDueRoute,
   ApiPublicGoogleCallbackRoute: ApiPublicGoogleCallbackRoute,
 }
 export const routeTree = rootRouteImport
