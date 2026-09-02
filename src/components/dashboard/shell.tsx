@@ -12,7 +12,8 @@ import {
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
-import logo from "@/assets/vizogen-logo.png";
+import logoAsset from "@/assets/vizogen-logo.png.asset.json";
+const logo = logoAsset.url;
 
 const NAV = [
   { to: "/dashboard", label: "Overview", icon: LayoutDashboard },

@@ -6,7 +6,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
-import logo from "@/assets/vizogen-logo.png";
+import logoAsset from "@/assets/vizogen-logo.png.asset.json";
+const logo = logoAsset.url;
 
 const title = "Vizogen CRM — Sales team sign in";
 const description = "Internal Vizogen CRM for the sales team. Accounts are created by an Admin.";
