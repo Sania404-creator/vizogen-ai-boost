@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as CrmRouteImport } from './routes/_crm'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as BakeryMarketingSoftwareRouteImport } from './routes/bakery-marketing-software'
 import { Route as CarGarageMarketingSoftwareRouteImport } from './routes/car-garage-marketing-software'
@@ -40,6 +41,7 @@ import { Route as TermsAndConditionsRouteImport } from './routes/terms-and-condi
 import { Route as TourTravelMarketingSoftwareRouteImport } from './routes/tour-travel-marketing-software'
 import { Route as YogaWellnessMarketingSoftwareRouteImport } from './routes/yoga-wellness-marketing-software'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as CrmCrmRouteImport } from './routes/_crm/crm'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as CrmLoginRouteImport } from './routes/crm.login'
@@ -79,6 +81,10 @@ const IndexRoute = IndexRouteImport.update({
 } as any)
 const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
   id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CrmRoute = CrmRouteImport.update({
+  id: '/_crm',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthRoute = AuthRouteImport.update({
@@ -233,6 +239,11 @@ const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
   getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const CrmCrmRoute = CrmCrmRouteImport.update({
+  id: '/crm',
+  path: '/crm',
+  getParentRoute: () => CrmRoute,
 } as any)
 const BlogIndexRoute = BlogIndexRouteImport.update({
   id: '/blog/',
@@ -432,6 +443,7 @@ export interface FileRoutesByFullPath {
   '/tour-travel-marketing-software': typeof TourTravelMarketingSoftwareRoute
   '/yoga-wellness-marketing-software': typeof YogaWellnessMarketingSoftwareRoute
   '/dashboard': typeof AuthenticatedDashboardRouteWithChildren
+  '/crm': typeof CrmCrmRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/crm/login': typeof CrmLoginRoute
   '/features/ai-post-generation': typeof FeaturesAiPostGenerationRoute
@@ -494,6 +506,7 @@ export interface FileRoutesByTo {
   '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/tour-travel-marketing-software': typeof TourTravelMarketingSoftwareRoute
   '/yoga-wellness-marketing-software': typeof YogaWellnessMarketingSoftwareRoute
+  '/crm': typeof CrmCrmRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/crm/login': typeof CrmLoginRoute
   '/features/ai-post-generation': typeof FeaturesAiPostGenerationRoute
@@ -530,6 +543,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/_crm': typeof CrmRouteWithChildren
   '/auth': typeof AuthRoute
   '/bakery-marketing-software': typeof BakeryMarketingSoftwareRoute
   '/car-garage-marketing-software': typeof CarGarageMarketingSoftwareRoute
@@ -559,6 +573,7 @@ export interface FileRoutesById {
   '/tour-travel-marketing-software': typeof TourTravelMarketingSoftwareRoute
   '/yoga-wellness-marketing-software': typeof YogaWellnessMarketingSoftwareRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRouteWithChildren
+  '/_crm/crm': typeof CrmCrmRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/crm/login': typeof CrmLoginRoute
   '/features/ai-post-generation': typeof FeaturesAiPostGenerationRoute
@@ -624,6 +639,7 @@ export interface FileRouteTypes {
     | '/tour-travel-marketing-software'
     | '/yoga-wellness-marketing-software'
     | '/dashboard'
+    | '/crm'
     | '/blog/$slug'
     | '/crm/login'
     | '/features/ai-post-generation'
@@ -686,6 +702,7 @@ export interface FileRouteTypes {
     | '/terms-and-conditions'
     | '/tour-travel-marketing-software'
     | '/yoga-wellness-marketing-software'
+    | '/crm'
     | '/blog/$slug'
     | '/crm/login'
     | '/features/ai-post-generation'
@@ -721,6 +738,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/_authenticated'
+    | '/_crm'
     | '/auth'
     | '/bakery-marketing-software'
     | '/car-garage-marketing-software'
@@ -750,6 +768,7 @@ export interface FileRouteTypes {
     | '/tour-travel-marketing-software'
     | '/yoga-wellness-marketing-software'
     | '/_authenticated/dashboard'
+    | '/_crm/crm'
     | '/blog/$slug'
     | '/crm/login'
     | '/features/ai-post-generation'
@@ -786,6 +805,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  CrmRoute: typeof CrmRouteWithChildren
   AuthRoute: typeof AuthRoute
   BakeryMarketingSoftwareRoute: typeof BakeryMarketingSoftwareRoute
   CarGarageMarketingSoftwareRoute: typeof CarGarageMarketingSoftwareRoute
@@ -856,6 +876,13 @@ declare module '@tanstack/react-router' {
       path: ''
       fullPath: '/'
       preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_crm': {
+      id: '/_crm'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof CrmRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth': {
@@ -1060,6 +1087,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/dashboard'
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_crm/crm': {
+      id: '/_crm/crm'
+      path: '/crm'
+      fullPath: '/crm'
+      preLoaderRoute: typeof CrmCrmRouteImport
+      parentRoute: typeof CrmRoute
     }
     '/blog/': {
       id: '/blog/'
@@ -1314,9 +1348,20 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
 const AuthenticatedRouteRouteWithChildren =
   AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
 
+interface CrmRouteChildren {
+  CrmCrmRoute: typeof CrmCrmRoute
+}
+
+const CrmRouteChildren: CrmRouteChildren = {
+  CrmCrmRoute: CrmCrmRoute,
+}
+
+const CrmRouteWithChildren = CrmRoute._addFileChildren(CrmRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  CrmRoute: CrmRouteWithChildren,
   AuthRoute: AuthRoute,
   BakeryMarketingSoftwareRoute: BakeryMarketingSoftwareRoute,
   CarGarageMarketingSoftwareRoute: CarGarageMarketingSoftwareRoute,
