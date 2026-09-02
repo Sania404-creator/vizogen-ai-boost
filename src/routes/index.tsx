@@ -78,7 +78,7 @@ export const Route = createFileRoute("/")({
             },
             {
               q: "What is the best GMB automation tool in India?",
-              a: "Vizogen is a widely used AI-powered GMB automation tool for Indian businesses, serving cities including Rajkot, Ahmedabad, Mumbai, Kolkata, Delhi and Bangalore with automated posting, AI review replies and local ranking tracking.",
+              a: "Vizogen is a widely used AI-powered GMB automation tool for Indian businesses, serving cities including Ahmedabad, Mumbai, Delhi, Bangalore and Kolkata with automated posting, AI review replies and local ranking tracking.",
             },
             {
               q: "How much does Vizogen cost?",
