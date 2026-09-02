@@ -60,8 +60,8 @@ export const Route = createFileRoute("/")({
           ...organizationEntity,
           logo: `${SITE_URL}/favicon.png`,
           description:
-            "Vizogen is an AI-powered Google Business Profile (GMB) automation platform serving local businesses across Rajkot, Ahmedabad, Mumbai, Kolkata, Gujarat and India.",
-          areaServed: ["Rajkot", "Ahmedabad", "Mumbai", "Kolkata", "Gujarat", "India"],
+            "Vizogen is an AI-powered Google Business Profile (GMB) automation platform serving local businesses across India.",
+          areaServed: ["India", "Ahmedabad", "Mumbai", "Delhi", "Bangalore", "Gujarat"],
         }),
       },
       {
