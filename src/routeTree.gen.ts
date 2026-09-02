@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as BakeryMarketingSoftwareRouteImport } from './routes/bakery-marketing-software'
 import { Route as CarGarageMarketingSoftwareRouteImport } from './routes/car-garage-marketing-software'
 import { Route as ClinicMarketingSoftwareRouteImport } from './routes/clinic-marketing-software'
+import { Route as ContactRouteImport } from './routes/contact'
 import { Route as DemoRouteImport } from './routes/demo'
 import { Route as EducationMarketingSoftwareRouteImport } from './routes/education-marketing-software'
 import { Route as GymMarketingSoftwareRouteImport } from './routes/gym-marketing-software'
@@ -77,6 +78,11 @@ const CarGarageMarketingSoftwareRoute =
 const ClinicMarketingSoftwareRoute = ClinicMarketingSoftwareRouteImport.update({
   id: '/clinic-marketing-software',
   path: '/clinic-marketing-software',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DemoRoute = DemoRouteImport.update({
@@ -318,6 +324,7 @@ export interface FileRoutesByFullPath {
   '/bakery-marketing-software': typeof BakeryMarketingSoftwareRoute
   '/car-garage-marketing-software': typeof CarGarageMarketingSoftwareRoute
   '/clinic-marketing-software': typeof ClinicMarketingSoftwareRoute
+  '/contact': typeof ContactRoute
   '/demo': typeof DemoRoute
   '/education-marketing-software': typeof EducationMarketingSoftwareRoute
   '/gym-marketing-software': typeof GymMarketingSoftwareRoute
@@ -368,6 +375,7 @@ export interface FileRoutesByTo {
   '/bakery-marketing-software': typeof BakeryMarketingSoftwareRoute
   '/car-garage-marketing-software': typeof CarGarageMarketingSoftwareRoute
   '/clinic-marketing-software': typeof ClinicMarketingSoftwareRoute
+  '/contact': typeof ContactRoute
   '/demo': typeof DemoRoute
   '/education-marketing-software': typeof EducationMarketingSoftwareRoute
   '/gym-marketing-software': typeof GymMarketingSoftwareRoute
@@ -419,6 +427,7 @@ export interface FileRoutesById {
   '/bakery-marketing-software': typeof BakeryMarketingSoftwareRoute
   '/car-garage-marketing-software': typeof CarGarageMarketingSoftwareRoute
   '/clinic-marketing-software': typeof ClinicMarketingSoftwareRoute
+  '/contact': typeof ContactRoute
   '/demo': typeof DemoRoute
   '/education-marketing-software': typeof EducationMarketingSoftwareRoute
   '/gym-marketing-software': typeof GymMarketingSoftwareRoute
@@ -471,6 +480,7 @@ export interface FileRouteTypes {
     | '/bakery-marketing-software'
     | '/car-garage-marketing-software'
     | '/clinic-marketing-software'
+    | '/contact'
     | '/demo'
     | '/education-marketing-software'
     | '/gym-marketing-software'
@@ -521,6 +531,7 @@ export interface FileRouteTypes {
     | '/bakery-marketing-software'
     | '/car-garage-marketing-software'
     | '/clinic-marketing-software'
+    | '/contact'
     | '/demo'
     | '/education-marketing-software'
     | '/gym-marketing-software'
@@ -571,6 +582,7 @@ export interface FileRouteTypes {
     | '/bakery-marketing-software'
     | '/car-garage-marketing-software'
     | '/clinic-marketing-software'
+    | '/contact'
     | '/demo'
     | '/education-marketing-software'
     | '/gym-marketing-software'
@@ -622,6 +634,7 @@ export interface RootRouteChildren {
   BakeryMarketingSoftwareRoute: typeof BakeryMarketingSoftwareRoute
   CarGarageMarketingSoftwareRoute: typeof CarGarageMarketingSoftwareRoute
   ClinicMarketingSoftwareRoute: typeof ClinicMarketingSoftwareRoute
+  ContactRoute: typeof ContactRoute
   DemoRoute: typeof DemoRoute
   EducationMarketingSoftwareRoute: typeof EducationMarketingSoftwareRoute
   GymMarketingSoftwareRoute: typeof GymMarketingSoftwareRoute
@@ -696,6 +709,13 @@ declare module '@tanstack/react-router' {
       path: '/clinic-marketing-software'
       fullPath: '/clinic-marketing-software'
       preLoaderRoute: typeof ClinicMarketingSoftwareRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/demo': {
@@ -1014,6 +1034,7 @@ const rootRouteChildren: RootRouteChildren = {
   BakeryMarketingSoftwareRoute: BakeryMarketingSoftwareRoute,
   CarGarageMarketingSoftwareRoute: CarGarageMarketingSoftwareRoute,
   ClinicMarketingSoftwareRoute: ClinicMarketingSoftwareRoute,
+  ContactRoute: ContactRoute,
   DemoRoute: DemoRoute,
   EducationMarketingSoftwareRoute: EducationMarketingSoftwareRoute,
   GymMarketingSoftwareRoute: GymMarketingSoftwareRoute,
