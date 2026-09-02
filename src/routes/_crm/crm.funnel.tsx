@@ -153,7 +153,7 @@ function FunnelPage() {
           </p>
           <div className="mt-5 space-y-4">
             {overall.map((s, i) => {
-              const prev = i === 0 ? s.count : overall[i - 1].count;
+              const prev = i === 0 ? s.count : (overall[i - 1]?.count ?? s.count);
               return (
                 <div key={s.key}>
                   <div className="flex items-baseline justify-between text-sm">
@@ -186,7 +186,7 @@ function FunnelPage() {
           {metaFunnel ? (
             <>
               <p className="mt-1 text-sm text-muted-foreground">
-                {metaFunnel.steps[0].count} Meta Ads leads captured in this range.
+                {metaFunnel.steps[0]?.count ?? 0} Meta Ads leads captured in this range.
               </p>
               <div className="mt-5 space-y-3">
                 {metaFunnel.steps.map((s, i) => (
@@ -203,7 +203,7 @@ function FunnelPage() {
                         <div
                           className="h-full rounded-full bg-primary"
                           style={{
-                            width: `${Math.max(pct(s.count, metaFunnel.steps[0].count), s.count ? 2 : 0)}%`,
+                            width: `${Math.max(pct(s.count, metaFunnel.steps[0]?.count ?? 0), s.count ? 2 : 0)}%`,
                           }}
                         />
                       </div>
@@ -214,7 +214,7 @@ function FunnelPage() {
               <div className="mt-5 rounded-xl border border-border bg-muted/40 p-4 text-sm text-muted-foreground">
                 Meta lead → demo is{" "}
                 <span className="font-semibold text-foreground">
-                  {pct(metaFunnel.steps[2].count, metaFunnel.steps[0].count)}%
+                  {pct(metaFunnel.steps[2]?.count ?? 0, metaFunnel.steps[0]?.count ?? 0)}%
                 </span>
                 . Anything under 25% usually means follow-up speed, not ad quality — work the New
                 column within an hour of the lead landing.
