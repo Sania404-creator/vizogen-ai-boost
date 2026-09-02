@@ -118,7 +118,7 @@ export function CrmShell({
           <Link to="/crm" className="mb-8 flex items-center gap-2.5 px-2">
             <img src={logo} alt="Vizogen" width={34} height={34} className="size-[34px] rounded-xl" />
             <span className="leading-tight">
-              <span className="block text-base font-bold tracking-tight text-gradient-brand font-display">
+              <span className="block text-base font-bold tracking-tight text-gradient font-display">
                 Vizogen
               </span>
               <span className="block text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground">
