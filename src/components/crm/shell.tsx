@@ -18,7 +18,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { getCrmSession, listNotifications, markNotificationsRead } from "@/lib/crm.functions";
-import logo from "@/assets/vizogen-logo.png";
+import logoAsset from "@/assets/vizogen-logo.png.asset.json";
+const logo = logoAsset.url;
 
 const NAV = [
   { to: "/crm", label: "Dashboard", icon: LayoutDashboard, adminOnly: false },

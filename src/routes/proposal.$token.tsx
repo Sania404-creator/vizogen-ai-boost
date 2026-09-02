@@ -3,7 +3,8 @@ import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { CheckCircle2, Loader2, Mail, Phone } from "lucide-react";
 import { viewProposal, type PricingLine } from "@/lib/proposals.functions";
-import logo from "@/assets/vizogen-logo.png";
+import logoAsset from "@/assets/vizogen-logo.png.asset.json";
+const logo = logoAsset.url;
 import { NAP } from "@/lib/aeo";
 
 export const Route = createFileRoute("/proposal/$token")({
