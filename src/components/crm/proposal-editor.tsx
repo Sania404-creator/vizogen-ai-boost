@@ -113,7 +113,6 @@ export function ProposalEditor({
             id: proposal.id,
             subject,
             message,
-            origin: window.location.origin,
           },
         });
         toast.success(`Proposal emailed to ${lead.email}.`);
