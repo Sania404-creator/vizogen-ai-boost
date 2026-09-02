@@ -250,6 +250,47 @@ export const sendProposal = createServerFn({ method: "POST" })
     return { ok: true, link };
   });
 
+/** Marks a proposal as sent over WhatsApp and returns its public link. */
+export const sendProposalWhatsApp = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((input: unknown) => z.object({ id: z.string().uuid() }).parse(input))
+  .handler(async ({ data, context }) => {
+    const { data: proposal, error } = await context.supabase
+      .from("crm_proposals")
+      .select(PROPOSAL_COLUMNS)
+      .eq("id", data.id)
+      .single();
+    if (error || !proposal) throw new Error("Proposal not found.");
+    const row = proposal as unknown as Proposal;
+    const link = `${SITE_URL}/proposal/${row.share_token}`;
+
+    await context.supabase
+      .from("crm_proposals")
+      .update({ status: "sent", sent_at: new Date().toISOString() })
+      .eq("id", row.id);
+
+    const { data: member } = await context.supabase
+      .from("crm_members")
+      .select("full_name, email")
+      .eq("user_id", context.userId)
+      .maybeSingle();
+
+    await context.supabase.from("crm_activities").insert({
+      lead_id: row.lead_id,
+      actor_id: context.userId,
+      actor_name: member?.full_name || member?.email || "Team",
+      type: "proposal_sent",
+      body: `Proposal "${row.title}" (v${row.version}) sent on WhatsApp.`,
+    });
+
+    await context.supabase
+      .from("crm_leads")
+      .update({ status: "proposal_sent", last_contacted_at: new Date().toISOString() })
+      .eq("id", row.lead_id);
+
+    return { ok: true, link, clientName: row.client_name };
+  });
+
 export const setProposalStatus = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((input: unknown) =>
