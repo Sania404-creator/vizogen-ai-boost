@@ -343,9 +343,7 @@ Vizogen isn't trying to be a 40-feature agency reporting suite — it's built sp
 
 There's no single "best" tool for every business — the right one depends on whether you need reporting depth for clients, enterprise-scale listing control, or simply want your own profile to stay active automatically. If it's the last one, that's exactly the gap Vizogen was built to close.`,
   },
-];
-
-export const blogCategories = ["All", ...Array.from(new Set(blogPosts.map((p) => p.category)))  {
+  {
     slug: "how-to-list-phone-number-on-google",
     title: "How to List Your Phone Number on Google (Step-by-Step Guide)",
     metaDescription:
@@ -423,6 +421,8 @@ Adding your phone number to Google only takes a few minutes, but it directly aff
 **Tip:** Need help optimizing your Google Business Profile or local SEO strategy? [Get in touch with Vizogen](/contact) — we help businesses get found, and get called.`,
   },
 ];
+
+export const blogCategories = ["All", ...Array.from(new Set(blogPosts.map((p) => p.category)))];
 
 export function getPostBySlug(slug: string) {
   return blogPosts.find((p) => p.slug === slug);
