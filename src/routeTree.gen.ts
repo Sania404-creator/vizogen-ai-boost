@@ -42,6 +42,7 @@ import { Route as YogaWellnessMarketingSoftwareRouteImport } from './routes/yoga
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
+import { Route as CrmLoginRouteImport } from './routes/crm.login'
 import { Route as FeaturesAiPostGenerationRouteImport } from './routes/features.ai-post-generation'
 import { Route as FeaturesMagicQrRouteImport } from './routes/features.magic-qr'
 import { Route as FeaturesReviewManagementRouteImport } from './routes/features.review-management'
@@ -243,6 +244,11 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
   path: '/blog/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CrmLoginRoute = CrmLoginRouteImport.update({
+  id: '/crm/login',
+  path: '/crm/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const FeaturesAiPostGenerationRoute =
   FeaturesAiPostGenerationRouteImport.update({
     id: '/features/ai-post-generation',
@@ -427,6 +433,7 @@ export interface FileRoutesByFullPath {
   '/yoga-wellness-marketing-software': typeof YogaWellnessMarketingSoftwareRoute
   '/dashboard': typeof AuthenticatedDashboardRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
+  '/crm/login': typeof CrmLoginRoute
   '/features/ai-post-generation': typeof FeaturesAiPostGenerationRoute
   '/features/magic-qr': typeof FeaturesMagicQrRoute
   '/features/review-management': typeof FeaturesReviewManagementRoute
@@ -488,6 +495,7 @@ export interface FileRoutesByTo {
   '/tour-travel-marketing-software': typeof TourTravelMarketingSoftwareRoute
   '/yoga-wellness-marketing-software': typeof YogaWellnessMarketingSoftwareRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/crm/login': typeof CrmLoginRoute
   '/features/ai-post-generation': typeof FeaturesAiPostGenerationRoute
   '/features/magic-qr': typeof FeaturesMagicQrRoute
   '/features/review-management': typeof FeaturesReviewManagementRoute
@@ -552,6 +560,7 @@ export interface FileRoutesById {
   '/yoga-wellness-marketing-software': typeof YogaWellnessMarketingSoftwareRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
+  '/crm/login': typeof CrmLoginRoute
   '/features/ai-post-generation': typeof FeaturesAiPostGenerationRoute
   '/features/magic-qr': typeof FeaturesMagicQrRoute
   '/features/review-management': typeof FeaturesReviewManagementRoute
@@ -616,6 +625,7 @@ export interface FileRouteTypes {
     | '/yoga-wellness-marketing-software'
     | '/dashboard'
     | '/blog/$slug'
+    | '/crm/login'
     | '/features/ai-post-generation'
     | '/features/magic-qr'
     | '/features/review-management'
@@ -677,6 +687,7 @@ export interface FileRouteTypes {
     | '/tour-travel-marketing-software'
     | '/yoga-wellness-marketing-software'
     | '/blog/$slug'
+    | '/crm/login'
     | '/features/ai-post-generation'
     | '/features/magic-qr'
     | '/features/review-management'
@@ -740,6 +751,7 @@ export interface FileRouteTypes {
     | '/yoga-wellness-marketing-software'
     | '/_authenticated/dashboard'
     | '/blog/$slug'
+    | '/crm/login'
     | '/features/ai-post-generation'
     | '/features/magic-qr'
     | '/features/review-management'
@@ -803,6 +815,7 @@ export interface RootRouteChildren {
   TourTravelMarketingSoftwareRoute: typeof TourTravelMarketingSoftwareRoute
   YogaWellnessMarketingSoftwareRoute: typeof YogaWellnessMarketingSoftwareRoute
   BlogSlugRoute: typeof BlogSlugRoute
+  CrmLoginRoute: typeof CrmLoginRoute
   FeaturesAiPostGenerationRoute: typeof FeaturesAiPostGenerationRoute
   FeaturesMagicQrRoute: typeof FeaturesMagicQrRoute
   FeaturesReviewManagementRoute: typeof FeaturesReviewManagementRoute
@@ -1060,6 +1073,13 @@ declare module '@tanstack/react-router' {
       path: '/blog/$slug'
       fullPath: '/blog/$slug'
       preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/crm/login': {
+      id: '/crm/login'
+      path: '/crm/login'
+      fullPath: '/crm/login'
+      preLoaderRoute: typeof CrmLoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/features/ai-post-generation': {
@@ -1326,6 +1346,7 @@ const rootRouteChildren: RootRouteChildren = {
   TourTravelMarketingSoftwareRoute: TourTravelMarketingSoftwareRoute,
   YogaWellnessMarketingSoftwareRoute: YogaWellnessMarketingSoftwareRoute,
   BlogSlugRoute: BlogSlugRoute,
+  CrmLoginRoute: CrmLoginRoute,
   FeaturesAiPostGenerationRoute: FeaturesAiPostGenerationRoute,
   FeaturesMagicQrRoute: FeaturesMagicQrRoute,
   FeaturesReviewManagementRoute: FeaturesReviewManagementRoute,
