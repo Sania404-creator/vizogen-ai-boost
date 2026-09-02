@@ -73,6 +73,7 @@ import { Route as AuthenticatedDashboardSettingsRouteImport } from './routes/_au
 import { Route as CrmCrmIndexRouteImport } from './routes/_crm/crm.index'
 import { Route as CrmCrmLeadsRouteImport } from './routes/_crm/crm.leads'
 import { Route as ApiPublicLeadsRouteImport } from './routes/api/public/leads'
+import { Route as CrmCrmLeadIdRouteImport } from './routes/_crm/crm.lead.$id'
 import { Route as ApiPublicCronPublishDueRouteImport } from './routes/api/public/cron/publish-due'
 import { Route as ApiPublicGoogleCallbackRouteImport } from './routes/api/public/google/callback'
 
@@ -413,6 +414,11 @@ const ApiPublicLeadsRoute = ApiPublicLeadsRouteImport.update({
   path: '/api/public/leads',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CrmCrmLeadIdRoute = CrmCrmLeadIdRouteImport.update({
+  id: '/lead/$id',
+  path: '/lead/$id',
+  getParentRoute: () => CrmCrmRoute,
+} as any)
 const ApiPublicCronPublishDueRoute = ApiPublicCronPublishDueRouteImport.update({
   id: '/api/public/cron/publish-due',
   path: '/api/public/cron/publish-due',
@@ -487,6 +493,7 @@ export interface FileRoutesByFullPath {
   '/api/public/leads': typeof ApiPublicLeadsRoute
   '/dashboard/': typeof AuthenticatedDashboardIndexRoute
   '/crm/': typeof CrmCrmIndexRoute
+  '/crm/lead/$id': typeof CrmCrmLeadIdRoute
   '/api/public/cron/publish-due': typeof ApiPublicCronPublishDueRoute
   '/api/public/google/callback': typeof ApiPublicGoogleCallbackRoute
 }
@@ -551,6 +558,7 @@ export interface FileRoutesByTo {
   '/api/public/leads': typeof ApiPublicLeadsRoute
   '/dashboard': typeof AuthenticatedDashboardIndexRoute
   '/crm': typeof CrmCrmIndexRoute
+  '/crm/lead/$id': typeof CrmCrmLeadIdRoute
   '/api/public/cron/publish-due': typeof ApiPublicCronPublishDueRoute
   '/api/public/google/callback': typeof ApiPublicGoogleCallbackRoute
 }
@@ -620,6 +628,7 @@ export interface FileRoutesById {
   '/api/public/leads': typeof ApiPublicLeadsRoute
   '/_authenticated/dashboard/': typeof AuthenticatedDashboardIndexRoute
   '/_crm/crm/': typeof CrmCrmIndexRoute
+  '/_crm/crm/lead/$id': typeof CrmCrmLeadIdRoute
   '/api/public/cron/publish-due': typeof ApiPublicCronPublishDueRoute
   '/api/public/google/callback': typeof ApiPublicGoogleCallbackRoute
 }
@@ -688,6 +697,7 @@ export interface FileRouteTypes {
     | '/api/public/leads'
     | '/dashboard/'
     | '/crm/'
+    | '/crm/lead/$id'
     | '/api/public/cron/publish-due'
     | '/api/public/google/callback'
   fileRoutesByTo: FileRoutesByTo
@@ -752,6 +762,7 @@ export interface FileRouteTypes {
     | '/api/public/leads'
     | '/dashboard'
     | '/crm'
+    | '/crm/lead/$id'
     | '/api/public/cron/publish-due'
     | '/api/public/google/callback'
   id:
@@ -820,6 +831,7 @@ export interface FileRouteTypes {
     | '/api/public/leads'
     | '/_authenticated/dashboard/'
     | '/_crm/crm/'
+    | '/_crm/crm/lead/$id'
     | '/api/public/cron/publish-due'
     | '/api/public/google/callback'
   fileRoutesById: FileRoutesById
@@ -1334,6 +1346,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicLeadsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_crm/crm/lead/$id': {
+      id: '/_crm/crm/lead/$id'
+      path: '/lead/$id'
+      fullPath: '/crm/lead/$id'
+      preLoaderRoute: typeof CrmCrmLeadIdRouteImport
+      parentRoute: typeof CrmCrmRoute
+    }
     '/api/public/cron/publish-due': {
       id: '/api/public/cron/publish-due'
       path: '/api/public/cron/publish-due'
@@ -1387,11 +1406,13 @@ const AuthenticatedRouteRouteWithChildren =
 interface CrmCrmRouteChildren {
   CrmCrmLeadsRoute: typeof CrmCrmLeadsRoute
   CrmCrmIndexRoute: typeof CrmCrmIndexRoute
+  CrmCrmLeadIdRoute: typeof CrmCrmLeadIdRoute
 }
 
 const CrmCrmRouteChildren: CrmCrmRouteChildren = {
   CrmCrmLeadsRoute: CrmCrmLeadsRoute,
   CrmCrmIndexRoute: CrmCrmIndexRoute,
+  CrmCrmLeadIdRoute: CrmCrmLeadIdRoute,
 }
 
 const CrmCrmRouteWithChildren =
