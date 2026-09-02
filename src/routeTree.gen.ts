@@ -43,6 +43,7 @@ import { Route as FeaturesAiPostGenerationRouteImport } from './routes/features.
 import { Route as FeaturesMagicQrRouteImport } from './routes/features.magic-qr'
 import { Route as FeaturesReviewManagementRouteImport } from './routes/features.review-management'
 import { Route as FeaturesSmartSchedulingRouteImport } from './routes/features.smart-scheduling'
+import { Route as RSlugRouteImport } from './routes/r.$slug'
 import { Route as ServicesLocalSeoRouteImport } from './routes/services.local-seo'
 import { Route as ServicesLocalSeoAhmedabadRouteImport } from './routes/services.local-seo-ahmedabad'
 import { Route as ServicesLocalSeoBangaloreRouteImport } from './routes/services.local-seo-bangalore'
@@ -241,6 +242,11 @@ const FeaturesSmartSchedulingRoute = FeaturesSmartSchedulingRouteImport.update({
   path: '/features/smart-scheduling',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RSlugRoute = RSlugRouteImport.update({
+  id: '/r/$slug',
+  path: '/r/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ServicesLocalSeoRoute = ServicesLocalSeoRouteImport.update({
   id: '/services/local-seo',
   path: '/services/local-seo',
@@ -365,6 +371,7 @@ export interface FileRoutesByFullPath {
   '/features/magic-qr': typeof FeaturesMagicQrRoute
   '/features/review-management': typeof FeaturesReviewManagementRoute
   '/features/smart-scheduling': typeof FeaturesSmartSchedulingRoute
+  '/r/$slug': typeof RSlugRoute
   '/services/local-seo': typeof ServicesLocalSeoRoute
   '/services/local-seo-ahmedabad': typeof ServicesLocalSeoAhmedabadRoute
   '/services/local-seo-bangalore': typeof ServicesLocalSeoBangaloreRoute
@@ -418,6 +425,7 @@ export interface FileRoutesByTo {
   '/features/magic-qr': typeof FeaturesMagicQrRoute
   '/features/review-management': typeof FeaturesReviewManagementRoute
   '/features/smart-scheduling': typeof FeaturesSmartSchedulingRoute
+  '/r/$slug': typeof RSlugRoute
   '/services/local-seo': typeof ServicesLocalSeoRoute
   '/services/local-seo-ahmedabad': typeof ServicesLocalSeoAhmedabadRoute
   '/services/local-seo-bangalore': typeof ServicesLocalSeoBangaloreRoute
@@ -472,6 +480,7 @@ export interface FileRoutesById {
   '/features/magic-qr': typeof FeaturesMagicQrRoute
   '/features/review-management': typeof FeaturesReviewManagementRoute
   '/features/smart-scheduling': typeof FeaturesSmartSchedulingRoute
+  '/r/$slug': typeof RSlugRoute
   '/services/local-seo': typeof ServicesLocalSeoRoute
   '/services/local-seo-ahmedabad': typeof ServicesLocalSeoAhmedabadRoute
   '/services/local-seo-bangalore': typeof ServicesLocalSeoBangaloreRoute
@@ -527,6 +536,7 @@ export interface FileRouteTypes {
     | '/features/magic-qr'
     | '/features/review-management'
     | '/features/smart-scheduling'
+    | '/r/$slug'
     | '/services/local-seo'
     | '/services/local-seo-ahmedabad'
     | '/services/local-seo-bangalore'
@@ -580,6 +590,7 @@ export interface FileRouteTypes {
     | '/features/magic-qr'
     | '/features/review-management'
     | '/features/smart-scheduling'
+    | '/r/$slug'
     | '/services/local-seo'
     | '/services/local-seo-ahmedabad'
     | '/services/local-seo-bangalore'
@@ -633,6 +644,7 @@ export interface FileRouteTypes {
     | '/features/magic-qr'
     | '/features/review-management'
     | '/features/smart-scheduling'
+    | '/r/$slug'
     | '/services/local-seo'
     | '/services/local-seo-ahmedabad'
     | '/services/local-seo-bangalore'
@@ -687,6 +699,7 @@ export interface RootRouteChildren {
   FeaturesMagicQrRoute: typeof FeaturesMagicQrRoute
   FeaturesReviewManagementRoute: typeof FeaturesReviewManagementRoute
   FeaturesSmartSchedulingRoute: typeof FeaturesSmartSchedulingRoute
+  RSlugRoute: typeof RSlugRoute
   ServicesLocalSeoRoute: typeof ServicesLocalSeoRoute
   ServicesLocalSeoAhmedabadRoute: typeof ServicesLocalSeoAhmedabadRoute
   ServicesLocalSeoBangaloreRoute: typeof ServicesLocalSeoBangaloreRoute
@@ -947,6 +960,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FeaturesSmartSchedulingRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/r/$slug': {
+      id: '/r/$slug'
+      path: '/r/$slug'
+      fullPath: '/r/$slug'
+      preLoaderRoute: typeof RSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/services/local-seo': {
       id: '/services/local-seo'
       path: '/services/local-seo'
@@ -1103,6 +1123,7 @@ const rootRouteChildren: RootRouteChildren = {
   FeaturesMagicQrRoute: FeaturesMagicQrRoute,
   FeaturesReviewManagementRoute: FeaturesReviewManagementRoute,
   FeaturesSmartSchedulingRoute: FeaturesSmartSchedulingRoute,
+  RSlugRoute: RSlugRoute,
   ServicesLocalSeoRoute: ServicesLocalSeoRoute,
   ServicesLocalSeoAhmedabadRoute: ServicesLocalSeoAhmedabadRoute,
   ServicesLocalSeoBangaloreRoute: ServicesLocalSeoBangaloreRoute,
