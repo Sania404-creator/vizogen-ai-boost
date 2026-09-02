@@ -57,7 +57,15 @@ function TeamPage() {
 
   const refresh = () => void queryClient.invalidateQueries({ queryKey: ["crm-team"] });
 
-  const update = async (input: Parameters<typeof patch>[0]["data"]) => {
+  type MemberPatch = {
+    userId: string;
+    role?: "admin" | "sales_rep";
+    canViewAll?: boolean;
+    active?: boolean;
+    fullName?: string;
+  };
+
+  const update = async (input: MemberPatch) => {
     try {
       await patch({ data: input });
       refresh();
