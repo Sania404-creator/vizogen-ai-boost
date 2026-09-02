@@ -5,6 +5,7 @@ import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 export const LEAD_SOURCES = [
   "website_demo",
   "website_popup",
+  "meta_ads",
   "manual",
   "referral",
   "other",

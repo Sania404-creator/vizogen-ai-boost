@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
-import { Loader2, LogOut, Plug } from "lucide-react";
+import { ExternalLink, Loader2, LogOut, Plug, RefreshCw } from "lucide-react";
 import { toast } from "sonner";
 import { CrmShell } from "@/components/crm/shell";
 import { getCrmSession, listStages, updateMember } from "@/lib/crm.functions";
+import { getMetaLeadConfig, runMetaLeadSync } from "@/lib/meta-leads.functions";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -35,13 +36,18 @@ function SettingsPage() {
   const fetchSession = useServerFn(getCrmSession);
   const fetchStages = useServerFn(listStages);
   const patch = useServerFn(updateMember);
+  const fetchMetaConfig = useServerFn(getMetaLeadConfig);
+  const syncMeta = useServerFn(runMetaLeadSync);
 
   const session = useQuery({ queryKey: ["crm-session"], queryFn: () => fetchSession() });
   const stages = useQuery({ queryKey: ["crm-stages"], queryFn: () => fetchStages() });
+  const metaConfig = useQuery({ queryKey: ["meta-config"], queryFn: () => fetchMetaConfig() });
 
   const [fullName, setFullName] = useState("");
   const [busy, setBusy] = useState(false);
   const [origin, setOrigin] = useState("");
+  const [syncing, setSyncing] = useState(false);
+  const [lastSync, setLastSync] = useState<string | null>(null);
 
   useEffect(() => {
     setOrigin(window.location.origin);
@@ -62,6 +68,24 @@ function SettingsPage() {
       toast.error(error instanceof Error ? error.message : "Could not save your profile.");
     } finally {
       setBusy(false);
+    }
+  };
+
+  const runSync = async () => {
+    setSyncing(true);
+    try {
+      const result = await syncMeta();
+      if (!result.ok) throw new Error(result.error ?? "Sync failed");
+      setLastSync(
+        `${result.created} new lead${result.created === 1 ? "" : "s"} imported · ${result.duplicates} already in CRM · ${result.rows} rows scanned`,
+      );
+      void queryClient.invalidateQueries({ queryKey: ["crm-leads"] });
+      void queryClient.invalidateQueries({ queryKey: ["crm-dashboard"] });
+      toast.success(`Meta sync done — ${result.created} new lead(s).`);
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "Could not sync Meta leads.");
+    } finally {
+      setSyncing(false);
     }
   };
 
@@ -123,6 +147,47 @@ function SettingsPage() {
               </li>
             ))}
           </ol>
+        </div>
+
+        <div className="rounded-2xl border border-border bg-card p-5 shadow-soft lg:col-span-2">
+          <h2 className="flex items-center gap-2 text-base font-semibold text-foreground font-display">
+            <Plug className="size-4 text-primary" /> Meta Ads lead sync
+          </h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Leads from your Facebook &amp; Instagram lead forms land in the connected Google Sheet
+            tab <span className="font-medium text-foreground">{metaConfig.data?.sheetTab}</span>.
+            Syncing imports every new row as a CRM lead with source{" "}
+            <Badge variant="secondary">Meta Ads</Badge> — duplicates by email or phone are skipped.
+          </p>
+          <div className="mt-4 flex flex-wrap items-center gap-2">
+            <Button onClick={runSync} disabled={syncing || !metaConfig.data?.connected}>
+              {syncing ? (
+                <Loader2 className="size-4 animate-spin" />
+              ) : (
+                <RefreshCw className="size-4" />
+              )}
+              Sync Meta leads now
+            </Button>
+            {metaConfig.data?.sheetUrl ? (
+              <Button variant="outline" asChild>
+                <a href={metaConfig.data.sheetUrl} target="_blank" rel="noreferrer">
+                  Open sheet <ExternalLink className="size-4" />
+                </a>
+              </Button>
+            ) : null}
+            {!metaConfig.data?.connected ? (
+              <span className="text-xs text-destructive">
+                Google Sheets is not connected yet.
+              </span>
+            ) : null}
+          </div>
+          {lastSync ? <p className="mt-3 text-sm text-muted-foreground">{lastSync}</p> : null}
+          <p className="mt-3 text-xs text-muted-foreground">
+            Business type, interest, preferred start date and requested demo slot are saved on the
+            lead so reps have full context. For hands-off imports, schedule{" "}
+            <code>{`GET ${origin}/api/public/cron/sync-meta-leads`}</code> hourly with the header{" "}
+            <code>x-vizogen-secret</code>.
+          </p>
         </div>
 
         <div className="rounded-2xl border border-border bg-card p-5 shadow-soft lg:col-span-2">
