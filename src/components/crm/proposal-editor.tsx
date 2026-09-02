@@ -55,6 +55,7 @@ export function ProposalEditor({
   const fetchTemplates = useServerFn(listTemplates);
   const save = useServerFn(saveProposal);
   const send = useServerFn(sendProposal);
+  const sendWhatsApp = useServerFn(sendProposalWhatsApp);
   const templates = useQuery({ queryKey: ["crm-templates"], queryFn: () => fetchTemplates() });
 
   const [title, setTitle] = useState(`Vizogen proposal for ${lead.company || lead.name}`);
@@ -133,6 +134,49 @@ export function ProposalEditor({
       void queryClient.invalidateQueries({ queryKey: ["crm-proposals"] });
     } catch (error) {
       toast.error(error instanceof Error ? error.message : "Could not save the proposal.");
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const submitWhatsApp = async () => {
+    if (!lead.phone) {
+      toast.error("This lead has no phone number. Add one first.");
+      return;
+    }
+    setBusy(true);
+    try {
+      const proposal = await save({
+        data: {
+          leadId: lead.id,
+          templateId: templateId || "",
+          title,
+          clientName: lead.name,
+          clientCompany: lead.company,
+          clientEmail: lead.email || "no-email@vizogen.in",
+          scope,
+          deliverables: deliverables
+            .split("\n")
+            .map((d) => d.trim())
+            .filter(Boolean),
+          pricing: pricing.filter((l) => l.item.trim()),
+          currency,
+          notes,
+          terms,
+          validUntil,
+        },
+      });
+      const { link } = await sendWhatsApp({ data: { id: proposal.id } });
+      const text = encodeURIComponent(
+        `Hi ${lead.name}, thanks for your interest in Vizogen. Here is your proposal "${title}" — tap the link to review scope, deliverables and pricing:\n\n${link}\n\nValid until ${validUntil}. Happy to walk you through it on a quick call.\n\n— Vizogen Sales Team`,
+      );
+      window.open(`https://wa.me/${toWhatsAppNumber(lead.phone)}?text=${text}`, "_blank");
+      toast.success("Proposal marked sent — WhatsApp is opening.");
+      setOpen(false);
+      onSent?.();
+      void queryClient.invalidateQueries({ queryKey: ["crm-proposals"] });
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "Could not send on WhatsApp.");
     } finally {
       setBusy(false);
     }
@@ -286,6 +330,15 @@ export function ProposalEditor({
         <DialogFooter className="gap-2">
           <Button variant="outline" disabled={busy} onClick={() => submit(false)}>
             Save draft
+          </Button>
+          <Button
+            variant="outline"
+            disabled={busy}
+            onClick={submitWhatsApp}
+            className="border-emerald-500/50 text-emerald-600 hover:bg-emerald-500/10"
+          >
+            {busy ? <Loader2 className="size-4 animate-spin" /> : <MessageCircle className="size-4" />}
+            WhatsApp
           </Button>
           <Button disabled={busy} onClick={() => submit(true)} className="gradient-brand text-white">
             {busy ? <Loader2 className="size-4 animate-spin" /> : <Send className="size-4" />} Send
