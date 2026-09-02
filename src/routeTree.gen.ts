@@ -80,6 +80,7 @@ import { Route as CrmCrmTeamRouteImport } from './routes/_crm/crm.team'
 import { Route as ApiPublicLeadsRouteImport } from './routes/api/public/leads'
 import { Route as CrmCrmLeadIdRouteImport } from './routes/_crm/crm.lead.$id'
 import { Route as ApiPublicCronPublishDueRouteImport } from './routes/api/public/cron/publish-due'
+import { Route as ApiPublicCronSyncMetaLeadsRouteImport } from './routes/api/public/cron/sync-meta-leads'
 import { Route as ApiPublicGoogleCallbackRouteImport } from './routes/api/public/google/callback'
 
 const IndexRoute = IndexRouteImport.update({
@@ -454,6 +455,12 @@ const ApiPublicCronPublishDueRoute = ApiPublicCronPublishDueRouteImport.update({
   path: '/api/public/cron/publish-due',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicCronSyncMetaLeadsRoute =
+  ApiPublicCronSyncMetaLeadsRouteImport.update({
+    id: '/api/public/cron/sync-meta-leads',
+    path: '/api/public/cron/sync-meta-leads',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ApiPublicGoogleCallbackRoute = ApiPublicGoogleCallbackRouteImport.update({
   id: '/api/public/google/callback',
   path: '/api/public/google/callback',
@@ -530,6 +537,7 @@ export interface FileRoutesByFullPath {
   '/crm/': typeof CrmCrmIndexRoute
   '/crm/lead/$id': typeof CrmCrmLeadIdRoute
   '/api/public/cron/publish-due': typeof ApiPublicCronPublishDueRoute
+  '/api/public/cron/sync-meta-leads': typeof ApiPublicCronSyncMetaLeadsRoute
   '/api/public/google/callback': typeof ApiPublicGoogleCallbackRoute
 }
 export interface FileRoutesByTo {
@@ -600,6 +608,7 @@ export interface FileRoutesByTo {
   '/crm': typeof CrmCrmIndexRoute
   '/crm/lead/$id': typeof CrmCrmLeadIdRoute
   '/api/public/cron/publish-due': typeof ApiPublicCronPublishDueRoute
+  '/api/public/cron/sync-meta-leads': typeof ApiPublicCronSyncMetaLeadsRoute
   '/api/public/google/callback': typeof ApiPublicGoogleCallbackRoute
 }
 export interface FileRoutesById {
@@ -675,6 +684,7 @@ export interface FileRoutesById {
   '/_crm/crm/': typeof CrmCrmIndexRoute
   '/_crm/crm/lead/$id': typeof CrmCrmLeadIdRoute
   '/api/public/cron/publish-due': typeof ApiPublicCronPublishDueRoute
+  '/api/public/cron/sync-meta-leads': typeof ApiPublicCronSyncMetaLeadsRoute
   '/api/public/google/callback': typeof ApiPublicGoogleCallbackRoute
 }
 export interface FileRouteTypes {
@@ -749,6 +759,7 @@ export interface FileRouteTypes {
     | '/crm/'
     | '/crm/lead/$id'
     | '/api/public/cron/publish-due'
+    | '/api/public/cron/sync-meta-leads'
     | '/api/public/google/callback'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -819,6 +830,7 @@ export interface FileRouteTypes {
     | '/crm'
     | '/crm/lead/$id'
     | '/api/public/cron/publish-due'
+    | '/api/public/cron/sync-meta-leads'
     | '/api/public/google/callback'
   id:
     | '__root__'
@@ -893,6 +905,7 @@ export interface FileRouteTypes {
     | '/_crm/crm/'
     | '/_crm/crm/lead/$id'
     | '/api/public/cron/publish-due'
+    | '/api/public/cron/sync-meta-leads'
     | '/api/public/google/callback'
   fileRoutesById: FileRoutesById
 }
@@ -954,6 +967,7 @@ export interface RootRouteChildren {
   BlogIndexRoute: typeof BlogIndexRoute
   ApiPublicLeadsRoute: typeof ApiPublicLeadsRoute
   ApiPublicCronPublishDueRoute: typeof ApiPublicCronPublishDueRoute
+  ApiPublicCronSyncMetaLeadsRoute: typeof ApiPublicCronSyncMetaLeadsRoute
   ApiPublicGoogleCallbackRoute: typeof ApiPublicGoogleCallbackRoute
 }
 
@@ -1456,6 +1470,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiPublicCronPublishDueRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/cron/sync-meta-leads': {
+      id: '/api/public/cron/sync-meta-leads'
+      path: '/api/public/cron/sync-meta-leads'
+      fullPath: '/api/public/cron/sync-meta-leads'
+      preLoaderRoute: typeof ApiPublicCronSyncMetaLeadsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/google/callback': {
       id: '/api/public/google/callback'
       path: '/api/public/google/callback'
@@ -1590,6 +1611,7 @@ const rootRouteChildren: RootRouteChildren = {
   BlogIndexRoute: BlogIndexRoute,
   ApiPublicLeadsRoute: ApiPublicLeadsRoute,
   ApiPublicCronPublishDueRoute: ApiPublicCronPublishDueRoute,
+  ApiPublicCronSyncMetaLeadsRoute: ApiPublicCronSyncMetaLeadsRoute,
   ApiPublicGoogleCallbackRoute: ApiPublicGoogleCallbackRoute,
 }
 export const routeTree = rootRouteImport
