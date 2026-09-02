@@ -74,6 +74,7 @@ import { Route as CrmCrmIndexRouteImport } from './routes/_crm/crm.index'
 import { Route as CrmCrmLeadsRouteImport } from './routes/_crm/crm.leads'
 import { Route as CrmCrmProposalsRouteImport } from './routes/_crm/crm.proposals'
 import { Route as CrmCrmReportsRouteImport } from './routes/_crm/crm.reports'
+import { Route as CrmCrmTeamRouteImport } from './routes/_crm/crm.team'
 import { Route as ApiPublicLeadsRouteImport } from './routes/api/public/leads'
 import { Route as CrmCrmLeadIdRouteImport } from './routes/_crm/crm.lead.$id'
 import { Route as ApiPublicCronPublishDueRouteImport } from './routes/api/public/cron/publish-due'
@@ -421,6 +422,11 @@ const CrmCrmReportsRoute = CrmCrmReportsRouteImport.update({
   path: '/reports',
   getParentRoute: () => CrmCrmRoute,
 } as any)
+const CrmCrmTeamRoute = CrmCrmTeamRouteImport.update({
+  id: '/team',
+  path: '/team',
+  getParentRoute: () => CrmCrmRoute,
+} as any)
 const ApiPublicLeadsRoute = ApiPublicLeadsRouteImport.update({
   id: '/api/public/leads',
   path: '/api/public/leads',
@@ -504,6 +510,7 @@ export interface FileRoutesByFullPath {
   '/crm/leads': typeof CrmCrmLeadsRoute
   '/crm/proposals': typeof CrmCrmProposalsRoute
   '/crm/reports': typeof CrmCrmReportsRoute
+  '/crm/team': typeof CrmCrmTeamRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
   '/dashboard/': typeof AuthenticatedDashboardIndexRoute
   '/crm/': typeof CrmCrmIndexRoute
@@ -571,6 +578,7 @@ export interface FileRoutesByTo {
   '/crm/leads': typeof CrmCrmLeadsRoute
   '/crm/proposals': typeof CrmCrmProposalsRoute
   '/crm/reports': typeof CrmCrmReportsRoute
+  '/crm/team': typeof CrmCrmTeamRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
   '/dashboard': typeof AuthenticatedDashboardIndexRoute
   '/crm': typeof CrmCrmIndexRoute
@@ -643,6 +651,7 @@ export interface FileRoutesById {
   '/_crm/crm/leads': typeof CrmCrmLeadsRoute
   '/_crm/crm/proposals': typeof CrmCrmProposalsRoute
   '/_crm/crm/reports': typeof CrmCrmReportsRoute
+  '/_crm/crm/team': typeof CrmCrmTeamRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
   '/_authenticated/dashboard/': typeof AuthenticatedDashboardIndexRoute
   '/_crm/crm/': typeof CrmCrmIndexRoute
@@ -714,6 +723,7 @@ export interface FileRouteTypes {
     | '/crm/leads'
     | '/crm/proposals'
     | '/crm/reports'
+    | '/crm/team'
     | '/api/public/leads'
     | '/dashboard/'
     | '/crm/'
@@ -781,6 +791,7 @@ export interface FileRouteTypes {
     | '/crm/leads'
     | '/crm/proposals'
     | '/crm/reports'
+    | '/crm/team'
     | '/api/public/leads'
     | '/dashboard'
     | '/crm'
@@ -852,6 +863,7 @@ export interface FileRouteTypes {
     | '/_crm/crm/leads'
     | '/_crm/crm/proposals'
     | '/_crm/crm/reports'
+    | '/_crm/crm/team'
     | '/api/public/leads'
     | '/_authenticated/dashboard/'
     | '/_crm/crm/'
@@ -1377,6 +1389,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CrmCrmReportsRouteImport
       parentRoute: typeof CrmCrmRoute
     }
+    '/_crm/crm/team': {
+      id: '/_crm/crm/team'
+      path: '/team'
+      fullPath: '/crm/team'
+      preLoaderRoute: typeof CrmCrmTeamRouteImport
+      parentRoute: typeof CrmCrmRoute
+    }
     '/api/public/leads': {
       id: '/api/public/leads'
       path: '/api/public/leads'
@@ -1445,6 +1464,7 @@ interface CrmCrmRouteChildren {
   CrmCrmLeadsRoute: typeof CrmCrmLeadsRoute
   CrmCrmProposalsRoute: typeof CrmCrmProposalsRoute
   CrmCrmReportsRoute: typeof CrmCrmReportsRoute
+  CrmCrmTeamRoute: typeof CrmCrmTeamRoute
   CrmCrmIndexRoute: typeof CrmCrmIndexRoute
   CrmCrmLeadIdRoute: typeof CrmCrmLeadIdRoute
 }
@@ -1453,6 +1473,7 @@ const CrmCrmRouteChildren: CrmCrmRouteChildren = {
   CrmCrmLeadsRoute: CrmCrmLeadsRoute,
   CrmCrmProposalsRoute: CrmCrmProposalsRoute,
   CrmCrmReportsRoute: CrmCrmReportsRoute,
+  CrmCrmTeamRoute: CrmCrmTeamRoute,
   CrmCrmIndexRoute: CrmCrmIndexRoute,
   CrmCrmLeadIdRoute: CrmCrmLeadIdRoute,
 }
