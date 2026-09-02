@@ -49,6 +49,7 @@ import { Route as FeaturesAiPostGenerationRouteImport } from './routes/features.
 import { Route as FeaturesMagicQrRouteImport } from './routes/features.magic-qr'
 import { Route as FeaturesReviewManagementRouteImport } from './routes/features.review-management'
 import { Route as FeaturesSmartSchedulingRouteImport } from './routes/features.smart-scheduling'
+import { Route as ProposalTokenRouteImport } from './routes/proposal.$token'
 import { Route as RSlugRouteImport } from './routes/r.$slug'
 import { Route as ServicesLocalSeoRouteImport } from './routes/services.local-seo'
 import { Route as ServicesLocalSeoAhmedabadRouteImport } from './routes/services.local-seo-ahmedabad'
@@ -289,6 +290,11 @@ const FeaturesSmartSchedulingRoute = FeaturesSmartSchedulingRouteImport.update({
   path: '/features/smart-scheduling',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProposalTokenRoute = ProposalTokenRouteImport.update({
+  id: '/proposal/$token',
+  path: '/proposal/$token',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RSlugRoute = RSlugRouteImport.update({
   id: '/r/$slug',
   path: '/r/$slug',
@@ -492,6 +498,7 @@ export interface FileRoutesByFullPath {
   '/features/magic-qr': typeof FeaturesMagicQrRoute
   '/features/review-management': typeof FeaturesReviewManagementRoute
   '/features/smart-scheduling': typeof FeaturesSmartSchedulingRoute
+  '/proposal/$token': typeof ProposalTokenRoute
   '/r/$slug': typeof RSlugRoute
   '/services/local-seo': typeof ServicesLocalSeoRoute
   '/services/local-seo-ahmedabad': typeof ServicesLocalSeoAhmedabadRoute
@@ -561,6 +568,7 @@ export interface FileRoutesByTo {
   '/features/magic-qr': typeof FeaturesMagicQrRoute
   '/features/review-management': typeof FeaturesReviewManagementRoute
   '/features/smart-scheduling': typeof FeaturesSmartSchedulingRoute
+  '/proposal/$token': typeof ProposalTokenRoute
   '/r/$slug': typeof RSlugRoute
   '/services/local-seo': typeof ServicesLocalSeoRoute
   '/services/local-seo-ahmedabad': typeof ServicesLocalSeoAhmedabadRoute
@@ -635,6 +643,7 @@ export interface FileRoutesById {
   '/features/magic-qr': typeof FeaturesMagicQrRoute
   '/features/review-management': typeof FeaturesReviewManagementRoute
   '/features/smart-scheduling': typeof FeaturesSmartSchedulingRoute
+  '/proposal/$token': typeof ProposalTokenRoute
   '/r/$slug': typeof RSlugRoute
   '/services/local-seo': typeof ServicesLocalSeoRoute
   '/services/local-seo-ahmedabad': typeof ServicesLocalSeoAhmedabadRoute
@@ -708,6 +717,7 @@ export interface FileRouteTypes {
     | '/features/magic-qr'
     | '/features/review-management'
     | '/features/smart-scheduling'
+    | '/proposal/$token'
     | '/r/$slug'
     | '/services/local-seo'
     | '/services/local-seo-ahmedabad'
@@ -777,6 +787,7 @@ export interface FileRouteTypes {
     | '/features/magic-qr'
     | '/features/review-management'
     | '/features/smart-scheduling'
+    | '/proposal/$token'
     | '/r/$slug'
     | '/services/local-seo'
     | '/services/local-seo-ahmedabad'
@@ -850,6 +861,7 @@ export interface FileRouteTypes {
     | '/features/magic-qr'
     | '/features/review-management'
     | '/features/smart-scheduling'
+    | '/proposal/$token'
     | '/r/$slug'
     | '/services/local-seo'
     | '/services/local-seo-ahmedabad'
@@ -922,6 +934,7 @@ export interface RootRouteChildren {
   FeaturesMagicQrRoute: typeof FeaturesMagicQrRoute
   FeaturesReviewManagementRoute: typeof FeaturesReviewManagementRoute
   FeaturesSmartSchedulingRoute: typeof FeaturesSmartSchedulingRoute
+  ProposalTokenRoute: typeof ProposalTokenRoute
   RSlugRoute: typeof RSlugRoute
   ServicesLocalSeoRoute: typeof ServicesLocalSeoRoute
   ServicesLocalSeoAhmedabadRoute: typeof ServicesLocalSeoAhmedabadRoute
@@ -1224,6 +1237,13 @@ declare module '@tanstack/react-router' {
       path: '/features/smart-scheduling'
       fullPath: '/features/smart-scheduling'
       preLoaderRoute: typeof FeaturesSmartSchedulingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/proposal/$token': {
+      id: '/proposal/$token'
+      path: '/proposal/$token'
+      fullPath: '/proposal/$token'
+      preLoaderRoute: typeof ProposalTokenRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/r/$slug': {
@@ -1550,6 +1570,7 @@ const rootRouteChildren: RootRouteChildren = {
   FeaturesMagicQrRoute: FeaturesMagicQrRoute,
   FeaturesReviewManagementRoute: FeaturesReviewManagementRoute,
   FeaturesSmartSchedulingRoute: FeaturesSmartSchedulingRoute,
+  ProposalTokenRoute: ProposalTokenRoute,
   RSlugRoute: RSlugRoute,
   ServicesLocalSeoRoute: ServicesLocalSeoRoute,
   ServicesLocalSeoAhmedabadRoute: ServicesLocalSeoAhmedabadRoute,
