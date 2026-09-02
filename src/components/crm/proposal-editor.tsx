@@ -1,14 +1,23 @@
 import { type ReactNode, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
-import { Loader2, Plus, Send, Trash2 } from "lucide-react";
+import { Loader2, MessageCircle, Plus, Send, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import {
   listTemplates,
   saveProposal,
   sendProposal,
+  sendProposalWhatsApp,
   type PricingLine,
 } from "@/lib/proposals.functions";
+
+/** Normalize a phone to a wa.me number (digits only, default country code 91). */
+function toWhatsAppNumber(phone: string): string {
+  const digits = phone.replace(/\D/g, "");
+  if (digits.length === 10) return `91${digits}`;
+  if (digits.length === 12 && digits.startsWith("91")) return digits;
+  return digits;
+}
 import type { Lead } from "@/lib/crm.functions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
