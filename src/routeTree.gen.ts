@@ -49,6 +49,7 @@ import { Route as FeaturesAiPostGenerationRouteImport } from './routes/features.
 import { Route as FeaturesMagicQrRouteImport } from './routes/features.magic-qr'
 import { Route as FeaturesReviewManagementRouteImport } from './routes/features.review-management'
 import { Route as FeaturesSmartSchedulingRouteImport } from './routes/features.smart-scheduling'
+import { Route as ProposalTokenRouteImport } from './routes/proposal.$token'
 import { Route as RSlugRouteImport } from './routes/r.$slug'
 import { Route as ServicesLocalSeoRouteImport } from './routes/services.local-seo'
 import { Route as ServicesLocalSeoAhmedabadRouteImport } from './routes/services.local-seo-ahmedabad'
@@ -73,6 +74,9 @@ import { Route as AuthenticatedDashboardSettingsRouteImport } from './routes/_au
 import { Route as CrmCrmIndexRouteImport } from './routes/_crm/crm.index'
 import { Route as CrmCrmLeadsRouteImport } from './routes/_crm/crm.leads'
 import { Route as CrmCrmProposalsRouteImport } from './routes/_crm/crm.proposals'
+import { Route as CrmCrmReportsRouteImport } from './routes/_crm/crm.reports'
+import { Route as CrmCrmSettingsRouteImport } from './routes/_crm/crm.settings'
+import { Route as CrmCrmTeamRouteImport } from './routes/_crm/crm.team'
 import { Route as ApiPublicLeadsRouteImport } from './routes/api/public/leads'
 import { Route as CrmCrmLeadIdRouteImport } from './routes/_crm/crm.lead.$id'
 import { Route as ApiPublicCronPublishDueRouteImport } from './routes/api/public/cron/publish-due'
@@ -286,6 +290,11 @@ const FeaturesSmartSchedulingRoute = FeaturesSmartSchedulingRouteImport.update({
   path: '/features/smart-scheduling',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ProposalTokenRoute = ProposalTokenRouteImport.update({
+  id: '/proposal/$token',
+  path: '/proposal/$token',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RSlugRoute = RSlugRouteImport.update({
   id: '/r/$slug',
   path: '/r/$slug',
@@ -415,6 +424,21 @@ const CrmCrmProposalsRoute = CrmCrmProposalsRouteImport.update({
   path: '/proposals',
   getParentRoute: () => CrmCrmRoute,
 } as any)
+const CrmCrmReportsRoute = CrmCrmReportsRouteImport.update({
+  id: '/reports',
+  path: '/reports',
+  getParentRoute: () => CrmCrmRoute,
+} as any)
+const CrmCrmSettingsRoute = CrmCrmSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => CrmCrmRoute,
+} as any)
+const CrmCrmTeamRoute = CrmCrmTeamRouteImport.update({
+  id: '/team',
+  path: '/team',
+  getParentRoute: () => CrmCrmRoute,
+} as any)
 const ApiPublicLeadsRoute = ApiPublicLeadsRouteImport.update({
   id: '/api/public/leads',
   path: '/api/public/leads',
@@ -474,6 +498,7 @@ export interface FileRoutesByFullPath {
   '/features/magic-qr': typeof FeaturesMagicQrRoute
   '/features/review-management': typeof FeaturesReviewManagementRoute
   '/features/smart-scheduling': typeof FeaturesSmartSchedulingRoute
+  '/proposal/$token': typeof ProposalTokenRoute
   '/r/$slug': typeof RSlugRoute
   '/services/local-seo': typeof ServicesLocalSeoRoute
   '/services/local-seo-ahmedabad': typeof ServicesLocalSeoAhmedabadRoute
@@ -497,6 +522,9 @@ export interface FileRoutesByFullPath {
   '/dashboard/settings': typeof AuthenticatedDashboardSettingsRoute
   '/crm/leads': typeof CrmCrmLeadsRoute
   '/crm/proposals': typeof CrmCrmProposalsRoute
+  '/crm/reports': typeof CrmCrmReportsRoute
+  '/crm/settings': typeof CrmCrmSettingsRoute
+  '/crm/team': typeof CrmCrmTeamRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
   '/dashboard/': typeof AuthenticatedDashboardIndexRoute
   '/crm/': typeof CrmCrmIndexRoute
@@ -540,6 +568,7 @@ export interface FileRoutesByTo {
   '/features/magic-qr': typeof FeaturesMagicQrRoute
   '/features/review-management': typeof FeaturesReviewManagementRoute
   '/features/smart-scheduling': typeof FeaturesSmartSchedulingRoute
+  '/proposal/$token': typeof ProposalTokenRoute
   '/r/$slug': typeof RSlugRoute
   '/services/local-seo': typeof ServicesLocalSeoRoute
   '/services/local-seo-ahmedabad': typeof ServicesLocalSeoAhmedabadRoute
@@ -563,6 +592,9 @@ export interface FileRoutesByTo {
   '/dashboard/settings': typeof AuthenticatedDashboardSettingsRoute
   '/crm/leads': typeof CrmCrmLeadsRoute
   '/crm/proposals': typeof CrmCrmProposalsRoute
+  '/crm/reports': typeof CrmCrmReportsRoute
+  '/crm/settings': typeof CrmCrmSettingsRoute
+  '/crm/team': typeof CrmCrmTeamRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
   '/dashboard': typeof AuthenticatedDashboardIndexRoute
   '/crm': typeof CrmCrmIndexRoute
@@ -611,6 +643,7 @@ export interface FileRoutesById {
   '/features/magic-qr': typeof FeaturesMagicQrRoute
   '/features/review-management': typeof FeaturesReviewManagementRoute
   '/features/smart-scheduling': typeof FeaturesSmartSchedulingRoute
+  '/proposal/$token': typeof ProposalTokenRoute
   '/r/$slug': typeof RSlugRoute
   '/services/local-seo': typeof ServicesLocalSeoRoute
   '/services/local-seo-ahmedabad': typeof ServicesLocalSeoAhmedabadRoute
@@ -634,6 +667,9 @@ export interface FileRoutesById {
   '/_authenticated/dashboard/settings': typeof AuthenticatedDashboardSettingsRoute
   '/_crm/crm/leads': typeof CrmCrmLeadsRoute
   '/_crm/crm/proposals': typeof CrmCrmProposalsRoute
+  '/_crm/crm/reports': typeof CrmCrmReportsRoute
+  '/_crm/crm/settings': typeof CrmCrmSettingsRoute
+  '/_crm/crm/team': typeof CrmCrmTeamRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
   '/_authenticated/dashboard/': typeof AuthenticatedDashboardIndexRoute
   '/_crm/crm/': typeof CrmCrmIndexRoute
@@ -681,6 +717,7 @@ export interface FileRouteTypes {
     | '/features/magic-qr'
     | '/features/review-management'
     | '/features/smart-scheduling'
+    | '/proposal/$token'
     | '/r/$slug'
     | '/services/local-seo'
     | '/services/local-seo-ahmedabad'
@@ -704,6 +741,9 @@ export interface FileRouteTypes {
     | '/dashboard/settings'
     | '/crm/leads'
     | '/crm/proposals'
+    | '/crm/reports'
+    | '/crm/settings'
+    | '/crm/team'
     | '/api/public/leads'
     | '/dashboard/'
     | '/crm/'
@@ -747,6 +787,7 @@ export interface FileRouteTypes {
     | '/features/magic-qr'
     | '/features/review-management'
     | '/features/smart-scheduling'
+    | '/proposal/$token'
     | '/r/$slug'
     | '/services/local-seo'
     | '/services/local-seo-ahmedabad'
@@ -770,6 +811,9 @@ export interface FileRouteTypes {
     | '/dashboard/settings'
     | '/crm/leads'
     | '/crm/proposals'
+    | '/crm/reports'
+    | '/crm/settings'
+    | '/crm/team'
     | '/api/public/leads'
     | '/dashboard'
     | '/crm'
@@ -817,6 +861,7 @@ export interface FileRouteTypes {
     | '/features/magic-qr'
     | '/features/review-management'
     | '/features/smart-scheduling'
+    | '/proposal/$token'
     | '/r/$slug'
     | '/services/local-seo'
     | '/services/local-seo-ahmedabad'
@@ -840,6 +885,9 @@ export interface FileRouteTypes {
     | '/_authenticated/dashboard/settings'
     | '/_crm/crm/leads'
     | '/_crm/crm/proposals'
+    | '/_crm/crm/reports'
+    | '/_crm/crm/settings'
+    | '/_crm/crm/team'
     | '/api/public/leads'
     | '/_authenticated/dashboard/'
     | '/_crm/crm/'
@@ -886,6 +934,7 @@ export interface RootRouteChildren {
   FeaturesMagicQrRoute: typeof FeaturesMagicQrRoute
   FeaturesReviewManagementRoute: typeof FeaturesReviewManagementRoute
   FeaturesSmartSchedulingRoute: typeof FeaturesSmartSchedulingRoute
+  ProposalTokenRoute: typeof ProposalTokenRoute
   RSlugRoute: typeof RSlugRoute
   ServicesLocalSeoRoute: typeof ServicesLocalSeoRoute
   ServicesLocalSeoAhmedabadRoute: typeof ServicesLocalSeoAhmedabadRoute
@@ -1190,6 +1239,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FeaturesSmartSchedulingRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/proposal/$token': {
+      id: '/proposal/$token'
+      path: '/proposal/$token'
+      fullPath: '/proposal/$token'
+      preLoaderRoute: typeof ProposalTokenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/r/$slug': {
       id: '/r/$slug'
       path: '/r/$slug'
@@ -1358,6 +1414,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CrmCrmProposalsRouteImport
       parentRoute: typeof CrmCrmRoute
     }
+    '/_crm/crm/reports': {
+      id: '/_crm/crm/reports'
+      path: '/reports'
+      fullPath: '/crm/reports'
+      preLoaderRoute: typeof CrmCrmReportsRouteImport
+      parentRoute: typeof CrmCrmRoute
+    }
+    '/_crm/crm/settings': {
+      id: '/_crm/crm/settings'
+      path: '/settings'
+      fullPath: '/crm/settings'
+      preLoaderRoute: typeof CrmCrmSettingsRouteImport
+      parentRoute: typeof CrmCrmRoute
+    }
+    '/_crm/crm/team': {
+      id: '/_crm/crm/team'
+      path: '/team'
+      fullPath: '/crm/team'
+      preLoaderRoute: typeof CrmCrmTeamRouteImport
+      parentRoute: typeof CrmCrmRoute
+    }
     '/api/public/leads': {
       id: '/api/public/leads'
       path: '/api/public/leads'
@@ -1425,6 +1502,9 @@ const AuthenticatedRouteRouteWithChildren =
 interface CrmCrmRouteChildren {
   CrmCrmLeadsRoute: typeof CrmCrmLeadsRoute
   CrmCrmProposalsRoute: typeof CrmCrmProposalsRoute
+  CrmCrmReportsRoute: typeof CrmCrmReportsRoute
+  CrmCrmSettingsRoute: typeof CrmCrmSettingsRoute
+  CrmCrmTeamRoute: typeof CrmCrmTeamRoute
   CrmCrmIndexRoute: typeof CrmCrmIndexRoute
   CrmCrmLeadIdRoute: typeof CrmCrmLeadIdRoute
 }
@@ -1432,6 +1512,9 @@ interface CrmCrmRouteChildren {
 const CrmCrmRouteChildren: CrmCrmRouteChildren = {
   CrmCrmLeadsRoute: CrmCrmLeadsRoute,
   CrmCrmProposalsRoute: CrmCrmProposalsRoute,
+  CrmCrmReportsRoute: CrmCrmReportsRoute,
+  CrmCrmSettingsRoute: CrmCrmSettingsRoute,
+  CrmCrmTeamRoute: CrmCrmTeamRoute,
   CrmCrmIndexRoute: CrmCrmIndexRoute,
   CrmCrmLeadIdRoute: CrmCrmLeadIdRoute,
 }
@@ -1487,6 +1570,7 @@ const rootRouteChildren: RootRouteChildren = {
   FeaturesMagicQrRoute: FeaturesMagicQrRoute,
   FeaturesReviewManagementRoute: FeaturesReviewManagementRoute,
   FeaturesSmartSchedulingRoute: FeaturesSmartSchedulingRoute,
+  ProposalTokenRoute: ProposalTokenRoute,
   RSlugRoute: RSlugRoute,
   ServicesLocalSeoRoute: ServicesLocalSeoRoute,
   ServicesLocalSeoAhmedabadRoute: ServicesLocalSeoAhmedabadRoute,

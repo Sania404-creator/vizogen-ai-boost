@@ -100,7 +100,17 @@ function LeadDetail() {
     void queryClient.invalidateQueries({ queryKey: ["crm-dashboard"] });
   };
 
-  const patch = async (input: Parameters<typeof save>[0]["data"]) => {
+  type LeadPatch = {
+    id: string;
+    status?: string;
+    assignedTo?: string;
+    followUpOn?: string;
+    tags?: string[];
+    lostReason?: string;
+    markContacted?: boolean;
+  };
+
+  const patch = async (input: LeadPatch) => {
     setBusy(true);
     try {
       await save({ data: input });
