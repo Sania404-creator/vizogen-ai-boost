@@ -24,10 +24,10 @@ import {
   softwareApplicationSchema,
 } from "@/lib/aeo";
 
-const title = "Vizogen - Automate Your GMB Profile | Local SEO Agency in Ahmedabad";
-const socialTitle = "Vizogen - Automate Your GMB Profile | Local SEO Agency in Ahmedabad";
+const title = "Vizogen - Automate Your GMB Profile";
+const socialTitle = "Vizogen - Automate Your GMB Profile";
 const description =
-  "Vizogen is a leading local SEO agency in Ahmedabad helping businesses automate their Google Business Profile (GMB), rank higher in local search, and get found by more customers.";
+  "Vizogen automates your Google Business Profile (GMB) with AI posts, review replies and Magic QR — so you rank higher on Google Maps and get found by more customers.";
 const socialDescription = description;
 const ogImage = `${SITE_URL}/favicon.png`;
 const keywords =
