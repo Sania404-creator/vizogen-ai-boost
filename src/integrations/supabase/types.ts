@@ -849,6 +849,7 @@ export type Database = {
         Returns: {
           client_company: string
           client_name: string
+          created_at: string
           currency: string
           deliverables: string[]
           notes: string
@@ -859,6 +860,7 @@ export type Database = {
           terms: string
           title: string
           valid_until: string
+          version: number
         }[]
       }
       has_role: {
