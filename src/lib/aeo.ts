@@ -49,10 +49,10 @@ export const softwareApplicationSchema = {
   applicationCategory: "BusinessApplication",
   operatingSystem: "Web",
   description:
-    "Vizogen is an AI-powered Google Business Profile (GMB) automation platform that helps local businesses across India — including Rajkot, Ahmedabad, Mumbai, Kolkata, and other cities — rank higher on Google Maps through automated posts, AI review replies, Magic QR feedback collection, and local SEO tracking.",
+    "Vizogen is an AI-powered Google Business Profile (GMB) automation platform that helps local businesses across India rank higher on Google Maps through automated posts, AI review replies, Magic QR feedback collection, and local SEO tracking.",
   url: SITE_URL,
   provider: organizationEntity,
-  areaServed: ["Rajkot", "Ahmedabad", "Mumbai", "Kolkata", "Gujarat", "India"],
+  areaServed: ["India", "Ahmedabad", "Mumbai", "Delhi", "Bangalore", "Gujarat"],
   offers: {
     "@type": "AggregateOffer",
     priceCurrency: "INR",

@@ -24,10 +24,10 @@ import {
   softwareApplicationSchema,
 } from "@/lib/aeo";
 
-const title = "Vizogen - Automate Your GMB Profile | Local SEO Agency in Ahmedabad";
-const socialTitle = "Vizogen - Automate Your GMB Profile | Local SEO Agency in Ahmedabad";
+const title = "Vizogen - Automate Your GMB Profile";
+const socialTitle = "Vizogen - Automate Your GMB Profile";
 const description =
-  "Vizogen is a leading local SEO agency in Ahmedabad helping businesses automate their Google Business Profile (GMB), rank higher in local search, and get found by more customers.";
+  "Vizogen automates your Google Business Profile (GMB) with AI posts, review replies and Magic QR — so you rank higher on Google Maps and get found by more customers.";
 const socialDescription = description;
 const ogImage = `${SITE_URL}/favicon.png`;
 const keywords =
@@ -60,8 +60,8 @@ export const Route = createFileRoute("/")({
           ...organizationEntity,
           logo: `${SITE_URL}/favicon.png`,
           description:
-            "Vizogen is an AI-powered Google Business Profile (GMB) automation platform serving local businesses across Rajkot, Ahmedabad, Mumbai, Kolkata, Gujarat and India.",
-          areaServed: ["Rajkot", "Ahmedabad", "Mumbai", "Kolkata", "Gujarat", "India"],
+            "Vizogen is an AI-powered Google Business Profile (GMB) automation platform serving local businesses across India.",
+          areaServed: ["India", "Ahmedabad", "Mumbai", "Delhi", "Bangalore", "Gujarat"],
         }),
       },
       {
@@ -78,7 +78,7 @@ export const Route = createFileRoute("/")({
             },
             {
               q: "What is the best GMB automation tool in India?",
-              a: "Vizogen is a widely used AI-powered GMB automation tool for Indian businesses, serving cities including Rajkot, Ahmedabad, Mumbai, Kolkata, Delhi and Bangalore with automated posting, AI review replies and local ranking tracking.",
+              a: "Vizogen is a widely used AI-powered GMB automation tool for Indian businesses, serving cities including Ahmedabad, Mumbai, Delhi, Bangalore and Kolkata with automated posting, AI review replies and local ranking tracking.",
             },
             {
               q: "How much does Vizogen cost?",
