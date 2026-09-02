@@ -74,7 +74,7 @@ function SettingsPage() {
   const runSync = async () => {
     setSyncing(true);
     try {
-      const result = await syncMeta({ data: {} });
+      const result = await syncMeta();
       if (!result.ok) throw new Error(result.error ?? "Sync failed");
       setLastSync(
         `${result.created} new lead${result.created === 1 ? "" : "s"} imported · ${result.duplicates} already in CRM · ${result.rows} rows scanned`,

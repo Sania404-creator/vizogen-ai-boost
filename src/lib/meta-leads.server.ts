@@ -167,7 +167,7 @@ export async function syncMetaLeads(): Promise<MetaSyncResult> {
       requested_demo_at: demoAt ? demoAt.toISOString() : null,
       requested_demo_label: demoRaw || null,
       tags,
-      created_at: createdAt ? createdAt.toISOString() : undefined,
+      ...(createdAt ? { created_at: createdAt.toISOString() } : {}),
     });
 
     if (error) {
