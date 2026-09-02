@@ -593,3 +593,124 @@ export const markNotificationsRead = createServerFn({ method: "POST" })
       .is("read_at", null);
     return { ok: true };
   });
+
+export interface FunnelStep {
+  key: string;
+  label: string;
+  count: number;
+}
+
+export interface FunnelSource {
+  source: string;
+  steps: FunnelStep[];
+}
+
+const STAGE_ORDER = [
+  "new",
+  "contacted",
+  "demo_scheduled",
+  "demo_completed",
+  "proposal_sent",
+  "negotiation",
+  "won",
+];
+
+export const FUNNEL_STEPS = [
+  { key: "leads", label: "Leads captured" },
+  { key: "contacted", label: "Contacted" },
+  { key: "demo", label: "Demo booked" },
+  { key: "demoDone", label: "Demo completed" },
+  { key: "proposal", label: "Proposal sent" },
+  { key: "viewed", label: "Proposal viewed" },
+  { key: "won", label: "Closed won" },
+] as const;
+
+export const getSalesFunnel = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((data: unknown) =>
+    z.object({ days: z.number().int().min(0).max(3650).default(90) }).parse(data ?? {}),
+  )
+  .handler(async ({ data, context }) => {
+    const since = data.days
+      ? new Date(Date.now() - data.days * 864e5).toISOString()
+      : "1970-01-01T00:00:00.000Z";
+
+    const { data: leadRows } = await context.supabase
+      .from("crm_leads")
+      .select("id, source, status, requested_demo_at, last_contacted_at, created_at, updated_at")
+      .gte("created_at", since);
+    const { data: proposalRows } = await context.supabase
+      .from("crm_proposals")
+      .select("lead_id, sent_at, viewed_at, pricing, currency, status");
+
+    const leads = leadRows ?? [];
+    const proposals = proposalRows ?? [];
+
+    const sentByLead = new Set(proposals.filter((p) => p.sent_at).map((p) => p.lead_id));
+    const viewedByLead = new Set(proposals.filter((p) => p.viewed_at).map((p) => p.lead_id));
+    const anyProposal = new Set(proposals.map((p) => p.lead_id));
+
+    const stageIdx = (s: string) => STAGE_ORDER.indexOf(s);
+
+    const flags = leads.map((l) => {
+      const idx = stageIdx(l.status);
+      const contacted = Boolean(l.last_contacted_at) || idx >= 1 || anyProposal.has(l.id);
+      const demo = Boolean(l.requested_demo_at) || idx >= 2 || anyProposal.has(l.id);
+      const demoDone = idx >= 3 || anyProposal.has(l.id);
+      const proposal = sentByLead.has(l.id) || idx >= 4;
+      return {
+        source: l.source,
+        leads: true,
+        contacted,
+        demo,
+        demoDone,
+        proposal,
+        viewed: viewedByLead.has(l.id),
+        won: l.status === "won",
+        lost: l.status === "lost",
+        createdAt: l.created_at,
+        updatedAt: l.updated_at,
+      };
+    });
+
+    const build = (rows: typeof flags): FunnelStep[] =>
+      FUNNEL_STEPS.map((s) => ({
+        key: s.key,
+        label: s.label,
+        count: rows.filter((r) => r[s.key as keyof typeof r] === true).length,
+      }));
+
+    const sources = Array.from(new Set(flags.map((f) => f.source))).sort();
+    const bySource: FunnelSource[] = sources.map((source) => ({
+      source,
+      steps: build(flags.filter((f) => f.source === source)),
+    }));
+
+    const wonRows = flags.filter((f) => f.won);
+    const avgDaysToWin = wonRows.length
+      ? Math.round(
+          (wonRows.reduce(
+            (sum, r) => sum + (new Date(r.updatedAt).getTime() - new Date(r.createdAt).getTime()),
+            0,
+          ) /
+            wonRows.length /
+            864e5) *
+            10,
+        ) / 10
+      : 0;
+
+    const wonValue = proposals
+      .filter((p) => p.status === "accepted")
+      .reduce((sum, p) => {
+        const lines = Array.isArray(p.pricing) ? (p.pricing as { qty?: number; price?: number }[]) : [];
+        return sum + lines.reduce((s, l) => s + (l.qty ?? 0) * (l.price ?? 0), 0);
+      }, 0);
+
+    return {
+      overall: build(flags),
+      bySource,
+      lost: flags.filter((f) => f.lost).length,
+      avgDaysToWin,
+      wonValue,
+    };
+  });

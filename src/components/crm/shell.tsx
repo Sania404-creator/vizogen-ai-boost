@@ -8,6 +8,7 @@ import {
   KanbanSquare,
   FileText,
   BarChart3,
+  Filter,
   Settings,
   LayoutDashboard,
   LogOut,
@@ -25,6 +26,7 @@ const NAV = [
   { to: "/crm", label: "Dashboard", icon: LayoutDashboard, adminOnly: false },
   { to: "/crm/leads", label: "Leads", icon: KanbanSquare, adminOnly: false },
   { to: "/crm/proposals", label: "Proposals", icon: FileText, adminOnly: false },
+  { to: "/crm/funnel", label: "Sales funnel", icon: Filter, adminOnly: false },
   { to: "/crm/reports", label: "Reports", icon: BarChart3, adminOnly: false },
   { to: "/crm/team", label: "Team", icon: Users, adminOnly: true },
   { to: "/crm/settings", label: "Settings", icon: Settings, adminOnly: false },
@@ -113,10 +115,15 @@ export function CrmShell({
     <div className="min-h-screen bg-muted/30">
       <div className="mx-auto flex w-full max-w-[1500px]">
         <aside className="sticky top-0 hidden h-screen w-60 shrink-0 flex-col border-r border-border bg-card px-4 py-6 lg:flex">
-          <Link to="/crm" className="mb-8 flex items-center gap-2 px-2">
-            <img src={logo} alt="Vizogen" width={30} height={30} className="size-[30px]" />
-            <span className="text-base font-bold tracking-tight text-foreground font-display">
-              Vizogen CRM
+          <Link to="/crm" className="mb-8 flex items-center gap-2.5 px-2">
+            <img src={logo} alt="Vizogen" width={34} height={34} className="size-[34px] rounded-xl" />
+            <span className="leading-tight">
+              <span className="block text-base font-bold tracking-tight text-gradient font-display">
+                Vizogen
+              </span>
+              <span className="block text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground">
+                Sales CRM
+              </span>
             </span>
           </Link>
           {nav}
