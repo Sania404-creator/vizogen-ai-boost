@@ -10,6 +10,8 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as BakeryMarketingSoftwareRouteImport } from './routes/bakery-marketing-software'
 import { Route as CarGarageMarketingSoftwareRouteImport } from './routes/car-garage-marketing-software'
 import { Route as ClinicMarketingSoftwareRouteImport } from './routes/clinic-marketing-software'
@@ -37,12 +39,14 @@ import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as TermsAndConditionsRouteImport } from './routes/terms-and-conditions'
 import { Route as TourTravelMarketingSoftwareRouteImport } from './routes/tour-travel-marketing-software'
 import { Route as YogaWellnessMarketingSoftwareRouteImport } from './routes/yoga-wellness-marketing-software'
+import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as FeaturesAiPostGenerationRouteImport } from './routes/features.ai-post-generation'
 import { Route as FeaturesMagicQrRouteImport } from './routes/features.magic-qr'
 import { Route as FeaturesReviewManagementRouteImport } from './routes/features.review-management'
 import { Route as FeaturesSmartSchedulingRouteImport } from './routes/features.smart-scheduling'
+import { Route as RSlugRouteImport } from './routes/r.$slug'
 import { Route as ServicesLocalSeoRouteImport } from './routes/services.local-seo'
 import { Route as ServicesLocalSeoAhmedabadRouteImport } from './routes/services.local-seo-ahmedabad'
 import { Route as ServicesLocalSeoBangaloreRouteImport } from './routes/services.local-seo-bangalore'
@@ -58,10 +62,26 @@ import { Route as ServicesLocalSeoPuneRouteImport } from './routes/services.loca
 import { Route as ServicesLocalSeoRajkotRouteImport } from './routes/services.local-seo-rajkot'
 import { Route as ServicesLocalSeoSuratRouteImport } from './routes/services.local-seo-surat'
 import { Route as ServicesLocalSeoVadodaraRouteImport } from './routes/services.local-seo-vadodara'
+import { Route as AuthenticatedDashboardIndexRouteImport } from './routes/_authenticated/dashboard.index'
+import { Route as AuthenticatedDashboardMagicQrRouteImport } from './routes/_authenticated/dashboard.magic-qr'
+import { Route as AuthenticatedDashboardPostsRouteImport } from './routes/_authenticated/dashboard.posts'
+import { Route as AuthenticatedDashboardReviewsRouteImport } from './routes/_authenticated/dashboard.reviews'
+import { Route as AuthenticatedDashboardSettingsRouteImport } from './routes/_authenticated/dashboard.settings'
+import { Route as ApiPublicCronPublishDueRouteImport } from './routes/api/public/cron/publish-due'
+import { Route as ApiPublicGoogleCallbackRouteImport } from './routes/api/public/google/callback'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BakeryMarketingSoftwareRoute = BakeryMarketingSoftwareRouteImport.update({
@@ -207,6 +227,11 @@ const YogaWellnessMarketingSoftwareRoute =
     path: '/yoga-wellness-marketing-software',
     getParentRoute: () => rootRouteImport,
   } as any)
+const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const BlogIndexRoute = BlogIndexRouteImport.update({
   id: '/blog/',
   path: '/blog/',
@@ -237,6 +262,11 @@ const FeaturesReviewManagementRoute =
 const FeaturesSmartSchedulingRoute = FeaturesSmartSchedulingRouteImport.update({
   id: '/features/smart-scheduling',
   path: '/features/smart-scheduling',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RSlugRoute = RSlugRouteImport.update({
+  id: '/r/$slug',
+  path: '/r/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ServicesLocalSeoRoute = ServicesLocalSeoRouteImport.update({
@@ -318,9 +348,50 @@ const ServicesLocalSeoVadodaraRoute =
     path: '/services/local-seo-vadodara',
     getParentRoute: () => rootRouteImport,
   } as any)
+const AuthenticatedDashboardIndexRoute =
+  AuthenticatedDashboardIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedDashboardRoute,
+  } as any)
+const AuthenticatedDashboardMagicQrRoute =
+  AuthenticatedDashboardMagicQrRouteImport.update({
+    id: '/magic-qr',
+    path: '/magic-qr',
+    getParentRoute: () => AuthenticatedDashboardRoute,
+  } as any)
+const AuthenticatedDashboardPostsRoute =
+  AuthenticatedDashboardPostsRouteImport.update({
+    id: '/posts',
+    path: '/posts',
+    getParentRoute: () => AuthenticatedDashboardRoute,
+  } as any)
+const AuthenticatedDashboardReviewsRoute =
+  AuthenticatedDashboardReviewsRouteImport.update({
+    id: '/reviews',
+    path: '/reviews',
+    getParentRoute: () => AuthenticatedDashboardRoute,
+  } as any)
+const AuthenticatedDashboardSettingsRoute =
+  AuthenticatedDashboardSettingsRouteImport.update({
+    id: '/settings',
+    path: '/settings',
+    getParentRoute: () => AuthenticatedDashboardRoute,
+  } as any)
+const ApiPublicCronPublishDueRoute = ApiPublicCronPublishDueRouteImport.update({
+  id: '/api/public/cron/publish-due',
+  path: '/api/public/cron/publish-due',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiPublicGoogleCallbackRoute = ApiPublicGoogleCallbackRouteImport.update({
+  id: '/api/public/google/callback',
+  path: '/api/public/google/callback',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/bakery-marketing-software': typeof BakeryMarketingSoftwareRoute
   '/car-garage-marketing-software': typeof CarGarageMarketingSoftwareRoute
   '/clinic-marketing-software': typeof ClinicMarketingSoftwareRoute
@@ -348,11 +419,13 @@ export interface FileRoutesByFullPath {
   '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/tour-travel-marketing-software': typeof TourTravelMarketingSoftwareRoute
   '/yoga-wellness-marketing-software': typeof YogaWellnessMarketingSoftwareRoute
+  '/dashboard': typeof AuthenticatedDashboardRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
   '/features/ai-post-generation': typeof FeaturesAiPostGenerationRoute
   '/features/magic-qr': typeof FeaturesMagicQrRoute
   '/features/review-management': typeof FeaturesReviewManagementRoute
   '/features/smart-scheduling': typeof FeaturesSmartSchedulingRoute
+  '/r/$slug': typeof RSlugRoute
   '/services/local-seo': typeof ServicesLocalSeoRoute
   '/services/local-seo-ahmedabad': typeof ServicesLocalSeoAhmedabadRoute
   '/services/local-seo-bangalore': typeof ServicesLocalSeoBangaloreRoute
@@ -369,9 +442,17 @@ export interface FileRoutesByFullPath {
   '/services/local-seo-surat': typeof ServicesLocalSeoSuratRoute
   '/services/local-seo-vadodara': typeof ServicesLocalSeoVadodaraRoute
   '/blog/': typeof BlogIndexRoute
+  '/dashboard/magic-qr': typeof AuthenticatedDashboardMagicQrRoute
+  '/dashboard/posts': typeof AuthenticatedDashboardPostsRoute
+  '/dashboard/reviews': typeof AuthenticatedDashboardReviewsRoute
+  '/dashboard/settings': typeof AuthenticatedDashboardSettingsRoute
+  '/dashboard/': typeof AuthenticatedDashboardIndexRoute
+  '/api/public/cron/publish-due': typeof ApiPublicCronPublishDueRoute
+  '/api/public/google/callback': typeof ApiPublicGoogleCallbackRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/bakery-marketing-software': typeof BakeryMarketingSoftwareRoute
   '/car-garage-marketing-software': typeof CarGarageMarketingSoftwareRoute
   '/clinic-marketing-software': typeof ClinicMarketingSoftwareRoute
@@ -404,6 +485,7 @@ export interface FileRoutesByTo {
   '/features/magic-qr': typeof FeaturesMagicQrRoute
   '/features/review-management': typeof FeaturesReviewManagementRoute
   '/features/smart-scheduling': typeof FeaturesSmartSchedulingRoute
+  '/r/$slug': typeof RSlugRoute
   '/services/local-seo': typeof ServicesLocalSeoRoute
   '/services/local-seo-ahmedabad': typeof ServicesLocalSeoAhmedabadRoute
   '/services/local-seo-bangalore': typeof ServicesLocalSeoBangaloreRoute
@@ -420,10 +502,19 @@ export interface FileRoutesByTo {
   '/services/local-seo-surat': typeof ServicesLocalSeoSuratRoute
   '/services/local-seo-vadodara': typeof ServicesLocalSeoVadodaraRoute
   '/blog': typeof BlogIndexRoute
+  '/dashboard/magic-qr': typeof AuthenticatedDashboardMagicQrRoute
+  '/dashboard/posts': typeof AuthenticatedDashboardPostsRoute
+  '/dashboard/reviews': typeof AuthenticatedDashboardReviewsRoute
+  '/dashboard/settings': typeof AuthenticatedDashboardSettingsRoute
+  '/dashboard': typeof AuthenticatedDashboardIndexRoute
+  '/api/public/cron/publish-due': typeof ApiPublicCronPublishDueRoute
+  '/api/public/google/callback': typeof ApiPublicGoogleCallbackRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/auth': typeof AuthRoute
   '/bakery-marketing-software': typeof BakeryMarketingSoftwareRoute
   '/car-garage-marketing-software': typeof CarGarageMarketingSoftwareRoute
   '/clinic-marketing-software': typeof ClinicMarketingSoftwareRoute
@@ -451,11 +542,13 @@ export interface FileRoutesById {
   '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/tour-travel-marketing-software': typeof TourTravelMarketingSoftwareRoute
   '/yoga-wellness-marketing-software': typeof YogaWellnessMarketingSoftwareRoute
+  '/_authenticated/dashboard': typeof AuthenticatedDashboardRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
   '/features/ai-post-generation': typeof FeaturesAiPostGenerationRoute
   '/features/magic-qr': typeof FeaturesMagicQrRoute
   '/features/review-management': typeof FeaturesReviewManagementRoute
   '/features/smart-scheduling': typeof FeaturesSmartSchedulingRoute
+  '/r/$slug': typeof RSlugRoute
   '/services/local-seo': typeof ServicesLocalSeoRoute
   '/services/local-seo-ahmedabad': typeof ServicesLocalSeoAhmedabadRoute
   '/services/local-seo-bangalore': typeof ServicesLocalSeoBangaloreRoute
@@ -472,11 +565,19 @@ export interface FileRoutesById {
   '/services/local-seo-surat': typeof ServicesLocalSeoSuratRoute
   '/services/local-seo-vadodara': typeof ServicesLocalSeoVadodaraRoute
   '/blog/': typeof BlogIndexRoute
+  '/_authenticated/dashboard/magic-qr': typeof AuthenticatedDashboardMagicQrRoute
+  '/_authenticated/dashboard/posts': typeof AuthenticatedDashboardPostsRoute
+  '/_authenticated/dashboard/reviews': typeof AuthenticatedDashboardReviewsRoute
+  '/_authenticated/dashboard/settings': typeof AuthenticatedDashboardSettingsRoute
+  '/_authenticated/dashboard/': typeof AuthenticatedDashboardIndexRoute
+  '/api/public/cron/publish-due': typeof ApiPublicCronPublishDueRoute
+  '/api/public/google/callback': typeof ApiPublicGoogleCallbackRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/auth'
     | '/bakery-marketing-software'
     | '/car-garage-marketing-software'
     | '/clinic-marketing-software'
@@ -504,11 +605,13 @@ export interface FileRouteTypes {
     | '/terms-and-conditions'
     | '/tour-travel-marketing-software'
     | '/yoga-wellness-marketing-software'
+    | '/dashboard'
     | '/blog/$slug'
     | '/features/ai-post-generation'
     | '/features/magic-qr'
     | '/features/review-management'
     | '/features/smart-scheduling'
+    | '/r/$slug'
     | '/services/local-seo'
     | '/services/local-seo-ahmedabad'
     | '/services/local-seo-bangalore'
@@ -525,9 +628,17 @@ export interface FileRouteTypes {
     | '/services/local-seo-surat'
     | '/services/local-seo-vadodara'
     | '/blog/'
+    | '/dashboard/magic-qr'
+    | '/dashboard/posts'
+    | '/dashboard/reviews'
+    | '/dashboard/settings'
+    | '/dashboard/'
+    | '/api/public/cron/publish-due'
+    | '/api/public/google/callback'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/auth'
     | '/bakery-marketing-software'
     | '/car-garage-marketing-software'
     | '/clinic-marketing-software'
@@ -560,6 +671,7 @@ export interface FileRouteTypes {
     | '/features/magic-qr'
     | '/features/review-management'
     | '/features/smart-scheduling'
+    | '/r/$slug'
     | '/services/local-seo'
     | '/services/local-seo-ahmedabad'
     | '/services/local-seo-bangalore'
@@ -576,9 +688,18 @@ export interface FileRouteTypes {
     | '/services/local-seo-surat'
     | '/services/local-seo-vadodara'
     | '/blog'
+    | '/dashboard/magic-qr'
+    | '/dashboard/posts'
+    | '/dashboard/reviews'
+    | '/dashboard/settings'
+    | '/dashboard'
+    | '/api/public/cron/publish-due'
+    | '/api/public/google/callback'
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
+    | '/auth'
     | '/bakery-marketing-software'
     | '/car-garage-marketing-software'
     | '/clinic-marketing-software'
@@ -606,11 +727,13 @@ export interface FileRouteTypes {
     | '/terms-and-conditions'
     | '/tour-travel-marketing-software'
     | '/yoga-wellness-marketing-software'
+    | '/_authenticated/dashboard'
     | '/blog/$slug'
     | '/features/ai-post-generation'
     | '/features/magic-qr'
     | '/features/review-management'
     | '/features/smart-scheduling'
+    | '/r/$slug'
     | '/services/local-seo'
     | '/services/local-seo-ahmedabad'
     | '/services/local-seo-bangalore'
@@ -627,10 +750,19 @@ export interface FileRouteTypes {
     | '/services/local-seo-surat'
     | '/services/local-seo-vadodara'
     | '/blog/'
+    | '/_authenticated/dashboard/magic-qr'
+    | '/_authenticated/dashboard/posts'
+    | '/_authenticated/dashboard/reviews'
+    | '/_authenticated/dashboard/settings'
+    | '/_authenticated/dashboard/'
+    | '/api/public/cron/publish-due'
+    | '/api/public/google/callback'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AuthRoute: typeof AuthRoute
   BakeryMarketingSoftwareRoute: typeof BakeryMarketingSoftwareRoute
   CarGarageMarketingSoftwareRoute: typeof CarGarageMarketingSoftwareRoute
   ClinicMarketingSoftwareRoute: typeof ClinicMarketingSoftwareRoute
@@ -663,6 +795,7 @@ export interface RootRouteChildren {
   FeaturesMagicQrRoute: typeof FeaturesMagicQrRoute
   FeaturesReviewManagementRoute: typeof FeaturesReviewManagementRoute
   FeaturesSmartSchedulingRoute: typeof FeaturesSmartSchedulingRoute
+  RSlugRoute: typeof RSlugRoute
   ServicesLocalSeoRoute: typeof ServicesLocalSeoRoute
   ServicesLocalSeoAhmedabadRoute: typeof ServicesLocalSeoAhmedabadRoute
   ServicesLocalSeoBangaloreRoute: typeof ServicesLocalSeoBangaloreRoute
@@ -679,6 +812,8 @@ export interface RootRouteChildren {
   ServicesLocalSeoSuratRoute: typeof ServicesLocalSeoSuratRoute
   ServicesLocalSeoVadodaraRoute: typeof ServicesLocalSeoVadodaraRoute
   BlogIndexRoute: typeof BlogIndexRoute
+  ApiPublicCronPublishDueRoute: typeof ApiPublicCronPublishDueRoute
+  ApiPublicGoogleCallbackRoute: typeof ApiPublicGoogleCallbackRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -688,6 +823,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/bakery-marketing-software': {
@@ -879,6 +1028,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof YogaWellnessMarketingSoftwareRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/dashboard': {
+      id: '/_authenticated/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AuthenticatedDashboardRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/blog/': {
       id: '/blog/'
       path: '/blog'
@@ -919,6 +1075,13 @@ declare module '@tanstack/react-router' {
       path: '/features/smart-scheduling'
       fullPath: '/features/smart-scheduling'
       preLoaderRoute: typeof FeaturesSmartSchedulingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/r/$slug': {
+      id: '/r/$slug'
+      path: '/r/$slug'
+      fullPath: '/r/$slug'
+      preLoaderRoute: typeof RSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/services/local-seo': {
@@ -1026,11 +1189,95 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesLocalSeoVadodaraRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/dashboard/': {
+      id: '/_authenticated/dashboard/'
+      path: '/'
+      fullPath: '/dashboard/'
+      preLoaderRoute: typeof AuthenticatedDashboardIndexRouteImport
+      parentRoute: typeof AuthenticatedDashboardRoute
+    }
+    '/_authenticated/dashboard/magic-qr': {
+      id: '/_authenticated/dashboard/magic-qr'
+      path: '/magic-qr'
+      fullPath: '/dashboard/magic-qr'
+      preLoaderRoute: typeof AuthenticatedDashboardMagicQrRouteImport
+      parentRoute: typeof AuthenticatedDashboardRoute
+    }
+    '/_authenticated/dashboard/posts': {
+      id: '/_authenticated/dashboard/posts'
+      path: '/posts'
+      fullPath: '/dashboard/posts'
+      preLoaderRoute: typeof AuthenticatedDashboardPostsRouteImport
+      parentRoute: typeof AuthenticatedDashboardRoute
+    }
+    '/_authenticated/dashboard/reviews': {
+      id: '/_authenticated/dashboard/reviews'
+      path: '/reviews'
+      fullPath: '/dashboard/reviews'
+      preLoaderRoute: typeof AuthenticatedDashboardReviewsRouteImport
+      parentRoute: typeof AuthenticatedDashboardRoute
+    }
+    '/_authenticated/dashboard/settings': {
+      id: '/_authenticated/dashboard/settings'
+      path: '/settings'
+      fullPath: '/dashboard/settings'
+      preLoaderRoute: typeof AuthenticatedDashboardSettingsRouteImport
+      parentRoute: typeof AuthenticatedDashboardRoute
+    }
+    '/api/public/cron/publish-due': {
+      id: '/api/public/cron/publish-due'
+      path: '/api/public/cron/publish-due'
+      fullPath: '/api/public/cron/publish-due'
+      preLoaderRoute: typeof ApiPublicCronPublishDueRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/public/google/callback': {
+      id: '/api/public/google/callback'
+      path: '/api/public/google/callback'
+      fullPath: '/api/public/google/callback'
+      preLoaderRoute: typeof ApiPublicGoogleCallbackRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
+interface AuthenticatedDashboardRouteChildren {
+  AuthenticatedDashboardMagicQrRoute: typeof AuthenticatedDashboardMagicQrRoute
+  AuthenticatedDashboardPostsRoute: typeof AuthenticatedDashboardPostsRoute
+  AuthenticatedDashboardReviewsRoute: typeof AuthenticatedDashboardReviewsRoute
+  AuthenticatedDashboardSettingsRoute: typeof AuthenticatedDashboardSettingsRoute
+  AuthenticatedDashboardIndexRoute: typeof AuthenticatedDashboardIndexRoute
+}
+
+const AuthenticatedDashboardRouteChildren: AuthenticatedDashboardRouteChildren =
+  {
+    AuthenticatedDashboardMagicQrRoute: AuthenticatedDashboardMagicQrRoute,
+    AuthenticatedDashboardPostsRoute: AuthenticatedDashboardPostsRoute,
+    AuthenticatedDashboardReviewsRoute: AuthenticatedDashboardReviewsRoute,
+    AuthenticatedDashboardSettingsRoute: AuthenticatedDashboardSettingsRoute,
+    AuthenticatedDashboardIndexRoute: AuthenticatedDashboardIndexRoute,
+  }
+
+const AuthenticatedDashboardRouteWithChildren =
+  AuthenticatedDashboardRoute._addFileChildren(
+    AuthenticatedDashboardRouteChildren,
+  )
+
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRouteWithChildren
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedDashboardRoute: AuthenticatedDashboardRouteWithChildren,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AuthRoute: AuthRoute,
   BakeryMarketingSoftwareRoute: BakeryMarketingSoftwareRoute,
   CarGarageMarketingSoftwareRoute: CarGarageMarketingSoftwareRoute,
   ClinicMarketingSoftwareRoute: ClinicMarketingSoftwareRoute,
@@ -1063,6 +1310,7 @@ const rootRouteChildren: RootRouteChildren = {
   FeaturesMagicQrRoute: FeaturesMagicQrRoute,
   FeaturesReviewManagementRoute: FeaturesReviewManagementRoute,
   FeaturesSmartSchedulingRoute: FeaturesSmartSchedulingRoute,
+  RSlugRoute: RSlugRoute,
   ServicesLocalSeoRoute: ServicesLocalSeoRoute,
   ServicesLocalSeoAhmedabadRoute: ServicesLocalSeoAhmedabadRoute,
   ServicesLocalSeoBangaloreRoute: ServicesLocalSeoBangaloreRoute,
@@ -1079,6 +1327,8 @@ const rootRouteChildren: RootRouteChildren = {
   ServicesLocalSeoSuratRoute: ServicesLocalSeoSuratRoute,
   ServicesLocalSeoVadodaraRoute: ServicesLocalSeoVadodaraRoute,
   BlogIndexRoute: BlogIndexRoute,
+  ApiPublicCronPublishDueRoute: ApiPublicCronPublishDueRoute,
+  ApiPublicGoogleCallbackRoute: ApiPublicGoogleCallbackRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
