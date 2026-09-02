@@ -1,6 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
+import { SITE_URL } from "@/lib/aeo";
 
 export interface PricingLine {
   item: string;
@@ -193,7 +194,6 @@ export const sendProposal = createServerFn({ method: "POST" })
         id: z.string().uuid(),
         subject: z.string().trim().min(3).max(200),
         message: z.string().trim().min(10).max(4000),
-        origin: z.string().trim().max(200),
       })
       .parse(input),
   )
@@ -206,7 +206,7 @@ export const sendProposal = createServerFn({ method: "POST" })
     if (error || !proposal) throw new Error("Proposal not found.");
     const row = proposal as unknown as Proposal;
 
-    const link = `${data.origin.replace(/\/$/, "")}/proposal/${row.share_token}`;
+    const link = `${SITE_URL}/proposal/${row.share_token}`;
     const { sendGmail } = await import("@/lib/email.server");
     const { buildProposalEmail } = await import("@/lib/crm-emails");
     const sent = await sendGmail(
