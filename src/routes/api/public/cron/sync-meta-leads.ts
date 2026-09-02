@@ -9,12 +9,36 @@ function json(body: unknown, status = 200) {
 
 async function run(request: Request) {
   const secret = process.env["CRM_WEBHOOK_SECRET"];
-  if (!secret) return json({ error: "Endpoint not configured" }, 503);
+  const cronToken = request.headers.get("x-cron-token");
 
-  const provided =
-    request.headers.get("x-vizogen-secret") ??
-    (request.headers.get("authorization") ?? "").replace(/^Bearer\s+/i, "");
-  if (provided !== secret) return json({ error: "Unauthorized" }, 401);
+  let authorized = false;
+  if (secret) {
+    const provided =
+      request.headers.get("x-vizogen-secret") ??
+      (request.headers.get("authorization") ?? "").replace(/^Bearer\s+/i, "");
+    if (provided && provided === secret) authorized = true;
+  }
+  if (!authorized && cronToken) {
+    // Hourly pg_cron job authenticates with a token stored in the database.
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const lookup = supabaseAdmin as unknown as {
+      from(table: "crm_integration_settings"): {
+        select(columns: "value"): {
+          eq(column: "key", value: string): {
+            maybeSingle(): PromiseLike<{ data: { value: string } | null }>;
+          };
+        };
+      };
+    };
+    const { data } = await lookup
+      .from("crm_integration_settings")
+      .select("value")
+      .eq("key", "meta_sync_token")
+      .maybeSingle();
+    if (data?.value && cronToken === data.value) authorized = true;
+  }
+  if (!secret && !cronToken) return json({ error: "Endpoint not configured" }, 503);
+  if (!authorized) return json({ error: "Unauthorized" }, 401);
 
   const { syncMetaLeads } = await import("@/lib/meta-leads.server");
   const result = await syncMetaLeads();
