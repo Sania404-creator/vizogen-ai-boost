@@ -64,6 +64,7 @@ import { Route as ServicesLocalSeoSuratRouteImport } from './routes/services.loc
 import { Route as ServicesLocalSeoVadodaraRouteImport } from './routes/services.local-seo-vadodara'
 import { Route as AuthenticatedDashboardIndexRouteImport } from './routes/_authenticated/dashboard.index'
 import { Route as AuthenticatedDashboardPostsRouteImport } from './routes/_authenticated/dashboard.posts'
+import { Route as AuthenticatedDashboardReviewsRouteImport } from './routes/_authenticated/dashboard.reviews'
 import { Route as ApiPublicCronPublishDueRouteImport } from './routes/api/public/cron/publish-due'
 import { Route as ApiPublicGoogleCallbackRouteImport } from './routes/api/public/google/callback'
 
@@ -357,6 +358,12 @@ const AuthenticatedDashboardPostsRoute =
     path: '/posts',
     getParentRoute: () => AuthenticatedDashboardRoute,
   } as any)
+const AuthenticatedDashboardReviewsRoute =
+  AuthenticatedDashboardReviewsRouteImport.update({
+    id: '/reviews',
+    path: '/reviews',
+    getParentRoute: () => AuthenticatedDashboardRoute,
+  } as any)
 const ApiPublicCronPublishDueRoute = ApiPublicCronPublishDueRouteImport.update({
   id: '/api/public/cron/publish-due',
   path: '/api/public/cron/publish-due',
@@ -422,6 +429,7 @@ export interface FileRoutesByFullPath {
   '/services/local-seo-vadodara': typeof ServicesLocalSeoVadodaraRoute
   '/blog/': typeof BlogIndexRoute
   '/dashboard/posts': typeof AuthenticatedDashboardPostsRoute
+  '/dashboard/reviews': typeof AuthenticatedDashboardReviewsRoute
   '/dashboard/': typeof AuthenticatedDashboardIndexRoute
   '/api/public/cron/publish-due': typeof ApiPublicCronPublishDueRoute
   '/api/public/google/callback': typeof ApiPublicGoogleCallbackRoute
@@ -479,6 +487,7 @@ export interface FileRoutesByTo {
   '/services/local-seo-vadodara': typeof ServicesLocalSeoVadodaraRoute
   '/blog': typeof BlogIndexRoute
   '/dashboard/posts': typeof AuthenticatedDashboardPostsRoute
+  '/dashboard/reviews': typeof AuthenticatedDashboardReviewsRoute
   '/dashboard': typeof AuthenticatedDashboardIndexRoute
   '/api/public/cron/publish-due': typeof ApiPublicCronPublishDueRoute
   '/api/public/google/callback': typeof ApiPublicGoogleCallbackRoute
@@ -539,6 +548,7 @@ export interface FileRoutesById {
   '/services/local-seo-vadodara': typeof ServicesLocalSeoVadodaraRoute
   '/blog/': typeof BlogIndexRoute
   '/_authenticated/dashboard/posts': typeof AuthenticatedDashboardPostsRoute
+  '/_authenticated/dashboard/reviews': typeof AuthenticatedDashboardReviewsRoute
   '/_authenticated/dashboard/': typeof AuthenticatedDashboardIndexRoute
   '/api/public/cron/publish-due': typeof ApiPublicCronPublishDueRoute
   '/api/public/google/callback': typeof ApiPublicGoogleCallbackRoute
@@ -599,6 +609,7 @@ export interface FileRouteTypes {
     | '/services/local-seo-vadodara'
     | '/blog/'
     | '/dashboard/posts'
+    | '/dashboard/reviews'
     | '/dashboard/'
     | '/api/public/cron/publish-due'
     | '/api/public/google/callback'
@@ -656,6 +667,7 @@ export interface FileRouteTypes {
     | '/services/local-seo-vadodara'
     | '/blog'
     | '/dashboard/posts'
+    | '/dashboard/reviews'
     | '/dashboard'
     | '/api/public/cron/publish-due'
     | '/api/public/google/callback'
@@ -715,6 +727,7 @@ export interface FileRouteTypes {
     | '/services/local-seo-vadodara'
     | '/blog/'
     | '/_authenticated/dashboard/posts'
+    | '/_authenticated/dashboard/reviews'
     | '/_authenticated/dashboard/'
     | '/api/public/cron/publish-due'
     | '/api/public/google/callback'
@@ -1164,6 +1177,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardPostsRouteImport
       parentRoute: typeof AuthenticatedDashboardRoute
     }
+    '/_authenticated/dashboard/reviews': {
+      id: '/_authenticated/dashboard/reviews'
+      path: '/reviews'
+      fullPath: '/dashboard/reviews'
+      preLoaderRoute: typeof AuthenticatedDashboardReviewsRouteImport
+      parentRoute: typeof AuthenticatedDashboardRoute
+    }
     '/api/public/cron/publish-due': {
       id: '/api/public/cron/publish-due'
       path: '/api/public/cron/publish-due'
@@ -1183,12 +1203,14 @@ declare module '@tanstack/react-router' {
 
 interface AuthenticatedDashboardRouteChildren {
   AuthenticatedDashboardPostsRoute: typeof AuthenticatedDashboardPostsRoute
+  AuthenticatedDashboardReviewsRoute: typeof AuthenticatedDashboardReviewsRoute
   AuthenticatedDashboardIndexRoute: typeof AuthenticatedDashboardIndexRoute
 }
 
 const AuthenticatedDashboardRouteChildren: AuthenticatedDashboardRouteChildren =
   {
     AuthenticatedDashboardPostsRoute: AuthenticatedDashboardPostsRoute,
+    AuthenticatedDashboardReviewsRoute: AuthenticatedDashboardReviewsRoute,
     AuthenticatedDashboardIndexRoute: AuthenticatedDashboardIndexRoute,
   }
 
