@@ -66,6 +66,7 @@ import { Route as AuthenticatedDashboardIndexRouteImport } from './routes/_authe
 import { Route as AuthenticatedDashboardMagicQrRouteImport } from './routes/_authenticated/dashboard.magic-qr'
 import { Route as AuthenticatedDashboardPostsRouteImport } from './routes/_authenticated/dashboard.posts'
 import { Route as AuthenticatedDashboardReviewsRouteImport } from './routes/_authenticated/dashboard.reviews'
+import { Route as AuthenticatedDashboardSettingsRouteImport } from './routes/_authenticated/dashboard.settings'
 import { Route as ApiPublicCronPublishDueRouteImport } from './routes/api/public/cron/publish-due'
 import { Route as ApiPublicGoogleCallbackRouteImport } from './routes/api/public/google/callback'
 
@@ -371,6 +372,12 @@ const AuthenticatedDashboardReviewsRoute =
     path: '/reviews',
     getParentRoute: () => AuthenticatedDashboardRoute,
   } as any)
+const AuthenticatedDashboardSettingsRoute =
+  AuthenticatedDashboardSettingsRouteImport.update({
+    id: '/settings',
+    path: '/settings',
+    getParentRoute: () => AuthenticatedDashboardRoute,
+  } as any)
 const ApiPublicCronPublishDueRoute = ApiPublicCronPublishDueRouteImport.update({
   id: '/api/public/cron/publish-due',
   path: '/api/public/cron/publish-due',
@@ -438,6 +445,7 @@ export interface FileRoutesByFullPath {
   '/dashboard/magic-qr': typeof AuthenticatedDashboardMagicQrRoute
   '/dashboard/posts': typeof AuthenticatedDashboardPostsRoute
   '/dashboard/reviews': typeof AuthenticatedDashboardReviewsRoute
+  '/dashboard/settings': typeof AuthenticatedDashboardSettingsRoute
   '/dashboard/': typeof AuthenticatedDashboardIndexRoute
   '/api/public/cron/publish-due': typeof ApiPublicCronPublishDueRoute
   '/api/public/google/callback': typeof ApiPublicGoogleCallbackRoute
@@ -497,6 +505,7 @@ export interface FileRoutesByTo {
   '/dashboard/magic-qr': typeof AuthenticatedDashboardMagicQrRoute
   '/dashboard/posts': typeof AuthenticatedDashboardPostsRoute
   '/dashboard/reviews': typeof AuthenticatedDashboardReviewsRoute
+  '/dashboard/settings': typeof AuthenticatedDashboardSettingsRoute
   '/dashboard': typeof AuthenticatedDashboardIndexRoute
   '/api/public/cron/publish-due': typeof ApiPublicCronPublishDueRoute
   '/api/public/google/callback': typeof ApiPublicGoogleCallbackRoute
@@ -559,6 +568,7 @@ export interface FileRoutesById {
   '/_authenticated/dashboard/magic-qr': typeof AuthenticatedDashboardMagicQrRoute
   '/_authenticated/dashboard/posts': typeof AuthenticatedDashboardPostsRoute
   '/_authenticated/dashboard/reviews': typeof AuthenticatedDashboardReviewsRoute
+  '/_authenticated/dashboard/settings': typeof AuthenticatedDashboardSettingsRoute
   '/_authenticated/dashboard/': typeof AuthenticatedDashboardIndexRoute
   '/api/public/cron/publish-due': typeof ApiPublicCronPublishDueRoute
   '/api/public/google/callback': typeof ApiPublicGoogleCallbackRoute
@@ -621,6 +631,7 @@ export interface FileRouteTypes {
     | '/dashboard/magic-qr'
     | '/dashboard/posts'
     | '/dashboard/reviews'
+    | '/dashboard/settings'
     | '/dashboard/'
     | '/api/public/cron/publish-due'
     | '/api/public/google/callback'
@@ -680,6 +691,7 @@ export interface FileRouteTypes {
     | '/dashboard/magic-qr'
     | '/dashboard/posts'
     | '/dashboard/reviews'
+    | '/dashboard/settings'
     | '/dashboard'
     | '/api/public/cron/publish-due'
     | '/api/public/google/callback'
@@ -741,6 +753,7 @@ export interface FileRouteTypes {
     | '/_authenticated/dashboard/magic-qr'
     | '/_authenticated/dashboard/posts'
     | '/_authenticated/dashboard/reviews'
+    | '/_authenticated/dashboard/settings'
     | '/_authenticated/dashboard/'
     | '/api/public/cron/publish-due'
     | '/api/public/google/callback'
@@ -1204,6 +1217,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardReviewsRouteImport
       parentRoute: typeof AuthenticatedDashboardRoute
     }
+    '/_authenticated/dashboard/settings': {
+      id: '/_authenticated/dashboard/settings'
+      path: '/settings'
+      fullPath: '/dashboard/settings'
+      preLoaderRoute: typeof AuthenticatedDashboardSettingsRouteImport
+      parentRoute: typeof AuthenticatedDashboardRoute
+    }
     '/api/public/cron/publish-due': {
       id: '/api/public/cron/publish-due'
       path: '/api/public/cron/publish-due'
@@ -1225,6 +1245,7 @@ interface AuthenticatedDashboardRouteChildren {
   AuthenticatedDashboardMagicQrRoute: typeof AuthenticatedDashboardMagicQrRoute
   AuthenticatedDashboardPostsRoute: typeof AuthenticatedDashboardPostsRoute
   AuthenticatedDashboardReviewsRoute: typeof AuthenticatedDashboardReviewsRoute
+  AuthenticatedDashboardSettingsRoute: typeof AuthenticatedDashboardSettingsRoute
   AuthenticatedDashboardIndexRoute: typeof AuthenticatedDashboardIndexRoute
 }
 
@@ -1233,6 +1254,7 @@ const AuthenticatedDashboardRouteChildren: AuthenticatedDashboardRouteChildren =
     AuthenticatedDashboardMagicQrRoute: AuthenticatedDashboardMagicQrRoute,
     AuthenticatedDashboardPostsRoute: AuthenticatedDashboardPostsRoute,
     AuthenticatedDashboardReviewsRoute: AuthenticatedDashboardReviewsRoute,
+    AuthenticatedDashboardSettingsRoute: AuthenticatedDashboardSettingsRoute,
     AuthenticatedDashboardIndexRoute: AuthenticatedDashboardIndexRoute,
   }
 
