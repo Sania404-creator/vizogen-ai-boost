@@ -72,6 +72,7 @@ import { Route as AuthenticatedDashboardReviewsRouteImport } from './routes/_aut
 import { Route as AuthenticatedDashboardSettingsRouteImport } from './routes/_authenticated/dashboard.settings'
 import { Route as CrmCrmIndexRouteImport } from './routes/_crm/crm.index'
 import { Route as CrmCrmLeadsRouteImport } from './routes/_crm/crm.leads'
+import { Route as CrmCrmProposalsRouteImport } from './routes/_crm/crm.proposals'
 import { Route as ApiPublicLeadsRouteImport } from './routes/api/public/leads'
 import { Route as CrmCrmLeadIdRouteImport } from './routes/_crm/crm.lead.$id'
 import { Route as ApiPublicCronPublishDueRouteImport } from './routes/api/public/cron/publish-due'
@@ -409,6 +410,11 @@ const CrmCrmLeadsRoute = CrmCrmLeadsRouteImport.update({
   path: '/leads',
   getParentRoute: () => CrmCrmRoute,
 } as any)
+const CrmCrmProposalsRoute = CrmCrmProposalsRouteImport.update({
+  id: '/proposals',
+  path: '/proposals',
+  getParentRoute: () => CrmCrmRoute,
+} as any)
 const ApiPublicLeadsRoute = ApiPublicLeadsRouteImport.update({
   id: '/api/public/leads',
   path: '/api/public/leads',
@@ -490,6 +496,7 @@ export interface FileRoutesByFullPath {
   '/dashboard/reviews': typeof AuthenticatedDashboardReviewsRoute
   '/dashboard/settings': typeof AuthenticatedDashboardSettingsRoute
   '/crm/leads': typeof CrmCrmLeadsRoute
+  '/crm/proposals': typeof CrmCrmProposalsRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
   '/dashboard/': typeof AuthenticatedDashboardIndexRoute
   '/crm/': typeof CrmCrmIndexRoute
@@ -555,6 +562,7 @@ export interface FileRoutesByTo {
   '/dashboard/reviews': typeof AuthenticatedDashboardReviewsRoute
   '/dashboard/settings': typeof AuthenticatedDashboardSettingsRoute
   '/crm/leads': typeof CrmCrmLeadsRoute
+  '/crm/proposals': typeof CrmCrmProposalsRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
   '/dashboard': typeof AuthenticatedDashboardIndexRoute
   '/crm': typeof CrmCrmIndexRoute
@@ -625,6 +633,7 @@ export interface FileRoutesById {
   '/_authenticated/dashboard/reviews': typeof AuthenticatedDashboardReviewsRoute
   '/_authenticated/dashboard/settings': typeof AuthenticatedDashboardSettingsRoute
   '/_crm/crm/leads': typeof CrmCrmLeadsRoute
+  '/_crm/crm/proposals': typeof CrmCrmProposalsRoute
   '/api/public/leads': typeof ApiPublicLeadsRoute
   '/_authenticated/dashboard/': typeof AuthenticatedDashboardIndexRoute
   '/_crm/crm/': typeof CrmCrmIndexRoute
@@ -694,6 +703,7 @@ export interface FileRouteTypes {
     | '/dashboard/reviews'
     | '/dashboard/settings'
     | '/crm/leads'
+    | '/crm/proposals'
     | '/api/public/leads'
     | '/dashboard/'
     | '/crm/'
@@ -759,6 +769,7 @@ export interface FileRouteTypes {
     | '/dashboard/reviews'
     | '/dashboard/settings'
     | '/crm/leads'
+    | '/crm/proposals'
     | '/api/public/leads'
     | '/dashboard'
     | '/crm'
@@ -828,6 +839,7 @@ export interface FileRouteTypes {
     | '/_authenticated/dashboard/reviews'
     | '/_authenticated/dashboard/settings'
     | '/_crm/crm/leads'
+    | '/_crm/crm/proposals'
     | '/api/public/leads'
     | '/_authenticated/dashboard/'
     | '/_crm/crm/'
@@ -1339,6 +1351,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CrmCrmLeadsRouteImport
       parentRoute: typeof CrmCrmRoute
     }
+    '/_crm/crm/proposals': {
+      id: '/_crm/crm/proposals'
+      path: '/proposals'
+      fullPath: '/crm/proposals'
+      preLoaderRoute: typeof CrmCrmProposalsRouteImport
+      parentRoute: typeof CrmCrmRoute
+    }
     '/api/public/leads': {
       id: '/api/public/leads'
       path: '/api/public/leads'
@@ -1405,12 +1424,14 @@ const AuthenticatedRouteRouteWithChildren =
 
 interface CrmCrmRouteChildren {
   CrmCrmLeadsRoute: typeof CrmCrmLeadsRoute
+  CrmCrmProposalsRoute: typeof CrmCrmProposalsRoute
   CrmCrmIndexRoute: typeof CrmCrmIndexRoute
   CrmCrmLeadIdRoute: typeof CrmCrmLeadIdRoute
 }
 
 const CrmCrmRouteChildren: CrmCrmRouteChildren = {
   CrmCrmLeadsRoute: CrmCrmLeadsRoute,
+  CrmCrmProposalsRoute: CrmCrmProposalsRoute,
   CrmCrmIndexRoute: CrmCrmIndexRoute,
   CrmCrmLeadIdRoute: CrmCrmLeadIdRoute,
 }
