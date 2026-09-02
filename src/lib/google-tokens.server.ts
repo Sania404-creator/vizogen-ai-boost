@@ -24,7 +24,17 @@ export async function saveConnection(input: {
   scopes: string;
 }) {
   const db = await admin();
-  const payload: Record<string, unknown> = {
+  const payload: {
+    owner_id: string;
+    google_email: string | null;
+    access_token: string;
+    access_token_expires_at: string;
+    scopes: string;
+    status: string;
+    last_error: string | null;
+    updated_at: string;
+    refresh_token?: string;
+  } = {
     owner_id: input.ownerId,
     google_email: input.googleEmail,
     access_token: input.accessToken,
@@ -34,7 +44,7 @@ export async function saveConnection(input: {
     last_error: null,
     updated_at: new Date().toISOString(),
   };
-  if (input.refreshToken) payload["refresh_token"] = input.refreshToken;
+  if (input.refreshToken) payload.refresh_token = input.refreshToken;
   const { error } = await db.from("google_connections").upsert(payload, { onConflict: "owner_id" });
   if (error) throw new Error(error.message);
 }

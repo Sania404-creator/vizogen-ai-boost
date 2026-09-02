@@ -107,10 +107,14 @@ export const updateQrCode = createServerFn({ method: "POST" })
       .parse(input),
   )
   .handler(async ({ data, context }) => {
-    const payload: Record<string, unknown> = {};
-    if (data.title !== undefined) payload["title"] = data.title;
-    if (data.reviewLink !== undefined) payload["review_link"] = data.reviewLink || null;
-    if (data.active !== undefined) payload["active"] = data.active;
+    const payload: {
+      title?: string;
+      review_link?: string | null;
+      active?: boolean;
+    } = {};
+    if (data.title !== undefined) payload.title = data.title;
+    if (data.reviewLink !== undefined) payload.review_link = data.reviewLink || null;
+    if (data.active !== undefined) payload.active = data.active;
     const { error } = await context.supabase
       .from("qr_codes")
       .update(payload)

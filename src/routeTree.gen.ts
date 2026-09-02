@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as CrmRouteImport } from './routes/_crm'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as BakeryMarketingSoftwareRouteImport } from './routes/bakery-marketing-software'
 import { Route as CarGarageMarketingSoftwareRouteImport } from './routes/car-garage-marketing-software'
@@ -40,8 +41,10 @@ import { Route as TermsAndConditionsRouteImport } from './routes/terms-and-condi
 import { Route as TourTravelMarketingSoftwareRouteImport } from './routes/tour-travel-marketing-software'
 import { Route as YogaWellnessMarketingSoftwareRouteImport } from './routes/yoga-wellness-marketing-software'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as CrmCrmRouteImport } from './routes/_crm/crm'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
+import { Route as CrmLoginRouteImport } from './routes/crm.login'
 import { Route as FeaturesAiPostGenerationRouteImport } from './routes/features.ai-post-generation'
 import { Route as FeaturesMagicQrRouteImport } from './routes/features.magic-qr'
 import { Route as FeaturesReviewManagementRouteImport } from './routes/features.review-management'
@@ -67,6 +70,11 @@ import { Route as AuthenticatedDashboardMagicQrRouteImport } from './routes/_aut
 import { Route as AuthenticatedDashboardPostsRouteImport } from './routes/_authenticated/dashboard.posts'
 import { Route as AuthenticatedDashboardReviewsRouteImport } from './routes/_authenticated/dashboard.reviews'
 import { Route as AuthenticatedDashboardSettingsRouteImport } from './routes/_authenticated/dashboard.settings'
+import { Route as CrmCrmIndexRouteImport } from './routes/_crm/crm.index'
+import { Route as CrmCrmLeadsRouteImport } from './routes/_crm/crm.leads'
+import { Route as CrmCrmProposalsRouteImport } from './routes/_crm/crm.proposals'
+import { Route as ApiPublicLeadsRouteImport } from './routes/api/public/leads'
+import { Route as CrmCrmLeadIdRouteImport } from './routes/_crm/crm.lead.$id'
 import { Route as ApiPublicCronPublishDueRouteImport } from './routes/api/public/cron/publish-due'
 import { Route as ApiPublicGoogleCallbackRouteImport } from './routes/api/public/google/callback'
 
@@ -77,6 +85,10 @@ const IndexRoute = IndexRouteImport.update({
 } as any)
 const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
   id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CrmRoute = CrmRouteImport.update({
+  id: '/_crm',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthRoute = AuthRouteImport.update({
@@ -232,6 +244,11 @@ const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const CrmCrmRoute = CrmCrmRouteImport.update({
+  id: '/crm',
+  path: '/crm',
+  getParentRoute: () => CrmRoute,
+} as any)
 const BlogIndexRoute = BlogIndexRouteImport.update({
   id: '/blog/',
   path: '/blog/',
@@ -240,6 +257,11 @@ const BlogIndexRoute = BlogIndexRouteImport.update({
 const BlogSlugRoute = BlogSlugRouteImport.update({
   id: '/blog/$slug',
   path: '/blog/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CrmLoginRoute = CrmLoginRouteImport.update({
+  id: '/crm/login',
+  path: '/crm/login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FeaturesAiPostGenerationRoute =
@@ -378,6 +400,31 @@ const AuthenticatedDashboardSettingsRoute =
     path: '/settings',
     getParentRoute: () => AuthenticatedDashboardRoute,
   } as any)
+const CrmCrmIndexRoute = CrmCrmIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => CrmCrmRoute,
+} as any)
+const CrmCrmLeadsRoute = CrmCrmLeadsRouteImport.update({
+  id: '/leads',
+  path: '/leads',
+  getParentRoute: () => CrmCrmRoute,
+} as any)
+const CrmCrmProposalsRoute = CrmCrmProposalsRouteImport.update({
+  id: '/proposals',
+  path: '/proposals',
+  getParentRoute: () => CrmCrmRoute,
+} as any)
+const ApiPublicLeadsRoute = ApiPublicLeadsRouteImport.update({
+  id: '/api/public/leads',
+  path: '/api/public/leads',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CrmCrmLeadIdRoute = CrmCrmLeadIdRouteImport.update({
+  id: '/lead/$id',
+  path: '/lead/$id',
+  getParentRoute: () => CrmCrmRoute,
+} as any)
 const ApiPublicCronPublishDueRoute = ApiPublicCronPublishDueRouteImport.update({
   id: '/api/public/cron/publish-due',
   path: '/api/public/cron/publish-due',
@@ -420,7 +467,9 @@ export interface FileRoutesByFullPath {
   '/tour-travel-marketing-software': typeof TourTravelMarketingSoftwareRoute
   '/yoga-wellness-marketing-software': typeof YogaWellnessMarketingSoftwareRoute
   '/dashboard': typeof AuthenticatedDashboardRouteWithChildren
+  '/crm': typeof CrmCrmRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
+  '/crm/login': typeof CrmLoginRoute
   '/features/ai-post-generation': typeof FeaturesAiPostGenerationRoute
   '/features/magic-qr': typeof FeaturesMagicQrRoute
   '/features/review-management': typeof FeaturesReviewManagementRoute
@@ -446,7 +495,12 @@ export interface FileRoutesByFullPath {
   '/dashboard/posts': typeof AuthenticatedDashboardPostsRoute
   '/dashboard/reviews': typeof AuthenticatedDashboardReviewsRoute
   '/dashboard/settings': typeof AuthenticatedDashboardSettingsRoute
+  '/crm/leads': typeof CrmCrmLeadsRoute
+  '/crm/proposals': typeof CrmCrmProposalsRoute
+  '/api/public/leads': typeof ApiPublicLeadsRoute
   '/dashboard/': typeof AuthenticatedDashboardIndexRoute
+  '/crm/': typeof CrmCrmIndexRoute
+  '/crm/lead/$id': typeof CrmCrmLeadIdRoute
   '/api/public/cron/publish-due': typeof ApiPublicCronPublishDueRoute
   '/api/public/google/callback': typeof ApiPublicGoogleCallbackRoute
 }
@@ -481,6 +535,7 @@ export interface FileRoutesByTo {
   '/tour-travel-marketing-software': typeof TourTravelMarketingSoftwareRoute
   '/yoga-wellness-marketing-software': typeof YogaWellnessMarketingSoftwareRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/crm/login': typeof CrmLoginRoute
   '/features/ai-post-generation': typeof FeaturesAiPostGenerationRoute
   '/features/magic-qr': typeof FeaturesMagicQrRoute
   '/features/review-management': typeof FeaturesReviewManagementRoute
@@ -506,7 +561,12 @@ export interface FileRoutesByTo {
   '/dashboard/posts': typeof AuthenticatedDashboardPostsRoute
   '/dashboard/reviews': typeof AuthenticatedDashboardReviewsRoute
   '/dashboard/settings': typeof AuthenticatedDashboardSettingsRoute
+  '/crm/leads': typeof CrmCrmLeadsRoute
+  '/crm/proposals': typeof CrmCrmProposalsRoute
+  '/api/public/leads': typeof ApiPublicLeadsRoute
   '/dashboard': typeof AuthenticatedDashboardIndexRoute
+  '/crm': typeof CrmCrmIndexRoute
+  '/crm/lead/$id': typeof CrmCrmLeadIdRoute
   '/api/public/cron/publish-due': typeof ApiPublicCronPublishDueRoute
   '/api/public/google/callback': typeof ApiPublicGoogleCallbackRoute
 }
@@ -514,6 +574,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/_crm': typeof CrmRouteWithChildren
   '/auth': typeof AuthRoute
   '/bakery-marketing-software': typeof BakeryMarketingSoftwareRoute
   '/car-garage-marketing-software': typeof CarGarageMarketingSoftwareRoute
@@ -543,7 +604,9 @@ export interface FileRoutesById {
   '/tour-travel-marketing-software': typeof TourTravelMarketingSoftwareRoute
   '/yoga-wellness-marketing-software': typeof YogaWellnessMarketingSoftwareRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRouteWithChildren
+  '/_crm/crm': typeof CrmCrmRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
+  '/crm/login': typeof CrmLoginRoute
   '/features/ai-post-generation': typeof FeaturesAiPostGenerationRoute
   '/features/magic-qr': typeof FeaturesMagicQrRoute
   '/features/review-management': typeof FeaturesReviewManagementRoute
@@ -569,7 +632,12 @@ export interface FileRoutesById {
   '/_authenticated/dashboard/posts': typeof AuthenticatedDashboardPostsRoute
   '/_authenticated/dashboard/reviews': typeof AuthenticatedDashboardReviewsRoute
   '/_authenticated/dashboard/settings': typeof AuthenticatedDashboardSettingsRoute
+  '/_crm/crm/leads': typeof CrmCrmLeadsRoute
+  '/_crm/crm/proposals': typeof CrmCrmProposalsRoute
+  '/api/public/leads': typeof ApiPublicLeadsRoute
   '/_authenticated/dashboard/': typeof AuthenticatedDashboardIndexRoute
+  '/_crm/crm/': typeof CrmCrmIndexRoute
+  '/_crm/crm/lead/$id': typeof CrmCrmLeadIdRoute
   '/api/public/cron/publish-due': typeof ApiPublicCronPublishDueRoute
   '/api/public/google/callback': typeof ApiPublicGoogleCallbackRoute
 }
@@ -606,7 +674,9 @@ export interface FileRouteTypes {
     | '/tour-travel-marketing-software'
     | '/yoga-wellness-marketing-software'
     | '/dashboard'
+    | '/crm'
     | '/blog/$slug'
+    | '/crm/login'
     | '/features/ai-post-generation'
     | '/features/magic-qr'
     | '/features/review-management'
@@ -632,7 +702,12 @@ export interface FileRouteTypes {
     | '/dashboard/posts'
     | '/dashboard/reviews'
     | '/dashboard/settings'
+    | '/crm/leads'
+    | '/crm/proposals'
+    | '/api/public/leads'
     | '/dashboard/'
+    | '/crm/'
+    | '/crm/lead/$id'
     | '/api/public/cron/publish-due'
     | '/api/public/google/callback'
   fileRoutesByTo: FileRoutesByTo
@@ -667,6 +742,7 @@ export interface FileRouteTypes {
     | '/tour-travel-marketing-software'
     | '/yoga-wellness-marketing-software'
     | '/blog/$slug'
+    | '/crm/login'
     | '/features/ai-post-generation'
     | '/features/magic-qr'
     | '/features/review-management'
@@ -692,13 +768,19 @@ export interface FileRouteTypes {
     | '/dashboard/posts'
     | '/dashboard/reviews'
     | '/dashboard/settings'
+    | '/crm/leads'
+    | '/crm/proposals'
+    | '/api/public/leads'
     | '/dashboard'
+    | '/crm'
+    | '/crm/lead/$id'
     | '/api/public/cron/publish-due'
     | '/api/public/google/callback'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
+    | '/_crm'
     | '/auth'
     | '/bakery-marketing-software'
     | '/car-garage-marketing-software'
@@ -728,7 +810,9 @@ export interface FileRouteTypes {
     | '/tour-travel-marketing-software'
     | '/yoga-wellness-marketing-software'
     | '/_authenticated/dashboard'
+    | '/_crm/crm'
     | '/blog/$slug'
+    | '/crm/login'
     | '/features/ai-post-generation'
     | '/features/magic-qr'
     | '/features/review-management'
@@ -754,7 +838,12 @@ export interface FileRouteTypes {
     | '/_authenticated/dashboard/posts'
     | '/_authenticated/dashboard/reviews'
     | '/_authenticated/dashboard/settings'
+    | '/_crm/crm/leads'
+    | '/_crm/crm/proposals'
+    | '/api/public/leads'
     | '/_authenticated/dashboard/'
+    | '/_crm/crm/'
+    | '/_crm/crm/lead/$id'
     | '/api/public/cron/publish-due'
     | '/api/public/google/callback'
   fileRoutesById: FileRoutesById
@@ -762,6 +851,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  CrmRoute: typeof CrmRouteWithChildren
   AuthRoute: typeof AuthRoute
   BakeryMarketingSoftwareRoute: typeof BakeryMarketingSoftwareRoute
   CarGarageMarketingSoftwareRoute: typeof CarGarageMarketingSoftwareRoute
@@ -791,6 +881,7 @@ export interface RootRouteChildren {
   TourTravelMarketingSoftwareRoute: typeof TourTravelMarketingSoftwareRoute
   YogaWellnessMarketingSoftwareRoute: typeof YogaWellnessMarketingSoftwareRoute
   BlogSlugRoute: typeof BlogSlugRoute
+  CrmLoginRoute: typeof CrmLoginRoute
   FeaturesAiPostGenerationRoute: typeof FeaturesAiPostGenerationRoute
   FeaturesMagicQrRoute: typeof FeaturesMagicQrRoute
   FeaturesReviewManagementRoute: typeof FeaturesReviewManagementRoute
@@ -812,6 +903,7 @@ export interface RootRouteChildren {
   ServicesLocalSeoSuratRoute: typeof ServicesLocalSeoSuratRoute
   ServicesLocalSeoVadodaraRoute: typeof ServicesLocalSeoVadodaraRoute
   BlogIndexRoute: typeof BlogIndexRoute
+  ApiPublicLeadsRoute: typeof ApiPublicLeadsRoute
   ApiPublicCronPublishDueRoute: typeof ApiPublicCronPublishDueRoute
   ApiPublicGoogleCallbackRoute: typeof ApiPublicGoogleCallbackRoute
 }
@@ -830,6 +922,13 @@ declare module '@tanstack/react-router' {
       path: ''
       fullPath: '/'
       preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_crm': {
+      id: '/_crm'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof CrmRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/auth': {
@@ -1035,6 +1134,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_crm/crm': {
+      id: '/_crm/crm'
+      path: '/crm'
+      fullPath: '/crm'
+      preLoaderRoute: typeof CrmCrmRouteImport
+      parentRoute: typeof CrmRoute
+    }
     '/blog/': {
       id: '/blog/'
       path: '/blog'
@@ -1047,6 +1153,13 @@ declare module '@tanstack/react-router' {
       path: '/blog/$slug'
       fullPath: '/blog/$slug'
       preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/crm/login': {
+      id: '/crm/login'
+      path: '/crm/login'
+      fullPath: '/crm/login'
+      preLoaderRoute: typeof CrmLoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/features/ai-post-generation': {
@@ -1224,6 +1337,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardSettingsRouteImport
       parentRoute: typeof AuthenticatedDashboardRoute
     }
+    '/_crm/crm/': {
+      id: '/_crm/crm/'
+      path: '/'
+      fullPath: '/crm/'
+      preLoaderRoute: typeof CrmCrmIndexRouteImport
+      parentRoute: typeof CrmCrmRoute
+    }
+    '/_crm/crm/leads': {
+      id: '/_crm/crm/leads'
+      path: '/leads'
+      fullPath: '/crm/leads'
+      preLoaderRoute: typeof CrmCrmLeadsRouteImport
+      parentRoute: typeof CrmCrmRoute
+    }
+    '/_crm/crm/proposals': {
+      id: '/_crm/crm/proposals'
+      path: '/proposals'
+      fullPath: '/crm/proposals'
+      preLoaderRoute: typeof CrmCrmProposalsRouteImport
+      parentRoute: typeof CrmCrmRoute
+    }
+    '/api/public/leads': {
+      id: '/api/public/leads'
+      path: '/api/public/leads'
+      fullPath: '/api/public/leads'
+      preLoaderRoute: typeof ApiPublicLeadsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_crm/crm/lead/$id': {
+      id: '/_crm/crm/lead/$id'
+      path: '/lead/$id'
+      fullPath: '/crm/lead/$id'
+      preLoaderRoute: typeof CrmCrmLeadIdRouteImport
+      parentRoute: typeof CrmCrmRoute
+    }
     '/api/public/cron/publish-due': {
       id: '/api/public/cron/publish-due'
       path: '/api/public/cron/publish-due'
@@ -1274,9 +1422,37 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
 const AuthenticatedRouteRouteWithChildren =
   AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
 
+interface CrmCrmRouteChildren {
+  CrmCrmLeadsRoute: typeof CrmCrmLeadsRoute
+  CrmCrmProposalsRoute: typeof CrmCrmProposalsRoute
+  CrmCrmIndexRoute: typeof CrmCrmIndexRoute
+  CrmCrmLeadIdRoute: typeof CrmCrmLeadIdRoute
+}
+
+const CrmCrmRouteChildren: CrmCrmRouteChildren = {
+  CrmCrmLeadsRoute: CrmCrmLeadsRoute,
+  CrmCrmProposalsRoute: CrmCrmProposalsRoute,
+  CrmCrmIndexRoute: CrmCrmIndexRoute,
+  CrmCrmLeadIdRoute: CrmCrmLeadIdRoute,
+}
+
+const CrmCrmRouteWithChildren =
+  CrmCrmRoute._addFileChildren(CrmCrmRouteChildren)
+
+interface CrmRouteChildren {
+  CrmCrmRoute: typeof CrmCrmRouteWithChildren
+}
+
+const CrmRouteChildren: CrmRouteChildren = {
+  CrmCrmRoute: CrmCrmRouteWithChildren,
+}
+
+const CrmRouteWithChildren = CrmRoute._addFileChildren(CrmRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  CrmRoute: CrmRouteWithChildren,
   AuthRoute: AuthRoute,
   BakeryMarketingSoftwareRoute: BakeryMarketingSoftwareRoute,
   CarGarageMarketingSoftwareRoute: CarGarageMarketingSoftwareRoute,
@@ -1306,6 +1482,7 @@ const rootRouteChildren: RootRouteChildren = {
   TourTravelMarketingSoftwareRoute: TourTravelMarketingSoftwareRoute,
   YogaWellnessMarketingSoftwareRoute: YogaWellnessMarketingSoftwareRoute,
   BlogSlugRoute: BlogSlugRoute,
+  CrmLoginRoute: CrmLoginRoute,
   FeaturesAiPostGenerationRoute: FeaturesAiPostGenerationRoute,
   FeaturesMagicQrRoute: FeaturesMagicQrRoute,
   FeaturesReviewManagementRoute: FeaturesReviewManagementRoute,
@@ -1327,6 +1504,7 @@ const rootRouteChildren: RootRouteChildren = {
   ServicesLocalSeoSuratRoute: ServicesLocalSeoSuratRoute,
   ServicesLocalSeoVadodaraRoute: ServicesLocalSeoVadodaraRoute,
   BlogIndexRoute: BlogIndexRoute,
+  ApiPublicLeadsRoute: ApiPublicLeadsRoute,
   ApiPublicCronPublishDueRoute: ApiPublicCronPublishDueRoute,
   ApiPublicGoogleCallbackRoute: ApiPublicGoogleCallbackRoute,
 }

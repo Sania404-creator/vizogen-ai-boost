@@ -71,6 +71,361 @@ export type Database = {
         }
         Relationships: []
       }
+      crm_activities: {
+        Row: {
+          actor_id: string | null
+          actor_name: string
+          body: string
+          created_at: string
+          id: string
+          lead_id: string
+          meta: Json
+          type: string
+        }
+        Insert: {
+          actor_id?: string | null
+          actor_name?: string
+          body?: string
+          created_at?: string
+          id?: string
+          lead_id: string
+          meta?: Json
+          type?: string
+        }
+        Update: {
+          actor_id?: string | null
+          actor_name?: string
+          body?: string
+          created_at?: string
+          id?: string
+          lead_id?: string
+          meta?: Json
+          type?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "crm_activities_lead_id_fkey"
+            columns: ["lead_id"]
+            isOneToOne: false
+            referencedRelation: "crm_leads"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      crm_leads: {
+        Row: {
+          assigned_to: string | null
+          booking_id: string | null
+          company: string
+          created_at: string
+          created_by: string | null
+          email: string
+          follow_up_on: string | null
+          id: string
+          job_title: string | null
+          last_contacted_at: string | null
+          lost_reason: string | null
+          message: string | null
+          name: string
+          phone: string
+          requested_demo_at: string | null
+          requested_demo_label: string | null
+          source: string
+          source_page: string | null
+          status: string
+          tags: string[]
+          updated_at: string
+        }
+        Insert: {
+          assigned_to?: string | null
+          booking_id?: string | null
+          company?: string
+          created_at?: string
+          created_by?: string | null
+          email?: string
+          follow_up_on?: string | null
+          id?: string
+          job_title?: string | null
+          last_contacted_at?: string | null
+          lost_reason?: string | null
+          message?: string | null
+          name: string
+          phone?: string
+          requested_demo_at?: string | null
+          requested_demo_label?: string | null
+          source?: string
+          source_page?: string | null
+          status?: string
+          tags?: string[]
+          updated_at?: string
+        }
+        Update: {
+          assigned_to?: string | null
+          booking_id?: string | null
+          company?: string
+          created_at?: string
+          created_by?: string | null
+          email?: string
+          follow_up_on?: string | null
+          id?: string
+          job_title?: string | null
+          last_contacted_at?: string | null
+          lost_reason?: string | null
+          message?: string | null
+          name?: string
+          phone?: string
+          requested_demo_at?: string | null
+          requested_demo_label?: string | null
+          source?: string
+          source_page?: string | null
+          status?: string
+          tags?: string[]
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "crm_leads_booking_id_fkey"
+            columns: ["booking_id"]
+            isOneToOne: false
+            referencedRelation: "demo_bookings"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "crm_leads_status_fkey"
+            columns: ["status"]
+            isOneToOne: false
+            referencedRelation: "crm_stages"
+            referencedColumns: ["key"]
+          },
+        ]
+      }
+      crm_members: {
+        Row: {
+          active: boolean
+          can_view_all: boolean
+          created_at: string
+          email: string
+          full_name: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          active?: boolean
+          can_view_all?: boolean
+          created_at?: string
+          email?: string
+          full_name?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          active?: boolean
+          can_view_all?: boolean
+          created_at?: string
+          email?: string
+          full_name?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      crm_notifications: {
+        Row: {
+          body: string
+          created_at: string
+          id: string
+          lead_id: string | null
+          read_at: string | null
+          title: string
+          type: string
+          user_id: string
+        }
+        Insert: {
+          body?: string
+          created_at?: string
+          id?: string
+          lead_id?: string | null
+          read_at?: string | null
+          title: string
+          type?: string
+          user_id: string
+        }
+        Update: {
+          body?: string
+          created_at?: string
+          id?: string
+          lead_id?: string | null
+          read_at?: string | null
+          title?: string
+          type?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "crm_notifications_lead_id_fkey"
+            columns: ["lead_id"]
+            isOneToOne: false
+            referencedRelation: "crm_leads"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      crm_proposal_templates: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          deliverables: string[]
+          id: string
+          name: string
+          notes: string
+          pricing: Json
+          scope: string
+          terms: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          deliverables?: string[]
+          id?: string
+          name: string
+          notes?: string
+          pricing?: Json
+          scope?: string
+          terms?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          deliverables?: string[]
+          id?: string
+          name?: string
+          notes?: string
+          pricing?: Json
+          scope?: string
+          terms?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      crm_proposals: {
+        Row: {
+          client_company: string
+          client_email: string
+          client_name: string
+          created_at: string
+          created_by: string | null
+          currency: string
+          decided_at: string | null
+          deliverables: string[]
+          id: string
+          lead_id: string
+          notes: string
+          pricing: Json
+          scope: string
+          sent_at: string | null
+          share_token: string
+          status: string
+          template_id: string | null
+          terms: string
+          title: string
+          updated_at: string
+          valid_until: string | null
+          version: number
+          viewed_at: string | null
+        }
+        Insert: {
+          client_company?: string
+          client_email?: string
+          client_name?: string
+          created_at?: string
+          created_by?: string | null
+          currency?: string
+          decided_at?: string | null
+          deliverables?: string[]
+          id?: string
+          lead_id: string
+          notes?: string
+          pricing?: Json
+          scope?: string
+          sent_at?: string | null
+          share_token?: string
+          status?: string
+          template_id?: string | null
+          terms?: string
+          title?: string
+          updated_at?: string
+          valid_until?: string | null
+          version?: number
+          viewed_at?: string | null
+        }
+        Update: {
+          client_company?: string
+          client_email?: string
+          client_name?: string
+          created_at?: string
+          created_by?: string | null
+          currency?: string
+          decided_at?: string | null
+          deliverables?: string[]
+          id?: string
+          lead_id?: string
+          notes?: string
+          pricing?: Json
+          scope?: string
+          sent_at?: string | null
+          share_token?: string
+          status?: string
+          template_id?: string | null
+          terms?: string
+          title?: string
+          updated_at?: string
+          valid_until?: string | null
+          version?: number
+          viewed_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "crm_proposals_lead_id_fkey"
+            columns: ["lead_id"]
+            isOneToOne: false
+            referencedRelation: "crm_leads"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "crm_proposals_template_id_fkey"
+            columns: ["template_id"]
+            isOneToOne: false
+            referencedRelation: "crm_proposal_templates"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      crm_stages: {
+        Row: {
+          created_at: string
+          key: string
+          kind: string
+          label: string
+          position: number
+        }
+        Insert: {
+          created_at?: string
+          key: string
+          kind?: string
+          label: string
+          position?: number
+        }
+        Update: {
+          created_at?: string
+          key?: string
+          kind?: string
+          label?: string
+          position?: number
+        }
+        Relationships: []
+      }
       demo_bookings: {
         Row: {
           admin_email_sent: boolean
@@ -461,11 +816,58 @@ export type Database = {
           },
         ]
       }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
+      crm_can_view_all: { Args: { _user_id: string }; Returns: boolean }
+      crm_is_member: { Args: { _user_id: string }; Returns: boolean }
+      crm_view_proposal: {
+        Args: { _token: string }
+        Returns: {
+          client_company: string
+          client_name: string
+          currency: string
+          deliverables: string[]
+          notes: string
+          pricing: Json
+          scope: string
+          sent_at: string
+          status: string
+          terms: string
+          title: string
+          valid_until: string
+        }[]
+      }
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
       register_qr_scan: { Args: { _slug: string }; Returns: undefined }
       submit_qr_feedback: {
         Args: {
@@ -479,7 +881,7 @@ export type Database = {
       }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "sales_rep"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -606,6 +1008,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "sales_rep"],
+    },
   },
 } as const
