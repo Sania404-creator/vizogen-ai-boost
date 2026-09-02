@@ -88,7 +88,7 @@ export const locations: LocationConfig[] = [
     region: "India",
     headline: "Best Local SEO Agency in Gujarat",
     intro:
-      "Vizogen is operated by NG Marketing Solution from Rajkot, and works with businesses across Gujarat — Ahmedabad, Surat, Vadodara, Rajkot, Gandhinagar, Bhavnagar and Jamnagar. One dashboard, one profile strategy, every city you trade in.",
+      "Vizogen is operated by NG Marketing Solution and works with businesses across Gujarat — Ahmedabad, Surat, Vadodara, Rajkot, Gandhinagar, Bhavnagar and Jamnagar. One dashboard, one profile strategy, every city you trade in.",
     metaTitle: "Best Local SEO Agency in Gujarat | Vizogen",
     metaDescription:
       "Looking for the best local SEO services in Gujarat? Vizogen helps businesses in Gujarat automate their GMB profile, boost local rankings, and attract more customers.",

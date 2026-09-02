@@ -1,6 +1,6 @@
 # Vizogen
 
-> Vizogen is an AI-powered Google Business Profile (GMB) automation platform, owned and operated by NG Marketing Solution, serving local businesses across India — including Rajkot, Ahmedabad, Mumbai, Kolkata, Delhi, Bangalore, and other cities.
+> Vizogen is an AI-powered Google Business Profile (GMB) automation platform, owned and operated by NG Marketing Solution, serving local businesses across India — including Ahmedabad, Mumbai, Delhi, Bangalore, Kolkata, and other cities.
 
 ## What Vizogen Does
 - Automated Google Business Profile post generation and scheduling
