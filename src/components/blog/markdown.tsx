@@ -15,7 +15,7 @@ function renderInline(text: string, keyPrefix: string): ReactNode[] {
       const linkClass = "font-medium text-primary underline underline-offset-4 hover:opacity-80";
       nodes.push(
         href.startsWith("/") ? (
-          <Link key={`${keyPrefix}-l-${i}`} to={href} className={linkClass}>
+          <Link key={`${keyPrefix}-l-${i}`} to={href as "/"} className={linkClass}>
             {label}
           </Link>
         ) : (
