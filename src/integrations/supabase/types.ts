@@ -14,8 +14,54 @@ export type Database = {
   }
   public: {
     Tables: {
+      agent_runs: {
+        Row: {
+          business_id: string | null
+          created_at: string
+          details: Json
+          id: string
+          owner_id: string
+          status: string
+          summary: string
+          trigger: string
+        }
+        Insert: {
+          business_id?: string | null
+          created_at?: string
+          details?: Json
+          id?: string
+          owner_id: string
+          status?: string
+          summary?: string
+          trigger?: string
+        }
+        Update: {
+          business_id?: string | null
+          created_at?: string
+          details?: Json
+          id?: string
+          owner_id?: string
+          status?: string
+          summary?: string
+          trigger?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "agent_runs_business_id_fkey"
+            columns: ["business_id"]
+            isOneToOne: false
+            referencedRelation: "businesses"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       businesses: {
         Row: {
+          agent_enabled: boolean
+          auto_post_enabled: boolean
+          auto_reply_enabled: boolean
+          auto_reply_min_rating: number
+          auto_reply_send: boolean
           brand_tone: string
           category: string
           city: string
@@ -34,6 +80,11 @@ export type Database = {
           website: string | null
         }
         Insert: {
+          agent_enabled?: boolean
+          auto_post_enabled?: boolean
+          auto_reply_enabled?: boolean
+          auto_reply_min_rating?: number
+          auto_reply_send?: boolean
           brand_tone?: string
           category?: string
           city?: string
@@ -52,6 +103,11 @@ export type Database = {
           website?: string | null
         }
         Update: {
+          agent_enabled?: boolean
+          auto_post_enabled?: boolean
+          auto_reply_enabled?: boolean
+          auto_reply_min_rating?: number
+          auto_reply_send?: boolean
           brand_tone?: string
           category?: string
           city?: string
