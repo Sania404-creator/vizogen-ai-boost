@@ -1,0 +1,1 @@
+revoke all on function public.grant_vizogen_admin() from public, anon, authenticated;
