@@ -67,6 +67,7 @@ import { Route as ServicesLocalSeoRajkotRouteImport } from './routes/services.lo
 import { Route as ServicesLocalSeoSuratRouteImport } from './routes/services.local-seo-surat'
 import { Route as ServicesLocalSeoVadodaraRouteImport } from './routes/services.local-seo-vadodara'
 import { Route as AuthenticatedDashboardIndexRouteImport } from './routes/_authenticated/dashboard.index'
+import { Route as AuthenticatedDashboardAgentRouteImport } from './routes/_authenticated/dashboard.agent'
 import { Route as AuthenticatedDashboardAuditRouteImport } from './routes/_authenticated/dashboard.audit'
 import { Route as AuthenticatedDashboardMagicQrRouteImport } from './routes/_authenticated/dashboard.magic-qr'
 import { Route as AuthenticatedDashboardPostsRouteImport } from './routes/_authenticated/dashboard.posts'
@@ -389,6 +390,12 @@ const AuthenticatedDashboardIndexRoute =
     path: '/',
     getParentRoute: () => AuthenticatedDashboardRoute,
   } as any)
+const AuthenticatedDashboardAgentRoute =
+  AuthenticatedDashboardAgentRouteImport.update({
+    id: '/agent',
+    path: '/agent',
+    getParentRoute: () => AuthenticatedDashboardRoute,
+  } as any)
 const AuthenticatedDashboardAuditRoute =
   AuthenticatedDashboardAuditRouteImport.update({
     id: '/audit',
@@ -542,6 +549,7 @@ export interface FileRoutesByFullPath {
   '/services/local-seo-surat': typeof ServicesLocalSeoSuratRoute
   '/services/local-seo-vadodara': typeof ServicesLocalSeoVadodaraRoute
   '/blog/': typeof BlogIndexRoute
+  '/dashboard/agent': typeof AuthenticatedDashboardAgentRoute
   '/dashboard/audit': typeof AuthenticatedDashboardAuditRoute
   '/dashboard/magic-qr': typeof AuthenticatedDashboardMagicQrRoute
   '/dashboard/posts': typeof AuthenticatedDashboardPostsRoute
@@ -616,6 +624,7 @@ export interface FileRoutesByTo {
   '/services/local-seo-surat': typeof ServicesLocalSeoSuratRoute
   '/services/local-seo-vadodara': typeof ServicesLocalSeoVadodaraRoute
   '/blog': typeof BlogIndexRoute
+  '/dashboard/agent': typeof AuthenticatedDashboardAgentRoute
   '/dashboard/audit': typeof AuthenticatedDashboardAuditRoute
   '/dashboard/magic-qr': typeof AuthenticatedDashboardMagicQrRoute
   '/dashboard/posts': typeof AuthenticatedDashboardPostsRoute
@@ -695,6 +704,7 @@ export interface FileRoutesById {
   '/services/local-seo-surat': typeof ServicesLocalSeoSuratRoute
   '/services/local-seo-vadodara': typeof ServicesLocalSeoVadodaraRoute
   '/blog/': typeof BlogIndexRoute
+  '/_authenticated/dashboard/agent': typeof AuthenticatedDashboardAgentRoute
   '/_authenticated/dashboard/audit': typeof AuthenticatedDashboardAuditRoute
   '/_authenticated/dashboard/magic-qr': typeof AuthenticatedDashboardMagicQrRoute
   '/_authenticated/dashboard/posts': typeof AuthenticatedDashboardPostsRoute
@@ -773,6 +783,7 @@ export interface FileRouteTypes {
     | '/services/local-seo-surat'
     | '/services/local-seo-vadodara'
     | '/blog/'
+    | '/dashboard/agent'
     | '/dashboard/audit'
     | '/dashboard/magic-qr'
     | '/dashboard/posts'
@@ -847,6 +858,7 @@ export interface FileRouteTypes {
     | '/services/local-seo-surat'
     | '/services/local-seo-vadodara'
     | '/blog'
+    | '/dashboard/agent'
     | '/dashboard/audit'
     | '/dashboard/magic-qr'
     | '/dashboard/posts'
@@ -925,6 +937,7 @@ export interface FileRouteTypes {
     | '/services/local-seo-surat'
     | '/services/local-seo-vadodara'
     | '/blog/'
+    | '/_authenticated/dashboard/agent'
     | '/_authenticated/dashboard/audit'
     | '/_authenticated/dashboard/magic-qr'
     | '/_authenticated/dashboard/posts'
@@ -1417,6 +1430,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardIndexRouteImport
       parentRoute: typeof AuthenticatedDashboardRoute
     }
+    '/_authenticated/dashboard/agent': {
+      id: '/_authenticated/dashboard/agent'
+      path: '/agent'
+      fullPath: '/dashboard/agent'
+      preLoaderRoute: typeof AuthenticatedDashboardAgentRouteImport
+      parentRoute: typeof AuthenticatedDashboardRoute
+    }
     '/_authenticated/dashboard/audit': {
       id: '/_authenticated/dashboard/audit'
       path: '/audit'
@@ -1547,6 +1567,7 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedDashboardRouteChildren {
+  AuthenticatedDashboardAgentRoute: typeof AuthenticatedDashboardAgentRoute
   AuthenticatedDashboardAuditRoute: typeof AuthenticatedDashboardAuditRoute
   AuthenticatedDashboardMagicQrRoute: typeof AuthenticatedDashboardMagicQrRoute
   AuthenticatedDashboardPostsRoute: typeof AuthenticatedDashboardPostsRoute
@@ -1557,6 +1578,7 @@ interface AuthenticatedDashboardRouteChildren {
 
 const AuthenticatedDashboardRouteChildren: AuthenticatedDashboardRouteChildren =
   {
+    AuthenticatedDashboardAgentRoute: AuthenticatedDashboardAgentRoute,
     AuthenticatedDashboardAuditRoute: AuthenticatedDashboardAuditRoute,
     AuthenticatedDashboardMagicQrRoute: AuthenticatedDashboardMagicQrRoute,
     AuthenticatedDashboardPostsRoute: AuthenticatedDashboardPostsRoute,
