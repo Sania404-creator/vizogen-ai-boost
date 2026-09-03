@@ -714,3 +714,98 @@ export const getSalesFunnel = createServerFn({ method: "GET" })
       wonValue,
     };
   });
+
+/* --------------------------------- admin --------------------------------- */
+
+async function assertAdmin(context: { supabase: { rpc: Function }; userId: string }) {
+  const { data: isAdmin } = await context.supabase.rpc("has_role", {
+    _user_id: context.userId,
+    _role: "admin",
+  });
+  if (!isAdmin) throw new Error("Admins only.");
+  return true;
+}
+
+export interface AdminOverview {
+  members: { total: number; active: number; admins: number };
+  leads: { total: number; unassigned: number; last7: number; won: number; lost: number };
+  bySource: { source: string; count: number }[];
+  proposals: { total: number; sent: number; accepted: number };
+  unassigned: { id: string; name: string; company: string; source: string; created_at: string }[];
+  lastMetaSync: string | null;
+}
+
+export const getAdminOverview = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }): Promise<AdminOverview> => {
+    await assertAdmin(context as never);
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+
+    const [{ data: members }, { data: roles }, { data: leads }, { data: proposals }, { data: settings }] =
+      await Promise.all([
+        supabaseAdmin.from("crm_members").select("user_id, active"),
+        supabaseAdmin.from("user_roles").select("user_id, role"),
+        supabaseAdmin
+          .from("crm_leads")
+          .select("id, name, company, source, status, assigned_to, created_at")
+          .order("created_at", { ascending: false }),
+        supabaseAdmin.from("crm_proposals").select("id, status"),
+        supabaseAdmin.from("crm_integration_settings").select("key, value"),
+      ]);
+
+    const leadRows = leads ?? [];
+    const weekAgo = Date.now() - 7 * 864e5;
+    const sourceMap = new Map<string, number>();
+    for (const l of leadRows) sourceMap.set(l.source, (sourceMap.get(l.source) ?? 0) + 1);
+
+    return {
+      members: {
+        total: (members ?? []).length,
+        active: (members ?? []).filter((m) => m.active).length,
+        admins: (roles ?? []).filter((r) => r.role === "admin").length,
+      },
+      leads: {
+        total: leadRows.length,
+        unassigned: leadRows.filter((l) => !l.assigned_to).length,
+        last7: leadRows.filter((l) => new Date(l.created_at).getTime() >= weekAgo).length,
+        won: leadRows.filter((l) => l.status === "won").length,
+        lost: leadRows.filter((l) => l.status === "lost").length,
+      },
+      bySource: Array.from(sourceMap, ([source, count]) => ({ source, count })).sort(
+        (a, b) => b.count - a.count,
+      ),
+      proposals: {
+        total: (proposals ?? []).length,
+        sent: (proposals ?? []).filter((p) => p.status !== "draft").length,
+        accepted: (proposals ?? []).filter((p) => p.status === "accepted").length,
+      },
+      unassigned: leadRows
+        .filter((l) => !l.assigned_to)
+        .slice(0, 25)
+        .map((l) => ({
+          id: l.id,
+          name: l.name,
+          company: l.company,
+          source: l.source,
+          created_at: l.created_at,
+        })),
+      lastMetaSync:
+        (settings ?? []).find((s) => s.key === "meta_leads_last_sync")?.value ?? null,
+    };
+  });
+
+export const adminAssignLeads = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((input: unknown) =>
+    z.object({ leadIds: z.array(z.string().uuid()).min(1).max(200), userId: z.string().uuid() }).parse(input),
+  )
+  .handler(async ({ data, context }) => {
+    await assertAdmin(context as never);
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { error } = await supabaseAdmin
+      .from("crm_leads")
+      .update({ assigned_to: data.userId } as never)
+      .in("id", data.leadIds);
+    if (error) throw new Error(error.message);
+    return { ok: true, count: data.leadIds.length };
+  });
