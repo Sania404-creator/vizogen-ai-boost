@@ -2,7 +2,7 @@ import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
-import { Loader2, QrCode, Trash2, Copy, Star, Download } from "lucide-react";
+import { Loader2, QrCode, Trash2, Copy, Star, Download, ExternalLink } from "lucide-react";
 import {
   listQrCodes,
   createQrCode,
@@ -12,6 +12,7 @@ import {
   type QrRow,
 } from "@/lib/qr.functions";
 import { getWorkspace } from "@/lib/workspace.functions";
+import { SITE_URL } from "@/lib/aeo";
 import { DashboardShell } from "@/components/dashboard/shell";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -41,8 +42,9 @@ function MagicQrPage() {
   const [svgs, setSvgs] = useState<Record<string, string>>({});
 
   const business = workspace.data?.business ?? null;
-  const origin = typeof window === "undefined" ? "https://www.vizogen.in" : window.location.origin;
-  const linkFor = (code: QrRow) => `${origin}/r/${code.slug}`;
+  // Always use the public site URL — preview/editor origins are private and
+  // return 401 for customers who scan the code.
+  const linkFor = (code: QrRow) => `${SITE_URL}/r/${code.slug}`;
 
   const add = async () => {
     setBusy(true);
@@ -198,6 +200,11 @@ function MagicQrPage() {
                       </Button>
                       <Button size="sm" variant="outline" onClick={() => void download(code)}>
                         <Download className="mr-2 size-3.5" /> Download
+                      </Button>
+                      <Button size="sm" variant="outline" asChild>
+                        <a href={linkFor(code)} target="_blank" rel="noreferrer">
+                          <ExternalLink className="mr-2 size-3.5" /> Open
+                        </a>
                       </Button>
                       <div className="flex items-center gap-2 pl-1">
                         <Switch

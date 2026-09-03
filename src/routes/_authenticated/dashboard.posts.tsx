@@ -176,14 +176,23 @@ function PostsPage() {
             </div>
           </div>
 
-          <Button onClick={draft} disabled={generating} className="mt-4 gradient-brand text-white">
+          <Button
+            onClick={draft}
+            disabled={generating}
+            size="lg"
+            className="mt-4 w-full gradient-brand text-white sm:w-auto"
+          >
             {generating ? (
               <Loader2 className="mr-2 size-4 animate-spin" />
             ) : (
               <Sparkles className="mr-2 size-4" />
             )}
-            Generate with AI
+            {generating ? "Writing your post…" : "Generate the post"}
           </Button>
+          <p className="mt-2 text-xs text-muted-foreground">
+            The AI writes a Google-ready post using your business name, city, tone and keywords. You
+            can edit everything below before saving.
+          </p>
 
           <div className="mt-6 space-y-4">
             <div className="space-y-1.5">
