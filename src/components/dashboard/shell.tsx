@@ -6,6 +6,7 @@ import {
   Star,
   QrCode,
   ClipboardCheck,
+  Bot,
   Settings,
   LogOut,
   Menu,
