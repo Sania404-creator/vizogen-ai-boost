@@ -18,6 +18,7 @@ import { VizogenLockup } from "@/components/brand/logo";
 
 const NAV = [
   { to: "/dashboard", label: "Overview", icon: LayoutDashboard },
+  { to: "/dashboard/agent", label: "AI Agent", icon: Bot },
   { to: "/dashboard/posts", label: "AI Posts", icon: Sparkles },
   { to: "/dashboard/reviews", label: "Reviews", icon: Star },
   { to: "/dashboard/magic-qr", label: "Magic QR", icon: QrCode },
