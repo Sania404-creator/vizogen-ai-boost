@@ -115,16 +115,8 @@ export function CrmShell({
     <div className="min-h-screen bg-muted/30">
       <div className="mx-auto flex w-full max-w-[1500px]">
         <aside className="sticky top-0 hidden h-screen w-60 shrink-0 flex-col border-r border-border bg-card px-4 py-6 lg:flex">
-          <Link to="/crm" className="mb-8 flex items-center gap-2.5 px-2">
-            <img src={logo} alt="Vizogen" width={34} height={34} className="size-[34px] rounded-xl" />
-            <span className="leading-tight">
-              <span className="block text-base font-bold tracking-tight text-gradient font-display">
-                Vizogen
-              </span>
-              <span className="block text-[11px] font-medium uppercase tracking-[0.18em] text-muted-foreground">
-                Sales CRM
-              </span>
-            </span>
+          <Link to="/crm" className="mb-8 px-2">
+            <VizogenLockup sublabel="Sales CRM" />
           </Link>
           {nav}
           <div className="mt-auto space-y-1">
