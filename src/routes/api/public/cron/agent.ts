@@ -7,13 +7,23 @@ export const Route = createFileRoute("/api/public/cron/agent")({
   server: {
     handlers: {
       POST: async ({ request }) => {
-        const secret = process.env["LOVABLE_CRON_SECRET"];
-        const provided = request.headers.get("authorization")?.replace("Bearer ", "");
-        if (!secret || provided !== secret) {
+        const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+
+        const provided =
+          request.headers.get("x-cron-token") ??
+          request.headers.get("authorization")?.replace("Bearer ", "") ??
+          "";
+        const envSecret = process.env["LOVABLE_CRON_SECRET"];
+        const { data: stored } = await supabaseAdmin
+          .from("crm_integration_settings")
+          .select("value")
+          .eq("key", "agent_cron_token")
+          .maybeSingle();
+
+        const allowed = [envSecret, stored?.value].filter((v): v is string => Boolean(v));
+        if (!provided || !allowed.includes(provided)) {
           return new Response("Unauthorized", { status: 401 });
         }
-
-        const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
         const { runAgentForOwner } = await import("@/lib/agent.server");
 
         const { data: businesses } = await supabaseAdmin
