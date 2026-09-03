@@ -5,6 +5,7 @@ import {
   Sparkles,
   Star,
   QrCode,
+  ClipboardCheck,
   Settings,
   LogOut,
   Menu,
@@ -20,6 +21,7 @@ const NAV = [
   { to: "/dashboard/posts", label: "AI Posts", icon: Sparkles },
   { to: "/dashboard/reviews", label: "Reviews", icon: Star },
   { to: "/dashboard/magic-qr", label: "Magic QR", icon: QrCode },
+  { to: "/dashboard/audit", label: "Audit Report", icon: ClipboardCheck },
   { to: "/dashboard/settings", label: "Settings", icon: Settings },
 ] as const;
 
