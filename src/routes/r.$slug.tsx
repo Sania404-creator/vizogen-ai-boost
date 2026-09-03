@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "motion/react";
-import { Star, Loader2, CheckCircle2, MessageSquareHeart } from "lucide-react";
+import { Star, Loader2, CheckCircle2, MessageSquareHeart, Copy, Check } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -20,6 +20,13 @@ export const Route = createFileRoute("/r/$slug")({
   component: FeedbackPage,
 });
 
+interface ReviewContext {
+  business_name: string;
+  city: string | null;
+  category: string | null;
+  keywords: string[] | null;
+}
+
 interface QrCode {
   id: string;
   title: string;
@@ -37,6 +44,8 @@ function FeedbackPage() {
   const [contact, setContact] = useState("");
   const [sending, setSending] = useState(false);
   const [done, setDone] = useState(false);
+  const [ctx, setCtx] = useState<ReviewContext | null>(null);
+  const [copied, setCopied] = useState<number | null>(null);
 
   useEffect(() => {
     let active = true;
@@ -50,7 +59,11 @@ function FeedbackPage() {
       if (!active) return;
       setCode((data as QrCode | null) ?? null);
       setLoading(false);
-      if (data) await supabase.rpc("register_qr_scan", { _slug: slug });
+      if (data) {
+        await supabase.rpc("register_qr_scan", { _slug: slug });
+        const { data: context } = await supabase.rpc("qr_review_context", { _slug: slug });
+        if (active) setCtx(((context as ReviewContext[] | null) ?? [])[0] ?? null);
+      }
     })();
     return () => {
       active = false;
@@ -81,6 +94,18 @@ function FeedbackPage() {
     }
     setDone(true);
   };
+
+  const keywords = (ctx?.keywords ?? []).filter(Boolean).slice(0, 8);
+  const businessName = ctx?.business_name ?? code?.business_name ?? "this business";
+  const place = ctx?.city ? ` in ${ctx.city}` : "";
+  const suggestions =
+    keywords.length > 0
+      ? [
+          `Great experience with ${businessName}${place}. Went in for ${keywords[0]} and the team was professional and quick. Highly recommended!`,
+          `Best ${keywords[1] ?? keywords[0]}${place} I have found. ${businessName} took care of everything and the results were excellent.`,
+          `Really happy with ${businessName}. Friendly staff, fair pricing and genuinely good ${keywords[2] ?? keywords[0]}. Will come back.`,
+        ]
+      : [];
 
   if (loading) {
     return (
@@ -161,9 +186,60 @@ function FeedbackPage() {
             ) : null}
 
             {rating >= 4 ? (
-              <p className="mt-6 text-center text-sm text-muted-foreground">
-                Wonderful! We&apos;ll take you to Google so you can share it publicly.
-              </p>
+              <div className="mt-6 space-y-4">
+                <p className="text-center text-sm text-muted-foreground">
+                  Wonderful! We&apos;ll take you to Google so you can share it publicly.
+                </p>
+
+                {keywords.length > 0 ? (
+                  <div className="rounded-xl border border-border bg-muted/30 p-4">
+                    <p className="text-xs font-semibold uppercase tracking-widest text-primary">
+                      Mention one of these in your review
+                    </p>
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      {keywords.map((keyword) => (
+                        <span
+                          key={keyword}
+                          className="rounded-full border border-border bg-background px-3 py-1 text-xs font-medium text-foreground"
+                        >
+                          {keyword}
+                        </span>
+                      ))}
+                    </div>
+                    <p className="mt-3 text-xs text-muted-foreground">
+                      Reviews that mention what you actually came for help other locals find us on
+                      Google.
+                    </p>
+                  </div>
+                ) : null}
+
+                {suggestions.length > 0 ? (
+                  <div className="space-y-2">
+                    <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+                      Tap to copy a ready review
+                    </p>
+                    {suggestions.map((text, index) => (
+                      <button
+                        key={text}
+                        type="button"
+                        onClick={() => {
+                          void navigator.clipboard.writeText(text);
+                          setCopied(index);
+                          toast.success("Review copied — paste it on Google.");
+                        }}
+                        className="flex w-full items-start gap-3 rounded-xl border border-border bg-card p-3 text-left text-sm text-foreground transition-colors hover:border-primary/50"
+                      >
+                        {copied === index ? (
+                          <Check className="mt-0.5 size-4 shrink-0 text-emerald-500" />
+                        ) : (
+                          <Copy className="mt-0.5 size-4 shrink-0 text-muted-foreground" />
+                        )}
+                        <span>{text}</span>
+                      </button>
+                    ))}
+                  </div>
+                ) : null}
+              </div>
             ) : null}
 
             <Button
