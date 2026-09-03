@@ -201,6 +201,11 @@ function MagicQrPage() {
                       <Button size="sm" variant="outline" onClick={() => void download(code)}>
                         <Download className="mr-2 size-3.5" /> Download
                       </Button>
+                      <Button size="sm" variant="outline" asChild>
+                        <a href={linkFor(code)} target="_blank" rel="noreferrer">
+                          <ExternalLink className="mr-2 size-3.5" /> Open
+                        </a>
+                      </Button>
                       <div className="flex items-center gap-2 pl-1">
                         <Switch
                           checked={code.active}
