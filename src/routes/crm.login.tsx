@@ -6,8 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
-import logoAsset from "@/assets/vizogen-logo.png.asset.json";
-const logo = logoAsset.url;
+import { VizogenLockup } from "@/components/brand/logo";
 
 const title = "Vizogen CRM — Sales team sign in";
 const description = "Internal Vizogen CRM for the sales team. Accounts are created by an Admin.";
@@ -63,12 +62,12 @@ function CrmLogin() {
         className="pointer-events-none absolute inset-x-0 -top-40 mx-auto h-[420px] max-w-3xl rounded-full opacity-20 blur-3xl gradient-brand"
       />
       <div className="relative w-full max-w-sm rounded-2xl border border-border bg-card p-7 shadow-soft">
-        <div className="flex items-center gap-2">
-          <img src={logo} alt="Vizogen" width={32} height={32} className="size-8" />
-          <span className="text-lg font-bold tracking-tight text-foreground font-display">
-            Vizogen CRM
-          </span>
-        </div>
+        <VizogenLockup
+          label="Vizogen"
+          sublabel="Sales CRM"
+          markClassName="size-10"
+          labelClassName="text-lg font-bold tracking-tight text-foreground font-display"
+        />
         <h1 className="mt-5 text-xl font-bold tracking-tight text-foreground font-display">
           Sales team sign in
         </h1>

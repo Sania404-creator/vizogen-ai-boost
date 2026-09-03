@@ -3,8 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { CheckCircle2, Loader2, Mail, Phone } from "lucide-react";
 import { viewProposal, type PricingLine } from "@/lib/proposals.functions";
-import logoAsset from "@/assets/vizogen-logo.png.asset.json";
-const logo = logoAsset.url;
+import { VizogenMark } from "@/components/brand/logo";
 import { NAP } from "@/lib/aeo";
 
 export const Route = createFileRoute("/proposal/$token")({
@@ -84,8 +83,8 @@ function PublicProposal() {
       <article className="mx-auto w-full max-w-3xl px-4 sm:px-6">
         <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-soft">
           <header className="gradient-brand px-6 py-8 text-white sm:px-9">
-            <div className="flex items-center gap-2">
-              <img src={logo} alt="Vizogen" width={32} height={32} className="size-8" />
+            <div className="flex items-center gap-2.5">
+              <VizogenMark className="size-10" />
               <span className="text-lg font-bold tracking-tight font-display">Vizogen</span>
             </div>
             <h1 className="mt-5 text-2xl font-bold tracking-tight font-display sm:text-3xl">
