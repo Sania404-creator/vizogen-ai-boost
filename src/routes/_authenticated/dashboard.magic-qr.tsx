@@ -12,6 +12,7 @@ import {
   type QrRow,
 } from "@/lib/qr.functions";
 import { getWorkspace } from "@/lib/workspace.functions";
+import { SITE_URL } from "@/lib/aeo";
 import { DashboardShell } from "@/components/dashboard/shell";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -41,8 +42,9 @@ function MagicQrPage() {
   const [svgs, setSvgs] = useState<Record<string, string>>({});
 
   const business = workspace.data?.business ?? null;
-  const origin = typeof window === "undefined" ? "https://www.vizogen.in" : window.location.origin;
-  const linkFor = (code: QrRow) => `${origin}/r/${code.slug}`;
+  // Always use the public site URL — preview/editor origins are private and
+  // return 401 for customers who scan the code.
+  const linkFor = (code: QrRow) => `${SITE_URL}/r/${code.slug}`;
 
   const add = async () => {
     setBusy(true);
