@@ -74,6 +74,7 @@ import { Route as AuthenticatedDashboardPostsRouteImport } from './routes/_authe
 import { Route as AuthenticatedDashboardReviewsRouteImport } from './routes/_authenticated/dashboard.reviews'
 import { Route as AuthenticatedDashboardSettingsRouteImport } from './routes/_authenticated/dashboard.settings'
 import { Route as CrmCrmIndexRouteImport } from './routes/_crm/crm.index'
+import { Route as CrmCrmAdminRouteImport } from './routes/_crm/crm.admin'
 import { Route as CrmCrmFunnelRouteImport } from './routes/_crm/crm.funnel'
 import { Route as CrmCrmLeadsRouteImport } from './routes/_crm/crm.leads'
 import { Route as CrmCrmProposalsRouteImport } from './routes/_crm/crm.proposals'
@@ -431,6 +432,11 @@ const CrmCrmIndexRoute = CrmCrmIndexRouteImport.update({
   path: '/',
   getParentRoute: () => CrmCrmRoute,
 } as any)
+const CrmCrmAdminRoute = CrmCrmAdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => CrmCrmRoute,
+} as any)
 const CrmCrmFunnelRoute = CrmCrmFunnelRouteImport.update({
   id: '/funnel',
   path: '/funnel',
@@ -555,6 +561,7 @@ export interface FileRoutesByFullPath {
   '/dashboard/posts': typeof AuthenticatedDashboardPostsRoute
   '/dashboard/reviews': typeof AuthenticatedDashboardReviewsRoute
   '/dashboard/settings': typeof AuthenticatedDashboardSettingsRoute
+  '/crm/admin': typeof CrmCrmAdminRoute
   '/crm/funnel': typeof CrmCrmFunnelRoute
   '/crm/leads': typeof CrmCrmLeadsRoute
   '/crm/proposals': typeof CrmCrmProposalsRoute
@@ -630,6 +637,7 @@ export interface FileRoutesByTo {
   '/dashboard/posts': typeof AuthenticatedDashboardPostsRoute
   '/dashboard/reviews': typeof AuthenticatedDashboardReviewsRoute
   '/dashboard/settings': typeof AuthenticatedDashboardSettingsRoute
+  '/crm/admin': typeof CrmCrmAdminRoute
   '/crm/funnel': typeof CrmCrmFunnelRoute
   '/crm/leads': typeof CrmCrmLeadsRoute
   '/crm/proposals': typeof CrmCrmProposalsRoute
@@ -710,6 +718,7 @@ export interface FileRoutesById {
   '/_authenticated/dashboard/posts': typeof AuthenticatedDashboardPostsRoute
   '/_authenticated/dashboard/reviews': typeof AuthenticatedDashboardReviewsRoute
   '/_authenticated/dashboard/settings': typeof AuthenticatedDashboardSettingsRoute
+  '/_crm/crm/admin': typeof CrmCrmAdminRoute
   '/_crm/crm/funnel': typeof CrmCrmFunnelRoute
   '/_crm/crm/leads': typeof CrmCrmLeadsRoute
   '/_crm/crm/proposals': typeof CrmCrmProposalsRoute
@@ -789,6 +798,7 @@ export interface FileRouteTypes {
     | '/dashboard/posts'
     | '/dashboard/reviews'
     | '/dashboard/settings'
+    | '/crm/admin'
     | '/crm/funnel'
     | '/crm/leads'
     | '/crm/proposals'
@@ -864,6 +874,7 @@ export interface FileRouteTypes {
     | '/dashboard/posts'
     | '/dashboard/reviews'
     | '/dashboard/settings'
+    | '/crm/admin'
     | '/crm/funnel'
     | '/crm/leads'
     | '/crm/proposals'
@@ -943,6 +954,7 @@ export interface FileRouteTypes {
     | '/_authenticated/dashboard/posts'
     | '/_authenticated/dashboard/reviews'
     | '/_authenticated/dashboard/settings'
+    | '/_crm/crm/admin'
     | '/_crm/crm/funnel'
     | '/_crm/crm/leads'
     | '/_crm/crm/proposals'
@@ -1479,6 +1491,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CrmCrmIndexRouteImport
       parentRoute: typeof CrmCrmRoute
     }
+    '/_crm/crm/admin': {
+      id: '/_crm/crm/admin'
+      path: '/admin'
+      fullPath: '/crm/admin'
+      preLoaderRoute: typeof CrmCrmAdminRouteImport
+      parentRoute: typeof CrmCrmRoute
+    }
     '/_crm/crm/funnel': {
       id: '/_crm/crm/funnel'
       path: '/funnel'
@@ -1604,6 +1623,7 @@ const AuthenticatedRouteRouteWithChildren =
   AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
 
 interface CrmCrmRouteChildren {
+  CrmCrmAdminRoute: typeof CrmCrmAdminRoute
   CrmCrmFunnelRoute: typeof CrmCrmFunnelRoute
   CrmCrmLeadsRoute: typeof CrmCrmLeadsRoute
   CrmCrmProposalsRoute: typeof CrmCrmProposalsRoute
@@ -1615,6 +1635,7 @@ interface CrmCrmRouteChildren {
 }
 
 const CrmCrmRouteChildren: CrmCrmRouteChildren = {
+  CrmCrmAdminRoute: CrmCrmAdminRoute,
   CrmCrmFunnelRoute: CrmCrmFunnelRoute,
   CrmCrmLeadsRoute: CrmCrmLeadsRoute,
   CrmCrmProposalsRoute: CrmCrmProposalsRoute,

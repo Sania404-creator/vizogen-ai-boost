@@ -13,6 +13,7 @@ import {
   LayoutDashboard,
   LogOut,
   Menu,
+  ShieldCheck,
   X,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
@@ -28,6 +29,7 @@ const NAV = [
   { to: "/crm/funnel", label: "Sales funnel", icon: Filter, adminOnly: false },
   { to: "/crm/reports", label: "Reports", icon: BarChart3, adminOnly: false },
   { to: "/crm/team", label: "Team", icon: Users, adminOnly: true },
+  { to: "/crm/admin", label: "Admin panel", icon: ShieldCheck, adminOnly: true },
   { to: "/crm/settings", label: "Settings", icon: Settings, adminOnly: false },
 ] as const;
 
