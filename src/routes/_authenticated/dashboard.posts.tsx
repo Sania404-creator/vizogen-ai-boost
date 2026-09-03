@@ -13,6 +13,7 @@ import {
 } from "@/lib/posts.functions";
 import { getWorkspace } from "@/lib/workspace.functions";
 import { DashboardShell } from "@/components/dashboard/shell";
+import { MediaPicker } from "@/components/dashboard/media-picker";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -57,6 +58,8 @@ function PostsPage() {
   const [body, setBody] = useState("");
   const [ctaLabel, setCtaLabel] = useState("");
   const [ctaUrl, setCtaUrl] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
+  const [videoUrl, setVideoUrl] = useState("");
   const [scheduledAt, setScheduledAt] = useState("");
   const [generating, setGenerating] = useState(false);
   const [saving, setSaving] = useState(false);
@@ -98,6 +101,8 @@ function PostsPage() {
           body: body.trim(),
           cta_label: ctaLabel.trim(),
           cta_url: ctaUrl.trim(),
+          image_url: imageUrl,
+          video_url: videoUrl,
           status,
           scheduled_at: status === "scheduled" ? new Date(scheduledAt).toISOString() : null,
         },
@@ -105,6 +110,8 @@ function PostsPage() {
       setHeadline("");
       setBody("");
       setPrompt("");
+      setImageUrl("");
+      setVideoUrl("");
       setScheduledAt("");
       void posts.refetch();
       toast.success(status === "scheduled" ? "Post scheduled." : "Draft saved.");
@@ -213,6 +220,14 @@ function PostsPage() {
                 <Input id="ctaUrl" value={ctaUrl} onChange={(e) => setCtaUrl(e.target.value)} />
               </div>
             </div>
+            <MediaPicker
+              imageUrl={imageUrl}
+              videoUrl={videoUrl}
+              onChange={(next) => {
+                if (next.imageUrl !== undefined) setImageUrl(next.imageUrl);
+                if (next.videoUrl !== undefined) setVideoUrl(next.videoUrl);
+              }}
+            />
             <div className="space-y-1.5">
               <Label htmlFor="scheduledAt">Schedule for</Label>
               <Input

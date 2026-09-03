@@ -597,6 +597,7 @@ export type Database = {
           scheduled_at: string | null
           status: string
           updated_at: string
+          video_url: string | null
         }
         Insert: {
           body?: string
@@ -615,6 +616,7 @@ export type Database = {
           scheduled_at?: string | null
           status?: string
           updated_at?: string
+          video_url?: string | null
         }
         Update: {
           body?: string
@@ -633,6 +635,7 @@ export type Database = {
           scheduled_at?: string | null
           status?: string
           updated_at?: string
+          video_url?: string | null
         }
         Relationships: [
           {
@@ -887,6 +890,15 @@ export type Database = {
           _user_id: string
         }
         Returns: boolean
+      }
+      qr_review_context: {
+        Args: { _slug: string }
+        Returns: {
+          business_name: string
+          category: string
+          city: string
+          keywords: string[]
+        }[]
       }
       register_qr_scan: { Args: { _slug: string }; Returns: undefined }
       submit_qr_feedback: {

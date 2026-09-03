@@ -11,6 +11,7 @@ export interface PostRow {
   cta_label: string | null;
   cta_url: string | null;
   image_url: string | null;
+  video_url: string | null;
   status: string;
   scheduled_at: string | null;
   published_at: string | null;
@@ -19,7 +20,7 @@ export interface PostRow {
 }
 
 const POST_COLUMNS =
-  "id, business_id, post_type, headline, body, cta_label, cta_url, image_url, status, scheduled_at, published_at, error, created_at";
+  "id, business_id, post_type, headline, body, cta_label, cta_url, image_url, video_url, status, scheduled_at, published_at, error, created_at";
 
 export const listPosts = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
@@ -95,7 +96,8 @@ const savePostSchema = z.object({
   body: z.string().trim().min(1).max(3000),
   cta_label: z.string().trim().max(40).optional().or(z.literal("")),
   cta_url: z.string().trim().max(400).optional().or(z.literal("")),
-  image_url: z.string().trim().max(600).optional().or(z.literal("")),
+  image_url: z.string().trim().max(2000).optional().or(z.literal("")),
+  video_url: z.string().trim().max(2000).optional().or(z.literal("")),
   status: z.enum(["draft", "scheduled"]),
   scheduled_at: z.string().datetime().nullable().optional(),
 });
@@ -122,6 +124,7 @@ export const savePost = createServerFn({ method: "POST" })
       cta_label: data.cta_label || null,
       cta_url: data.cta_url || null,
       image_url: data.image_url || null,
+      video_url: data.video_url || null,
       status: data.status,
       scheduled_at: data.status === "scheduled" ? (data.scheduled_at ?? null) : null,
       error: null,
