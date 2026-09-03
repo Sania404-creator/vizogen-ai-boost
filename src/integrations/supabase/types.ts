@@ -492,6 +492,71 @@ export type Database = {
         }
         Relationships: []
       }
+      gbp_audits: {
+        Row: {
+          action_plan: Json
+          business_id: string | null
+          business_name: string
+          category: string
+          city: string
+          created_at: string
+          grade: string
+          id: string
+          keywords: string[]
+          owner_id: string
+          quick_wins: Json
+          score: number
+          sections: Json
+          summary: string
+          updated_at: string
+          website: string | null
+        }
+        Insert: {
+          action_plan?: Json
+          business_id?: string | null
+          business_name: string
+          category: string
+          city: string
+          created_at?: string
+          grade?: string
+          id?: string
+          keywords?: string[]
+          owner_id: string
+          quick_wins?: Json
+          score?: number
+          sections?: Json
+          summary?: string
+          updated_at?: string
+          website?: string | null
+        }
+        Update: {
+          action_plan?: Json
+          business_id?: string | null
+          business_name?: string
+          category?: string
+          city?: string
+          created_at?: string
+          grade?: string
+          id?: string
+          keywords?: string[]
+          owner_id?: string
+          quick_wins?: Json
+          score?: number
+          sections?: Json
+          summary?: string
+          updated_at?: string
+          website?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "gbp_audits_business_id_fkey"
+            columns: ["business_id"]
+            isOneToOne: false
+            referencedRelation: "businesses"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       google_connections: {
         Row: {
           access_token: string | null
