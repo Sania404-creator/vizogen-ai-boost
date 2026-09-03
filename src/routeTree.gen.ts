@@ -67,6 +67,7 @@ import { Route as ServicesLocalSeoRajkotRouteImport } from './routes/services.lo
 import { Route as ServicesLocalSeoSuratRouteImport } from './routes/services.local-seo-surat'
 import { Route as ServicesLocalSeoVadodaraRouteImport } from './routes/services.local-seo-vadodara'
 import { Route as AuthenticatedDashboardIndexRouteImport } from './routes/_authenticated/dashboard.index'
+import { Route as AuthenticatedDashboardAgentRouteImport } from './routes/_authenticated/dashboard.agent'
 import { Route as AuthenticatedDashboardAuditRouteImport } from './routes/_authenticated/dashboard.audit'
 import { Route as AuthenticatedDashboardMagicQrRouteImport } from './routes/_authenticated/dashboard.magic-qr'
 import { Route as AuthenticatedDashboardPostsRouteImport } from './routes/_authenticated/dashboard.posts'
@@ -81,6 +82,7 @@ import { Route as CrmCrmSettingsRouteImport } from './routes/_crm/crm.settings'
 import { Route as CrmCrmTeamRouteImport } from './routes/_crm/crm.team'
 import { Route as ApiPublicLeadsRouteImport } from './routes/api/public/leads'
 import { Route as CrmCrmLeadIdRouteImport } from './routes/_crm/crm.lead.$id'
+import { Route as ApiPublicCronAgentRouteImport } from './routes/api/public/cron/agent'
 import { Route as ApiPublicCronPublishDueRouteImport } from './routes/api/public/cron/publish-due'
 import { Route as ApiPublicCronSyncMetaLeadsRouteImport } from './routes/api/public/cron/sync-meta-leads'
 import { Route as ApiPublicGoogleCallbackRouteImport } from './routes/api/public/google/callback'
@@ -388,6 +390,12 @@ const AuthenticatedDashboardIndexRoute =
     path: '/',
     getParentRoute: () => AuthenticatedDashboardRoute,
   } as any)
+const AuthenticatedDashboardAgentRoute =
+  AuthenticatedDashboardAgentRouteImport.update({
+    id: '/agent',
+    path: '/agent',
+    getParentRoute: () => AuthenticatedDashboardRoute,
+  } as any)
 const AuthenticatedDashboardAuditRoute =
   AuthenticatedDashboardAuditRouteImport.update({
     id: '/audit',
@@ -463,6 +471,11 @@ const CrmCrmLeadIdRoute = CrmCrmLeadIdRouteImport.update({
   path: '/lead/$id',
   getParentRoute: () => CrmCrmRoute,
 } as any)
+const ApiPublicCronAgentRoute = ApiPublicCronAgentRouteImport.update({
+  id: '/api/public/cron/agent',
+  path: '/api/public/cron/agent',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiPublicCronPublishDueRoute = ApiPublicCronPublishDueRouteImport.update({
   id: '/api/public/cron/publish-due',
   path: '/api/public/cron/publish-due',
@@ -536,6 +549,7 @@ export interface FileRoutesByFullPath {
   '/services/local-seo-surat': typeof ServicesLocalSeoSuratRoute
   '/services/local-seo-vadodara': typeof ServicesLocalSeoVadodaraRoute
   '/blog/': typeof BlogIndexRoute
+  '/dashboard/agent': typeof AuthenticatedDashboardAgentRoute
   '/dashboard/audit': typeof AuthenticatedDashboardAuditRoute
   '/dashboard/magic-qr': typeof AuthenticatedDashboardMagicQrRoute
   '/dashboard/posts': typeof AuthenticatedDashboardPostsRoute
@@ -551,6 +565,7 @@ export interface FileRoutesByFullPath {
   '/dashboard/': typeof AuthenticatedDashboardIndexRoute
   '/crm/': typeof CrmCrmIndexRoute
   '/crm/lead/$id': typeof CrmCrmLeadIdRoute
+  '/api/public/cron/agent': typeof ApiPublicCronAgentRoute
   '/api/public/cron/publish-due': typeof ApiPublicCronPublishDueRoute
   '/api/public/cron/sync-meta-leads': typeof ApiPublicCronSyncMetaLeadsRoute
   '/api/public/google/callback': typeof ApiPublicGoogleCallbackRoute
@@ -609,6 +624,7 @@ export interface FileRoutesByTo {
   '/services/local-seo-surat': typeof ServicesLocalSeoSuratRoute
   '/services/local-seo-vadodara': typeof ServicesLocalSeoVadodaraRoute
   '/blog': typeof BlogIndexRoute
+  '/dashboard/agent': typeof AuthenticatedDashboardAgentRoute
   '/dashboard/audit': typeof AuthenticatedDashboardAuditRoute
   '/dashboard/magic-qr': typeof AuthenticatedDashboardMagicQrRoute
   '/dashboard/posts': typeof AuthenticatedDashboardPostsRoute
@@ -624,6 +640,7 @@ export interface FileRoutesByTo {
   '/dashboard': typeof AuthenticatedDashboardIndexRoute
   '/crm': typeof CrmCrmIndexRoute
   '/crm/lead/$id': typeof CrmCrmLeadIdRoute
+  '/api/public/cron/agent': typeof ApiPublicCronAgentRoute
   '/api/public/cron/publish-due': typeof ApiPublicCronPublishDueRoute
   '/api/public/cron/sync-meta-leads': typeof ApiPublicCronSyncMetaLeadsRoute
   '/api/public/google/callback': typeof ApiPublicGoogleCallbackRoute
@@ -687,6 +704,7 @@ export interface FileRoutesById {
   '/services/local-seo-surat': typeof ServicesLocalSeoSuratRoute
   '/services/local-seo-vadodara': typeof ServicesLocalSeoVadodaraRoute
   '/blog/': typeof BlogIndexRoute
+  '/_authenticated/dashboard/agent': typeof AuthenticatedDashboardAgentRoute
   '/_authenticated/dashboard/audit': typeof AuthenticatedDashboardAuditRoute
   '/_authenticated/dashboard/magic-qr': typeof AuthenticatedDashboardMagicQrRoute
   '/_authenticated/dashboard/posts': typeof AuthenticatedDashboardPostsRoute
@@ -702,6 +720,7 @@ export interface FileRoutesById {
   '/_authenticated/dashboard/': typeof AuthenticatedDashboardIndexRoute
   '/_crm/crm/': typeof CrmCrmIndexRoute
   '/_crm/crm/lead/$id': typeof CrmCrmLeadIdRoute
+  '/api/public/cron/agent': typeof ApiPublicCronAgentRoute
   '/api/public/cron/publish-due': typeof ApiPublicCronPublishDueRoute
   '/api/public/cron/sync-meta-leads': typeof ApiPublicCronSyncMetaLeadsRoute
   '/api/public/google/callback': typeof ApiPublicGoogleCallbackRoute
@@ -764,6 +783,7 @@ export interface FileRouteTypes {
     | '/services/local-seo-surat'
     | '/services/local-seo-vadodara'
     | '/blog/'
+    | '/dashboard/agent'
     | '/dashboard/audit'
     | '/dashboard/magic-qr'
     | '/dashboard/posts'
@@ -779,6 +799,7 @@ export interface FileRouteTypes {
     | '/dashboard/'
     | '/crm/'
     | '/crm/lead/$id'
+    | '/api/public/cron/agent'
     | '/api/public/cron/publish-due'
     | '/api/public/cron/sync-meta-leads'
     | '/api/public/google/callback'
@@ -837,6 +858,7 @@ export interface FileRouteTypes {
     | '/services/local-seo-surat'
     | '/services/local-seo-vadodara'
     | '/blog'
+    | '/dashboard/agent'
     | '/dashboard/audit'
     | '/dashboard/magic-qr'
     | '/dashboard/posts'
@@ -852,6 +874,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/crm'
     | '/crm/lead/$id'
+    | '/api/public/cron/agent'
     | '/api/public/cron/publish-due'
     | '/api/public/cron/sync-meta-leads'
     | '/api/public/google/callback'
@@ -914,6 +937,7 @@ export interface FileRouteTypes {
     | '/services/local-seo-surat'
     | '/services/local-seo-vadodara'
     | '/blog/'
+    | '/_authenticated/dashboard/agent'
     | '/_authenticated/dashboard/audit'
     | '/_authenticated/dashboard/magic-qr'
     | '/_authenticated/dashboard/posts'
@@ -929,6 +953,7 @@ export interface FileRouteTypes {
     | '/_authenticated/dashboard/'
     | '/_crm/crm/'
     | '/_crm/crm/lead/$id'
+    | '/api/public/cron/agent'
     | '/api/public/cron/publish-due'
     | '/api/public/cron/sync-meta-leads'
     | '/api/public/google/callback'
@@ -991,6 +1016,7 @@ export interface RootRouteChildren {
   ServicesLocalSeoVadodaraRoute: typeof ServicesLocalSeoVadodaraRoute
   BlogIndexRoute: typeof BlogIndexRoute
   ApiPublicLeadsRoute: typeof ApiPublicLeadsRoute
+  ApiPublicCronAgentRoute: typeof ApiPublicCronAgentRoute
   ApiPublicCronPublishDueRoute: typeof ApiPublicCronPublishDueRoute
   ApiPublicCronSyncMetaLeadsRoute: typeof ApiPublicCronSyncMetaLeadsRoute
   ApiPublicGoogleCallbackRoute: typeof ApiPublicGoogleCallbackRoute
@@ -1404,6 +1430,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardIndexRouteImport
       parentRoute: typeof AuthenticatedDashboardRoute
     }
+    '/_authenticated/dashboard/agent': {
+      id: '/_authenticated/dashboard/agent'
+      path: '/agent'
+      fullPath: '/dashboard/agent'
+      preLoaderRoute: typeof AuthenticatedDashboardAgentRouteImport
+      parentRoute: typeof AuthenticatedDashboardRoute
+    }
     '/_authenticated/dashboard/audit': {
       id: '/_authenticated/dashboard/audit'
       path: '/audit'
@@ -1502,6 +1535,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CrmCrmLeadIdRouteImport
       parentRoute: typeof CrmCrmRoute
     }
+    '/api/public/cron/agent': {
+      id: '/api/public/cron/agent'
+      path: '/api/public/cron/agent'
+      fullPath: '/api/public/cron/agent'
+      preLoaderRoute: typeof ApiPublicCronAgentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/public/cron/publish-due': {
       id: '/api/public/cron/publish-due'
       path: '/api/public/cron/publish-due'
@@ -1527,6 +1567,7 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedDashboardRouteChildren {
+  AuthenticatedDashboardAgentRoute: typeof AuthenticatedDashboardAgentRoute
   AuthenticatedDashboardAuditRoute: typeof AuthenticatedDashboardAuditRoute
   AuthenticatedDashboardMagicQrRoute: typeof AuthenticatedDashboardMagicQrRoute
   AuthenticatedDashboardPostsRoute: typeof AuthenticatedDashboardPostsRoute
@@ -1537,6 +1578,7 @@ interface AuthenticatedDashboardRouteChildren {
 
 const AuthenticatedDashboardRouteChildren: AuthenticatedDashboardRouteChildren =
   {
+    AuthenticatedDashboardAgentRoute: AuthenticatedDashboardAgentRoute,
     AuthenticatedDashboardAuditRoute: AuthenticatedDashboardAuditRoute,
     AuthenticatedDashboardMagicQrRoute: AuthenticatedDashboardMagicQrRoute,
     AuthenticatedDashboardPostsRoute: AuthenticatedDashboardPostsRoute,
@@ -1653,6 +1695,7 @@ const rootRouteChildren: RootRouteChildren = {
   ServicesLocalSeoVadodaraRoute: ServicesLocalSeoVadodaraRoute,
   BlogIndexRoute: BlogIndexRoute,
   ApiPublicLeadsRoute: ApiPublicLeadsRoute,
+  ApiPublicCronAgentRoute: ApiPublicCronAgentRoute,
   ApiPublicCronPublishDueRoute: ApiPublicCronPublishDueRoute,
   ApiPublicCronSyncMetaLeadsRoute: ApiPublicCronSyncMetaLeadsRoute,
   ApiPublicGoogleCallbackRoute: ApiPublicGoogleCallbackRoute,

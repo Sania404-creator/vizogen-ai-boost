@@ -6,6 +6,7 @@ import {
   Star,
   QrCode,
   ClipboardCheck,
+  Bot,
   Settings,
   LogOut,
   Menu,
@@ -13,11 +14,11 @@ import {
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
-import logoAsset from "@/assets/vizogen-logo.png.asset.json";
-const logo = logoAsset.url;
+import { VizogenLockup } from "@/components/brand/logo";
 
 const NAV = [
   { to: "/dashboard", label: "Overview", icon: LayoutDashboard },
+  { to: "/dashboard/agent", label: "AI Agent", icon: Bot },
   { to: "/dashboard/posts", label: "AI Posts", icon: Sparkles },
   { to: "/dashboard/reviews", label: "Reviews", icon: Star },
   { to: "/dashboard/magic-qr", label: "Magic QR", icon: QrCode },
@@ -73,11 +74,13 @@ export function DashboardShell({
     <div className="min-h-screen bg-muted/30">
       <div className="mx-auto flex w-full max-w-[1400px]">
         <aside className="sticky top-0 hidden h-screen w-64 shrink-0 flex-col border-r border-border bg-card px-4 py-6 lg:flex">
-          <Link to="/" className="mb-8 flex items-center gap-2 px-2">
-            <img src={logo} alt="Vizogen" width={32} height={32} className="size-8" />
-            <span className="text-lg font-bold tracking-tight text-foreground font-display">
-              Vizogen
-            </span>
+          <Link to="/" className="mb-8 block px-2">
+            <VizogenLockup
+              label="Vizogen"
+              sublabel="GMB Autopilot"
+              markClassName="size-10"
+              labelClassName="text-lg font-bold tracking-tight text-foreground font-display"
+            />
           </Link>
           {nav}
           <Button variant="ghost" onClick={signOut} className="mt-auto justify-start gap-3 text-muted-foreground">
