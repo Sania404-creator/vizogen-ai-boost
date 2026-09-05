@@ -26,6 +26,7 @@ import { Route as HowToCreatePostRouteImport } from './routes/how-to-create-post
 import { Route as HowToGenerateMagicQrRouteImport } from './routes/how-to-generate-magic-qr'
 import { Route as HowToPostOnGbpRouteImport } from './routes/how-to-post-on-gbp'
 import { Route as HowToReplyReviewRouteImport } from './routes/how-to-reply-review'
+import { Route as LocalSeoCafeResortRestaurantUdaipurRouteImport } from './routes/local-seo-cafe-resort-restaurant-udaipur'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as OfficialPartnerRouteImport } from './routes/official-partner'
 import { Route as PartnerRouteImport } from './routes/partner'
@@ -54,17 +55,22 @@ import { Route as RSlugRouteImport } from './routes/r.$slug'
 import { Route as ServicesLocalSeoRouteImport } from './routes/services.local-seo'
 import { Route as ServicesLocalSeoAhmedabadRouteImport } from './routes/services.local-seo-ahmedabad'
 import { Route as ServicesLocalSeoBangaloreRouteImport } from './routes/services.local-seo-bangalore'
+import { Route as ServicesLocalSeoBhujRouteImport } from './routes/services.local-seo-bhuj'
+import { Route as ServicesLocalSeoChandigarhRouteImport } from './routes/services.local-seo-chandigarh'
 import { Route as ServicesLocalSeoChennaiRouteImport } from './routes/services.local-seo-chennai'
 import { Route as ServicesLocalSeoDelhiRouteImport } from './routes/services.local-seo-delhi'
 import { Route as ServicesLocalSeoGujaratRouteImport } from './routes/services.local-seo-gujarat'
+import { Route as ServicesLocalSeoGurgaonRouteImport } from './routes/services.local-seo-gurgaon'
 import { Route as ServicesLocalSeoHyderabadRouteImport } from './routes/services.local-seo-hyderabad'
 import { Route as ServicesLocalSeoJaipurRouteImport } from './routes/services.local-seo-jaipur'
 import { Route as ServicesLocalSeoKolkataRouteImport } from './routes/services.local-seo-kolkata'
 import { Route as ServicesLocalSeoLucknowRouteImport } from './routes/services.local-seo-lucknow'
 import { Route as ServicesLocalSeoMumbaiRouteImport } from './routes/services.local-seo-mumbai'
+import { Route as ServicesLocalSeoNoidaRouteImport } from './routes/services.local-seo-noida'
 import { Route as ServicesLocalSeoPuneRouteImport } from './routes/services.local-seo-pune'
 import { Route as ServicesLocalSeoRajkotRouteImport } from './routes/services.local-seo-rajkot'
 import { Route as ServicesLocalSeoSuratRouteImport } from './routes/services.local-seo-surat'
+import { Route as ServicesLocalSeoUdaipurRouteImport } from './routes/services.local-seo-udaipur'
 import { Route as ServicesLocalSeoVadodaraRouteImport } from './routes/services.local-seo-vadodara'
 import { Route as AuthenticatedDashboardIndexRouteImport } from './routes/_authenticated/dashboard.index'
 import { Route as AuthenticatedDashboardAgentRouteImport } from './routes/_authenticated/dashboard.agent'
@@ -174,6 +180,12 @@ const HowToReplyReviewRoute = HowToReplyReviewRouteImport.update({
   path: '/how-to-reply-review',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LocalSeoCafeResortRestaurantUdaipurRoute =
+  LocalSeoCafeResortRestaurantUdaipurRouteImport.update({
+    id: '/local-seo-cafe-resort-restaurant-udaipur',
+    path: '/local-seo-cafe-resort-restaurant-udaipur',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
@@ -323,6 +335,17 @@ const ServicesLocalSeoBangaloreRoute =
     path: '/services/local-seo-bangalore',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ServicesLocalSeoBhujRoute = ServicesLocalSeoBhujRouteImport.update({
+  id: '/services/local-seo-bhuj',
+  path: '/services/local-seo-bhuj',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesLocalSeoChandigarhRoute =
+  ServicesLocalSeoChandigarhRouteImport.update({
+    id: '/services/local-seo-chandigarh',
+    path: '/services/local-seo-chandigarh',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ServicesLocalSeoChennaiRoute = ServicesLocalSeoChennaiRouteImport.update({
   id: '/services/local-seo-chennai',
   path: '/services/local-seo-chennai',
@@ -336,6 +359,11 @@ const ServicesLocalSeoDelhiRoute = ServicesLocalSeoDelhiRouteImport.update({
 const ServicesLocalSeoGujaratRoute = ServicesLocalSeoGujaratRouteImport.update({
   id: '/services/local-seo-gujarat',
   path: '/services/local-seo-gujarat',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesLocalSeoGurgaonRoute = ServicesLocalSeoGurgaonRouteImport.update({
+  id: '/services/local-seo-gurgaon',
+  path: '/services/local-seo-gurgaon',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ServicesLocalSeoHyderabadRoute =
@@ -364,6 +392,11 @@ const ServicesLocalSeoMumbaiRoute = ServicesLocalSeoMumbaiRouteImport.update({
   path: '/services/local-seo-mumbai',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ServicesLocalSeoNoidaRoute = ServicesLocalSeoNoidaRouteImport.update({
+  id: '/services/local-seo-noida',
+  path: '/services/local-seo-noida',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ServicesLocalSeoPuneRoute = ServicesLocalSeoPuneRouteImport.update({
   id: '/services/local-seo-pune',
   path: '/services/local-seo-pune',
@@ -377,6 +410,11 @@ const ServicesLocalSeoRajkotRoute = ServicesLocalSeoRajkotRouteImport.update({
 const ServicesLocalSeoSuratRoute = ServicesLocalSeoSuratRouteImport.update({
   id: '/services/local-seo-surat',
   path: '/services/local-seo-surat',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ServicesLocalSeoUdaipurRoute = ServicesLocalSeoUdaipurRouteImport.update({
+  id: '/services/local-seo-udaipur',
+  path: '/services/local-seo-udaipur',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ServicesLocalSeoVadodaraRoute =
@@ -515,6 +553,7 @@ export interface FileRoutesByFullPath {
   '/how-to-generate-magic-qr': typeof HowToGenerateMagicQrRoute
   '/how-to-post-on-gbp': typeof HowToPostOnGbpRoute
   '/how-to-reply-review': typeof HowToReplyReviewRoute
+  '/local-seo-cafe-resort-restaurant-udaipur': typeof LocalSeoCafeResortRestaurantUdaipurRoute
   '/login': typeof LoginRoute
   '/official-partner': typeof OfficialPartnerRoute
   '/partner': typeof PartnerRoute
@@ -542,17 +581,22 @@ export interface FileRoutesByFullPath {
   '/services/local-seo': typeof ServicesLocalSeoRoute
   '/services/local-seo-ahmedabad': typeof ServicesLocalSeoAhmedabadRoute
   '/services/local-seo-bangalore': typeof ServicesLocalSeoBangaloreRoute
+  '/services/local-seo-bhuj': typeof ServicesLocalSeoBhujRoute
+  '/services/local-seo-chandigarh': typeof ServicesLocalSeoChandigarhRoute
   '/services/local-seo-chennai': typeof ServicesLocalSeoChennaiRoute
   '/services/local-seo-delhi': typeof ServicesLocalSeoDelhiRoute
   '/services/local-seo-gujarat': typeof ServicesLocalSeoGujaratRoute
+  '/services/local-seo-gurgaon': typeof ServicesLocalSeoGurgaonRoute
   '/services/local-seo-hyderabad': typeof ServicesLocalSeoHyderabadRoute
   '/services/local-seo-jaipur': typeof ServicesLocalSeoJaipurRoute
   '/services/local-seo-kolkata': typeof ServicesLocalSeoKolkataRoute
   '/services/local-seo-lucknow': typeof ServicesLocalSeoLucknowRoute
   '/services/local-seo-mumbai': typeof ServicesLocalSeoMumbaiRoute
+  '/services/local-seo-noida': typeof ServicesLocalSeoNoidaRoute
   '/services/local-seo-pune': typeof ServicesLocalSeoPuneRoute
   '/services/local-seo-rajkot': typeof ServicesLocalSeoRajkotRoute
   '/services/local-seo-surat': typeof ServicesLocalSeoSuratRoute
+  '/services/local-seo-udaipur': typeof ServicesLocalSeoUdaipurRoute
   '/services/local-seo-vadodara': typeof ServicesLocalSeoVadodaraRoute
   '/blog/': typeof BlogIndexRoute
   '/dashboard/agent': typeof AuthenticatedDashboardAgentRoute
@@ -593,6 +637,7 @@ export interface FileRoutesByTo {
   '/how-to-generate-magic-qr': typeof HowToGenerateMagicQrRoute
   '/how-to-post-on-gbp': typeof HowToPostOnGbpRoute
   '/how-to-reply-review': typeof HowToReplyReviewRoute
+  '/local-seo-cafe-resort-restaurant-udaipur': typeof LocalSeoCafeResortRestaurantUdaipurRoute
   '/login': typeof LoginRoute
   '/official-partner': typeof OfficialPartnerRoute
   '/partner': typeof PartnerRoute
@@ -618,17 +663,22 @@ export interface FileRoutesByTo {
   '/services/local-seo': typeof ServicesLocalSeoRoute
   '/services/local-seo-ahmedabad': typeof ServicesLocalSeoAhmedabadRoute
   '/services/local-seo-bangalore': typeof ServicesLocalSeoBangaloreRoute
+  '/services/local-seo-bhuj': typeof ServicesLocalSeoBhujRoute
+  '/services/local-seo-chandigarh': typeof ServicesLocalSeoChandigarhRoute
   '/services/local-seo-chennai': typeof ServicesLocalSeoChennaiRoute
   '/services/local-seo-delhi': typeof ServicesLocalSeoDelhiRoute
   '/services/local-seo-gujarat': typeof ServicesLocalSeoGujaratRoute
+  '/services/local-seo-gurgaon': typeof ServicesLocalSeoGurgaonRoute
   '/services/local-seo-hyderabad': typeof ServicesLocalSeoHyderabadRoute
   '/services/local-seo-jaipur': typeof ServicesLocalSeoJaipurRoute
   '/services/local-seo-kolkata': typeof ServicesLocalSeoKolkataRoute
   '/services/local-seo-lucknow': typeof ServicesLocalSeoLucknowRoute
   '/services/local-seo-mumbai': typeof ServicesLocalSeoMumbaiRoute
+  '/services/local-seo-noida': typeof ServicesLocalSeoNoidaRoute
   '/services/local-seo-pune': typeof ServicesLocalSeoPuneRoute
   '/services/local-seo-rajkot': typeof ServicesLocalSeoRajkotRoute
   '/services/local-seo-surat': typeof ServicesLocalSeoSuratRoute
+  '/services/local-seo-udaipur': typeof ServicesLocalSeoUdaipurRoute
   '/services/local-seo-vadodara': typeof ServicesLocalSeoVadodaraRoute
   '/blog': typeof BlogIndexRoute
   '/dashboard/agent': typeof AuthenticatedDashboardAgentRoute
@@ -672,6 +722,7 @@ export interface FileRoutesById {
   '/how-to-generate-magic-qr': typeof HowToGenerateMagicQrRoute
   '/how-to-post-on-gbp': typeof HowToPostOnGbpRoute
   '/how-to-reply-review': typeof HowToReplyReviewRoute
+  '/local-seo-cafe-resort-restaurant-udaipur': typeof LocalSeoCafeResortRestaurantUdaipurRoute
   '/login': typeof LoginRoute
   '/official-partner': typeof OfficialPartnerRoute
   '/partner': typeof PartnerRoute
@@ -699,17 +750,22 @@ export interface FileRoutesById {
   '/services/local-seo': typeof ServicesLocalSeoRoute
   '/services/local-seo-ahmedabad': typeof ServicesLocalSeoAhmedabadRoute
   '/services/local-seo-bangalore': typeof ServicesLocalSeoBangaloreRoute
+  '/services/local-seo-bhuj': typeof ServicesLocalSeoBhujRoute
+  '/services/local-seo-chandigarh': typeof ServicesLocalSeoChandigarhRoute
   '/services/local-seo-chennai': typeof ServicesLocalSeoChennaiRoute
   '/services/local-seo-delhi': typeof ServicesLocalSeoDelhiRoute
   '/services/local-seo-gujarat': typeof ServicesLocalSeoGujaratRoute
+  '/services/local-seo-gurgaon': typeof ServicesLocalSeoGurgaonRoute
   '/services/local-seo-hyderabad': typeof ServicesLocalSeoHyderabadRoute
   '/services/local-seo-jaipur': typeof ServicesLocalSeoJaipurRoute
   '/services/local-seo-kolkata': typeof ServicesLocalSeoKolkataRoute
   '/services/local-seo-lucknow': typeof ServicesLocalSeoLucknowRoute
   '/services/local-seo-mumbai': typeof ServicesLocalSeoMumbaiRoute
+  '/services/local-seo-noida': typeof ServicesLocalSeoNoidaRoute
   '/services/local-seo-pune': typeof ServicesLocalSeoPuneRoute
   '/services/local-seo-rajkot': typeof ServicesLocalSeoRajkotRoute
   '/services/local-seo-surat': typeof ServicesLocalSeoSuratRoute
+  '/services/local-seo-udaipur': typeof ServicesLocalSeoUdaipurRoute
   '/services/local-seo-vadodara': typeof ServicesLocalSeoVadodaraRoute
   '/blog/': typeof BlogIndexRoute
   '/_authenticated/dashboard/agent': typeof AuthenticatedDashboardAgentRoute
@@ -752,6 +808,7 @@ export interface FileRouteTypes {
     | '/how-to-generate-magic-qr'
     | '/how-to-post-on-gbp'
     | '/how-to-reply-review'
+    | '/local-seo-cafe-resort-restaurant-udaipur'
     | '/login'
     | '/official-partner'
     | '/partner'
@@ -779,17 +836,22 @@ export interface FileRouteTypes {
     | '/services/local-seo'
     | '/services/local-seo-ahmedabad'
     | '/services/local-seo-bangalore'
+    | '/services/local-seo-bhuj'
+    | '/services/local-seo-chandigarh'
     | '/services/local-seo-chennai'
     | '/services/local-seo-delhi'
     | '/services/local-seo-gujarat'
+    | '/services/local-seo-gurgaon'
     | '/services/local-seo-hyderabad'
     | '/services/local-seo-jaipur'
     | '/services/local-seo-kolkata'
     | '/services/local-seo-lucknow'
     | '/services/local-seo-mumbai'
+    | '/services/local-seo-noida'
     | '/services/local-seo-pune'
     | '/services/local-seo-rajkot'
     | '/services/local-seo-surat'
+    | '/services/local-seo-udaipur'
     | '/services/local-seo-vadodara'
     | '/blog/'
     | '/dashboard/agent'
@@ -830,6 +892,7 @@ export interface FileRouteTypes {
     | '/how-to-generate-magic-qr'
     | '/how-to-post-on-gbp'
     | '/how-to-reply-review'
+    | '/local-seo-cafe-resort-restaurant-udaipur'
     | '/login'
     | '/official-partner'
     | '/partner'
@@ -855,17 +918,22 @@ export interface FileRouteTypes {
     | '/services/local-seo'
     | '/services/local-seo-ahmedabad'
     | '/services/local-seo-bangalore'
+    | '/services/local-seo-bhuj'
+    | '/services/local-seo-chandigarh'
     | '/services/local-seo-chennai'
     | '/services/local-seo-delhi'
     | '/services/local-seo-gujarat'
+    | '/services/local-seo-gurgaon'
     | '/services/local-seo-hyderabad'
     | '/services/local-seo-jaipur'
     | '/services/local-seo-kolkata'
     | '/services/local-seo-lucknow'
     | '/services/local-seo-mumbai'
+    | '/services/local-seo-noida'
     | '/services/local-seo-pune'
     | '/services/local-seo-rajkot'
     | '/services/local-seo-surat'
+    | '/services/local-seo-udaipur'
     | '/services/local-seo-vadodara'
     | '/blog'
     | '/dashboard/agent'
@@ -908,6 +976,7 @@ export interface FileRouteTypes {
     | '/how-to-generate-magic-qr'
     | '/how-to-post-on-gbp'
     | '/how-to-reply-review'
+    | '/local-seo-cafe-resort-restaurant-udaipur'
     | '/login'
     | '/official-partner'
     | '/partner'
@@ -935,17 +1004,22 @@ export interface FileRouteTypes {
     | '/services/local-seo'
     | '/services/local-seo-ahmedabad'
     | '/services/local-seo-bangalore'
+    | '/services/local-seo-bhuj'
+    | '/services/local-seo-chandigarh'
     | '/services/local-seo-chennai'
     | '/services/local-seo-delhi'
     | '/services/local-seo-gujarat'
+    | '/services/local-seo-gurgaon'
     | '/services/local-seo-hyderabad'
     | '/services/local-seo-jaipur'
     | '/services/local-seo-kolkata'
     | '/services/local-seo-lucknow'
     | '/services/local-seo-mumbai'
+    | '/services/local-seo-noida'
     | '/services/local-seo-pune'
     | '/services/local-seo-rajkot'
     | '/services/local-seo-surat'
+    | '/services/local-seo-udaipur'
     | '/services/local-seo-vadodara'
     | '/blog/'
     | '/_authenticated/dashboard/agent'
@@ -989,6 +1063,7 @@ export interface RootRouteChildren {
   HowToGenerateMagicQrRoute: typeof HowToGenerateMagicQrRoute
   HowToPostOnGbpRoute: typeof HowToPostOnGbpRoute
   HowToReplyReviewRoute: typeof HowToReplyReviewRoute
+  LocalSeoCafeResortRestaurantUdaipurRoute: typeof LocalSeoCafeResortRestaurantUdaipurRoute
   LoginRoute: typeof LoginRoute
   OfficialPartnerRoute: typeof OfficialPartnerRoute
   PartnerRoute: typeof PartnerRoute
@@ -1014,17 +1089,22 @@ export interface RootRouteChildren {
   ServicesLocalSeoRoute: typeof ServicesLocalSeoRoute
   ServicesLocalSeoAhmedabadRoute: typeof ServicesLocalSeoAhmedabadRoute
   ServicesLocalSeoBangaloreRoute: typeof ServicesLocalSeoBangaloreRoute
+  ServicesLocalSeoBhujRoute: typeof ServicesLocalSeoBhujRoute
+  ServicesLocalSeoChandigarhRoute: typeof ServicesLocalSeoChandigarhRoute
   ServicesLocalSeoChennaiRoute: typeof ServicesLocalSeoChennaiRoute
   ServicesLocalSeoDelhiRoute: typeof ServicesLocalSeoDelhiRoute
   ServicesLocalSeoGujaratRoute: typeof ServicesLocalSeoGujaratRoute
+  ServicesLocalSeoGurgaonRoute: typeof ServicesLocalSeoGurgaonRoute
   ServicesLocalSeoHyderabadRoute: typeof ServicesLocalSeoHyderabadRoute
   ServicesLocalSeoJaipurRoute: typeof ServicesLocalSeoJaipurRoute
   ServicesLocalSeoKolkataRoute: typeof ServicesLocalSeoKolkataRoute
   ServicesLocalSeoLucknowRoute: typeof ServicesLocalSeoLucknowRoute
   ServicesLocalSeoMumbaiRoute: typeof ServicesLocalSeoMumbaiRoute
+  ServicesLocalSeoNoidaRoute: typeof ServicesLocalSeoNoidaRoute
   ServicesLocalSeoPuneRoute: typeof ServicesLocalSeoPuneRoute
   ServicesLocalSeoRajkotRoute: typeof ServicesLocalSeoRajkotRoute
   ServicesLocalSeoSuratRoute: typeof ServicesLocalSeoSuratRoute
+  ServicesLocalSeoUdaipurRoute: typeof ServicesLocalSeoUdaipurRoute
   ServicesLocalSeoVadodaraRoute: typeof ServicesLocalSeoVadodaraRoute
   BlogIndexRoute: typeof BlogIndexRoute
   ApiPublicLeadsRoute: typeof ApiPublicLeadsRoute
@@ -1153,6 +1233,13 @@ declare module '@tanstack/react-router' {
       path: '/how-to-reply-review'
       fullPath: '/how-to-reply-review'
       preLoaderRoute: typeof HowToReplyReviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/local-seo-cafe-resort-restaurant-udaipur': {
+      id: '/local-seo-cafe-resort-restaurant-udaipur'
+      path: '/local-seo-cafe-resort-restaurant-udaipur'
+      fullPath: '/local-seo-cafe-resort-restaurant-udaipur'
+      preLoaderRoute: typeof LocalSeoCafeResortRestaurantUdaipurRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -1351,6 +1438,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesLocalSeoBangaloreRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/services/local-seo-bhuj': {
+      id: '/services/local-seo-bhuj'
+      path: '/services/local-seo-bhuj'
+      fullPath: '/services/local-seo-bhuj'
+      preLoaderRoute: typeof ServicesLocalSeoBhujRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/local-seo-chandigarh': {
+      id: '/services/local-seo-chandigarh'
+      path: '/services/local-seo-chandigarh'
+      fullPath: '/services/local-seo-chandigarh'
+      preLoaderRoute: typeof ServicesLocalSeoChandigarhRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/services/local-seo-chennai': {
       id: '/services/local-seo-chennai'
       path: '/services/local-seo-chennai'
@@ -1370,6 +1471,13 @@ declare module '@tanstack/react-router' {
       path: '/services/local-seo-gujarat'
       fullPath: '/services/local-seo-gujarat'
       preLoaderRoute: typeof ServicesLocalSeoGujaratRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/local-seo-gurgaon': {
+      id: '/services/local-seo-gurgaon'
+      path: '/services/local-seo-gurgaon'
+      fullPath: '/services/local-seo-gurgaon'
+      preLoaderRoute: typeof ServicesLocalSeoGurgaonRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/services/local-seo-hyderabad': {
@@ -1407,6 +1515,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesLocalSeoMumbaiRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/services/local-seo-noida': {
+      id: '/services/local-seo-noida'
+      path: '/services/local-seo-noida'
+      fullPath: '/services/local-seo-noida'
+      preLoaderRoute: typeof ServicesLocalSeoNoidaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/services/local-seo-pune': {
       id: '/services/local-seo-pune'
       path: '/services/local-seo-pune'
@@ -1426,6 +1541,13 @@ declare module '@tanstack/react-router' {
       path: '/services/local-seo-surat'
       fullPath: '/services/local-seo-surat'
       preLoaderRoute: typeof ServicesLocalSeoSuratRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/local-seo-udaipur': {
+      id: '/services/local-seo-udaipur'
+      path: '/services/local-seo-udaipur'
+      fullPath: '/services/local-seo-udaipur'
+      preLoaderRoute: typeof ServicesLocalSeoUdaipurRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/services/local-seo-vadodara': {
@@ -1677,6 +1799,8 @@ const rootRouteChildren: RootRouteChildren = {
   HowToGenerateMagicQrRoute: HowToGenerateMagicQrRoute,
   HowToPostOnGbpRoute: HowToPostOnGbpRoute,
   HowToReplyReviewRoute: HowToReplyReviewRoute,
+  LocalSeoCafeResortRestaurantUdaipurRoute:
+    LocalSeoCafeResortRestaurantUdaipurRoute,
   LoginRoute: LoginRoute,
   OfficialPartnerRoute: OfficialPartnerRoute,
   PartnerRoute: PartnerRoute,
@@ -1702,17 +1826,22 @@ const rootRouteChildren: RootRouteChildren = {
   ServicesLocalSeoRoute: ServicesLocalSeoRoute,
   ServicesLocalSeoAhmedabadRoute: ServicesLocalSeoAhmedabadRoute,
   ServicesLocalSeoBangaloreRoute: ServicesLocalSeoBangaloreRoute,
+  ServicesLocalSeoBhujRoute: ServicesLocalSeoBhujRoute,
+  ServicesLocalSeoChandigarhRoute: ServicesLocalSeoChandigarhRoute,
   ServicesLocalSeoChennaiRoute: ServicesLocalSeoChennaiRoute,
   ServicesLocalSeoDelhiRoute: ServicesLocalSeoDelhiRoute,
   ServicesLocalSeoGujaratRoute: ServicesLocalSeoGujaratRoute,
+  ServicesLocalSeoGurgaonRoute: ServicesLocalSeoGurgaonRoute,
   ServicesLocalSeoHyderabadRoute: ServicesLocalSeoHyderabadRoute,
   ServicesLocalSeoJaipurRoute: ServicesLocalSeoJaipurRoute,
   ServicesLocalSeoKolkataRoute: ServicesLocalSeoKolkataRoute,
   ServicesLocalSeoLucknowRoute: ServicesLocalSeoLucknowRoute,
   ServicesLocalSeoMumbaiRoute: ServicesLocalSeoMumbaiRoute,
+  ServicesLocalSeoNoidaRoute: ServicesLocalSeoNoidaRoute,
   ServicesLocalSeoPuneRoute: ServicesLocalSeoPuneRoute,
   ServicesLocalSeoRajkotRoute: ServicesLocalSeoRajkotRoute,
   ServicesLocalSeoSuratRoute: ServicesLocalSeoSuratRoute,
+  ServicesLocalSeoUdaipurRoute: ServicesLocalSeoUdaipurRoute,
   ServicesLocalSeoVadodaraRoute: ServicesLocalSeoVadodaraRoute,
   BlogIndexRoute: BlogIndexRoute,
   ApiPublicLeadsRoute: ApiPublicLeadsRoute,
