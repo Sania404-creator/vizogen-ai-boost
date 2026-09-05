@@ -26,6 +26,7 @@ import { Route as HowToCreatePostRouteImport } from './routes/how-to-create-post
 import { Route as HowToGenerateMagicQrRouteImport } from './routes/how-to-generate-magic-qr'
 import { Route as HowToPostOnGbpRouteImport } from './routes/how-to-post-on-gbp'
 import { Route as HowToReplyReviewRouteImport } from './routes/how-to-reply-review'
+import { Route as LocalSeoCafeResortRestaurantUdaipurRouteImport } from './routes/local-seo-cafe-resort-restaurant-udaipur'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as OfficialPartnerRouteImport } from './routes/official-partner'
 import { Route as PartnerRouteImport } from './routes/partner'
@@ -179,6 +180,12 @@ const HowToReplyReviewRoute = HowToReplyReviewRouteImport.update({
   path: '/how-to-reply-review',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LocalSeoCafeResortRestaurantUdaipurRoute =
+  LocalSeoCafeResortRestaurantUdaipurRouteImport.update({
+    id: '/local-seo-cafe-resort-restaurant-udaipur',
+    path: '/local-seo-cafe-resort-restaurant-udaipur',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
@@ -546,6 +553,7 @@ export interface FileRoutesByFullPath {
   '/how-to-generate-magic-qr': typeof HowToGenerateMagicQrRoute
   '/how-to-post-on-gbp': typeof HowToPostOnGbpRoute
   '/how-to-reply-review': typeof HowToReplyReviewRoute
+  '/local-seo-cafe-resort-restaurant-udaipur': typeof LocalSeoCafeResortRestaurantUdaipurRoute
   '/login': typeof LoginRoute
   '/official-partner': typeof OfficialPartnerRoute
   '/partner': typeof PartnerRoute
@@ -629,6 +637,7 @@ export interface FileRoutesByTo {
   '/how-to-generate-magic-qr': typeof HowToGenerateMagicQrRoute
   '/how-to-post-on-gbp': typeof HowToPostOnGbpRoute
   '/how-to-reply-review': typeof HowToReplyReviewRoute
+  '/local-seo-cafe-resort-restaurant-udaipur': typeof LocalSeoCafeResortRestaurantUdaipurRoute
   '/login': typeof LoginRoute
   '/official-partner': typeof OfficialPartnerRoute
   '/partner': typeof PartnerRoute
@@ -713,6 +722,7 @@ export interface FileRoutesById {
   '/how-to-generate-magic-qr': typeof HowToGenerateMagicQrRoute
   '/how-to-post-on-gbp': typeof HowToPostOnGbpRoute
   '/how-to-reply-review': typeof HowToReplyReviewRoute
+  '/local-seo-cafe-resort-restaurant-udaipur': typeof LocalSeoCafeResortRestaurantUdaipurRoute
   '/login': typeof LoginRoute
   '/official-partner': typeof OfficialPartnerRoute
   '/partner': typeof PartnerRoute
@@ -798,6 +808,7 @@ export interface FileRouteTypes {
     | '/how-to-generate-magic-qr'
     | '/how-to-post-on-gbp'
     | '/how-to-reply-review'
+    | '/local-seo-cafe-resort-restaurant-udaipur'
     | '/login'
     | '/official-partner'
     | '/partner'
@@ -881,6 +892,7 @@ export interface FileRouteTypes {
     | '/how-to-generate-magic-qr'
     | '/how-to-post-on-gbp'
     | '/how-to-reply-review'
+    | '/local-seo-cafe-resort-restaurant-udaipur'
     | '/login'
     | '/official-partner'
     | '/partner'
@@ -964,6 +976,7 @@ export interface FileRouteTypes {
     | '/how-to-generate-magic-qr'
     | '/how-to-post-on-gbp'
     | '/how-to-reply-review'
+    | '/local-seo-cafe-resort-restaurant-udaipur'
     | '/login'
     | '/official-partner'
     | '/partner'
@@ -1050,6 +1063,7 @@ export interface RootRouteChildren {
   HowToGenerateMagicQrRoute: typeof HowToGenerateMagicQrRoute
   HowToPostOnGbpRoute: typeof HowToPostOnGbpRoute
   HowToReplyReviewRoute: typeof HowToReplyReviewRoute
+  LocalSeoCafeResortRestaurantUdaipurRoute: typeof LocalSeoCafeResortRestaurantUdaipurRoute
   LoginRoute: typeof LoginRoute
   OfficialPartnerRoute: typeof OfficialPartnerRoute
   PartnerRoute: typeof PartnerRoute
@@ -1219,6 +1233,13 @@ declare module '@tanstack/react-router' {
       path: '/how-to-reply-review'
       fullPath: '/how-to-reply-review'
       preLoaderRoute: typeof HowToReplyReviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/local-seo-cafe-resort-restaurant-udaipur': {
+      id: '/local-seo-cafe-resort-restaurant-udaipur'
+      path: '/local-seo-cafe-resort-restaurant-udaipur'
+      fullPath: '/local-seo-cafe-resort-restaurant-udaipur'
+      preLoaderRoute: typeof LocalSeoCafeResortRestaurantUdaipurRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -1778,6 +1799,8 @@ const rootRouteChildren: RootRouteChildren = {
   HowToGenerateMagicQrRoute: HowToGenerateMagicQrRoute,
   HowToPostOnGbpRoute: HowToPostOnGbpRoute,
   HowToReplyReviewRoute: HowToReplyReviewRoute,
+  LocalSeoCafeResortRestaurantUdaipurRoute:
+    LocalSeoCafeResortRestaurantUdaipurRoute,
   LoginRoute: LoginRoute,
   OfficialPartnerRoute: OfficialPartnerRoute,
   PartnerRoute: PartnerRoute,
