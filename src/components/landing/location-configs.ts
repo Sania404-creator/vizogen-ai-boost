@@ -637,6 +637,216 @@ export const locations: LocationConfig[] = [
       "Lucknow's local market is growing quickly but is still less saturated than metro cities, which means a properly optimised Google Business Profile can move into the map pack faster here. Our local SEO services in Lucknow cover Gomti Nagar, Hazratganj, Alambagh, Indira Nagar, Aliganj and Faizabad Road, with categories, services and service areas set to match the localities you serve. Vizogen publishes daily AI posts in Hindi-English phrasing, since a large share of Lucknow searches are Hindi-led, keeping your listing visibly active. Magic QR collects reviews from walk-in customers at billing, and AI replies respond within minutes so your listing shows consistent engagement — something most local competitors here still neglect. For clinics, coaching institutes, salons, restaurants and home services, we also complete the services, pricing and Q&A sections so customers get their answer without calling a competitor first. Monthly locality-level rank tracking shows which areas improved and where review velocity needs a push.",
     faqs: baseFaqs("Lucknow"),
   },
+  {
+    slug: "noida",
+    city: "Noida",
+    region: "Uttar Pradesh",
+    headline: "Best Local SEO Agency in Noida",
+    intro:
+      "From Sector 18 retail to Sector 62 offices and Greater Noida clinics, Noida customers pick from the first three map results. Vizogen automates the Google Business Profile work that decides who those three are.",
+    metaTitle: "Best Local SEO Agency in Noida | Vizogen",
+    metaDescription:
+      "Looking for the best local SEO services in Noida? Vizogen helps businesses in Noida automate their GMB profile, boost local rankings, and attract more customers.",
+    keywords: [
+      "local SEO services Noida",
+      "Google Business Profile management Noida",
+      "GMB expert Noida",
+      "Google Maps ranking Noida",
+    ],
+    neighbourhoods: [
+      "Sector 18",
+      "Sector 62",
+      "Sector 137",
+      "Noida Extension",
+      "Greater Noida West",
+      "Sector 50",
+      "Sector 76",
+      "Film City",
+    ],
+    industries: [
+      "Clinics & dental practices",
+      "Salons & spas",
+      "Restaurants & cafés",
+      "Coaching institutes",
+      "Gyms & fitness studios",
+      "Home services",
+    ],
+    localInsight:
+      "Noida search is sector-led: people type a sector number with \u201Cnear me\u201D. We map your service areas and post language to the sectors you actually serve so proximity and relevance line up.",
+    searchBehaviour:
+      "A high share of Noida searches happen on mobile during commutes, so call buttons, hours and directions accuracy decide who gets contacted first.",
+    servicesCopy:
+      "Our local SEO services in Noida begin with a full Google Business Profile audit — categories, sector-level service areas, hours, photos, services and the sector language customers type. Vizogen then publishes AI-written Google posts every day tuned to corridors such as Sector 18, Sector 62, Sector 137, Sector 50 and Greater Noida West, keeping your listing active where you actually sell. Magic QR collects reviews at your counter or invoice so happy customers post the same day, and every review receives an AI-drafted reply within minutes. Because Noida buyers compare three listings before calling, we keep services, descriptions and the Q&A section complete to remove hesitation. Clinics, salons, gyms, coaching institutes and restaurants across Noida and Greater Noida use this to move from page-two visibility into the Maps 3-Pack, with monthly rank tracking showing which sectors improved.",
+    faqs: baseFaqs("Noida"),
+  },
+  {
+    slug: "chandigarh",
+    city: "Chandigarh",
+    region: "Punjab & Haryana",
+    headline: "Best Local SEO Agency in Chandigarh",
+    intro:
+      "Chandigarh's sector grid makes local search unusually precise — Sector 17, Sector 35, Mohali and Panchkula each behave like their own market. Vizogen keeps your profile visible in all of them.",
+    metaTitle: "Best Local SEO Agency in Chandigarh | Vizogen",
+    metaDescription:
+      "Looking for the best local SEO services in Chandigarh? Vizogen helps businesses in Chandigarh automate their GMB profile, boost local rankings, and attract more customers.",
+    keywords: [
+      "local SEO services Chandigarh",
+      "Google Business Profile management Chandigarh",
+      "GMB expert Chandigarh",
+      "Google Maps ranking Chandigarh",
+    ],
+    neighbourhoods: [
+      "Sector 17",
+      "Sector 22",
+      "Sector 35",
+      "Sector 43",
+      "Industrial Area",
+      "Mohali",
+      "Panchkula",
+      "Zirakpur",
+    ],
+    industries: [
+      "Restaurants & cafés",
+      "Salons & spas",
+      "Clinics & diagnostics",
+      "Coaching institutes",
+      "Retail showrooms",
+      "Car garages",
+    ],
+    localInsight:
+      "Chandigarh's tricity spread means one profile competes across Chandigarh, Mohali and Panchkula. We set service areas and post language so you show up in the right sectors instead of diluting across all three.",
+    searchBehaviour:
+      "Buyers here read reviews carefully before visiting, so review velocity and fast, well-written replies move conversions as much as ranking does.",
+    servicesCopy:
+      "Our local SEO services in Chandigarh start by aligning your Google Business Profile with the tricity reality: categories, services and service areas mapped across Sector 17, Sector 35, Sector 43, Industrial Area, Mohali and Panchkula. Vizogen publishes daily AI posts covering offers, seasonal hours and new services in the phrasing Chandigarh customers use, keeping the listing fresh while competitors post once a month. Magic QR collects genuine reviews from walk-in customers at billing, and AI replies respond within minutes so sentiment stays strong. Photos matter here for restaurants, salons, showrooms and clinics, so we keep new imagery flowing alongside posts, and we clean up duplicate or mis-pinned listings that split review equity between Chandigarh and Mohali. Monthly locality reporting separates local from discovery searches so you can see exactly which sectors improved.",
+    faqs: baseFaqs("Chandigarh"),
+  },
+  {
+    slug: "gurgaon",
+    city: "Gurgaon",
+    region: "Haryana",
+    headline: "Best Local SEO Agency in Gurgaon",
+    intro:
+      "Gurgaon is one of India's most competitive local markets — Cyber Hub, Golf Course Road and Sohna Road businesses fight for the same three map slots. Vizogen automates the daily work that wins them.",
+    metaTitle: "Best Local SEO Agency in Gurgaon | Vizogen",
+    metaDescription:
+      "Looking for the best local SEO services in Gurgaon? Vizogen helps businesses in Gurgaon automate their GMB profile, boost local rankings, and attract more customers.",
+    keywords: [
+      "local SEO services Gurgaon",
+      "Google Business Profile management Gurgaon",
+      "GMB expert Gurugram",
+      "Google Maps ranking Gurgaon",
+    ],
+    neighbourhoods: [
+      "Cyber Hub",
+      "Golf Course Road",
+      "Sohna Road",
+      "MG Road",
+      "Sector 29",
+      "DLF Phase 3",
+      "Sector 56",
+      "New Gurgaon",
+    ],
+    industries: [
+      "Restaurants & cafés",
+      "Salons & spas",
+      "Clinics & dental practices",
+      "Gyms & fitness studios",
+      "Real estate offices",
+      "Car detailers",
+    ],
+    localInsight:
+      "Gurgaon searches cluster around workplace and residential corridors at different hours. We tune service areas, hours and posts so your profile shows for both the lunch-hour office crowd and evening residential demand.",
+    searchBehaviour:
+      "Competition is high and review counts are large, so consistent review growth plus daily activity is the practical way to close the prominence gap.",
+    servicesCopy:
+      "Our local SEO services in Gurgaon are built for a crowded map: we audit categories, services, attributes and service areas, then align them to corridors such as Cyber Hub, Golf Course Road, Sohna Road, MG Road, Sector 29 and DLF Phase 3. Vizogen publishes AI-written Google posts daily — offers, events, new services and seasonal timings — so your listing stays fresh against chains with far bigger budgets. Magic QR collects authentic reviews from customers on site, and AI replies answer every review within minutes, which lifts both prominence and conversion. Because Gurgaon buyers compare three listings and read the top reviews, we complete services, pricing, photos and Q&A so nothing pushes them to a competitor. Restaurants, salons, clinics, gyms and real estate offices use this cadence to climb into the Maps 3-Pack, and monthly rank tracking reports which corridors gained calls and direction requests.",
+    faqs: baseFaqs("Gurgaon"),
+  },
+  {
+    slug: "bhuj",
+    city: "Bhuj",
+    region: "Gujarat",
+    headline: "Best Local SEO Agency in Bhuj",
+    intro:
+      "Bhuj blends steady local demand with strong Kutch tourism traffic — from Hamirsar Lake and Aina Mahal visitors to everyday customers across the city. A well-run Google Business Profile wins both.",
+    metaTitle: "Best Local SEO Agency in Bhuj | Vizogen",
+    metaDescription:
+      "Looking for the best local SEO services in Bhuj? Vizogen helps businesses in Bhuj automate their GMB profile, boost local rankings, and attract more customers.",
+    keywords: [
+      "local SEO services Bhuj",
+      "Google Business Profile management Bhuj",
+      "GMB expert Kutch",
+      "Google Maps ranking Bhuj",
+    ],
+    neighbourhoods: [
+      "Hamirsar Lake",
+      "Aina Mahal area",
+      "Bhujiyo Hill",
+      "Station Road",
+      "Mundra Road",
+      "Vijaynagar",
+      "Mirzapar",
+      "Madhapar",
+    ],
+    industries: [
+      "Hotels & homestays",
+      "Restaurants & cafés",
+      "Tour & travel operators",
+      "Clinics",
+      "Handicraft & retail stores",
+      "Car garages",
+    ],
+    localInsight:
+      "Bhuj demand swings with the Rann season, and much of it is discovery search from visitors who have never heard your business name. Categories, photos and service areas matter more than brand recall here.",
+    searchBehaviour:
+      "Queries mix Gujarati transliteration with English and often include landmarks like Hamirsar Lake or Aina Mahal, so landmark-aware post and description language performs better.",
+    servicesCopy:
+      "Our local SEO services in Bhuj are tuned to a market that is part local, part tourism-led. We audit and complete your Google Business Profile — categories, services, attributes, hours and service areas across Station Road, Mundra Road, Madhapar, Mirzapar and the Hamirsar Lake and Aina Mahal areas — so both residents and Kutch visitors find you. Vizogen publishes daily AI posts covering seasonal Rann Utsav offers, festival timings, packages and new services in Gujarati-English phrasing that reads naturally to both audiences. Magic QR collects reviews from guests and walk-in customers before they leave, which is critical when visitors move on the next day, and AI replies answer every review within minutes. Photos carry heavy weight for hotels, restaurants, handicraft stores and tour operators here, so we keep fresh imagery flowing. Monthly reporting shows how discovery searches rise through the season and which localities are converting into calls and direction requests.",
+    faqs: baseFaqs("Bhuj"),
+  },
+  {
+    slug: "udaipur",
+    city: "Udaipur",
+    region: "Rajasthan",
+    headline: "Best Local SEO Agency in Udaipur",
+    intro:
+      "Udaipur's businesses compete for travelers and locals at once — Lake Pichola rooftops, City Palace-area resorts and Fatehpura clinics all live on Google Maps visibility. Vizogen automates the profile work behind it.",
+    metaTitle: "Best Local SEO Agency in Udaipur | Vizogen",
+    metaDescription:
+      "Looking for the best local SEO services in Udaipur? Vizogen helps businesses in Udaipur automate their GMB profile, boost local rankings, and attract more customers.",
+    keywords: [
+      "local SEO services Udaipur",
+      "Google Business Profile management Udaipur",
+      "GMB expert Udaipur",
+      "Google Maps ranking Udaipur",
+    ],
+    neighbourhoods: [
+      "Lake Pichola",
+      "City Palace Road",
+      "Fatehpura",
+      "Hiran Magri",
+      "Sukhadia Circle",
+      "Bhuwana",
+      "Ambamata",
+      "Sardarpura",
+    ],
+    industries: [
+      "Resorts & hotels",
+      "Cafés & rooftop restaurants",
+      "Tour & travel operators",
+      "Salons & spas",
+      "Clinics",
+      "Retail & handicrafts",
+    ],
+    localInsight:
+      "Udaipur demand is seasonal and heavily tourism-driven. Visitors search by landmark — lake view, City Palace, Fateh Sagar — so landmark-aware service areas, photos and post copy outperform generic city targeting.",
+    searchBehaviour:
+      "Travelers read the top three reviews before booking, which makes review velocity and fast replies as decisive as ranking position for hospitality and food businesses.",
+    servicesCopy:
+      "Our local SEO services in Udaipur work both the tourism and local sides of the market. We audit your Google Business Profile and align categories, services, attributes and service areas to the areas that actually drive visits — Lake Pichola, City Palace Road, Fateh Sagar, Fatehpura, Hiran Magri and Sukhadia Circle. Vizogen publishes daily AI posts covering peak-season packages, festival specials, off-season offers and new services, written for the way travelers and residents search. Magic QR collects reviews from guests before they check out or leave the table, and AI replies respond within minutes in the language the reviewer used, which protects your rating in a market where one bad review is highly visible. Photos are decisive for resorts, rooftop restaurants and cafés, so we keep new imagery flowing alongside posts, and we clean up duplicate or mis-pinned listings that split review equity. Monthly reporting separates local from discovery search so seasonality is clear.",
+    faqs: baseFaqs("Udaipur"),
+  },
 ];
 
 export const locationBySlug = Object.fromEntries(locations.map((l) => [l.slug, l]));
