@@ -68,6 +68,15 @@ export function Navbar() {
             </a>
           ))}
 
+          <Link
+            to="/partner"
+            className={`rounded-full px-3 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-foreground ${
+              pathname === "/partner" ? "text-foreground" : "text-muted-foreground"
+            }`}
+          >
+            Partner
+          </Link>
+
           <div
             className="relative"
             onMouseEnter={openMenu}
@@ -145,15 +154,6 @@ export function Navbar() {
               ) : null}
             </AnimatePresence>
           </div>
-
-          <Link
-            to="/partner"
-            className={`rounded-full px-3 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-foreground ${
-              pathname === "/partner" ? "text-foreground" : "text-muted-foreground"
-            }`}
-          >
-            Partner
-          </Link>
         </div>
 
         <div className="hidden items-center gap-3 xl:flex">
@@ -200,6 +200,16 @@ export function Navbar() {
                 {l.label}
               </a>
             ))}
+
+            <Link
+              to="/partner"
+              onClick={() => setOpen(false)}
+              className={`rounded-lg px-2 py-2.5 text-sm font-medium hover:bg-accent ${
+                pathname === "/partner" ? "text-foreground" : "text-muted-foreground"
+              }`}
+            >
+              Partner
+            </Link>
 
             <button
               type="button"
@@ -261,16 +271,6 @@ export function Navbar() {
                 </motion.div>
               ) : null}
             </AnimatePresence>
-
-            <Link
-              to="/partner"
-              onClick={() => setOpen(false)}
-              className={`rounded-lg px-2 py-2.5 text-sm font-medium hover:bg-accent ${
-                pathname === "/partner" ? "text-foreground" : "text-muted-foreground"
-              }`}
-            >
-              Partner
-            </Link>
           </div>
 
           <div className="mt-3 flex flex-col gap-2">
