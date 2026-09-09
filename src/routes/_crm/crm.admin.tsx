@@ -308,7 +308,10 @@ function AdminPage() {
               )}
             </div>
           </section>
+
+          <PartnerApplicationsPanel enabled={isAdmin} />
         </>
+
       ) : null}
     </CrmShell>
   );
