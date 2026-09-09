@@ -157,9 +157,6 @@ function TeamPage() {
           </div>
           );
         })}
-
-          </div>
-        ))}
       </div>
     </CrmShell>
   );
