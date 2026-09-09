@@ -50,12 +50,22 @@ export function buildPartnerAdminEmail(app: PartnerApplication) {
   `);
 }
 
-export function buildPartnerApplicantEmail(app: PartnerApplication) {
+export function buildPartnerApplicantEmail(app: PartnerApplication, referenceCode?: string) {
+  const codeBlock = referenceCode
+    ? `<div style="margin:0 0 16px;padding:14px 16px;border:1px solid #e6e8ef;border-radius:12px">
+        <div style="font-size:12px;color:#8a8f9c">Your application reference</div>
+        <div style="font-size:20px;font-weight:700;letter-spacing:1px">${escape(referenceCode)}</div>
+        <div style="margin-top:6px;font-size:12px;color:#8a8f9c">
+          Track your status anytime at https://www.vizogen.in/partner-application
+        </div>
+      </div>`
+    : "";
   return wrap(`
     <h2 style="margin:18px 0 8px;font-size:22px">Thanks, ${escape(app.fullName)}!</h2>
     <p style="margin:0 0 14px;color:#4a4f5c">
       We've received your application for the <b>${escape(app.program)}</b> program.
     </p>
+    ${codeBlock}
     <p style="margin:0 0 14px;color:#4a4f5c">
       Our partnerships team will review your details and reach out within
       <b>2 business days</b> with next steps, commission details and your onboarding link.
@@ -63,3 +73,4 @@ export function buildPartnerApplicantEmail(app: PartnerApplication) {
     <p style="margin:0;color:#4a4f5c">Need us sooner? WhatsApp us on +91 84889 18358.</p>
   `);
 }
+

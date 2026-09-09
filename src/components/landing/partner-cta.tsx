@@ -45,10 +45,11 @@ export function PartnerCta() {
         </div>
         <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <Button asChild size="lg" className="w-full rounded-full gradient-brand px-7 shadow-glow sm:w-auto">
-            <Link to="/partner">
-              <Handshake className="size-4" /> Become a Partner
+            <Link to="/partner-application">
+              <Handshake className="size-4" /> Apply to Become a Partner
             </Link>
           </Button>
+
           <Button asChild size="lg" variant="outline" className="w-full rounded-full sm:w-auto">
             <Link to="/official-partner">
               Official Partner Program <ArrowRight className="size-4" />

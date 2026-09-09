@@ -49,6 +49,8 @@ function buildEntries(): SitemapEntry[] {
     { path: "/", changefreq: "weekly", priority: "1.0" },
     { path: "/pricing", changefreq: "weekly", priority: "0.8" },
     { path: "/partner", changefreq: "monthly", priority: "0.8" },
+    { path: "/partner-application", changefreq: "monthly", priority: "0.7" },
+
     { path: "/official-partner", changefreq: "monthly", priority: "0.6" },
     { path: "/post-management", changefreq: "monthly", priority: "0.6" },
     { path: "/services/local-seo", changefreq: "weekly", priority: "0.8" },
