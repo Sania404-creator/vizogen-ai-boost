@@ -70,12 +70,17 @@ export interface Activity {
 const LEAD_COLUMNS =
   "id, name, email, phone, company, job_title, source, status, assigned_to, requested_demo_at, requested_demo_label, message, source_page, follow_up_on, tags, lost_reason, last_contacted_at, created_at, updated_at";
 
+/** The permanent owner Admin account. Its Admin seat can never be changed. */
+export const OWNER_EMAIL = "info.vizogen@gmail.com";
+
 /** Signed-in CRM identity. The very first signed-in user claims the Admin seat. */
 export const getCrmSession = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
     const { supabase, userId, claims } = context;
     const email = (claims as { email?: string }).email ?? "";
+    const isOwner = email.toLowerCase() === OWNER_EMAIL;
+
 
     let { data: member } = await supabase
       .from("crm_members")
