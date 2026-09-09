@@ -70,12 +70,17 @@ export interface Activity {
 const LEAD_COLUMNS =
   "id, name, email, phone, company, job_title, source, status, assigned_to, requested_demo_at, requested_demo_label, message, source_page, follow_up_on, tags, lost_reason, last_contacted_at, created_at, updated_at";
 
+/** The permanent owner Admin account. Its Admin seat can never be changed. */
+export const OWNER_EMAIL = "info.vizogen@gmail.com";
+
 /** Signed-in CRM identity. The very first signed-in user claims the Admin seat. */
 export const getCrmSession = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
     const { supabase, userId, claims } = context;
     const email = (claims as { email?: string }).email ?? "";
+    const isOwner = email.toLowerCase() === OWNER_EMAIL;
+
 
     let { data: member } = await supabase
       .from("crm_members")
@@ -89,6 +94,33 @@ export const getCrmSession = createServerFn({ method: "GET" })
       .eq("user_id", userId);
 
     let isAdmin = (roleRows ?? []).some((r) => r.role === "admin");
+
+    if (isOwner) {
+      const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+      if (!isAdmin) {
+        await supabaseAdmin.from("user_roles").insert({ user_id: userId, role: "admin" });
+        isAdmin = true;
+      }
+      if (!member || !member.active || !member.can_view_all) {
+        await supabaseAdmin.from("crm_members").upsert(
+          {
+            user_id: userId,
+            email,
+            full_name: member?.full_name || "Vizogen Admin",
+            can_view_all: true,
+            active: true,
+          },
+          { onConflict: "user_id" },
+        );
+        member = {
+          user_id: userId,
+          email,
+          full_name: member?.full_name || "Vizogen Admin",
+          can_view_all: true,
+          active: true,
+        };
+      }
+    }
 
     if (!member) {
       const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
@@ -120,6 +152,7 @@ export const getCrmSession = createServerFn({ method: "GET" })
     if (!member || !member.active) {
       return { member: null, isAdmin: false, canViewAll: false, email };
     }
+
 
     return {
       member: { ...member, role: isAdmin ? "admin" : "sales_rep" } as CrmMember,
@@ -487,6 +520,21 @@ export const updateMember = createServerFn({ method: "POST" })
     if (!isAdmin) throw new Error("Only Admins can manage the team.");
 
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+
+    const { data: target } = await supabaseAdmin
+      .from("crm_members")
+      .select("email")
+      .eq("user_id", data.userId)
+      .maybeSingle();
+    if ((target?.email ?? "").toLowerCase() === OWNER_EMAIL) {
+      if (data.role && data.role !== "admin") {
+        throw new Error("The owner account is a permanent Admin and cannot be changed.");
+      }
+      if (data.active === false || data.canViewAll === false) {
+        throw new Error("The owner account is a permanent Admin and cannot be restricted.");
+      }
+    }
+
     const payload: Record<string, string | boolean> = {};
     if (data.canViewAll !== undefined) payload["can_view_all"] = data.canViewAll;
     if (data.active !== undefined) payload["active"] = data.active;

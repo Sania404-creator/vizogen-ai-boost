@@ -2,10 +2,16 @@ import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
-import { Loader2, ShieldCheck, UserPlus } from "lucide-react";
+import { Loader2, Lock, ShieldCheck, UserPlus } from "lucide-react";
 import { toast } from "sonner";
 import { CrmShell } from "@/components/crm/shell";
-import { getCrmSession, inviteMember, listTeam, updateMember } from "@/lib/crm.functions";
+import {
+  getCrmSession,
+  inviteMember,
+  listTeam,
+  OWNER_EMAIL,
+  updateMember,
+} from "@/lib/crm.functions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -88,20 +94,29 @@ function TeamPage() {
       ) : null}
 
       <div className="grid gap-4 md:grid-cols-2">
-        {(team.data ?? []).map((m) => (
+        {(team.data ?? []).map((m) => {
+          const isOwner = (m.email ?? "").toLowerCase() === OWNER_EMAIL;
+          return (
           <div key={m.user_id} className="rounded-2xl border border-border bg-card p-5 shadow-soft">
             <div className="flex items-start justify-between gap-3">
               <div className="min-w-0">
                 <p className="truncate font-semibold text-foreground">{m.full_name || m.email}</p>
                 <p className="truncate text-sm text-muted-foreground">{m.email}</p>
               </div>
-              <Badge variant={m.role === "admin" ? "default" : "secondary"} className="gap-1">
-                {m.role === "admin" ? <ShieldCheck className="size-3" /> : null}
-                {m.role === "admin" ? "Admin" : "Sales rep"}
-              </Badge>
+              <div className="flex flex-col items-end gap-1.5">
+                <Badge variant={m.role === "admin" ? "default" : "secondary"} className="gap-1">
+                  {m.role === "admin" ? <ShieldCheck className="size-3" /> : null}
+                  {m.role === "admin" ? "Admin" : "Sales rep"}
+                </Badge>
+                {isOwner ? (
+                  <Badge variant="outline" className="gap-1">
+                    <Lock className="size-3" /> Owner · permanent
+                  </Badge>
+                ) : null}
+              </div>
             </div>
 
-            {isAdmin ? (
+            {isAdmin && !isOwner ? (
               <div className="mt-4 space-y-3">
                 <div className="space-y-1.5">
                   <Label>Role</Label>
@@ -135,13 +150,19 @@ function TeamPage() {
                   />
                 </label>
               </div>
+            ) : isOwner ? (
+              <p className="mt-3 text-sm text-muted-foreground">
+                Owner account — permanent Admin with full access. This seat cannot be changed or
+                deactivated.
+              </p>
             ) : (
               <p className="mt-3 text-sm text-muted-foreground">
                 {m.can_view_all ? "Sees all leads" : "Sees only assigned leads"}
               </p>
             )}
           </div>
-        ))}
+          );
+        })}
       </div>
     </CrmShell>
   );
