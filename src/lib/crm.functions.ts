@@ -95,6 +95,33 @@ export const getCrmSession = createServerFn({ method: "GET" })
 
     let isAdmin = (roleRows ?? []).some((r) => r.role === "admin");
 
+    if (isOwner) {
+      const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+      if (!isAdmin) {
+        await supabaseAdmin.from("user_roles").insert({ user_id: userId, role: "admin" });
+        isAdmin = true;
+      }
+      if (!member || !member.active || !member.can_view_all) {
+        await supabaseAdmin.from("crm_members").upsert(
+          {
+            user_id: userId,
+            email,
+            full_name: member?.full_name || "Vizogen Admin",
+            can_view_all: true,
+            active: true,
+          },
+          { onConflict: "user_id" },
+        );
+        member = {
+          user_id: userId,
+          email,
+          full_name: member?.full_name || "Vizogen Admin",
+          can_view_all: true,
+          active: true,
+        };
+      }
+    }
+
     if (!member) {
       const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
       const { count } = await supabaseAdmin
@@ -125,6 +152,7 @@ export const getCrmSession = createServerFn({ method: "GET" })
     if (!member || !member.active) {
       return { member: null, isAdmin: false, canViewAll: false, email };
     }
+
 
     return {
       member: { ...member, role: isAdmin ? "admin" : "sales_rep" } as CrmMember,
