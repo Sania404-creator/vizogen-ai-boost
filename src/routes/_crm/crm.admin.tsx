@@ -153,7 +153,9 @@ function AdminPage() {
                 </Button>
               </div>
               <div className="mt-4 divide-y divide-border">
-                {(team.data ?? []).map((m) => (
+                {(team.data ?? []).map((m) => {
+                  const isOwner = (m.email ?? "").toLowerCase() === OWNER_EMAIL;
+                  return (
                   <div key={m.user_id} className="flex flex-wrap items-center gap-3 py-3">
                     <div className="min-w-0 flex-1">
                       <p className="truncate text-sm font-semibold text-foreground">
@@ -164,36 +166,46 @@ function AdminPage() {
                     <Badge variant={m.role === "admin" ? "default" : "secondary"}>
                       {m.role === "admin" ? "Admin" : "Sales rep"}
                     </Badge>
-                    <Select
-                      value={m.role}
-                      onValueChange={(v) =>
-                        update({ userId: m.user_id, role: v as "admin" | "sales_rep" })
-                      }
-                    >
-                      <SelectTrigger className="h-9 w-[132px]">
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="admin">Admin</SelectItem>
-                        <SelectItem value="sales_rep">Sales rep</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <label className="flex items-center gap-2 text-xs text-muted-foreground">
-                      All leads
-                      <Switch
-                        checked={m.can_view_all}
-                        onCheckedChange={(v) => update({ userId: m.user_id, canViewAll: v })}
-                      />
-                    </label>
-                    <label className="flex items-center gap-2 text-xs text-muted-foreground">
-                      Active
-                      <Switch
-                        checked={m.active}
-                        onCheckedChange={(v) => update({ userId: m.user_id, active: v })}
-                      />
-                    </label>
+                    {isOwner ? (
+                      <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                        <Lock className="size-3.5" /> Owner · permanent Admin
+                      </span>
+                    ) : (
+                      <>
+                        <Select
+                          value={m.role}
+                          onValueChange={(v) =>
+                            update({ userId: m.user_id, role: v as "admin" | "sales_rep" })
+                          }
+                        >
+                          <SelectTrigger className="h-9 w-[132px]">
+                            <SelectValue />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="admin">Admin</SelectItem>
+                            <SelectItem value="sales_rep">Sales rep</SelectItem>
+                          </SelectContent>
+                        </Select>
+                        <label className="flex items-center gap-2 text-xs text-muted-foreground">
+                          All leads
+                          <Switch
+                            checked={m.can_view_all}
+                            onCheckedChange={(v) => update({ userId: m.user_id, canViewAll: v })}
+                          />
+                        </label>
+                        <label className="flex items-center gap-2 text-xs text-muted-foreground">
+                          Active
+                          <Switch
+                            checked={m.active}
+                            onCheckedChange={(v) => update({ userId: m.user_id, active: v })}
+                          />
+                        </label>
+                      </>
+                    )}
                   </div>
-                ))}
+                  );
+                })}
+
               </div>
             </section>
 
