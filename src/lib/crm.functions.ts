@@ -520,6 +520,21 @@ export const updateMember = createServerFn({ method: "POST" })
     if (!isAdmin) throw new Error("Only Admins can manage the team.");
 
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+
+    const { data: target } = await supabaseAdmin
+      .from("crm_members")
+      .select("email")
+      .eq("user_id", data.userId)
+      .maybeSingle();
+    if ((target?.email ?? "").toLowerCase() === OWNER_EMAIL) {
+      if (data.role && data.role !== "admin") {
+        throw new Error("The owner account is a permanent Admin and cannot be changed.");
+      }
+      if (data.active === false || data.canViewAll === false) {
+        throw new Error("The owner account is a permanent Admin and cannot be restricted.");
+      }
+    }
+
     const payload: Record<string, string | boolean> = {};
     if (data.canViewAll !== undefined) payload["can_view_all"] = data.canViewAll;
     if (data.active !== undefined) payload["active"] = data.active;
