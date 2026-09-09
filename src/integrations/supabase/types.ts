@@ -659,6 +659,7 @@ export type Database = {
         Row: {
           about: string | null
           admin_email_sent: boolean
+          admin_notes: string
           applicant_email_sent: boolean
           business_count: string
           business_name: string
@@ -668,11 +669,17 @@ export type Database = {
           id: string
           phone: string
           program: string
+          reference_code: string | null
+          reviewed_at: string | null
+          reviewed_by: string | null
+          status: string
+          updated_at: string
           website: string | null
         }
         Insert: {
           about?: string | null
           admin_email_sent?: boolean
+          admin_notes?: string
           applicant_email_sent?: boolean
           business_count: string
           business_name: string
@@ -682,11 +689,17 @@ export type Database = {
           id?: string
           phone: string
           program: string
+          reference_code?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: string
+          updated_at?: string
           website?: string | null
         }
         Update: {
           about?: string | null
           admin_email_sent?: boolean
+          admin_notes?: string
           applicant_email_sent?: boolean
           business_count?: string
           business_name?: string
@@ -696,6 +709,11 @@ export type Database = {
           id?: string
           phone?: string
           program?: string
+          reference_code?: string | null
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          status?: string
+          updated_at?: string
           website?: string | null
         }
         Relationships: []
