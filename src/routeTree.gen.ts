@@ -30,6 +30,7 @@ import { Route as LocalSeoCafeResortRestaurantUdaipurRouteImport } from './route
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as OfficialPartnerRouteImport } from './routes/official-partner'
 import { Route as PartnerRouteImport } from './routes/partner'
+import { Route as PartnerApplicationRouteImport } from './routes/partner-application'
 import { Route as PestControlMarketingSoftwareRouteImport } from './routes/pest-control-marketing-software'
 import { Route as PostManagementRouteImport } from './routes/post-management'
 import { Route as PricingRouteImport } from './routes/pricing'
@@ -199,6 +200,11 @@ const OfficialPartnerRoute = OfficialPartnerRouteImport.update({
 const PartnerRoute = PartnerRouteImport.update({
   id: '/partner',
   path: '/partner',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PartnerApplicationRoute = PartnerApplicationRouteImport.update({
+  id: '/partner-application',
+  path: '/partner-application',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PestControlMarketingSoftwareRoute =
@@ -557,6 +563,7 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/official-partner': typeof OfficialPartnerRoute
   '/partner': typeof PartnerRoute
+  '/partner-application': typeof PartnerApplicationRoute
   '/pest-control-marketing-software': typeof PestControlMarketingSoftwareRoute
   '/post-management': typeof PostManagementRoute
   '/pricing': typeof PricingRoute
@@ -641,6 +648,7 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/official-partner': typeof OfficialPartnerRoute
   '/partner': typeof PartnerRoute
+  '/partner-application': typeof PartnerApplicationRoute
   '/pest-control-marketing-software': typeof PestControlMarketingSoftwareRoute
   '/post-management': typeof PostManagementRoute
   '/pricing': typeof PricingRoute
@@ -726,6 +734,7 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/official-partner': typeof OfficialPartnerRoute
   '/partner': typeof PartnerRoute
+  '/partner-application': typeof PartnerApplicationRoute
   '/pest-control-marketing-software': typeof PestControlMarketingSoftwareRoute
   '/post-management': typeof PostManagementRoute
   '/pricing': typeof PricingRoute
@@ -812,6 +821,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/official-partner'
     | '/partner'
+    | '/partner-application'
     | '/pest-control-marketing-software'
     | '/post-management'
     | '/pricing'
@@ -896,6 +906,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/official-partner'
     | '/partner'
+    | '/partner-application'
     | '/pest-control-marketing-software'
     | '/post-management'
     | '/pricing'
@@ -980,6 +991,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/official-partner'
     | '/partner'
+    | '/partner-application'
     | '/pest-control-marketing-software'
     | '/post-management'
     | '/pricing'
@@ -1067,6 +1079,7 @@ export interface RootRouteChildren {
   LoginRoute: typeof LoginRoute
   OfficialPartnerRoute: typeof OfficialPartnerRoute
   PartnerRoute: typeof PartnerRoute
+  PartnerApplicationRoute: typeof PartnerApplicationRoute
   PestControlMarketingSoftwareRoute: typeof PestControlMarketingSoftwareRoute
   PostManagementRoute: typeof PostManagementRoute
   PricingRoute: typeof PricingRoute
@@ -1261,6 +1274,13 @@ declare module '@tanstack/react-router' {
       path: '/partner'
       fullPath: '/partner'
       preLoaderRoute: typeof PartnerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/partner-application': {
+      id: '/partner-application'
+      path: '/partner-application'
+      fullPath: '/partner-application'
+      preLoaderRoute: typeof PartnerApplicationRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/pest-control-marketing-software': {
@@ -1804,6 +1824,7 @@ const rootRouteChildren: RootRouteChildren = {
   LoginRoute: LoginRoute,
   OfficialPartnerRoute: OfficialPartnerRoute,
   PartnerRoute: PartnerRoute,
+  PartnerApplicationRoute: PartnerApplicationRoute,
   PestControlMarketingSoftwareRoute: PestControlMarketingSoftwareRoute,
   PostManagementRoute: PostManagementRoute,
   PricingRoute: PricingRoute,

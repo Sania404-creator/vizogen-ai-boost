@@ -5,6 +5,8 @@ import { useServerFn } from "@tanstack/react-start";
 import { Loader2, Lock, ShieldCheck, Users, KanbanSquare, FileText, UserPlus } from "lucide-react";
 import { toast } from "sonner";
 import { CrmShell, useCrmSession } from "@/components/crm/shell";
+import { PartnerApplicationsPanel } from "@/components/crm/partner-applications";
+
 import {
   adminAssignLeads,
   getAdminOverview,
