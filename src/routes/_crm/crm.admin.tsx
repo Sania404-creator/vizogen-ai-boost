@@ -2,7 +2,16 @@ import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
-import { Loader2, Lock, ShieldCheck, Users, KanbanSquare, FileText, UserPlus } from "lucide-react";
+import {
+  Loader2,
+  Lock,
+  ShieldCheck,
+  Users,
+  KanbanSquare,
+  FileText,
+  UserPlus,
+  Trash2,
+} from "lucide-react";
 import { toast } from "sonner";
 import { CrmShell, useCrmSession } from "@/components/crm/shell";
 import { PartnerApplicationsPanel } from "@/components/crm/partner-applications";
@@ -12,6 +21,7 @@ import {
   getAdminOverview,
   listTeam,
   OWNER_EMAIL,
+  removeMember,
   updateMember,
 } from "@/lib/crm.functions";
 import { Button } from "@/components/ui/button";
