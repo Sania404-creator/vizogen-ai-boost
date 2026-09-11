@@ -21,6 +21,7 @@ import { Button } from "@/components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { getCrmSession, listNotifications, markNotificationsRead } from "@/lib/crm.functions";
 import { VizogenLockup } from "@/components/brand/logo";
+import { CrmPageLoadingOverlay } from "./page-loading-overlay";
 
 const NAV = [
   { to: "/crm", label: "Dashboard", icon: LayoutDashboard, adminOnly: false },
@@ -114,6 +115,7 @@ export function CrmShell({
 
   return (
     <div className="min-h-screen bg-muted/30">
+      <CrmPageLoadingOverlay />
       <div className="mx-auto flex w-full max-w-[1500px]">
         <aside className="sticky top-0 hidden h-screen w-60 shrink-0 flex-col border-r border-border bg-card px-4 py-6 lg:flex">
           <Link to="/crm" className="mb-8 px-2">
