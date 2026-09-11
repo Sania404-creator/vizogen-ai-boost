@@ -26,8 +26,18 @@ function DashboardHome() {
   const fetchWorkspace = useServerFn(getWorkspace);
   const fetchStats = useServerFn(getDashboardStats);
 
+  const fetchStatus = useServerFn(getGoogleStatus);
+  const fetchLocations = useServerFn(listGoogleLocations);
+
   const workspace = useQuery({ queryKey: ["workspace"], queryFn: () => fetchWorkspace() });
   const stats = useQuery({ queryKey: ["dashboard-stats"], queryFn: () => fetchStats() });
+  const status = useQuery({ queryKey: ["google-status"], queryFn: () => fetchStatus() });
+  const googleConnected = Boolean(status.data?.connection);
+  const locationsQuery = useQuery({
+    queryKey: ["google-locations"],
+    queryFn: () => fetchLocations(),
+    enabled: googleConnected,
+  });
 
   if (workspace.isLoading) {
     return (
