@@ -21,6 +21,7 @@ import { Button } from "@/components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { getCrmSession, listNotifications, markNotificationsRead } from "@/lib/crm.functions";
 import { VizogenLockup } from "@/components/brand/logo";
+import { CrmPageLoadingOverlay } from "./page-loading-overlay";
 
 const NAV = [
   { to: "/crm", label: "Dashboard", icon: LayoutDashboard, adminOnly: false },
