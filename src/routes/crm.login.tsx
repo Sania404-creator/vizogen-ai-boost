@@ -55,6 +55,24 @@ function CrmLogin() {
     void navigate({ to: "/crm" });
   };
 
+  const forgot = async () => {
+    const target = email.trim();
+    if (!target) {
+      toast.error("Enter your work email first, then tap Forgot password.");
+      return;
+    }
+    setBusy(true);
+    const { error } = await supabase.auth.resetPasswordForEmail(target, {
+      redirectTo: `${window.location.origin}/crm/reset-password`,
+    });
+    setBusy(false);
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
+    toast.success(`Reset link sent to ${target}. Check your inbox.`);
+  };
+
   return (
     <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-muted/30 px-4">
       <div
