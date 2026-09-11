@@ -172,6 +172,10 @@ function AdminPage() {
                       <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
                         <Lock className="size-3.5" /> Owner · permanent Admin
                       </span>
+                    ) : m.role === "admin" && !viewerIsOwner ? (
+                      <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                        <Lock className="size-3.5" /> Only the owner Admin can manage Admins
+                      </span>
                     ) : (
                       <>
                         <Select
@@ -202,6 +206,16 @@ function AdminPage() {
                             onCheckedChange={(v) => update({ userId: m.user_id, active: v })}
                           />
                         </label>
+                        {m.user_id === session.data?.member?.user_id ? null : (
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            className="text-destructive"
+                            onClick={() => void remove(m.user_id, m.full_name || m.email)}
+                          >
+                            <Trash2 className="mr-1.5 size-3.5" /> Remove
+                          </Button>
+                        )}
                       </>
                     )}
                   </div>
