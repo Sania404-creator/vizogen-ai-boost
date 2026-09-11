@@ -72,6 +72,8 @@ function AdminPage() {
   const fetchTeam = useServerFn(listTeam);
   const patch = useServerFn(updateMember);
   const assign = useServerFn(adminAssignLeads);
+  const deleteMember = useServerFn(removeMember);
+  const viewerIsOwner = (session.data?.email ?? "").toLowerCase() === OWNER_EMAIL;
 
   const overview = useQuery({
     queryKey: ["crm-admin-overview"],
@@ -102,6 +104,17 @@ function AdminPage() {
       toast.success("Member updated.");
     } catch (error) {
       toast.error(error instanceof Error ? error.message : "Update failed.");
+    }
+  };
+
+  const remove = async (userId: string, label: string) => {
+    if (!window.confirm(`Remove ${label} from the CRM? This deletes their login.`)) return;
+    try {
+      await deleteMember({ data: { userId } });
+      refresh();
+      toast.success(`${label} removed.`);
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "Could not remove the member.");
     }
   };
 
