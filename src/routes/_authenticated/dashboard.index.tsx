@@ -139,6 +139,56 @@ function DashboardHome() {
         </Button>
       </div>
 
+      {googleConnected ? (
+        <div className="mb-6 rounded-2xl border border-border bg-card p-5 shadow-soft">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <h2 className="text-base font-semibold text-foreground font-display">
+              Your Google locations
+            </h2>
+            <Button asChild variant="ghost" size="sm">
+              <Link to="/dashboard/settings">Manage</Link>
+            </Button>
+          </div>
+          {locationsQuery.isLoading ? (
+            <p className="mt-3 flex items-center gap-2 text-sm text-muted-foreground">
+              <Loader2 className="size-4 animate-spin" /> Loading locations from Google…
+            </p>
+          ) : locationsQuery.data?.error ? (
+            <p className="mt-3 rounded-xl border border-amber-500/30 bg-amber-500/5 p-4 text-sm text-muted-foreground">
+              {locationsQuery.data.error.message}
+            </p>
+          ) : locationsQuery.data?.locations?.length ? (
+            <div className="mt-4 grid gap-3 sm:grid-cols-2">
+              {locationsQuery.data.locations.map((loc) => {
+                const active = business.google_location_id === loc.locationId;
+                return (
+                  <div
+                    key={`${loc.accountId}-${loc.locationId}`}
+                    className={`rounded-xl border p-4 ${
+                      active ? "border-primary bg-primary/5" : "border-border"
+                    }`}
+                  >
+                    <p className="flex items-center gap-2 font-semibold text-foreground">
+                      <MapPin className="size-4 text-primary" /> {loc.title}
+                    </p>
+                    {loc.address ? (
+                      <p className="mt-1 text-sm text-muted-foreground">{loc.address}</p>
+                    ) : null}
+                    {active ? (
+                      <p className="mt-2 text-xs font-medium text-primary">Managed by Vizogen</p>
+                    ) : null}
+                  </div>
+                );
+              })}
+            </div>
+          ) : (
+            <p className="mt-3 text-sm text-muted-foreground">
+              No locations found on this Google account yet.
+            </p>
+          )}
+        </div>
+      ) : null}
+
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         {cards.map((card) => (
           <Link
