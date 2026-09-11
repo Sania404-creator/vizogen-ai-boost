@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouterState } from "@tanstack/react-router";
 import { VizogenMark } from "@/components/brand/logo";
 
@@ -7,13 +7,26 @@ const DEBOUNCE_MS = 140;
 export function CrmPageLoadingOverlay() {
   const isLoading = useRouterState({ select: (s) => s.isLoading });
   const [visible, setVisible] = useState(false);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
-    if (isLoading) {
-      const timer = setTimeout(() => setVisible(true), DEBOUNCE_MS);
-      return () => clearTimeout(timer);
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+      timerRef.current = null;
     }
-    setVisible(false);
+
+    if (isLoading) {
+      timerRef.current = setTimeout(() => setVisible(true), DEBOUNCE_MS);
+    } else {
+      setVisible(false);
+    }
+
+    return () => {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+        timerRef.current = null;
+      }
+    };
   }, [isLoading]);
 
   if (!visible) return null;
