@@ -567,6 +567,48 @@ export const updateMember = createServerFn({ method: "POST" })
     return { ok: true };
   });
 
+export const removeMember = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((input: unknown) => z.object({ userId: z.string().uuid() }).parse(input))
+  .handler(async ({ data, context }) => {
+    const { data: isAdmin } = await context.supabase.rpc("has_role", {
+      _user_id: context.userId,
+      _role: "admin",
+    });
+    if (!isAdmin) throw new Error("Only Admins can remove team members.");
+    if (data.userId === context.userId) throw new Error("You cannot remove your own account.");
+
+    const actorEmail = ((context.claims as { email?: string }).email ?? "").toLowerCase();
+    const actorIsOwner = actorEmail === OWNER_EMAIL;
+
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { data: target } = await supabaseAdmin
+      .from("crm_members")
+      .select("email")
+      .eq("user_id", data.userId)
+      .maybeSingle();
+    if (!target) throw new Error("That member no longer exists.");
+    if ((target.email ?? "").toLowerCase() === OWNER_EMAIL) {
+      throw new Error("The owner Admin is permanent and cannot be removed.");
+    }
+
+    const { data: targetIsAdmin } = await context.supabase.rpc("has_role", {
+      _user_id: data.userId,
+      _role: "admin",
+    });
+    if (targetIsAdmin && !actorIsOwner) {
+      throw new Error("Only the owner Admin can remove another Admin.");
+    }
+
+    await supabaseAdmin.from("crm_leads").update({ assigned_to: null }).eq("assigned_to", data.userId);
+    await supabaseAdmin.from("user_roles").delete().eq("user_id", data.userId);
+    await supabaseAdmin.from("crm_members").delete().eq("user_id", data.userId);
+    await supabaseAdmin.auth.admin.deleteUser(data.userId);
+    return { ok: true };
+  });
+
+
+
 /* ------------------------------- dashboard ------------------------------- */
 
 export const getCrmDashboard = createServerFn({ method: "GET" })
