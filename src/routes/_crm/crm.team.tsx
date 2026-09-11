@@ -60,6 +60,7 @@ function TeamPage() {
   const session = useQuery({ queryKey: ["crm-session"], queryFn: () => fetchSession() });
   const team = useQuery({ queryKey: ["crm-team"], queryFn: () => fetchTeam() });
   const isAdmin = session.data?.isAdmin ?? false;
+  const viewerIsOwner = (session.data?.email ?? "").toLowerCase() === OWNER_EMAIL;
 
   const refresh = () => void queryClient.invalidateQueries({ queryKey: ["crm-team"] });
 
@@ -116,7 +117,7 @@ function TeamPage() {
               </div>
             </div>
 
-            {isAdmin && !isOwner ? (
+            {isAdmin && !isOwner && (viewerIsOwner || m.role !== "admin") ? (
               <div className="mt-4 space-y-3">
                 <div className="space-y-1.5">
                   <Label>Role</Label>

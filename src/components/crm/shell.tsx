@@ -73,7 +73,7 @@ export function CrmShell({
     void navigate({ to: "/crm/login" });
   };
 
-  const nav = (
+  const navList = (withSignOut: boolean) => (
     <nav className="space-y-1">
       {items.map((item) => {
         const active = item.to === "/crm" ? pathname === "/crm" : pathname.startsWith(item.to);
@@ -93,8 +93,23 @@ export function CrmShell({
           </Link>
         );
       })}
+      {withSignOut ? (
+        <button
+          type="button"
+          onClick={() => {
+            setOpen(false);
+            void signOut();
+          }}
+          className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+        >
+          <LogOut className="size-4" />
+          Sign out
+        </button>
+      ) : null}
     </nav>
   );
+
+  const nav = navList(false);
 
   if (session.isSuccess && !session.data.member) {
     return (
@@ -206,7 +221,9 @@ export function CrmShell({
                 </PopoverContent>
               </Popover>
             </div>
-            {open ? <div className="border-t border-border px-4 py-3 lg:hidden">{nav}</div> : null}
+            {open ? (
+              <div className="border-t border-border px-4 py-3 lg:hidden">{navList(true)}</div>
+            ) : null}
           </header>
           <main className="px-4 py-6 sm:px-6 lg:py-8">{children}</main>
         </div>

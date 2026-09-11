@@ -2,7 +2,16 @@ import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
-import { Loader2, Lock, ShieldCheck, Users, KanbanSquare, FileText, UserPlus } from "lucide-react";
+import {
+  Loader2,
+  Lock,
+  ShieldCheck,
+  Users,
+  KanbanSquare,
+  FileText,
+  UserPlus,
+  Trash2,
+} from "lucide-react";
 import { toast } from "sonner";
 import { CrmShell, useCrmSession } from "@/components/crm/shell";
 import { PartnerApplicationsPanel } from "@/components/crm/partner-applications";
@@ -12,6 +21,7 @@ import {
   getAdminOverview,
   listTeam,
   OWNER_EMAIL,
+  removeMember,
   updateMember,
 } from "@/lib/crm.functions";
 import { Button } from "@/components/ui/button";
@@ -62,6 +72,8 @@ function AdminPage() {
   const fetchTeam = useServerFn(listTeam);
   const patch = useServerFn(updateMember);
   const assign = useServerFn(adminAssignLeads);
+  const deleteMember = useServerFn(removeMember);
+  const viewerIsOwner = (session.data?.email ?? "").toLowerCase() === OWNER_EMAIL;
 
   const overview = useQuery({
     queryKey: ["crm-admin-overview"],
@@ -92,6 +104,17 @@ function AdminPage() {
       toast.success("Member updated.");
     } catch (error) {
       toast.error(error instanceof Error ? error.message : "Update failed.");
+    }
+  };
+
+  const remove = async (userId: string, label: string) => {
+    if (!window.confirm(`Remove ${label} from the CRM? This deletes their login.`)) return;
+    try {
+      await deleteMember({ data: { userId } });
+      refresh();
+      toast.success(`${label} removed.`);
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "Could not remove the member.");
     }
   };
 
@@ -172,6 +195,10 @@ function AdminPage() {
                       <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
                         <Lock className="size-3.5" /> Owner · permanent Admin
                       </span>
+                    ) : m.role === "admin" && !viewerIsOwner ? (
+                      <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
+                        <Lock className="size-3.5" /> Only the owner Admin can manage Admins
+                      </span>
                     ) : (
                       <>
                         <Select
@@ -202,6 +229,16 @@ function AdminPage() {
                             onCheckedChange={(v) => update({ userId: m.user_id, active: v })}
                           />
                         </label>
+                        {m.user_id === session.data?.member?.user_id ? null : (
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            className="text-destructive"
+                            onClick={() => void remove(m.user_id, m.full_name || m.email)}
+                          >
+                            <Trash2 className="mr-1.5 size-3.5" /> Remove
+                          </Button>
+                        )}
                       </>
                     )}
                   </div>

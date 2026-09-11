@@ -47,6 +47,7 @@ import { Route as CrmCrmRouteImport } from './routes/_crm/crm'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as CrmLoginRouteImport } from './routes/crm.login'
+import { Route as CrmResetPasswordRouteImport } from './routes/crm.reset-password'
 import { Route as FeaturesAiPostGenerationRouteImport } from './routes/features.ai-post-generation'
 import { Route as FeaturesMagicQrRouteImport } from './routes/features.magic-qr'
 import { Route as FeaturesReviewManagementRouteImport } from './routes/features.review-management'
@@ -290,6 +291,11 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
 const CrmLoginRoute = CrmLoginRouteImport.update({
   id: '/crm/login',
   path: '/crm/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CrmResetPasswordRoute = CrmResetPasswordRouteImport.update({
+  id: '/crm/reset-password',
+  path: '/crm/reset-password',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FeaturesAiPostGenerationRoute =
@@ -579,6 +585,7 @@ export interface FileRoutesByFullPath {
   '/crm': typeof CrmCrmRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
   '/crm/login': typeof CrmLoginRoute
+  '/crm/reset-password': typeof CrmResetPasswordRoute
   '/features/ai-post-generation': typeof FeaturesAiPostGenerationRoute
   '/features/magic-qr': typeof FeaturesMagicQrRoute
   '/features/review-management': typeof FeaturesReviewManagementRoute
@@ -662,6 +669,7 @@ export interface FileRoutesByTo {
   '/yoga-wellness-marketing-software': typeof YogaWellnessMarketingSoftwareRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/crm/login': typeof CrmLoginRoute
+  '/crm/reset-password': typeof CrmResetPasswordRoute
   '/features/ai-post-generation': typeof FeaturesAiPostGenerationRoute
   '/features/magic-qr': typeof FeaturesMagicQrRoute
   '/features/review-management': typeof FeaturesReviewManagementRoute
@@ -750,6 +758,7 @@ export interface FileRoutesById {
   '/_crm/crm': typeof CrmCrmRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
   '/crm/login': typeof CrmLoginRoute
+  '/crm/reset-password': typeof CrmResetPasswordRoute
   '/features/ai-post-generation': typeof FeaturesAiPostGenerationRoute
   '/features/magic-qr': typeof FeaturesMagicQrRoute
   '/features/review-management': typeof FeaturesReviewManagementRoute
@@ -837,6 +846,7 @@ export interface FileRouteTypes {
     | '/crm'
     | '/blog/$slug'
     | '/crm/login'
+    | '/crm/reset-password'
     | '/features/ai-post-generation'
     | '/features/magic-qr'
     | '/features/review-management'
@@ -920,6 +930,7 @@ export interface FileRouteTypes {
     | '/yoga-wellness-marketing-software'
     | '/blog/$slug'
     | '/crm/login'
+    | '/crm/reset-password'
     | '/features/ai-post-generation'
     | '/features/magic-qr'
     | '/features/review-management'
@@ -1007,6 +1018,7 @@ export interface FileRouteTypes {
     | '/_crm/crm'
     | '/blog/$slug'
     | '/crm/login'
+    | '/crm/reset-password'
     | '/features/ai-post-generation'
     | '/features/magic-qr'
     | '/features/review-management'
@@ -1093,6 +1105,7 @@ export interface RootRouteChildren {
   YogaWellnessMarketingSoftwareRoute: typeof YogaWellnessMarketingSoftwareRoute
   BlogSlugRoute: typeof BlogSlugRoute
   CrmLoginRoute: typeof CrmLoginRoute
+  CrmResetPasswordRoute: typeof CrmResetPasswordRoute
   FeaturesAiPostGenerationRoute: typeof FeaturesAiPostGenerationRoute
   FeaturesMagicQrRoute: typeof FeaturesMagicQrRoute
   FeaturesReviewManagementRoute: typeof FeaturesReviewManagementRoute
@@ -1393,6 +1406,13 @@ declare module '@tanstack/react-router' {
       path: '/crm/login'
       fullPath: '/crm/login'
       preLoaderRoute: typeof CrmLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/crm/reset-password': {
+      id: '/crm/reset-password'
+      path: '/crm/reset-password'
+      fullPath: '/crm/reset-password'
+      preLoaderRoute: typeof CrmResetPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/features/ai-post-generation': {
@@ -1838,6 +1858,7 @@ const rootRouteChildren: RootRouteChildren = {
   YogaWellnessMarketingSoftwareRoute: YogaWellnessMarketingSoftwareRoute,
   BlogSlugRoute: BlogSlugRoute,
   CrmLoginRoute: CrmLoginRoute,
+  CrmResetPasswordRoute: CrmResetPasswordRoute,
   FeaturesAiPostGenerationRoute: FeaturesAiPostGenerationRoute,
   FeaturesMagicQrRoute: FeaturesMagicQrRoute,
   FeaturesReviewManagementRoute: FeaturesReviewManagementRoute,
