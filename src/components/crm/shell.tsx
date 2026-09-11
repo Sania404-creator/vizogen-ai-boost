@@ -221,7 +221,9 @@ export function CrmShell({
                 </PopoverContent>
               </Popover>
             </div>
-            {open ? <div className="border-t border-border px-4 py-3 lg:hidden">{nav}</div> : null}
+            {open ? (
+              <div className="border-t border-border px-4 py-3 lg:hidden">{navList(true)}</div>
+            ) : null}
           </header>
           <main className="px-4 py-6 sm:px-6 lg:py-8">{children}</main>
         </div>
