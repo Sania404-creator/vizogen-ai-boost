@@ -521,17 +521,32 @@ export const updateMember = createServerFn({ method: "POST" })
 
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
 
+    const actorEmail = ((context.claims as { email?: string }).email ?? "").toLowerCase();
+    const actorIsOwner = actorEmail === OWNER_EMAIL;
+
     const { data: target } = await supabaseAdmin
       .from("crm_members")
       .select("email")
       .eq("user_id", data.userId)
       .maybeSingle();
-    if ((target?.email ?? "").toLowerCase() === OWNER_EMAIL) {
+    const targetEmail = (target?.email ?? "").toLowerCase();
+    if (targetEmail === OWNER_EMAIL) {
+      if (!actorIsOwner) {
+        throw new Error("The owner Admin account cannot be edited by other Admins.");
+      }
       if (data.role && data.role !== "admin") {
         throw new Error("The owner account is a permanent Admin and cannot be changed.");
       }
       if (data.active === false || data.canViewAll === false) {
         throw new Error("The owner account is a permanent Admin and cannot be restricted.");
+      }
+    } else if (!actorIsOwner && data.userId !== context.userId) {
+      const { data: targetIsAdmin } = await context.supabase.rpc("has_role", {
+        _user_id: data.userId,
+        _role: "admin",
+      });
+      if (targetIsAdmin) {
+        throw new Error("Only the owner Admin can change another Admin's access.");
       }
     }
 
