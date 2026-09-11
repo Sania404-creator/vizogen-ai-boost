@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { Loader2, Lock, Mail, ShieldCheck } from "lucide-react";
+import { Loader2, Lock } from "lucide-react";
+import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { toast } from "sonner";
 import { VizogenLockup } from "@/components/brand/logo";
 
-const title = "Vizogen CRM — Sales team sign in";
-const description = "Internal Vizogen CRM for the sales team. Accounts are created by an Admin.";
+const title = "Set a new password — Vizogen CRM";
+const description = "Choose a new password for your Vizogen CRM account.";
 
-export const Route = createFileRoute("/crm/login")({
+export const Route = createFileRoute("/crm/reset-password")({
   ssr: false,
   head: () => ({
     meta: [
@@ -24,34 +24,41 @@ export const Route = createFileRoute("/crm/login")({
       { name: "robots", content: "noindex, nofollow" },
     ],
   }),
-  component: CrmLogin,
+  component: ResetPassword,
 });
 
-function CrmLogin() {
+function ResetPassword() {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
+  const [ready, setReady] = useState(false);
   const [password, setPassword] = useState("");
+  const [confirm, setConfirm] = useState("");
   const [busy, setBusy] = useState(false);
 
   useEffect(() => {
     void (async () => {
       const { data } = await supabase.auth.getSession();
-      if (data.session) void navigate({ to: "/crm" });
+      setReady(Boolean(data.session));
     })();
-  }, [navigate]);
+    const { data: sub } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (session) setReady(true);
+    });
+    return () => sub.subscription.unsubscribe();
+  }, []);
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (password !== confirm) {
+      toast.error("Both passwords must match.");
+      return;
+    }
     setBusy(true);
-    const { error } = await supabase.auth.signInWithPassword({
-      email: email.trim(),
-      password,
-    });
+    const { error } = await supabase.auth.updateUser({ password });
     setBusy(false);
     if (error) {
       toast.error(error.message);
       return;
     }
+    toast.success("Password updated. You are signed in.");
     void navigate({ to: "/crm" });
   };
 
@@ -69,63 +76,58 @@ function CrmLogin() {
           labelClassName="text-lg font-bold tracking-tight text-foreground font-display"
         />
         <h1 className="mt-5 text-xl font-bold tracking-tight text-foreground font-display">
-          Sales team sign in
+          Set a new password
         </h1>
-        <p className="mt-1.5 text-sm text-muted-foreground">
-          Internal access only. Ask an Admin to create your account.
-        </p>
+        {!ready ? (
+          <p className="mt-2 text-sm text-muted-foreground">
+            Open this page from the reset link in your email, then choose a new password.
+          </p>
+        ) : null}
 
         <form onSubmit={submit} className="mt-6 space-y-4">
           <div className="space-y-1.5">
-            <Label htmlFor="crm-email">Work email</Label>
+            <Label htmlFor="new-password">New password</Label>
             <div className="relative">
-              <Mail className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+              <Lock className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
               <Input
-                id="crm-email"
-                type="email"
-                autoComplete="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="you@vizogen.in"
+                id="new-password"
+                type="password"
+                autoComplete="new-password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="At least 8 characters"
+                minLength={8}
                 className="pl-9"
                 required
               />
             </div>
           </div>
           <div className="space-y-1.5">
-            <Label htmlFor="crm-password">Password</Label>
+            <Label htmlFor="confirm-password">Confirm password</Label>
             <div className="relative">
               <Lock className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
               <Input
-                id="crm-password"
+                id="confirm-password"
                 type="password"
-                autoComplete="current-password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="••••••••"
+                autoComplete="new-password"
+                value={confirm}
+                onChange={(e) => setConfirm(e.target.value)}
+                placeholder="Repeat the password"
+                minLength={8}
                 className="pl-9"
                 required
               />
             </div>
           </div>
-          <Button type="submit" disabled={busy} className="w-full gradient-brand text-white">
+          <Button
+            type="submit"
+            disabled={busy || !ready || password.length < 8}
+            className="w-full gradient-brand text-white"
+          >
             {busy ? <Loader2 className="mr-2 size-4 animate-spin" /> : null}
-            Sign in
+            Update password
           </Button>
         </form>
-
-        <button
-          type="button"
-          onClick={forgot}
-          disabled={busy}
-          className="mt-3 w-full text-center text-sm font-medium text-primary hover:underline disabled:opacity-60"
-        >
-          Forgot password?
-        </button>
-
-        <p className="mt-5 flex items-center gap-2 text-xs text-muted-foreground">
-          <ShieldCheck className="size-3.5 text-primary" /> Vizogen internal CRM · crm.vizogen.in
-        </p>
       </div>
     </div>
   );
