@@ -36,6 +36,8 @@ export type IndustryConfig = {
   faqs: { question: string; answer: string }[];
   /** 10 industry-specific customer testimonials */
   testimonials: IndustryTestimonial[];
+  /** Optional customer logos shown in a scrolling trust strip. */
+  trustedLogos?: { src: string; alt: string }[];
   whatsappMessage: string;
   seoTitle: string;
   seoDescription: string;
