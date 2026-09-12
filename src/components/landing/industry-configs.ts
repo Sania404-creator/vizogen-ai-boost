@@ -35,16 +35,16 @@ import yogaHero from "@/assets/industry-yoga.jpg";
 import handymanHero from "@/assets/industry-handyman.jpg";
 import educationHero from "@/assets/industry-education.jpg";
 import realestateHero from "@/assets/industry-realestate.jpg";
-import sterlingHospitalsLogo from "@/assets/clinic-logos/sterling-hospitals.png.asset.json";
-import girirajHospitalLogo from "@/assets/clinic-logos/giriraj-hospital.jpeg.asset.json";
-import swastikHospitalLogo from "@/assets/clinic-logos/swastik-childrens-orthopaedic-hospital.png.asset.json";
-import kutchEyeCareLogo from "@/assets/clinic-logos/kutch-eye-care.jpeg.asset.json";
-import drGoyalsDentalLogo from "@/assets/clinic-logos/dr-goyals-dental-clinic.png.asset.json";
-import kutchOrthopaedicLogo from "@/assets/clinic-logos/kutch-orthopaedic-hospital.png.asset.json";
-import ndcDentalLogo from "@/assets/clinic-logos/ndc-dental-clinic.png.asset.json";
-import berkowitsLogo from "@/assets/clinic-logos/berkowits-hair-skin-clinic.jpeg.asset.json";
-import advanceDentalLogo from "@/assets/clinic-logos/advance-dental-studio.jpeg.asset.json";
-import truDentalLogo from "@/assets/clinic-logos/tru-dental.jpeg.asset.json";
+import sterlingHospitalsLogo from "@/assets/clinic-logos/sterling-hospitals-transparent.png";
+import girirajHospitalLogo from "@/assets/clinic-logos/giriraj-hospital-transparent.png";
+import swastikHospitalLogo from "@/assets/clinic-logos/swastik-hospital-transparent.png";
+import kutchEyeCareLogo from "@/assets/clinic-logos/kutch-eye-care-transparent.png";
+import drGoyalsDentalLogo from "@/assets/clinic-logos/dr-goyals-transparent.png";
+import kutchOrthopaedicLogo from "@/assets/clinic-logos/kutch-orthopaedic-transparent.png";
+import ndcDentalLogo from "@/assets/clinic-logos/ndc-transparent.png";
+import berkowitsLogo from "@/assets/clinic-logos/berkowits-transparent.png";
+import advanceDentalLogo from "@/assets/clinic-logos/advance-dental-transparent.png";
+import truDentalLogo from "@/assets/clinic-logos/tru-dental-transparent.png";
 
 /**
  * Content spec for one industry. Everything else (old vs new lists, gallery,
@@ -313,16 +313,16 @@ export const clinicConfig = buildConfig({
   seoDescription:
     "Vizogen automates Google Business Profile marketing for clinics: daily AI health posts, 5-star patient reviews, smart replies and Top 3 local map rankings.",
   trustedLogos: [
-    { src: sterlingHospitalsLogo.url, alt: "Sterling Hospitals" },
-    { src: girirajHospitalLogo.url, alt: "Giriraj Hospital" },
-    { src: swastikHospitalLogo.url, alt: "Swastik Children's Orthopaedic Hospital" },
-    { src: kutchEyeCareLogo.url, alt: "Kutch Eye Care" },
-    { src: drGoyalsDentalLogo.url, alt: "Dr Goyal's Dental Clinic" },
-    { src: kutchOrthopaedicLogo.url, alt: "Kutch Orthopaedic Hospital" },
-    { src: ndcDentalLogo.url, alt: "NDC Dental Clinic" },
-    { src: berkowitsLogo.url, alt: "Berkowits Hair and Skin Clinic" },
-    { src: advanceDentalLogo.url, alt: "Advance Dental Studio" },
-    { src: truDentalLogo.url, alt: "Tru Dental" },
+    { src: sterlingHospitalsLogo, alt: "Sterling Hospitals" },
+    { src: girirajHospitalLogo, alt: "Giriraj Hospital" },
+    { src: swastikHospitalLogo, alt: "Swastik Children's Orthopaedic Hospital" },
+    { src: kutchEyeCareLogo, alt: "Kutch Eye Care" },
+    { src: drGoyalsDentalLogo, alt: "Dr Goyal's Dental Clinic" },
+    { src: kutchOrthopaedicLogo, alt: "Kutch Orthopaedic Hospital" },
+    { src: ndcDentalLogo, alt: "NDC Dental Clinic" },
+    { src: berkowitsLogo, alt: "Berkowits Hair and Skin Clinic" },
+    { src: advanceDentalLogo, alt: "Advance Dental Studio" },
+    { src: truDentalLogo, alt: "Tru Dental" },
   ],
 });
 
