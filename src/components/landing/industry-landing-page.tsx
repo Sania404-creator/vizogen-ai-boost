@@ -54,6 +54,47 @@ function CountUp({
   );
 }
 
+function TrustedLogoStrip({ logos }: { logos: { src: string; alt: string }[] }) {
+  return (
+    <section aria-labelledby="trusted-clinics-title" className="overflow-hidden border-y border-border/70 bg-card/60 py-10 sm:py-12">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <p
+          id="trusted-clinics-title"
+          className="text-center text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground"
+        >
+          Trusted by leading hospitals &amp; clinics
+        </p>
+      </div>
+      <div className="relative mt-7 overflow-hidden [mask-image:linear-gradient(90deg,transparent,#000_8%,#000_92%,transparent)]">
+        <div className="flex w-max animate-marquee motion-reduce:animate-none">
+          {[0, 1].map((copy) => (
+            <ul
+              key={copy}
+              aria-hidden={copy === 1}
+              className="flex shrink-0 items-center gap-4 pr-4 sm:gap-6 sm:pr-6"
+            >
+              {logos.map((logo) => (
+                <li
+                  key={`${copy}-${logo.alt}`}
+                  className="flex h-24 w-44 shrink-0 items-center justify-center rounded-lg border border-border/70 bg-background px-5 py-4 shadow-soft sm:h-28 sm:w-52"
+                >
+                  <img
+                    src={logo.src}
+                    alt={copy === 0 ? logo.alt : ""}
+                    loading="lazy"
+                    decoding="async"
+                    className="max-h-full max-w-full object-contain"
+                  />
+                </li>
+              ))}
+            </ul>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export function IndustryLandingPage({ config }: { config: IndustryConfig }) {
   const statsRef = useRef<HTMLDivElement>(null);
   const statsInView = useInView(statsRef, { once: true, amount: 0.3 });
@@ -138,6 +179,8 @@ export function IndustryLandingPage({ config }: { config: IndustryConfig }) {
             </motion.div>
           </div>
         </section>
+
+        {config.trustedLogos?.length ? <TrustedLogoStrip logos={config.trustedLogos} /> : null}
 
         {/* 2. REVENUE OPPORTUNITY */}
         <section className="bg-card/60 py-20 sm:py-28">
