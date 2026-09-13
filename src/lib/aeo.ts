@@ -325,7 +325,7 @@ export const partnerProgramsSchema = {
       serviceType: "Google Business Profile automation reseller partnership",
       provider: organizationEntity,
       description: p.summary,
-370:  },
+},
   })),
 };
 
