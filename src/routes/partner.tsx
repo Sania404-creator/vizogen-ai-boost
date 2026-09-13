@@ -300,6 +300,99 @@ function PartnerPage() {
           </div>
         </section>
 
+        {/* Program scope (GEO) */}
+        <section className="pb-16 sm:pb-20">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <SectionHeading
+              eyebrow="Program Scope"
+              title="Commission, eligibility & coverage at a glance"
+              subtitle="A plain comparison of what each Vizogen partnership program pays, who it suits, and where it is available."
+            />
+            <Reveal className="mt-10 block">
+              <div className="overflow-x-auto rounded-2xl border border-border bg-card shadow-soft">
+                <table className="w-full min-w-[640px] text-left text-sm">
+                  <caption className="sr-only">
+                    Comparison of Vizogen affiliate, Prime Plus and white-labelled
+                    partnership programs
+                  </caption>
+                  <thead className="bg-muted/50 text-xs uppercase tracking-wider text-muted-foreground">
+                    <tr>
+                      <th scope="col" className="px-5 py-4 font-semibold">Program</th>
+                      <th scope="col" className="px-5 py-4 font-semibold">Commission</th>
+                      <th scope="col" className="px-5 py-4 font-semibold">Joining fee</th>
+                      <th scope="col" className="px-5 py-4 font-semibold">Best for</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {PARTNER_PROGRAMS.map((p) => (
+                      <tr key={p.slug} className="border-t border-border/70">
+                        <th scope="row" className="px-5 py-4 font-semibold text-foreground">
+                          {p.name}
+                        </th>
+                        <td className="px-5 py-4 text-muted-foreground">{p.commission}</td>
+                        <td className="px-5 py-4 text-muted-foreground">{p.joiningFee}</td>
+                        <td className="px-5 py-4 text-muted-foreground">{p.bestFor}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </Reveal>
+            <div className="mt-6 grid gap-4 sm:grid-cols-3">
+              {[
+                { label: "Who can apply", value: PARTNER_SCOPE.audience },
+                {
+                  label: "Where it's available",
+                  value: `Across India — ${PARTNER_SCOPE.areaServed
+                    .filter((a) => a !== "India")
+                    .join(", ")}.`,
+                },
+                {
+                  label: "Payouts & review time",
+                  value: `Commissions are paid in Indian Rupees with a minimum payout of ₹${PARTNER_SCOPE.minPayout}. ${PARTNER_SCOPE.reviewTime}.`,
+                },
+              ].map((item) => (
+                <div
+                  key={item.label}
+                  className="rounded-2xl border border-border bg-card p-5 shadow-soft"
+                >
+                  <h3 className="text-xs font-semibold uppercase tracking-widest text-primary">
+                    {item.label}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                    {item.value}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Partner FAQ (AEO) */}
+        <section className="pb-16 sm:pb-20">
+          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+            <SectionHeading
+              eyebrow="Partner FAQ"
+              title="Questions people ask about the partnership programs"
+              subtitle="Short, direct answers about commissions, eligibility, coverage and the application process."
+            />
+            <div className="mt-10 space-y-4">
+              {partnerFaqs.map((f, i) => (
+                <Reveal key={f.q} delay={i * 0.04}>
+                  <div className="rounded-2xl border border-border bg-card p-5 shadow-soft sm:p-6">
+                    <h3 className="font-display text-base font-bold text-foreground">
+                      {f.q}
+                    </h3>
+                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                      {f.a}
+                    </p>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* Final CTA band */}
         <section className="pb-20 sm:pb-24">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
