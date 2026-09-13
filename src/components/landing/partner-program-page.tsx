@@ -158,7 +158,13 @@ export function PartnerProgramPage({ program, h1 }: { program: PartnerProgram; h
               {others.map((o) => (
                 <Link
                   key={o.slug}
-                  to={`/partner/${o.slug}`}
+                  to={
+                    o.slug === "affiliate-partner"
+                      ? "/partner/affiliate-partner"
+                      : o.slug === "prime-plus-partner"
+                        ? "/partner/prime-plus-partner"
+                        : "/partner/white-labelled-partner"
+                  }
                   className="group rounded-2xl border border-border bg-card p-5 shadow-soft transition-shadow hover:shadow-lift"
                 >
                   <p className="text-sm font-bold text-foreground">{o.name}</p>
