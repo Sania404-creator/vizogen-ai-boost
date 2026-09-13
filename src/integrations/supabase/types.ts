@@ -655,12 +655,78 @@ export type Database = {
         }
         Relationships: []
       }
+      partner_accounts: {
+        Row: {
+          active: boolean
+          application_id: string
+          approved_at: string
+          commission_rate: number
+          created_at: string
+          email: string
+          exclusive_city: string
+          full_name: string
+          id: string
+          manager_email: string
+          manager_name: string
+          manager_phone: string
+          min_payout: number
+          program: string
+          updated_at: string
+          user_id: string | null
+        }
+        Insert: {
+          active?: boolean
+          application_id: string
+          approved_at?: string
+          commission_rate?: number
+          created_at?: string
+          email: string
+          exclusive_city?: string
+          full_name?: string
+          id?: string
+          manager_email?: string
+          manager_name?: string
+          manager_phone?: string
+          min_payout?: number
+          program?: string
+          updated_at?: string
+          user_id?: string | null
+        }
+        Update: {
+          active?: boolean
+          application_id?: string
+          approved_at?: string
+          commission_rate?: number
+          created_at?: string
+          email?: string
+          exclusive_city?: string
+          full_name?: string
+          id?: string
+          manager_email?: string
+          manager_name?: string
+          manager_phone?: string
+          min_payout?: number
+          program?: string
+          updated_at?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "partner_accounts_application_id_fkey"
+            columns: ["application_id"]
+            isOneToOne: true
+            referencedRelation: "partner_applications"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       partner_applications: {
         Row: {
           about: string | null
           admin_email_sent: boolean
           admin_notes: string
           applicant_email_sent: boolean
+          approval_email_sent: boolean
           business_count: string
           business_name: string
           created_at: string
@@ -670,6 +736,7 @@ export type Database = {
           phone: string
           program: string
           reference_code: string | null
+          rejection_email_sent: boolean
           reviewed_at: string | null
           reviewed_by: string | null
           status: string
@@ -681,6 +748,7 @@ export type Database = {
           admin_email_sent?: boolean
           admin_notes?: string
           applicant_email_sent?: boolean
+          approval_email_sent?: boolean
           business_count: string
           business_name: string
           created_at?: string
@@ -690,6 +758,7 @@ export type Database = {
           phone: string
           program: string
           reference_code?: string | null
+          rejection_email_sent?: boolean
           reviewed_at?: string | null
           reviewed_by?: string | null
           status?: string
@@ -701,6 +770,7 @@ export type Database = {
           admin_email_sent?: boolean
           admin_notes?: string
           applicant_email_sent?: boolean
+          approval_email_sent?: boolean
           business_count?: string
           business_name?: string
           created_at?: string
@@ -710,11 +780,163 @@ export type Database = {
           phone?: string
           program?: string
           reference_code?: string | null
+          rejection_email_sent?: boolean
           reviewed_at?: string | null
           reviewed_by?: string | null
           status?: string
           updated_at?: string
           website?: string | null
+        }
+        Relationships: []
+      }
+      partner_clients: {
+        Row: {
+          admin_note: string
+          business_name: string
+          city: string
+          confirmation: string
+          contact_email: string
+          contact_name: string
+          contact_phone: string
+          created_at: string
+          id: string
+          monthly_value: number
+          partner_id: string
+          plan: string
+          started_on: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          admin_note?: string
+          business_name: string
+          city?: string
+          confirmation?: string
+          contact_email?: string
+          contact_name?: string
+          contact_phone?: string
+          created_at?: string
+          id?: string
+          monthly_value?: number
+          partner_id: string
+          plan?: string
+          started_on?: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          admin_note?: string
+          business_name?: string
+          city?: string
+          confirmation?: string
+          contact_email?: string
+          contact_name?: string
+          contact_phone?: string
+          created_at?: string
+          id?: string
+          monthly_value?: number
+          partner_id?: string
+          plan?: string
+          started_on?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "partner_clients_partner_id_fkey"
+            columns: ["partner_id"]
+            isOneToOne: false
+            referencedRelation: "partner_accounts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      partner_earnings: {
+        Row: {
+          amount: number
+          created_at: string
+          currency: string
+          description: string
+          id: string
+          paid_at: string | null
+          partner_id: string
+          period_month: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          amount?: number
+          created_at?: string
+          currency?: string
+          description?: string
+          id?: string
+          paid_at?: string | null
+          partner_id: string
+          period_month?: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          currency?: string
+          description?: string
+          id?: string
+          paid_at?: string | null
+          partner_id?: string
+          period_month?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "partner_earnings_partner_id_fkey"
+            columns: ["partner_id"]
+            isOneToOne: false
+            referencedRelation: "partner_accounts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      partner_resources: {
+        Row: {
+          active: boolean
+          category: string
+          created_at: string
+          description: string
+          id: string
+          programs: string[]
+          resource_type: string
+          sort_order: number
+          title: string
+          updated_at: string
+          url: string
+        }
+        Insert: {
+          active?: boolean
+          category?: string
+          created_at?: string
+          description?: string
+          id?: string
+          programs?: string[]
+          resource_type?: string
+          sort_order?: number
+          title: string
+          updated_at?: string
+          url: string
+        }
+        Update: {
+          active?: boolean
+          category?: string
+          created_at?: string
+          description?: string
+          id?: string
+          programs?: string[]
+          resource_type?: string
+          sort_order?: number
+          title?: string
+          updated_at?: string
+          url?: string
         }
         Relationships: []
       }
