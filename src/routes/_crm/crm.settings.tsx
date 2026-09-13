@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
-import { ExternalLink, Loader2, LogOut, Plug, RefreshCw } from "lucide-react";
+import { ExternalLink, KeyRound, Loader2, LogOut, Mail, Plug, RefreshCw } from "lucide-react";
 import { toast } from "sonner";
 import { CrmShell } from "@/components/crm/shell";
 import { getCrmSession, listStages, updateMember } from "@/lib/crm.functions";
@@ -48,6 +48,50 @@ function SettingsPage() {
   const [origin, setOrigin] = useState("");
   const [syncing, setSyncing] = useState(false);
   const [lastSync, setLastSync] = useState<string | null>(null);
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [pwBusy, setPwBusy] = useState(false);
+
+  const changePassword = async () => {
+    if (newPassword !== confirmPassword) {
+      toast.error("Both new password fields must match.");
+      return;
+    }
+    setPwBusy(true);
+    const attributes = {
+      password: newPassword,
+      current_password: currentPassword,
+    } as unknown as { password: string };
+    const { error } = await supabase.auth.updateUser(attributes);
+    setPwBusy(false);
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
+    setCurrentPassword("");
+    setNewPassword("");
+    setConfirmPassword("");
+    toast.success("Password updated. Use it the next time you sign in.");
+  };
+
+  const sendReset = async () => {
+    const target = session.data?.email;
+    if (!target) {
+      toast.error("We could not read your account email. Reload and try again.");
+      return;
+    }
+    setPwBusy(true);
+    const { error } = await supabase.auth.resetPasswordForEmail(target, {
+      redirectTo: `${window.location.origin}/crm/reset-password`,
+    });
+    setPwBusy(false);
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
+    toast.success(`Reset link sent to ${target}.`);
+  };
 
   useEffect(() => {
     setOrigin(window.location.origin);
@@ -121,6 +165,64 @@ function SettingsPage() {
                 }}
               >
                 <LogOut className="size-4" /> Sign out
+              </Button>
+            </div>
+          </div>
+        </div>
+
+        <div className="rounded-2xl border border-border bg-card p-5 shadow-soft">
+          <h2 className="flex items-center gap-2 text-base font-semibold text-foreground font-display">
+            <KeyRound className="size-4 text-primary" /> Change your password
+          </h2>
+          <p className="mt-1 text-sm text-muted-foreground">
+            Every team member can set their own password here. Forgot it? Use “Forgot password?” on
+            the sign-in page and a reset link is emailed to you.
+          </p>
+          <div className="mt-4 space-y-3">
+            <div className="space-y-1.5">
+              <Label htmlFor="current-password">Current password</Label>
+              <Input
+                id="current-password"
+                type="password"
+                autoComplete="current-password"
+                value={currentPassword}
+                onChange={(e) => setCurrentPassword(e.target.value)}
+                placeholder="Your password today"
+              />
+            </div>
+            <div className="space-y-1.5">
+              <Label htmlFor="next-password">New password</Label>
+              <Input
+                id="next-password"
+                type="password"
+                autoComplete="new-password"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+                placeholder="At least 8 characters"
+                minLength={8}
+              />
+            </div>
+            <div className="space-y-1.5">
+              <Label htmlFor="confirm-new-password">Confirm new password</Label>
+              <Input
+                id="confirm-new-password"
+                type="password"
+                autoComplete="new-password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                placeholder="Repeat the new password"
+                minLength={8}
+              />
+            </div>
+            <div className="flex flex-wrap gap-2">
+              <Button
+                onClick={changePassword}
+                disabled={pwBusy || newPassword.length < 8 || !currentPassword}
+              >
+                {pwBusy ? <Loader2 className="size-4 animate-spin" /> : null} Update password
+              </Button>
+              <Button variant="outline" onClick={sendReset} disabled={pwBusy}>
+                <Mail className="size-4" /> Email me a reset link
               </Button>
             </div>
           </div>
