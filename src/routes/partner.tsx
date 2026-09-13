@@ -1,13 +1,9 @@
-import { useState } from "react";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { Navbar } from "@/components/landing/navbar";
 import { Footer } from "@/components/landing/footer";
 import { Reveal, SectionHeading } from "@/components/landing/reveal";
 import { ArrowRight, BadgeCheck, Handshake, Rocket, Wallet } from "lucide-react";
-import {
-  PartnerApplicationModal,
-  type PartnerProgram,
-} from "@/components/site/partner-application-modal";
+import { PartnerStatusTracker } from "@/components/site/partner-status-tracker";
 
 const title = "Partner with Vizogen — Affiliate & Prime Plus Programs";
 const description =
@@ -31,13 +27,6 @@ const ctaClass =
   "group inline-flex items-center justify-center gap-2 rounded-xl gradient-brand px-6 py-3 text-sm font-semibold text-primary-foreground shadow-glow transition-transform hover:scale-[1.02]";
 
 function PartnerPage() {
-  const [modalOpen, setModalOpen] = useState(false);
-  const [program, setProgram] = useState<PartnerProgram>("Affiliate Partner");
-  const open = (p: PartnerProgram) => () => {
-    setProgram(p);
-    setModalOpen(true);
-  };
-
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -67,10 +56,10 @@ function PartnerPage() {
                 businesses in your network.
               </p>
               <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-                <button type="button" onClick={open("Affiliate Partner")} className={ctaClass}>
+                <Link to="/partner-application" className={ctaClass}>
                   Become a Partner Today
                   <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
-                </button>
+                </Link>
               </div>
             </Reveal>
           </div>
@@ -111,14 +100,13 @@ function PartnerPage() {
                       </li>
                     ))}
                   </ul>
-                  <button
-                    type="button"
-                    onClick={open("Affiliate Partner")}
+                  <Link
+                    to="/partner-application"
                     className={`${ctaClass} mt-8 w-full sm:w-auto`}
                   >
                     Become an Affiliate Partner
                     <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
-                  </button>
+                  </Link>
                 </div>
               </Reveal>
 
@@ -151,16 +139,58 @@ function PartnerPage() {
                       </li>
                     ))}
                   </ul>
-                  <button
-                    type="button"
-                    onClick={open("Prime Plus Partnership")}
+                  <Link
+                    to="/partner-application"
+                    search={{ program: "Prime Plus Partnership" }}
                     className={`${ctaClass} mt-8 w-full sm:w-auto`}
                   >
                     Apply for Prime Plus
                     <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
-                  </button>
+                  </Link>
                 </div>
               </Reveal>
+            </div>
+          </div>
+        </section>
+
+        {/* Track application status */}
+        <section id="track-status" className="pb-16 sm:pb-20">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <SectionHeading
+              eyebrow="Application Tracking"
+              title="Track your partnership program status"
+              subtitle="Already applied? Enter your reference code and the email you applied with to see exactly where your application stands."
+            />
+            <div className="mt-10 grid gap-6 lg:grid-cols-[1fr_1.1fr] lg:gap-8">
+              <Reveal>
+                <div className="h-full rounded-2xl border border-border bg-card p-6 shadow-soft sm:p-8">
+                  <h3 className="font-display text-lg font-bold text-foreground">
+                    How tracking works
+                  </h3>
+                  <ol className="mt-5 space-y-4 text-sm text-muted-foreground">
+                    {[
+                      "Submit your application — you get a reference code instantly, plus a copy by email.",
+                      "Our partnerships team moves you from Received to Under review within 2 business days.",
+                      "Check back here anytime with your code and email to see Approved or Not selected.",
+                    ].map((t, i) => (
+                      <li key={t} className="flex gap-3">
+                        <span className="grid size-6 shrink-0 place-items-center rounded-full gradient-brand text-xs font-bold text-primary-foreground">
+                          {i + 1}
+                        </span>
+                        {t}
+                      </li>
+                    ))}
+                  </ol>
+                  <Link
+                    to="/partner-application"
+                    className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
+                  >
+                    Haven't applied yet? Start your application
+                    <ArrowRight className="size-4" />
+                  </Link>
+                </div>
+              </Reveal>
+              <PartnerStatusTracker idPrefix="partner-page" />
             </div>
           </div>
         </section>
@@ -185,14 +215,13 @@ function PartnerPage() {
                       application and gets back within 48 hours.
                     </p>
                   </div>
-                  <button
-                    type="button"
-                    onClick={open("Affiliate Partner")}
+                  <Link
+                    to="/partner-application"
                     className="inline-flex items-center gap-2 rounded-xl bg-white px-6 py-3 text-sm font-semibold text-navy shadow-soft transition-transform hover:scale-[1.02]"
                   >
                     Become Partner Today
                     <ArrowRight className="size-4" />
-                  </button>
+                  </Link>
                 </div>
               </div>
             </Reveal>
@@ -200,11 +229,6 @@ function PartnerPage() {
         </section>
       </main>
       <Footer />
-      <PartnerApplicationModal
-        isOpen={modalOpen}
-        onClose={() => setModalOpen(false)}
-        initialProgram={program}
-      />
     </div>
   );
 }
