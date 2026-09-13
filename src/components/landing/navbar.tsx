@@ -74,7 +74,7 @@ export function Navbar() {
               pathname === "/partner" ? "text-foreground" : "text-muted-foreground"
             }`}
           >
-            Partner
+            Partner with us
           </Link>
 
           <div
@@ -208,7 +208,7 @@ export function Navbar() {
                 pathname === "/partner" ? "text-foreground" : "text-muted-foreground"
               }`}
             >
-              Partner
+              Partner with us
             </Link>
 
             <button
