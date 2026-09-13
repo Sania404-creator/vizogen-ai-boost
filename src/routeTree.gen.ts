@@ -54,6 +54,7 @@ import { Route as FeaturesMagicQrRouteImport } from './routes/features.magic-qr'
 import { Route as FeaturesReviewManagementRouteImport } from './routes/features.review-management'
 import { Route as FeaturesSmartSchedulingRouteImport } from './routes/features.smart-scheduling'
 import { Route as PartnerAffiliatePartnerRouteImport } from './routes/partner_.affiliate-partner'
+import { Route as PartnerPrimePlusPartnerRouteImport } from './routes/partner_.prime-plus-partner'
 import { Route as ProposalTokenRouteImport } from './routes/proposal.$token'
 import { Route as RSlugRouteImport } from './routes/r.$slug'
 import { Route as ServicesLocalSeoRouteImport } from './routes/services.local-seo'
@@ -333,6 +334,11 @@ const PartnerAffiliatePartnerRoute = PartnerAffiliatePartnerRouteImport.update({
   path: '/partner/affiliate-partner',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PartnerPrimePlusPartnerRoute = PartnerPrimePlusPartnerRouteImport.update({
+  id: '/partner_/prime-plus-partner',
+  path: '/partner/prime-plus-partner',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProposalTokenRoute = ProposalTokenRouteImport.update({
   id: '/proposal/$token',
   path: '/proposal/$token',
@@ -605,6 +611,7 @@ export interface FileRoutesByFullPath {
   '/features/review-management': typeof FeaturesReviewManagementRoute
   '/features/smart-scheduling': typeof FeaturesSmartSchedulingRoute
   '/partner/affiliate-partner': typeof PartnerAffiliatePartnerRoute
+  '/partner/prime-plus-partner': typeof PartnerPrimePlusPartnerRoute
   '/proposal/$token': typeof ProposalTokenRoute
   '/r/$slug': typeof RSlugRoute
   '/services/local-seo': typeof ServicesLocalSeoRoute
@@ -691,6 +698,7 @@ export interface FileRoutesByTo {
   '/features/review-management': typeof FeaturesReviewManagementRoute
   '/features/smart-scheduling': typeof FeaturesSmartSchedulingRoute
   '/partner/affiliate-partner': typeof PartnerAffiliatePartnerRoute
+  '/partner/prime-plus-partner': typeof PartnerPrimePlusPartnerRoute
   '/proposal/$token': typeof ProposalTokenRoute
   '/r/$slug': typeof RSlugRoute
   '/services/local-seo': typeof ServicesLocalSeoRoute
@@ -782,6 +790,7 @@ export interface FileRoutesById {
   '/features/review-management': typeof FeaturesReviewManagementRoute
   '/features/smart-scheduling': typeof FeaturesSmartSchedulingRoute
   '/partner_/affiliate-partner': typeof PartnerAffiliatePartnerRoute
+  '/partner_/prime-plus-partner': typeof PartnerPrimePlusPartnerRoute
   '/proposal/$token': typeof ProposalTokenRoute
   '/r/$slug': typeof RSlugRoute
   '/services/local-seo': typeof ServicesLocalSeoRoute
@@ -872,6 +881,7 @@ export interface FileRouteTypes {
     | '/features/review-management'
     | '/features/smart-scheduling'
     | '/partner/affiliate-partner'
+    | '/partner/prime-plus-partner'
     | '/proposal/$token'
     | '/r/$slug'
     | '/services/local-seo'
@@ -958,6 +968,7 @@ export interface FileRouteTypes {
     | '/features/review-management'
     | '/features/smart-scheduling'
     | '/partner/affiliate-partner'
+    | '/partner/prime-plus-partner'
     | '/proposal/$token'
     | '/r/$slug'
     | '/services/local-seo'
@@ -1048,6 +1059,7 @@ export interface FileRouteTypes {
     | '/features/review-management'
     | '/features/smart-scheduling'
     | '/partner_/affiliate-partner'
+    | '/partner_/prime-plus-partner'
     | '/proposal/$token'
     | '/r/$slug'
     | '/services/local-seo'
@@ -1136,6 +1148,7 @@ export interface RootRouteChildren {
   FeaturesReviewManagementRoute: typeof FeaturesReviewManagementRoute
   FeaturesSmartSchedulingRoute: typeof FeaturesSmartSchedulingRoute
   PartnerAffiliatePartnerRoute: typeof PartnerAffiliatePartnerRoute
+  PartnerPrimePlusPartnerRoute: typeof PartnerPrimePlusPartnerRoute
   ProposalTokenRoute: typeof ProposalTokenRoute
   RSlugRoute: typeof RSlugRoute
   ServicesLocalSeoRoute: typeof ServicesLocalSeoRoute
@@ -1481,6 +1494,13 @@ declare module '@tanstack/react-router' {
       path: '/partner/affiliate-partner'
       fullPath: '/partner/affiliate-partner'
       preLoaderRoute: typeof PartnerAffiliatePartnerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/partner_/prime-plus-partner': {
+      id: '/partner_/prime-plus-partner'
+      path: '/partner/prime-plus-partner'
+      fullPath: '/partner/prime-plus-partner'
+      preLoaderRoute: typeof PartnerPrimePlusPartnerRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/proposal/$token': {
@@ -1906,6 +1926,7 @@ const rootRouteChildren: RootRouteChildren = {
   FeaturesReviewManagementRoute: FeaturesReviewManagementRoute,
   FeaturesSmartSchedulingRoute: FeaturesSmartSchedulingRoute,
   PartnerAffiliatePartnerRoute: PartnerAffiliatePartnerRoute,
+  PartnerPrimePlusPartnerRoute: PartnerPrimePlusPartnerRoute,
   ProposalTokenRoute: ProposalTokenRoute,
   RSlugRoute: RSlugRoute,
   ServicesLocalSeoRoute: ServicesLocalSeoRoute,
