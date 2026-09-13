@@ -32,10 +32,12 @@ export const Route = createFileRoute("/partner-application")({
     ],
     links: [{ rel: "canonical", href: canonical }],
   }),
-  validateSearch: (search: Record<string, unknown>) => ({
-    program:
-      search['program'] === "Prime Plus Partnership" ? ("Prime Plus Partnership" as const) : undefined,
-  }),
+  validateSearch: (
+    search: Record<string, unknown>,
+  ): { program?: "Affiliate Partner" | "Prime Plus Partnership" } =>
+    search['program'] === "Prime Plus Partnership"
+      ? { program: "Prime Plus Partnership" }
+      : {},
   component: PartnerApplicationPage,
 });
 
@@ -108,7 +110,7 @@ function PartnerApplicationPage() {
 
         <section className="px-4 py-14 sm:px-6 sm:py-16">
           <div className="mx-auto grid max-w-6xl gap-8 lg:grid-cols-[1.25fr_1fr]">
-            <ApplicationForm initialProgram={initialProgram} />
+            <ApplicationForm {...(initialProgram ? { initialProgram } : {})} />
             <div className="space-y-6">
               <PartnerStatusTracker />
               <Reveal delay={0.1}>

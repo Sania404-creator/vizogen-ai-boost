@@ -102,7 +102,6 @@ function PartnerPage() {
                   </ul>
                   <Link
                     to="/partner-application"
-                    search={{ program: undefined }}
                     className={`${ctaClass} mt-8 w-full sm:w-auto`}
                   >
                     Become an Affiliate Partner
@@ -142,7 +141,7 @@ function PartnerPage() {
                   </ul>
                   <Link
                     to="/partner-application"
-                    search={{ program: "Prime Plus Partnership" as const }}
+                    search={{ program: "Prime Plus Partnership" }}
                     className={`${ctaClass} mt-8 w-full sm:w-auto`}
                   >
                     Apply for Prime Plus
