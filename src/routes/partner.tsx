@@ -234,6 +234,14 @@ function PartnerPage() {
                     Become a White-Label Partner
                     <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
                   </Link>
+                  <Link
+                    to="/partner/white-labelled-partner"
+                    className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline"
+                  >
+                    Full White-Label program details
+                    <ArrowRight className="size-3.5" />
+                  </Link>
+
                 </div>
               </Reveal>
             </div>
