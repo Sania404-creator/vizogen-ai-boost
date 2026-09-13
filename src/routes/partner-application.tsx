@@ -2,17 +2,7 @@ import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { useServerFn } from "@tanstack/react-start";
 import { z } from "zod";
-import {
-  AlertCircle,
-  BadgeCheck,
-  CheckCircle2,
-  Clock,
-  Copy,
-  Loader2,
-  Search,
-  ShieldCheck,
-  XCircle,
-} from "lucide-react";
+import { AlertCircle, BadgeCheck, Copy, Loader2, ShieldCheck } from "lucide-react";
 import { toast } from "sonner";
 import { Navbar } from "@/components/landing/navbar";
 import { Footer } from "@/components/landing/footer";
