@@ -15,6 +15,7 @@ import {
 import { toast } from "sonner";
 import { CrmShell, useCrmSession } from "@/components/crm/shell";
 import { PartnerApplicationsPanel } from "@/components/crm/partner-applications";
+import { PartnerAccountsPanel } from "@/components/crm/partner-accounts";
 
 import {
   adminAssignLeads,
@@ -347,6 +348,7 @@ function AdminPage() {
           </section>
 
           <PartnerApplicationsPanel enabled={isAdmin} />
+          <PartnerAccountsPanel enabled={isAdmin} />
         </>
 
       ) : null}

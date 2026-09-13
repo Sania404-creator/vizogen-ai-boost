@@ -52,3 +52,9 @@ Small and multi-location local businesses including gyms, salons, clinics, resta
 - Email: info.vizogen@gmail.com
 - Phone: +91 84889 18358
 - Address: Tower-B, RK ICONIC, 923, 150 Feet Ring Rd, nr. Ayodhya Chowk, Sheetal Park, Puneet Nagar, Bajrang Wadi, Rajkot, Gujarat 360006, India
+
+## Partner program pages
+- Affiliate Partner program: https://www.vizogen.in/partner/affiliate-partner (20% recurring commission, Rs.999 minimum payout, no joining fee)
+- Prime Plus Partner program: https://www.vizogen.in/partner/prime-plus-partner (up to 30% recurring commission, co-branding, dedicated Partner Growth Manager, inbound leads, city exclusivity)
+- White-Labelled Partner program: https://www.vizogen.in/partner/white-labelled-partner (own domain, logo and pricing; Vizogen handles hosting, engineering, updates and API stability)
+- Approved partners sign in to the partner portal at https://www.vizogen.in/partner-portal for training material, their dedicated manager, commission earnings and client onboarding.
