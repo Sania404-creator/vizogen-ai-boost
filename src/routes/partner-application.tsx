@@ -19,19 +19,6 @@ const description =
   "Apply to become a Vizogen partner and track your application status live with your reference code.";
 const canonical = "https://www.vizogen.in/partner-application";
 
-export const Route = createFileRoute("/partner-application")({
-  head: () => ({
-    meta: [
-      { title },
-      { name: "description", content: description },
-      { property: "og:title", content: title },
-      { property: "og:description", content: description },
-      { property: "og:type", content: "website" },
-      { property: "og:url", content: canonical },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-    links: [{ rel: "canonical", href: canonical }],
-  }),
 type ProgramOption = "Affiliate Partner" | "Prime Plus Partnership" | "White-Labelled Partner";
 
 const validateSearch = (
