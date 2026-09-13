@@ -4,10 +4,18 @@ import { Footer } from "@/components/landing/footer";
 import { Reveal, SectionHeading } from "@/components/landing/reveal";
 import { ArrowRight, BadgeCheck, Briefcase, Handshake, Rocket, Wallet } from "lucide-react";
 import { PartnerStatusTracker } from "@/components/site/partner-status-tracker";
+import {
+  PARTNER_PROGRAMS,
+  PARTNER_SCOPE,
+  partnerFaqs,
+  partnerJsonLdScripts,
+  partnerQuickAnswer,
+} from "@/lib/aeo";
 
 const title = "Partner with Vizogen — Affiliate, Prime Plus & White-Label Programs";
 const description =
-  "Join the Vizogen partner program. Earn recurring commissions as an Affiliate Partner, unlock exclusive growth benefits with Prime Plus, or launch your own white-labelled platform.";
+  "Three Vizogen partnership programs for India: Affiliate Partner (20% recurring commission, ₹999 min payout, no joining fee), Prime Plus (up to 30% plus co-branding and city exclusivity) and White-Labelled Partner.";
+const canonical = "https://www.vizogen.in/partner";
 
 export const Route = createFileRoute("/partner")({
   head: () => ({
@@ -17,8 +25,11 @@ export const Route = createFileRoute("/partner")({
       { property: "og:title", content: title },
       { property: "og:description", content: description },
       { property: "og:type", content: "website" },
+      { property: "og:url", content: canonical },
       { name: "twitter:card", content: "summary_large_image" },
     ],
+    links: [{ rel: "canonical", href: canonical }],
+    scripts: partnerJsonLdScripts("program"),
   }),
   component: PartnerPage,
 });
