@@ -43,6 +43,7 @@ import { Route as TermsAndConditionsRouteImport } from './routes/terms-and-condi
 import { Route as TourTravelMarketingSoftwareRouteImport } from './routes/tour-travel-marketing-software'
 import { Route as YogaWellnessMarketingSoftwareRouteImport } from './routes/yoga-wellness-marketing-software'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedPartnerPortalRouteImport } from './routes/_authenticated/partner-portal'
 import { Route as CrmCrmRouteImport } from './routes/_crm/crm'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
@@ -273,6 +274,12 @@ const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedPartnerPortalRoute =
+  AuthenticatedPartnerPortalRouteImport.update({
+    id: '/partner-portal',
+    path: '/partner-portal',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const CrmCrmRoute = CrmCrmRouteImport.update({
   id: '/crm',
   path: '/crm',
@@ -582,6 +589,7 @@ export interface FileRoutesByFullPath {
   '/tour-travel-marketing-software': typeof TourTravelMarketingSoftwareRoute
   '/yoga-wellness-marketing-software': typeof YogaWellnessMarketingSoftwareRoute
   '/dashboard': typeof AuthenticatedDashboardRouteWithChildren
+  '/partner-portal': typeof AuthenticatedPartnerPortalRoute
   '/crm': typeof CrmCrmRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
   '/crm/login': typeof CrmLoginRoute
@@ -667,6 +675,7 @@ export interface FileRoutesByTo {
   '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/tour-travel-marketing-software': typeof TourTravelMarketingSoftwareRoute
   '/yoga-wellness-marketing-software': typeof YogaWellnessMarketingSoftwareRoute
+  '/partner-portal': typeof AuthenticatedPartnerPortalRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/crm/login': typeof CrmLoginRoute
   '/crm/reset-password': typeof CrmResetPasswordRoute
@@ -755,6 +764,7 @@ export interface FileRoutesById {
   '/tour-travel-marketing-software': typeof TourTravelMarketingSoftwareRoute
   '/yoga-wellness-marketing-software': typeof YogaWellnessMarketingSoftwareRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRouteWithChildren
+  '/_authenticated/partner-portal': typeof AuthenticatedPartnerPortalRoute
   '/_crm/crm': typeof CrmCrmRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
   '/crm/login': typeof CrmLoginRoute
@@ -843,6 +853,7 @@ export interface FileRouteTypes {
     | '/tour-travel-marketing-software'
     | '/yoga-wellness-marketing-software'
     | '/dashboard'
+    | '/partner-portal'
     | '/crm'
     | '/blog/$slug'
     | '/crm/login'
@@ -928,6 +939,7 @@ export interface FileRouteTypes {
     | '/terms-and-conditions'
     | '/tour-travel-marketing-software'
     | '/yoga-wellness-marketing-software'
+    | '/partner-portal'
     | '/blog/$slug'
     | '/crm/login'
     | '/crm/reset-password'
@@ -1015,6 +1027,7 @@ export interface FileRouteTypes {
     | '/tour-travel-marketing-software'
     | '/yoga-wellness-marketing-software'
     | '/_authenticated/dashboard'
+    | '/_authenticated/partner-portal'
     | '/_crm/crm'
     | '/blog/$slug'
     | '/crm/login'
@@ -1378,6 +1391,13 @@ declare module '@tanstack/react-router' {
       path: '/dashboard'
       fullPath: '/dashboard'
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/partner-portal': {
+      id: '/_authenticated/partner-portal'
+      path: '/partner-portal'
+      fullPath: '/partner-portal'
+      preLoaderRoute: typeof AuthenticatedPartnerPortalRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_crm/crm': {
@@ -1775,10 +1795,12 @@ const AuthenticatedDashboardRouteWithChildren =
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRouteWithChildren
+  AuthenticatedPartnerPortalRoute: typeof AuthenticatedPartnerPortalRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedDashboardRoute: AuthenticatedDashboardRouteWithChildren,
+  AuthenticatedPartnerPortalRoute: AuthenticatedPartnerPortalRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
