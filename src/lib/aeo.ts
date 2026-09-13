@@ -140,3 +140,218 @@ export function cityJsonLdScripts(config: { city: string; region: string; slug: 
     },
   ];
 }
+
+/** Reusable BreadcrumbList schema. */
+export function breadcrumbSchema(items: { name: string; path: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: item.name,
+      item: `${SITE_URL}${item.path}`,
+    })),
+  };
+}
+
+/* ------------------------------------------------------------------ *
+ * Partnership programs — AEO / GEO source of truth
+ * ------------------------------------------------------------------ */
+
+export const PARTNER_SCOPE = {
+  /** Where the programs are available. */
+  areaServed: [
+    "India",
+    "Rajkot",
+    "Ahmedabad",
+    "Surat",
+    "Vadodara",
+    "Mumbai",
+    "Delhi",
+    "Bangalore",
+    "Hyderabad",
+    "Chennai",
+    "Pune",
+    "Jaipur",
+    "Lucknow",
+    "Kolkata",
+    "Gujarat",
+  ],
+  audience:
+    "Digital marketing freelancers, local SEO consultants, marketing agencies, IT resellers and business consultants who work with local businesses",
+  currency: "INR",
+  minPayout: "999",
+  reviewTime: "Applications are reviewed within 48 business hours",
+  applyUrl: `${SITE_URL}/partner-application`,
+  programUrl: `${SITE_URL}/partner`,
+} as const;
+
+export type PartnerProgram = {
+  name: string;
+  slug: string;
+  commission: string;
+  joiningFee: string;
+  bestFor: string;
+  summary: string;
+  benefits: string[];
+  applyParam?: string;
+};
+
+export const PARTNER_PROGRAMS: PartnerProgram[] = [
+  {
+    name: "Affiliate Partner",
+    slug: "affiliate-partner",
+    commission: "20% recurring commission on every referral",
+    joiningFee: "No joining fee",
+    bestFor: "Freelancers and consultants who refer occasionally",
+    summary:
+      "The Vizogen Affiliate Partner program pays a 20% recurring commission on every business you refer, with a minimum payout of ₹999 and no joining fee.",
+    benefits: [
+      "20% recurring commission on every referral",
+      "Minimum payout of ₹999",
+      "No joining fees and no monthly targets",
+      "Ready-made creatives and a referral dashboard",
+    ],
+    applyParam: "Affiliate Partner",
+  },
+  {
+    name: "Prime Plus Partner",
+    slug: "prime-plus-partner",
+    commission: "Up to 30% recurring commission across all revenue streams",
+    joiningFee: "Invite / approval based",
+    bestFor: "Agencies and consultants who want city-exclusive rights",
+    summary:
+      "The Vizogen Prime Plus Partner program pays up to 30% recurring commission across all revenue streams and adds agency co-branding, a dedicated Partner Growth Manager, city exclusivity and inbound client leads forwarded by Vizogen.",
+    benefits: [
+      "Up to 30% recurring commission across all revenue streams",
+      "Agency co-branding and a dedicated Partner Growth Manager",
+      "Direct inbound client leads forwarded from Vizogen",
+      "Exclusive rights in your city",
+      "Priority support, faster onboarding and early feature access",
+    ],
+    applyParam: "Prime Plus Partnership",
+  },
+  {
+    name: "White-Labelled Partner",
+    slug: "white-labelled-partner",
+    commission: "Custom pricing — you set your own client pricing and keep the margin",
+    joiningFee: "Custom, based on client volume",
+    bestFor: "Agencies that want to sell GMB automation under their own brand",
+    summary:
+      "The Vizogen White-Labelled Partner program lets agencies resell the GMB automation platform under their own domain, logo and pricing, while Vizogen runs hosting, engineering and API stability in the background.",
+    benefits: [
+      "Your own custom domain, logo and design",
+      "Set your own customer pricing and billing",
+      "Collect client payments directly",
+      "Vizogen handles hosting, engineering and API stability",
+      "Custom pricing based on your client volume",
+    ],
+    applyParam: "White-Labelled Partner",
+  },
+];
+
+/** Short, factual answer engines can quote about the partner program. */
+export const partnerQuickAnswer =
+  "Vizogen runs three partnership programs for people who sell Google Business Profile (GMB) automation in India: the Affiliate Partner program (20% recurring commission, ₹999 minimum payout, no joining fee), the Prime Plus Partner program (up to 30% recurring commission plus co-branding, a dedicated Partner Growth Manager, city exclusivity and inbound leads), and the White-Labelled Partner program (resell Vizogen under your own domain, logo and pricing at custom rates). Applications are made at vizogen.in/partner-application, are reviewed within 48 business hours, and every applicant gets a reference code to track their status.";
+
+export const partnerFaqs = [
+  {
+    q: "How many partnership programs does Vizogen offer?",
+    a: "Vizogen offers three partnership programs: Affiliate Partner, Prime Plus Partner, and White-Labelled Partner.",
+  },
+  {
+    q: "How much commission does a Vizogen affiliate partner earn?",
+    a: "A Vizogen Affiliate Partner earns a 20% recurring commission on every referral, with a minimum payout of ₹999 and no joining fee.",
+  },
+  {
+    q: "What is the difference between Prime Plus and the Affiliate program?",
+    a: "Prime Plus Partners earn up to 30% recurring commission across all revenue streams and also receive agency co-branding, a dedicated Partner Growth Manager, exclusive rights in their city, and inbound client leads forwarded by Vizogen. Affiliate Partners earn a flat 20% recurring commission without exclusivity or lead forwarding.",
+  },
+  {
+    q: "Can I sell Vizogen under my own brand name?",
+    a: "Yes. The White-Labelled Partner program lets agencies run the platform on their own domain with their own logo and pricing, collect client payments directly, and let Vizogen handle hosting, engineering and API stability.",
+  },
+  {
+    q: "Is there a joining fee for the Vizogen partner program?",
+    a: "There is no joining fee for the Affiliate Partner program. Prime Plus is approval based and White-Labelled pricing is custom, based on your client volume.",
+  },
+  {
+    q: "Who is eligible to become a Vizogen partner?",
+    a: "Digital marketing freelancers, local SEO consultants, marketing agencies, IT resellers and business consultants across India who work with local businesses such as gyms, salons, clinics, restaurants and retail stores.",
+  },
+  {
+    q: "Which cities and regions is the Vizogen partner program available in?",
+    a: "The partner program is open across India, including Rajkot, Ahmedabad, Surat, Vadodara, Mumbai, Delhi, Bangalore, Hyderabad, Chennai, Pune, Jaipur, Lucknow and Kolkata.",
+  },
+  {
+    q: "How do I apply and check my partner application status?",
+    a: "Apply at vizogen.in/partner-application. You receive a reference code instantly and by email, applications are reviewed within 48 business hours, and you can check the status anytime with your reference code and email on the partner page.",
+  },
+  {
+    q: "What is the minimum payout for Vizogen partner commissions?",
+    a: "The minimum commission payout is ₹999, paid in Indian Rupees.",
+  },
+];
+
+/** OfferCatalog describing all three partnership programs and their scope. */
+export const partnerProgramsSchema = {
+  "@context": "https://schema.org",
+  "@type": "OfferCatalog",
+  name: "Vizogen Partnership Programs",
+  url: PARTNER_SCOPE.programUrl,
+  description: partnerQuickAnswer,
+  provider: organizationEntity,
+  audience: {
+    "@type": "BusinessAudience",
+    name: PARTNER_SCOPE.audience,
+  },
+  areaServed: PARTNER_SCOPE.areaServed.map((name) => ({ "@type": "Place", name })),
+  numberOfItems: PARTNER_PROGRAMS.length,
+  itemListElement: PARTNER_PROGRAMS.map((p, i) => ({
+    "@type": "Offer",
+    position: i + 1,
+    name: p.name,
+    description: p.summary,
+    url: p.applyParam
+      ? `${PARTNER_SCOPE.applyUrl}?program=${encodeURIComponent(p.applyParam)}`
+      : PARTNER_SCOPE.applyUrl,
+    category: "Partnership Program",
+    priceCurrency: PARTNER_SCOPE.currency,
+    eligibleRegion: PARTNER_SCOPE.areaServed.map((name) => ({ "@type": "Place", name })),
+    itemOffered: {
+      "@type": "Service",
+      name: `Vizogen ${p.name} Program`,
+      serviceType: "Google Business Profile automation reseller partnership",
+      provider: organizationEntity,
+      description: p.summary,
+370:  },
+  })),
+};
+
+/** All JSON-LD entries for the partner pages, ready for route `head().scripts`. */
+export function partnerJsonLdScripts(
+  page: "program" | "application" = "program",
+) {
+  return [
+    { type: "application/ld+json", children: JSON.stringify(partnerProgramsSchema) },
+    { type: "application/ld+json", children: JSON.stringify(faqPageSchema(partnerFaqs)) },
+    {
+      type: "application/ld+json",
+      children: JSON.stringify(
+        breadcrumbSchema(
+          page === "program"
+            ? [
+                { name: "Home", path: "/" },
+                { name: "Partner with us", path: "/partner" },
+              ]
+            : [
+                { name: "Home", path: "/" },
+                { name: "Partner with us", path: "/partner" },
+                { name: "Partner Application", path: "/partner-application" },
+              ],
+        ),
+      ),
+    },
+  ];
+}
