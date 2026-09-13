@@ -2,12 +2,12 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Navbar } from "@/components/landing/navbar";
 import { Footer } from "@/components/landing/footer";
 import { Reveal, SectionHeading } from "@/components/landing/reveal";
-import { ArrowRight, BadgeCheck, Handshake, Rocket, Wallet } from "lucide-react";
+import { ArrowRight, BadgeCheck, Briefcase, Handshake, Rocket, Wallet } from "lucide-react";
 import { PartnerStatusTracker } from "@/components/site/partner-status-tracker";
 
-const title = "Partner with Vizogen — Affiliate & Prime Plus Programs";
+const title = "Partner with Vizogen — Affiliate, Prime Plus & White-Label Programs";
 const description =
-  "Join the Vizogen partner program. Earn recurring commissions as an Affiliate Partner or unlock exclusive growth benefits with Prime Plus.";
+  "Join the Vizogen partner program. Earn recurring commissions as an Affiliate Partner, unlock exclusive growth benefits with Prime Plus, or launch your own white-labelled platform.";
 
 export const Route = createFileRoute("/partner")({
   head: () => ({
@@ -69,11 +69,11 @@ function PartnerPage() {
         <section className="py-16 sm:py-20">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <SectionHeading
-              eyebrow="Two Ways to Partner"
+              eyebrow="Three Ways to Partner"
               title="Choose the program that fits you"
-              subtitle="Whether you refer occasionally or run a full agency, there's a Vizogen partner track built for your goals."
+              subtitle="Whether you refer occasionally, run a full agency, or want your own branded platform, there's a Vizogen partner track built for your goals."
             />
-            <div className="mt-12 grid gap-6 lg:grid-cols-2 lg:gap-8">
+            <div className="mt-12 grid gap-6 lg:grid-cols-3 lg:gap-8">
               {/* Affiliate */}
               <Reveal>
                 <div className="flex h-full flex-col rounded-2xl border border-border/70 bg-card p-7 shadow-soft transition-shadow duration-300 hover:shadow-lift sm:p-9">
@@ -84,15 +84,15 @@ function PartnerPage() {
                     Affiliate Partner
                   </h3>
                   <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                    Refer businesses to Vizogen and earn commission on every
-                    subscription. No targets, no commitments — just share your
-                    link and get paid.
+                    Refer businesses to Vizogen and earn a recurring 20% commission
+                    on every referral. No joining fees, no targets, no commitments.
                   </p>
                   <ul className="mt-6 space-y-3 text-sm text-foreground">
                     {[
-                      "Recurring commission on every referral",
+                      "20% recurring commission on every referral",
+                      "Minimum payout of just ₹999",
+                      "No joining fees — start immediately",
                       "Ready-made creatives & referral dashboard",
-                      "Monthly payouts, no minimum threshold",
                     ].map((t) => (
                       <li key={t} className="flex items-start gap-2.5">
                         <BadgeCheck className="mt-0.5 size-4 shrink-0 text-success" />
@@ -111,7 +111,7 @@ function PartnerPage() {
               </Reveal>
 
               {/* Prime Plus */}
-              <Reveal delay={0.12}>
+              <Reveal delay={0.08}>
                 <div className="relative flex h-full flex-col overflow-hidden rounded-2xl border border-primary/30 bg-card p-7 shadow-glow sm:p-9">
                   <span className="absolute right-5 top-5 rounded-full gradient-brand px-3 py-1 text-xs font-bold text-primary-foreground">
                     Exclusive
@@ -123,15 +123,17 @@ function PartnerPage() {
                     Prime Plus Partner
                   </h3>
                   <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                    For agencies, consultants and resellers managing multiple
-                    clients. Get white-glove onboarding, priority support and
-                    the highest revenue share.
+                    Earn higher recurring commissions across every revenue stream,
+                    up to 30%. Built for agencies and consultants who want exclusive
+                    rights, co-branding, and direct client leads from Vizogen.
                   </p>
                   <ul className="mt-6 space-y-3 text-sm text-foreground">
                     {[
-                      "Highest-tier revenue share & bonuses",
-                      "Dedicated partner success manager",
-                      "Co-branded marketing & priority roadmap input",
+                      "Up to 30% recurring commission",
+                      "Agency co-branding & dedicated Partner Growth Manager",
+                      "Direct inbound client leads forwarded from Vizogen",
+                      "Exclusive rights in your city",
+                      "Priority support, faster onboarding & early feature access",
                     ].map((t) => (
                       <li key={t} className="flex items-start gap-2.5">
                         <BadgeCheck className="mt-0.5 size-4 shrink-0 text-success" />
@@ -145,6 +147,48 @@ function PartnerPage() {
                     className={`${ctaClass} mt-8 w-full sm:w-auto`}
                   >
                     Apply for Prime Plus
+                    <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
+                  </Link>
+                </div>
+              </Reveal>
+
+              {/* White-Labelled Partner */}
+              <Reveal delay={0.16}>
+                <div className="relative flex h-full flex-col overflow-hidden rounded-2xl border border-border/70 bg-card p-7 shadow-soft transition-shadow duration-300 hover:shadow-lift sm:p-9">
+                  <span className="absolute right-5 top-5 rounded-full border border-border bg-card px-3 py-1 text-xs font-bold text-primary">
+                    Agency
+                  </span>
+                  <div className="grid size-12 place-items-center rounded-xl bg-primary/10 text-primary">
+                    <Briefcase className="size-6" />
+                  </div>
+                  <h3 className="mt-5 text-2xl font-bold text-foreground">
+                    White-Labelled Partner
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                    Best for agencies who want to sell Vizogen under their own brand
+                    name. Host the platform on your custom domain, logo, and pricing
+                    while Vizogen runs the backend.
+                  </p>
+                  <ul className="mt-6 space-y-3 text-sm text-foreground">
+                    {[
+                      "Your own custom domain, logo & design",
+                      "Set your own customer pricing & billing",
+                      "Collect client payments directly",
+                      "Vizogen handles hosting, engineering & API stability",
+                      "Custom pricing based on your client volume",
+                    ].map((t) => (
+                      <li key={t} className="flex items-start gap-2.5">
+                        <BadgeCheck className="mt-0.5 size-4 shrink-0 text-success" />
+                        {t}
+                      </li>
+                    ))}
+                  </ul>
+                  <Link
+                    to="/partner-application"
+                    search={{ program: "White-Labelled Partner" }}
+                    className={`${ctaClass} mt-8 w-full sm:w-auto`}
+                  >
+                    Become a White-Label Partner
                     <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
                   </Link>
                 </div>
@@ -191,6 +235,40 @@ function PartnerPage() {
                 </div>
               </Reveal>
               <PartnerStatusTracker idPrefix="partner-page" />
+            </div>
+          </div>
+        </section>
+
+        {/* Partner perks */}
+        <section className="pb-16 sm:pb-20">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <SectionHeading
+              eyebrow="Top Perks for Our Partners"
+              title="Everything you need to grow faster"
+              subtitle="From daily skill training to sponsored travel, our partners get more than a commission plan."
+            />
+            <div className="mt-12 grid gap-6 md:grid-cols-3 lg:gap-8">
+              {[
+                {
+                  title: "Free Trainings",
+                  body: "Skill Up With Experts Every Day. Access ongoing training from top mentors to sharpen your freelancing and enrollment skills — at zero cost.",
+                },
+                {
+                  title: "National & International Trips",
+                  body: "Earn. Achieve. Travel The World. Hit performance goals and qualify for fully sponsored national and international trips with fellow achievers.",
+                },
+                {
+                  title: "Events & Recognition",
+                  body: "Shine On Stage With The Best. Be part of high-energy partner events, award nights, and community meetups where your success is celebrated.",
+                },
+              ].map((p, i) => (
+                <Reveal key={p.title} delay={i * 0.08} className="h-full">
+                  <div className="flex h-full flex-col rounded-2xl border border-border bg-card p-7 shadow-soft sm:p-9">
+                    <h3 className="font-display text-xl font-bold text-foreground">{p.title}</h3>
+                    <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{p.body}</p>
+                  </div>
+                </Reveal>
+              ))}
             </div>
           </div>
         </section>

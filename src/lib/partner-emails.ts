@@ -4,7 +4,7 @@ export type PartnerApplication = {
   phone: string;
   businessName: string;
   website?: string;
-  program: "Affiliate Partner" | "Prime Plus Partnership";
+  program: "Affiliate Partner" | "Prime Plus Partnership" | "White-Labelled Partner";
   businessCount: string;
   about?: string;
 };

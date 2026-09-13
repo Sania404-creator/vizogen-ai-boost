@@ -19,6 +19,22 @@ const description =
   "Apply to become a Vizogen partner and track your application status live with your reference code.";
 const canonical = "https://www.vizogen.in/partner-application";
 
+type ProgramOption = "Affiliate Partner" | "Prime Plus Partnership" | "White-Labelled Partner";
+
+const validateSearch = (
+  search: Record<string, unknown>,
+): { program?: ProgramOption } => {
+  const program = search['program'];
+  if (
+    program === "Prime Plus Partnership" ||
+    program === "White-Labelled Partner" ||
+    program === "Affiliate Partner"
+  ) {
+    return { program };
+  }
+  return {};
+};
+
 export const Route = createFileRoute("/partner-application")({
   head: () => ({
     meta: [
@@ -32,16 +48,11 @@ export const Route = createFileRoute("/partner-application")({
     ],
     links: [{ rel: "canonical", href: canonical }],
   }),
-  validateSearch: (
-    search: Record<string, unknown>,
-  ): { program?: "Affiliate Partner" | "Prime Plus Partnership" } =>
-    search['program'] === "Prime Plus Partnership"
-      ? { program: "Prime Plus Partnership" }
-      : {},
+  validateSearch,
   component: PartnerApplicationPage,
 });
 
-const PROGRAMS = ["Affiliate Partner", "Prime Plus Partnership"] as const;
+const PROGRAMS = ["Affiliate Partner", "Prime Plus Partnership", "White-Labelled Partner"] as const;
 const BUSINESS_COUNTS = ["Just starting out", "1-5", "6-20", "20+"] as const;
 
 const schema = z.object({
@@ -308,7 +319,7 @@ function ApplicationForm({ initialProgram }: { initialProgram?: (typeof PROGRAMS
 
         <fieldset>
           <legend className="text-sm font-medium text-foreground">Which program?</legend>
-          <div role="radiogroup" aria-label="Which program?" className="mt-2 grid gap-2 sm:grid-cols-2">
+          <div role="radiogroup" aria-label="Which program?" className="mt-2 grid gap-2 sm:grid-cols-3">
             {PROGRAMS.map((p) => {
               const active = values.program === p;
               return (

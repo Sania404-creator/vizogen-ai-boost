@@ -46,7 +46,7 @@ const partnerSchema = z.object({
     .regex(/^[0-9+\-\s()]+$/),
   businessName: z.string().trim().min(2).max(120),
   website: z.string().trim().max(200).optional().default(""),
-  program: z.enum(["Affiliate Partner", "Prime Plus Partnership"]),
+  program: z.enum(["Affiliate Partner", "Prime Plus Partnership", "White-Labelled Partner"]),
   businessCount: z.enum(["Just starting out", "1-5", "6-20", "20+"]),
   about: z.string().trim().max(1000).optional().default(""),
 });
