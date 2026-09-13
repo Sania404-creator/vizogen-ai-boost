@@ -13,10 +13,11 @@ import { Textarea } from "@/components/ui/textarea";
 import { createPartnerApplication } from "@/lib/partner.functions";
 import { PartnerStatusTracker } from "@/components/site/partner-status-tracker";
 import { WHATSAPP_URL } from "@/lib/site-contact";
+import { partnerJsonLdScripts } from "@/lib/aeo";
 
 const title = "Partner Application — Apply to Partner with Vizogen";
 const description =
-  "Apply to become a Vizogen partner and track your application status live with your reference code.";
+  "Apply to the Vizogen Affiliate, Prime Plus or White-Labelled partnership program and track your application status live with your reference code.";
 const canonical = "https://www.vizogen.in/partner-application";
 
 type ProgramOption = "Affiliate Partner" | "Prime Plus Partnership" | "White-Labelled Partner";
@@ -47,6 +48,7 @@ export const Route = createFileRoute("/partner-application")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: canonical }],
+    scripts: partnerJsonLdScripts("application"),
   }),
   validateSearch,
   component: PartnerApplicationPage,
