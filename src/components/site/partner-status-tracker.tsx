@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { Link } from "@tanstack/react-router";
+import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
-import { CheckCircle2, Clock, Loader2, Search, XCircle } from "lucide-react";
+import { ArrowRight, CheckCircle2, Clock, Loader2, Search, XCircle } from "lucide-react";
 import { Reveal } from "@/components/landing/reveal";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -27,7 +29,7 @@ export const STATUS_STYLE: Record<
   approved: {
     icon: CheckCircle2,
     className: "border-success/40 bg-success/10 text-success",
-    note: "Congratulations — you're approved! Check your inbox for onboarding and commission details.",
+    note: "Congratulations — you're approved! Check your inbox for onboarding, commission details and your portal link.",
   },
   rejected: {
     icon: XCircle,
@@ -36,40 +38,37 @@ export const STATUS_STYLE: Record<
   },
 };
 
+const TRAIL: PartnerStatus[] = ["new", "reviewing", "approved"];
+
 export function PartnerStatusTracker({ idPrefix = "ps" }: { idPrefix?: string }) {
   const lookup = useServerFn(getPartnerApplicationStatus);
   const [code, setCode] = useState("");
   const [email, setEmail] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [result, setResult] = useState<{
-    referenceCode: string;
-    fullName: string;
-    program: string;
-    status: PartnerStatus;
-    submittedAt: string;
-    updatedAt: string;
-  } | null>(null);
-  const [notFound, setNotFound] = useState(false);
+  const [query, setQuery] = useState<{ referenceCode: string; email: string } | null>(null);
 
-  const check = async (e: React.FormEvent) => {
+  const status = useQuery({
+    queryKey: ["partner-status", query?.referenceCode, query?.email],
+    queryFn: () => lookup({ data: query! }),
+    enabled: !!query,
+    refetchInterval: 20000,
+    refetchOnWindowFocus: true,
+  });
+
+  const submit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!code.trim() || !email.trim()) return;
-    setLoading(true);
-    setNotFound(false);
-    try {
-      const res = await lookup({ data: { referenceCode: code, email } });
-      setResult(res);
-      setNotFound(!res);
-    } catch {
-      setNotFound(true);
-      setResult(null);
-    } finally {
-      setLoading(false);
-    }
+    setQuery({ referenceCode: code.trim(), email: email.trim() });
   };
 
+  const result = status.data ?? null;
+  const notFound = !!query && status.isFetched && !status.isError && result === null;
   const style = result ? STATUS_STYLE[result.status] : null;
   const StatusIcon = style?.icon ?? Clock;
+  const trailIndex = result
+    ? result.status === "rejected"
+      ? 1
+      : TRAIL.indexOf(result.status)
+    : -1;
 
   return (
     <Reveal>
@@ -79,9 +78,9 @@ export function PartnerStatusTracker({ idPrefix = "ps" }: { idPrefix?: string })
         </h2>
         <p className="mt-1.5 text-sm text-muted-foreground">
           Enter the reference code from your confirmation email along with the email you applied
-          with.
+          with. This panel then updates itself automatically.
         </p>
-        <form onSubmit={check} className="mt-4 space-y-3">
+        <form onSubmit={submit} className="mt-4 space-y-3">
           <div>
             <Label htmlFor={`${idPrefix}-code`}>Reference code</Label>
             <Input
@@ -105,18 +104,22 @@ export function PartnerStatusTracker({ idPrefix = "ps" }: { idPrefix?: string })
           </div>
           <button
             type="submit"
-            disabled={loading}
+            disabled={status.isFetching}
             className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-border bg-background px-5 py-2.5 text-sm font-semibold text-foreground transition-colors hover:bg-muted disabled:opacity-70"
           >
-            {loading ? <Loader2 className="size-4 animate-spin" /> : <Search className="size-4" />}
+            {status.isFetching ? (
+              <Loader2 className="size-4 animate-spin" />
+            ) : (
+              <Search className="size-4" />
+            )}
             Check status
           </button>
         </form>
 
-        {notFound ? (
+        {notFound || status.isError ? (
           <p className="mt-4 rounded-xl border border-border bg-muted p-3 text-xs text-muted-foreground">
-            We couldn't find an application with that code and email. Double-check both, or
-            message us on WhatsApp.
+            We couldn't find an application with that code and email. Double-check both, or message
+            us on WhatsApp.
           </p>
         ) : null}
 
@@ -124,8 +127,27 @@ export function PartnerStatusTracker({ idPrefix = "ps" }: { idPrefix?: string })
           <div className={`mt-4 rounded-xl border p-4 ${style.className}`}>
             <div className="flex items-center gap-2 text-sm font-bold">
               <StatusIcon className="size-4" /> {PARTNER_STATUS_LABEL[result.status]}
+              {status.isFetching ? <Loader2 className="size-3.5 animate-spin" /> : null}
             </div>
-            <p className="mt-2 text-xs leading-relaxed opacity-90">{style.note}</p>
+
+            <ol className="mt-3 flex items-center gap-1.5">
+              {TRAIL.map((s, i) => (
+                <li key={s} className="flex flex-1 items-center gap-1.5">
+                  <span
+                    className={`h-1.5 flex-1 rounded-full ${
+                      i <= trailIndex ? "bg-current opacity-90" : "bg-current opacity-20"
+                    }`}
+                  />
+                </li>
+              ))}
+            </ol>
+            <div className="mt-1.5 flex justify-between text-[11px] font-semibold opacity-80">
+              <span>Received</span>
+              <span>Under review</span>
+              <span>{result.status === "rejected" ? "Decision made" : "Approved"}</span>
+            </div>
+
+            <p className="mt-3 text-xs leading-relaxed opacity-90">{style.note}</p>
             <dl className="mt-3 space-y-1 text-xs opacity-90">
               <div className="flex justify-between gap-3">
                 <dt>Applicant</dt>
@@ -144,10 +166,20 @@ export function PartnerStatusTracker({ idPrefix = "ps" }: { idPrefix?: string })
               <div className="flex justify-between gap-3">
                 <dt>Last update</dt>
                 <dd className="font-semibold">
-                  {new Date(result.updatedAt).toLocaleDateString()}
+                  {new Date(result.updatedAt).toLocaleString()}
                 </dd>
               </div>
             </dl>
+
+            {result.status === "approved" ? (
+              <Link
+                to="/partner-portal"
+                className="mt-4 inline-flex items-center gap-2 rounded-xl bg-foreground px-4 py-2.5 text-xs font-bold text-background transition-opacity hover:opacity-90"
+              >
+                Open your partner portal
+                <ArrowRight className="size-3.5" />
+              </Link>
+            ) : null}
           </div>
         ) : null}
       </div>
