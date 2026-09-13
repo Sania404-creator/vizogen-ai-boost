@@ -86,6 +86,20 @@ function TeamPage() {
     }
   };
 
+  const removeUser = async (userId: string, label: string) => {
+    if (!window.confirm(`Remove ${label}? Their account and access are deleted for good.`)) return;
+    setRemovingId(userId);
+    try {
+      await remove({ data: { userId } });
+      refresh();
+      toast.success(`${label} was removed from the team.`);
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "Could not remove that member.");
+    } finally {
+      setRemovingId(null);
+    }
+  };
+
   return (
     <CrmShell
       title="Team"
