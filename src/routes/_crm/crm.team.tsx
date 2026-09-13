@@ -57,6 +57,9 @@ function TeamPage() {
   const fetchSession = useServerFn(getCrmSession);
   const fetchTeam = useServerFn(listTeam);
   const patch = useServerFn(updateMember);
+  const remove = useServerFn(removeMember);
+  const [removingId, setRemovingId] = useState<string | null>(null);
+
 
   const session = useQuery({ queryKey: ["crm-session"], queryFn: () => fetchSession() });
   const team = useQuery({ queryKey: ["crm-team"], queryFn: () => fetchTeam() });
