@@ -134,6 +134,14 @@ function PartnerPage() {
                     Become an Affiliate Partner
                     <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
                   </Link>
+                  <Link
+                    to="/partner/affiliate-partner"
+                    className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline"
+                  >
+                    Full Affiliate Partner program details
+                    <ArrowRight className="size-3.5" />
+                  </Link>
+
                 </div>
               </Reveal>
 
@@ -176,6 +184,14 @@ function PartnerPage() {
                     Apply for Prime Plus
                     <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
                   </Link>
+                  <Link
+                    to="/partner/prime-plus-partner"
+                    className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline"
+                  >
+                    Full Prime Plus program details
+                    <ArrowRight className="size-3.5" />
+                  </Link>
+
                 </div>
               </Reveal>
 
@@ -218,6 +234,14 @@ function PartnerPage() {
                     Become a White-Label Partner
                     <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
                   </Link>
+                  <Link
+                    to="/partner/white-labelled-partner"
+                    className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline"
+                  >
+                    Full White-Label program details
+                    <ArrowRight className="size-3.5" />
+                  </Link>
+
                 </div>
               </Reveal>
             </div>

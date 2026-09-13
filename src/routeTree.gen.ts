@@ -43,6 +43,7 @@ import { Route as TermsAndConditionsRouteImport } from './routes/terms-and-condi
 import { Route as TourTravelMarketingSoftwareRouteImport } from './routes/tour-travel-marketing-software'
 import { Route as YogaWellnessMarketingSoftwareRouteImport } from './routes/yoga-wellness-marketing-software'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedPartnerPortalRouteImport } from './routes/_authenticated/partner-portal'
 import { Route as CrmCrmRouteImport } from './routes/_crm/crm'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
@@ -52,6 +53,9 @@ import { Route as FeaturesAiPostGenerationRouteImport } from './routes/features.
 import { Route as FeaturesMagicQrRouteImport } from './routes/features.magic-qr'
 import { Route as FeaturesReviewManagementRouteImport } from './routes/features.review-management'
 import { Route as FeaturesSmartSchedulingRouteImport } from './routes/features.smart-scheduling'
+import { Route as PartnerAffiliatePartnerRouteImport } from './routes/partner_.affiliate-partner'
+import { Route as PartnerPrimePlusPartnerRouteImport } from './routes/partner_.prime-plus-partner'
+import { Route as PartnerWhiteLabelledPartnerRouteImport } from './routes/partner_.white-labelled-partner'
 import { Route as ProposalTokenRouteImport } from './routes/proposal.$token'
 import { Route as RSlugRouteImport } from './routes/r.$slug'
 import { Route as ServicesLocalSeoRouteImport } from './routes/services.local-seo'
@@ -273,6 +277,12 @@ const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedPartnerPortalRoute =
+  AuthenticatedPartnerPortalRouteImport.update({
+    id: '/partner-portal',
+    path: '/partner-portal',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 const CrmCrmRoute = CrmCrmRouteImport.update({
   id: '/crm',
   path: '/crm',
@@ -320,6 +330,22 @@ const FeaturesSmartSchedulingRoute = FeaturesSmartSchedulingRouteImport.update({
   path: '/features/smart-scheduling',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PartnerAffiliatePartnerRoute = PartnerAffiliatePartnerRouteImport.update({
+  id: '/partner_/affiliate-partner',
+  path: '/partner/affiliate-partner',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PartnerPrimePlusPartnerRoute = PartnerPrimePlusPartnerRouteImport.update({
+  id: '/partner_/prime-plus-partner',
+  path: '/partner/prime-plus-partner',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PartnerWhiteLabelledPartnerRoute =
+  PartnerWhiteLabelledPartnerRouteImport.update({
+    id: '/partner_/white-labelled-partner',
+    path: '/partner/white-labelled-partner',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ProposalTokenRoute = ProposalTokenRouteImport.update({
   id: '/proposal/$token',
   path: '/proposal/$token',
@@ -582,6 +608,7 @@ export interface FileRoutesByFullPath {
   '/tour-travel-marketing-software': typeof TourTravelMarketingSoftwareRoute
   '/yoga-wellness-marketing-software': typeof YogaWellnessMarketingSoftwareRoute
   '/dashboard': typeof AuthenticatedDashboardRouteWithChildren
+  '/partner-portal': typeof AuthenticatedPartnerPortalRoute
   '/crm': typeof CrmCrmRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
   '/crm/login': typeof CrmLoginRoute
@@ -590,6 +617,9 @@ export interface FileRoutesByFullPath {
   '/features/magic-qr': typeof FeaturesMagicQrRoute
   '/features/review-management': typeof FeaturesReviewManagementRoute
   '/features/smart-scheduling': typeof FeaturesSmartSchedulingRoute
+  '/partner/affiliate-partner': typeof PartnerAffiliatePartnerRoute
+  '/partner/prime-plus-partner': typeof PartnerPrimePlusPartnerRoute
+  '/partner/white-labelled-partner': typeof PartnerWhiteLabelledPartnerRoute
   '/proposal/$token': typeof ProposalTokenRoute
   '/r/$slug': typeof RSlugRoute
   '/services/local-seo': typeof ServicesLocalSeoRoute
@@ -667,6 +697,7 @@ export interface FileRoutesByTo {
   '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/tour-travel-marketing-software': typeof TourTravelMarketingSoftwareRoute
   '/yoga-wellness-marketing-software': typeof YogaWellnessMarketingSoftwareRoute
+  '/partner-portal': typeof AuthenticatedPartnerPortalRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/crm/login': typeof CrmLoginRoute
   '/crm/reset-password': typeof CrmResetPasswordRoute
@@ -674,6 +705,9 @@ export interface FileRoutesByTo {
   '/features/magic-qr': typeof FeaturesMagicQrRoute
   '/features/review-management': typeof FeaturesReviewManagementRoute
   '/features/smart-scheduling': typeof FeaturesSmartSchedulingRoute
+  '/partner/affiliate-partner': typeof PartnerAffiliatePartnerRoute
+  '/partner/prime-plus-partner': typeof PartnerPrimePlusPartnerRoute
+  '/partner/white-labelled-partner': typeof PartnerWhiteLabelledPartnerRoute
   '/proposal/$token': typeof ProposalTokenRoute
   '/r/$slug': typeof RSlugRoute
   '/services/local-seo': typeof ServicesLocalSeoRoute
@@ -755,6 +789,7 @@ export interface FileRoutesById {
   '/tour-travel-marketing-software': typeof TourTravelMarketingSoftwareRoute
   '/yoga-wellness-marketing-software': typeof YogaWellnessMarketingSoftwareRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRouteWithChildren
+  '/_authenticated/partner-portal': typeof AuthenticatedPartnerPortalRoute
   '/_crm/crm': typeof CrmCrmRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
   '/crm/login': typeof CrmLoginRoute
@@ -763,6 +798,9 @@ export interface FileRoutesById {
   '/features/magic-qr': typeof FeaturesMagicQrRoute
   '/features/review-management': typeof FeaturesReviewManagementRoute
   '/features/smart-scheduling': typeof FeaturesSmartSchedulingRoute
+  '/partner_/affiliate-partner': typeof PartnerAffiliatePartnerRoute
+  '/partner_/prime-plus-partner': typeof PartnerPrimePlusPartnerRoute
+  '/partner_/white-labelled-partner': typeof PartnerWhiteLabelledPartnerRoute
   '/proposal/$token': typeof ProposalTokenRoute
   '/r/$slug': typeof RSlugRoute
   '/services/local-seo': typeof ServicesLocalSeoRoute
@@ -843,6 +881,7 @@ export interface FileRouteTypes {
     | '/tour-travel-marketing-software'
     | '/yoga-wellness-marketing-software'
     | '/dashboard'
+    | '/partner-portal'
     | '/crm'
     | '/blog/$slug'
     | '/crm/login'
@@ -851,6 +890,9 @@ export interface FileRouteTypes {
     | '/features/magic-qr'
     | '/features/review-management'
     | '/features/smart-scheduling'
+    | '/partner/affiliate-partner'
+    | '/partner/prime-plus-partner'
+    | '/partner/white-labelled-partner'
     | '/proposal/$token'
     | '/r/$slug'
     | '/services/local-seo'
@@ -928,6 +970,7 @@ export interface FileRouteTypes {
     | '/terms-and-conditions'
     | '/tour-travel-marketing-software'
     | '/yoga-wellness-marketing-software'
+    | '/partner-portal'
     | '/blog/$slug'
     | '/crm/login'
     | '/crm/reset-password'
@@ -935,6 +978,9 @@ export interface FileRouteTypes {
     | '/features/magic-qr'
     | '/features/review-management'
     | '/features/smart-scheduling'
+    | '/partner/affiliate-partner'
+    | '/partner/prime-plus-partner'
+    | '/partner/white-labelled-partner'
     | '/proposal/$token'
     | '/r/$slug'
     | '/services/local-seo'
@@ -1015,6 +1061,7 @@ export interface FileRouteTypes {
     | '/tour-travel-marketing-software'
     | '/yoga-wellness-marketing-software'
     | '/_authenticated/dashboard'
+    | '/_authenticated/partner-portal'
     | '/_crm/crm'
     | '/blog/$slug'
     | '/crm/login'
@@ -1023,6 +1070,9 @@ export interface FileRouteTypes {
     | '/features/magic-qr'
     | '/features/review-management'
     | '/features/smart-scheduling'
+    | '/partner_/affiliate-partner'
+    | '/partner_/prime-plus-partner'
+    | '/partner_/white-labelled-partner'
     | '/proposal/$token'
     | '/r/$slug'
     | '/services/local-seo'
@@ -1110,6 +1160,9 @@ export interface RootRouteChildren {
   FeaturesMagicQrRoute: typeof FeaturesMagicQrRoute
   FeaturesReviewManagementRoute: typeof FeaturesReviewManagementRoute
   FeaturesSmartSchedulingRoute: typeof FeaturesSmartSchedulingRoute
+  PartnerAffiliatePartnerRoute: typeof PartnerAffiliatePartnerRoute
+  PartnerPrimePlusPartnerRoute: typeof PartnerPrimePlusPartnerRoute
+  PartnerWhiteLabelledPartnerRoute: typeof PartnerWhiteLabelledPartnerRoute
   ProposalTokenRoute: typeof ProposalTokenRoute
   RSlugRoute: typeof RSlugRoute
   ServicesLocalSeoRoute: typeof ServicesLocalSeoRoute
@@ -1380,6 +1433,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedDashboardRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/partner-portal': {
+      id: '/_authenticated/partner-portal'
+      path: '/partner-portal'
+      fullPath: '/partner-portal'
+      preLoaderRoute: typeof AuthenticatedPartnerPortalRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_crm/crm': {
       id: '/_crm/crm'
       path: '/crm'
@@ -1441,6 +1501,27 @@ declare module '@tanstack/react-router' {
       path: '/features/smart-scheduling'
       fullPath: '/features/smart-scheduling'
       preLoaderRoute: typeof FeaturesSmartSchedulingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/partner_/affiliate-partner': {
+      id: '/partner_/affiliate-partner'
+      path: '/partner/affiliate-partner'
+      fullPath: '/partner/affiliate-partner'
+      preLoaderRoute: typeof PartnerAffiliatePartnerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/partner_/prime-plus-partner': {
+      id: '/partner_/prime-plus-partner'
+      path: '/partner/prime-plus-partner'
+      fullPath: '/partner/prime-plus-partner'
+      preLoaderRoute: typeof PartnerPrimePlusPartnerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/partner_/white-labelled-partner': {
+      id: '/partner_/white-labelled-partner'
+      path: '/partner/white-labelled-partner'
+      fullPath: '/partner/white-labelled-partner'
+      preLoaderRoute: typeof PartnerWhiteLabelledPartnerRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/proposal/$token': {
@@ -1775,10 +1856,12 @@ const AuthenticatedDashboardRouteWithChildren =
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRouteWithChildren
+  AuthenticatedPartnerPortalRoute: typeof AuthenticatedPartnerPortalRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedDashboardRoute: AuthenticatedDashboardRouteWithChildren,
+  AuthenticatedPartnerPortalRoute: AuthenticatedPartnerPortalRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =
@@ -1863,6 +1946,9 @@ const rootRouteChildren: RootRouteChildren = {
   FeaturesMagicQrRoute: FeaturesMagicQrRoute,
   FeaturesReviewManagementRoute: FeaturesReviewManagementRoute,
   FeaturesSmartSchedulingRoute: FeaturesSmartSchedulingRoute,
+  PartnerAffiliatePartnerRoute: PartnerAffiliatePartnerRoute,
+  PartnerPrimePlusPartnerRoute: PartnerPrimePlusPartnerRoute,
+  PartnerWhiteLabelledPartnerRoute: PartnerWhiteLabelledPartnerRoute,
   ProposalTokenRoute: ProposalTokenRoute,
   RSlugRoute: RSlugRoute,
   ServicesLocalSeoRoute: ServicesLocalSeoRoute,

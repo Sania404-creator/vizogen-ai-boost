@@ -355,3 +355,74 @@ export function partnerJsonLdScripts(
     },
   ];
 }
+
+/** Per-program JSON-LD (Service + FAQ + breadcrumb) for a dedicated program page. */
+export function partnerProgramJsonLdScripts(program: PartnerProgram) {
+  const url = `${SITE_URL}/partner/${program.slug}`;
+  const service = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: `Vizogen ${program.name} Program`,
+    serviceType: "Google Business Profile automation reseller partnership",
+    url,
+    description: program.summary,
+    provider: organizationEntity,
+    areaServed: PARTNER_SCOPE.areaServed.map((name) => ({ "@type": "Place", name })),
+    audience: { "@type": "BusinessAudience", name: PARTNER_SCOPE.audience },
+    offers: {
+      "@type": "Offer",
+      name: program.commission,
+      priceCurrency: PARTNER_SCOPE.currency,
+      url: program.applyParam
+        ? `${PARTNER_SCOPE.applyUrl}?program=${encodeURIComponent(program.applyParam)}`
+        : PARTNER_SCOPE.applyUrl,
+      category: "Partnership Program",
+    },
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: `${program.name} benefits`,
+      itemListElement: program.benefits.map((b, i) => ({
+        "@type": "Offer",
+        position: i + 1,
+        name: b,
+      })),
+    },
+  };
+
+  const faqs = [
+    { q: `What is the Vizogen ${program.name} program?`, a: program.summary },
+    { q: `How much does a Vizogen ${program.name} earn?`, a: program.commission },
+    { q: `Is there a joining fee for the ${program.name} program?`, a: program.joiningFee },
+    { q: `Who is the ${program.name} program best for?`, a: program.bestFor },
+    {
+      q: `How do I apply for the Vizogen ${program.name} program?`,
+      a: `Apply at ${PARTNER_SCOPE.applyUrl}. You get a reference code instantly, applications are reviewed within 48 business hours, and approved partners receive portal access with training material, a dedicated manager and commission tracking.`,
+    },
+  ];
+
+  return [
+    { type: "application/ld+json", children: JSON.stringify(service) },
+    { type: "application/ld+json", children: JSON.stringify(faqPageSchema(faqs)) },
+    {
+      type: "application/ld+json",
+      children: JSON.stringify(
+        breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Partner with us", path: "/partner" },
+          { name: program.name, path: `/partner/${program.slug}` },
+        ]),
+      ),
+    },
+  ];
+}
+
+export function partnerProgramBySlug(slug: string) {
+  return PARTNER_PROGRAMS.find((p) => p.slug === slug)!;
+}
+
+export const partnerProgramFaqs = (program: PartnerProgram) => [
+  { q: `What is the Vizogen ${program.name} program?`, a: program.summary },
+  { q: `How much does a Vizogen ${program.name} earn?`, a: program.commission },
+  { q: `Is there a joining fee for the ${program.name} program?`, a: program.joiningFee },
+  { q: `Who is the ${program.name} program best for?`, a: program.bestFor },
+];

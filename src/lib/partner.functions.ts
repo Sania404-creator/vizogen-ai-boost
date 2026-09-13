@@ -186,5 +186,117 @@ export const updatePartnerApplication = createServerFn({ method: "POST" })
       .update(patch as never)
       .eq("id", data.id);
     if (error) throw new Error(error.message);
+
+    if (data.status === "approved" || data.status === "rejected") {
+      await handleDecision(data.id, data.status);
+    }
     return { ok: true };
   });
+
+const PROGRAM_TERMS: Record<string, { rate: number; minPayout: number }> = {
+  "Affiliate Partner": { rate: 20, minPayout: 999 },
+  "Prime Plus Partnership": { rate: 30, minPayout: 999 },
+  "White-Labelled Partner": { rate: 0, minPayout: 0 },
+};
+
+/** Creates the partner account on approval and emails the applicant once. */
+async function handleDecision(applicationId: string, status: "approved" | "rejected") {
+  const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+  const { sendGmail } = await import("@/lib/email.server");
+  const { buildPartnerApprovedEmail, buildPartnerRejectedEmail } = await import(
+    "@/lib/partner-emails"
+  );
+
+  const { data: app } = await supabaseAdmin
+    .from("partner_applications")
+    .select(
+      "id, full_name, email, program, reference_code, business_name, approval_email_sent, rejection_email_sent",
+    )
+    .eq("id", applicationId)
+    .maybeSingle();
+  if (!app) return;
+
+  const row = app as unknown as {
+    id: string;
+    full_name: string;
+    email: string;
+    program: string;
+    reference_code: string | null;
+    approval_email_sent: boolean;
+    rejection_email_sent: boolean;
+  };
+
+  if (status === "rejected") {
+    if (row.rejection_email_sent) return;
+    const sent = await sendGmail(
+      row.email,
+      "About your Vizogen partner application",
+      buildPartnerRejectedEmail({ fullName: row.full_name, program: row.program }),
+    );
+    if (sent) {
+      await supabaseAdmin
+        .from("partner_applications")
+        .update({ rejection_email_sent: true } as never)
+        .eq("id", row.id);
+    }
+    return;
+  }
+
+  const terms = PROGRAM_TERMS[row.program] ?? { rate: 20, minPayout: 999 };
+  const manager = {
+    name: "Vizogen Partnerships Desk",
+    email: ADMIN_EMAIL,
+    phone: "+91 84889 18358",
+  };
+
+  const { data: existing } = await supabaseAdmin
+    .from("partner_accounts")
+    .select("id, manager_name, manager_email, manager_phone")
+    .eq("application_id", row.id)
+    .maybeSingle();
+
+  if (existing) {
+    const e = existing as unknown as {
+      manager_name: string;
+      manager_email: string;
+      manager_phone: string;
+    };
+    manager.name = e.manager_name;
+    manager.email = e.manager_email;
+    manager.phone = e.manager_phone;
+    await supabaseAdmin
+      .from("partner_accounts")
+      .update({ active: true } as never)
+      .eq("application_id", row.id);
+  } else {
+    await supabaseAdmin.from("partner_accounts").insert({
+      application_id: row.id,
+      email: row.email,
+      full_name: row.full_name,
+      program: row.program,
+      commission_rate: terms.rate,
+      min_payout: terms.minPayout,
+    } as never);
+  }
+
+  if (row.approval_email_sent) return;
+  const sent = await sendGmail(
+    row.email,
+    `You're approved — welcome to the Vizogen ${row.program} program`,
+    buildPartnerApprovedEmail({
+      fullName: row.full_name,
+      program: row.program,
+      referenceCode: row.reference_code ?? "",
+      managerName: manager.name,
+      managerEmail: manager.email,
+      managerPhone: manager.phone,
+      portalUrl: "https://www.vizogen.in/partner-portal",
+    }),
+  );
+  if (sent) {
+    await supabaseAdmin
+      .from("partner_applications")
+      .update({ approval_email_sent: true } as never)
+      .eq("id", row.id);
+  }
+}
