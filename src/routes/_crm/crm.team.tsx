@@ -2,7 +2,7 @@ import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
-import { Loader2, Lock, ShieldCheck, UserPlus } from "lucide-react";
+import { Loader2, Lock, ShieldCheck, Trash2, UserPlus } from "lucide-react";
 import { toast } from "sonner";
 import { CrmShell } from "@/components/crm/shell";
 import {
@@ -10,6 +10,7 @@ import {
   inviteMember,
   listTeam,
   OWNER_EMAIL,
+  removeMember,
   updateMember,
 } from "@/lib/crm.functions";
 import { Button } from "@/components/ui/button";
@@ -56,6 +57,9 @@ function TeamPage() {
   const fetchSession = useServerFn(getCrmSession);
   const fetchTeam = useServerFn(listTeam);
   const patch = useServerFn(updateMember);
+  const remove = useServerFn(removeMember);
+  const [removingId, setRemovingId] = useState<string | null>(null);
+
 
   const session = useQuery({ queryKey: ["crm-session"], queryFn: () => fetchSession() });
   const team = useQuery({ queryKey: ["crm-team"], queryFn: () => fetchTeam() });
@@ -79,6 +83,20 @@ function TeamPage() {
       toast.success("Team member updated.");
     } catch (error) {
       toast.error(error instanceof Error ? error.message : "Update failed.");
+    }
+  };
+
+  const removeUser = async (userId: string, label: string) => {
+    if (!window.confirm(`Remove ${label}? Their account and access are deleted for good.`)) return;
+    setRemovingId(userId);
+    try {
+      await remove({ data: { userId } });
+      refresh();
+      toast.success(`${label} was removed from the team.`);
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "Could not remove that member.");
+    } finally {
+      setRemovingId(null);
     }
   };
 
@@ -150,6 +168,29 @@ function TeamPage() {
                     onCheckedChange={(v) => update({ userId: m.user_id, active: v })}
                   />
                 </label>
+                {m.user_id !== session.data?.member?.user_id ? (
+                  <div className="border-t border-border pt-3">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="text-destructive hover:text-destructive"
+                      disabled={removingId === m.user_id}
+                      onClick={() => removeUser(m.user_id, m.full_name || m.email)}
+                    >
+                      {removingId === m.user_id ? (
+                        <Loader2 className="size-4 animate-spin" />
+                      ) : (
+                        <Trash2 className="size-4" />
+                      )}
+                      Remove from team
+                    </Button>
+                    <p className="mt-1.5 text-xs text-muted-foreground">
+                      {m.role === "admin"
+                        ? "Only the owner Admin can remove another Admin."
+                        : "Admins can remove sales reps."}
+                    </p>
+                  </div>
+                ) : null}
               </div>
             ) : isOwner ? (
               <p className="mt-3 text-sm text-muted-foreground">
