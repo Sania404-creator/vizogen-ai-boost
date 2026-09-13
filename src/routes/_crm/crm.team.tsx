@@ -2,7 +2,7 @@ import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
-import { Loader2, Lock, ShieldCheck, UserPlus } from "lucide-react";
+import { Loader2, Lock, ShieldCheck, Trash2, UserPlus } from "lucide-react";
 import { toast } from "sonner";
 import { CrmShell } from "@/components/crm/shell";
 import {
@@ -10,6 +10,7 @@ import {
   inviteMember,
   listTeam,
   OWNER_EMAIL,
+  removeMember,
   updateMember,
 } from "@/lib/crm.functions";
 import { Button } from "@/components/ui/button";
