@@ -168,6 +168,29 @@ function TeamPage() {
                     onCheckedChange={(v) => update({ userId: m.user_id, active: v })}
                   />
                 </label>
+                {m.user_id !== session.data?.member?.user_id ? (
+                  <div className="border-t border-border pt-3">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="text-destructive hover:text-destructive"
+                      disabled={removingId === m.user_id}
+                      onClick={() => removeUser(m.user_id, m.full_name || m.email)}
+                    >
+                      {removingId === m.user_id ? (
+                        <Loader2 className="size-4 animate-spin" />
+                      ) : (
+                        <Trash2 className="size-4" />
+                      )}
+                      Remove from team
+                    </Button>
+                    <p className="mt-1.5 text-xs text-muted-foreground">
+                      {m.role === "admin"
+                        ? "Only the owner Admin can remove another Admin."
+                        : "Admins can remove sales reps."}
+                    </p>
+                  </div>
+                ) : null}
               </div>
             ) : isOwner ? (
               <p className="mt-3 text-sm text-muted-foreground">
