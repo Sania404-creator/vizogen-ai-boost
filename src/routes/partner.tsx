@@ -76,6 +76,22 @@ function PartnerPage() {
           </div>
         </section>
 
+        {/* Quick answer (AEO) */}
+        <section className="pb-4">
+          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+            <Reveal>
+              <div className="rounded-2xl border border-border bg-card p-6 shadow-soft sm:p-8">
+                <h2 className="text-sm font-semibold uppercase tracking-widest text-primary">
+                  Quick answer: What are the Vizogen partnership programs?
+                </h2>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground sm:text-base">
+                  {partnerQuickAnswer}
+                </p>
+              </div>
+            </Reveal>
+          </div>
+        </section>
+
         {/* Program cards */}
         <section className="py-16 sm:py-20">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
