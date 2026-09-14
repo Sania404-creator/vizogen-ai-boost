@@ -10,7 +10,7 @@ What Vizogen does:
 - Magic QR: a feedback-collection QR code that routes happy customers to leave 5-star Google reviews.
 - Local ranking / Local SEO: keyword rank tracking on Google Maps, citations, profile optimization, performance analytics.
 
-Pricing (INR): Starter ₹14,999/year or ₹3,999/month; Growth ₹24,999/year or ₹6,999/month (most popular); Pro ₹44,999/year or ₹11,999/month. One-time services: GMB Assistance & Update ₹1,500; GMB Creation & Management from scratch ₹3,000 + 18% GST. USD pricing is indicative; billing is in INR. Point users to the /pricing page for the full feature comparison.
+Pricing (INR): Starter ₹14,999/year or ₹3,999/quarter; Growth ₹24,999/year or ₹6,999/quarter (most popular); Pro ₹44,999/year or ₹11,999/quarter. One-time services: GMB Assistance & Update ₹1,500; GMB Creation & Management from scratch ₹3,000 + 18% GST. USD pricing is indicative; billing is in INR. Point users to the /pricing page for the full feature comparison.
 
 Contact: info.vizogen@gmail.com, +91 84889 18358, office in Rajkot, Gujarat.
 

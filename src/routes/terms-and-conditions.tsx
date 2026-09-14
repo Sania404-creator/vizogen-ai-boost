@@ -73,7 +73,7 @@ const sections: LegalSection[] = [
         items={[
           "All prices listed on the website are in the currency shown (INR or USD equivalent) and are exclusive of applicable taxes (including GST) unless stated otherwise.",
           "Payment must be completed in full before any service, plan, or feature is activated. No service, subscription, or one-time plan will be provisioned, unlocked, or made available until payment is successfully received and confirmed by our payment gateway.",
-          "Subscription plans (Starter, Growth, Pro) renew automatically for the billing cycle selected (monthly or yearly) unless cancelled before the renewal date.",
+          "Subscription plans (Starter, Growth, Pro) renew automatically for the billing cycle selected (quarterly or yearly) unless cancelled before the renewal date.",
           "One-time service plans (e.g. GMB Assistance & Update Plan, GMB Creation & Management Plan) are billed once and do not renew automatically.",
         ]}
       />

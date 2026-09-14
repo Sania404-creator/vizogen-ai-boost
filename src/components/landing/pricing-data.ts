@@ -1,4 +1,4 @@
-export type BillingCycle = "yearly" | "monthly";
+export type BillingCycle = "yearly" | "quarterly";
 export type Currency = "INR" | "USD";
 
 export type PlanFeature = { label: string; included: boolean };
@@ -7,7 +7,7 @@ export type Plan = {
   name: string;
   tagline: string;
   inrYearly: number;
-  inrMonthly: number;
+  inrQuarterly: number;
   usdYearly: number;
   popular?: boolean;
   cta: string;
@@ -21,7 +21,7 @@ export const plans: Plan[] = [
     name: "Starter",
     tagline: "For solo owners getting started with GBP automation.",
     inrYearly: 14999,
-    inrMonthly: 3999,
+    inrQuarterly: 3999,
     usdYearly: 181,
     cta: "Start Free Trial",
     features: [
@@ -44,7 +44,7 @@ export const plans: Plan[] = [
     name: "Growth",
     tagline: "For growing businesses that need daily automation and insights.",
     inrYearly: 24999,
-    inrMonthly: 6999,
+    inrQuarterly: 6999,
     usdYearly: 301,
     popular: true,
     cta: "Start Free Trial",
@@ -69,7 +69,7 @@ export const plans: Plan[] = [
     name: "Pro",
     tagline: "For multi-location businesses and agencies.",
     inrYearly: 44999,
-    inrMonthly: 11999,
+    inrQuarterly: 11999,
     usdYearly: 542,
     cta: "Start Free Trial",
     features: [
@@ -138,13 +138,13 @@ export function whatsappLink(message: string) {
 
 export function planPrice(plan: Plan, cycle: BillingCycle, currency: Currency) {
   if (currency === "INR") {
-    const amount = cycle === "yearly" ? plan.inrYearly : plan.inrMonthly;
+    const amount = cycle === "yearly" ? plan.inrYearly : plan.inrQuarterly;
     return `₹${amount.toLocaleString("en-IN")}`;
   }
   const amount =
     cycle === "yearly"
       ? plan.usdYearly
-      : Math.round(plan.inrMonthly / 83);
+      : Math.round(plan.inrQuarterly / 83);
   return `$${amount.toLocaleString("en-US")}`;
 }
 
