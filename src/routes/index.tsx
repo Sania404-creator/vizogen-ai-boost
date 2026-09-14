@@ -84,7 +84,7 @@ export const Route = createFileRoute("/")({
             },
             {
               q: "How much does Vizogen cost?",
-               a: "Vizogen subscription plans start at ₹3,999 per month or ₹14,999 per year, with one-time Google Business Profile services starting at ₹1,500. Prices are exclusive of GST.",
+               a: "Vizogen subscription plans start at ₹3,999 per quarter or ₹14,999 per year, with one-time Google Business Profile services starting at ₹1,500. Prices are exclusive of GST.",
             },
           ]),
         ),
