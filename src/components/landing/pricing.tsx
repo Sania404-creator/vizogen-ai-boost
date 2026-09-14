@@ -150,7 +150,7 @@ export function SubscriptionPlans({
   const [currency, setCurrency] = useState<Currency>("INR");
   const [pendingPlan, setPendingPlan] = useState<string | null>(null);
   const [agreed, setAgreed] = useState(false);
-  const period = billingCycle === "yearly" ? "/year" : "/quarter";
+  const period = billingCycle === "yearly" ? "/year" : "/month";
 
 
   return (
@@ -176,7 +176,7 @@ export function SubscriptionPlans({
             value={billingCycle}
             onChange={setBillingCycle}
             options={[
-              { value: "quarterly", label: "Quarterly" },
+              { value: "monthly", label: "Monthly" },
               { value: "yearly", label: "Yearly", badge: "Save more" },
             ]}
           />
