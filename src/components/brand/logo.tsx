@@ -1,19 +1,16 @@
-import logoAsset from "@/assets/vizogen-logo.png.asset.json";
+import logoAsset from "@/assets/vizogen-mark.png.asset.json";
 
 const LOGO = logoAsset.url;
 
-/**
- * Square brand mark. The source artwork is a wide lock-up, so it is contained
- * inside a fixed square tile instead of being stretched.
- */
+/** Square Vizogen brand mark used throughout product surfaces. */
 export function VizogenMark({ className = "size-9" }: { className?: string }) {
   return (
     <span
-      className={`inline-flex shrink-0 items-center justify-center overflow-hidden rounded-xl border border-border/60 bg-background p-1 shadow-soft ${className}`}
+      className={`inline-flex shrink-0 items-center justify-center ${className}`}
     >
       <img
         src={LOGO}
-        alt="Vizogen"
+        alt="Vizogen logo"
         className="h-full w-full object-contain"
         loading="eager"
         decoding="async"
