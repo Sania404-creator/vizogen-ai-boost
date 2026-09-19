@@ -60,6 +60,8 @@ const ANY = "any";
 function LeadsPage() {
   const queryClient = useQueryClient();
   const session = useCrmSession();
+  const { from, to } = Route.useSearch();
+  const navigate = useNavigate({ from: "/crm/leads" });
   const [view, setView] = useState<"board" | "list">("board");
   const [status, setStatus] = useState(ANY);
   const [assignedTo, setAssignedTo] = useState(ANY);
@@ -67,12 +69,11 @@ function LeadsPage() {
   const [tag, setTag] = useState("");
   const [search, setSearch] = useState("");
   const [due, setDue] = useState(ANY);
-  const [createdFrom, setCreatedFrom] = useState("");
-  const [createdTo, setCreatedTo] = useState("");
 
   const fetchLeads = useServerFn(listLeads);
   const fetchStages = useServerFn(listStages);
   const fetchTeam = useServerFn(listTeam);
+  const fetchSummary = useServerFn(leadRangeSummary);
   const saveLead = useServerFn(updateLead);
 
   const filters = {
@@ -82,16 +83,20 @@ function LeadsPage() {
     ...(tag ? { tag } : {}),
     ...(search ? { search } : {}),
     ...(due !== ANY ? { due: due as "today" | "overdue" | "week" } : {}),
-    ...(createdFrom ? { createdFrom: new Date(createdFrom).toISOString() } : {}),
-    ...(createdTo ? { createdTo: new Date(`${createdTo}T23:59:59`).toISOString() } : {}),
+    ...rangeToIsoFilters(from, to),
   };
 
   const leads = useQuery({
     queryKey: ["crm-leads", filters],
     queryFn: () => fetchLeads({ data: filters }),
   });
+  const summary = useQuery({
+    queryKey: ["crm-lead-summary", filters],
+    queryFn: () => fetchSummary({ data: filters }),
+  });
   const stages = useQuery({ queryKey: ["crm-stages"], queryFn: () => fetchStages() });
   const team = useQuery({ queryKey: ["crm-team"], queryFn: () => fetchTeam() });
+
 
   const move = useMutation({
     mutationFn: (input: { id: string; status: string; lostReason?: string }) =>
