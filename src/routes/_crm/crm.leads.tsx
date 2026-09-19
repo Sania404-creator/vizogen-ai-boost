@@ -209,7 +209,14 @@ function LeadsPage() {
       <LeadDateFilter
         from={from}
         to={to}
-        onChange={(range) => void navigate({ search: range })}
+        onChange={(range) =>
+          void navigate({
+            search: {
+              ...(range.from ? { from: range.from } : {}),
+              ...(range.to ? { to: range.to } : {}),
+            },
+          })
+        }
         summary={summary.data}
         loading={summary.isPending}
       />
