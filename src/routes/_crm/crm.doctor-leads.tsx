@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { Download, Search, Stethoscope } from "lucide-react";
 import { CrmShell, useCrmSession } from "@/components/crm/shell";
+import { DoctorBadge } from "@/components/crm/doctor-badge";
 import { AddLeadDialog } from "@/components/crm/add-lead-dialog";
 import {
   DOCTOR_TAG,

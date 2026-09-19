@@ -5,6 +5,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { Download, KanbanSquare, List, Search } from "lucide-react";
 import { toast } from "sonner";
 import { CrmShell, useCrmSession } from "@/components/crm/shell";
+import { DoctorBadge } from "@/components/crm/doctor-badge";
 import { AddLeadDialog } from "@/components/crm/add-lead-dialog";
 import {
   listLeads,

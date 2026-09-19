@@ -3,6 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { AlertTriangle, CalendarClock, FileText, Trophy, TrendingUp, Users } from "lucide-react";
 import { CrmShell, useCrmSession } from "@/components/crm/shell";
+import { DoctorBadge } from "@/components/crm/doctor-badge";
 import { getCrmDashboard, listLeads, listStages } from "@/lib/crm.functions";
 import { Button } from "@/components/ui/button";
 
