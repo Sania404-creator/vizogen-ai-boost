@@ -135,7 +135,15 @@ function DoctorLeadsPage() {
         </div>
       }
     >
-      <div className="rounded-2xl border border-border bg-card p-4 shadow-soft">
+      <LeadDateFilter
+        from={from}
+        to={to}
+        onChange={(range) => void navigate({ search: range })}
+        summary={summary.data}
+        loading={summary.isPending}
+      />
+
+      <div className="mt-4 rounded-2xl border border-border bg-card p-4 shadow-soft">
         <p className="mb-3 flex items-center gap-2 text-xs text-muted-foreground">
           <Stethoscope className="size-4 text-primary" />
           Leads are added here automatically whenever the name or business name contains “Dr”,
