@@ -1,6 +1,9 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
+import { DOCTOR_PATTERN, DOCTOR_TAG, isDoctorLead } from "./crm-detection";
+
+export { DOCTOR_PATTERN, DOCTOR_TAG, isDoctorLead };
 
 export const LEAD_SOURCES = [
   "website_demo",
@@ -937,21 +940,6 @@ export const adminAssignLeads = createServerFn({ method: "POST" })
     if (error) throw new Error(error.message);
     return { ok: true, count: data.leadIds.length };
   });
-
-/** Tag applied automatically to any lead that looks like a doctor / clinic. */
-export const DOCTOR_TAG = "Doctor";
-
-/** Case-insensitive "Dr", "Dr.", "DR ", "Doctor" detector used across the CRM. */
-export const DOCTOR_PATTERN = /(^|[^a-z0-9])(dr|drs|doctor)([^a-z0-9]|$)/i;
-
-export function isDoctorLead(input: {
-  name?: string | null;
-  company?: string | null;
-  job_title?: string | null;
-}) {
-  const haystack = [input.name, input.company, input.job_title].filter(Boolean).join(" ");
-  return DOCTOR_PATTERN.test(haystack);
-}
 
 /** Count of new (untouched) doctor leads, for the sidebar badge. */
 export const countNewDoctorLeads = createServerFn({ method: "GET" })

@@ -6,6 +6,8 @@
  * Server-only: never import this from browser code.
  */
 
+import { DOCTOR_TAG, isDoctorLead } from "./crm-detection";
+
 const GATEWAY_URL = "https://connector-gateway.lovable.dev/google_sheets/v4";
 
 export const META_SHEET_ID =
@@ -152,6 +154,7 @@ export async function syncMetaLeads(): Promise<MetaSyncResult> {
     ].filter(Boolean);
 
     const tags = ["meta-ads"];
+    if (isDoctorLead({ name: name || email || phone, company: business })) tags.push(DOCTOR_TAG);
     if (platform === "ig") tags.push("instagram");
     else if (platform === "fb") tags.push("facebook");
 
