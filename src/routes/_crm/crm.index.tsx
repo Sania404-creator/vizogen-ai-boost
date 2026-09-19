@@ -172,7 +172,10 @@ function FollowUpList({
           params={{ id: lead.id }}
           className="flex items-center justify-between py-2.5 text-sm hover:text-primary"
         >
-          <span className="min-w-0 truncate font-medium">{lead.name}</span>
+          <span className="flex min-w-0 items-center gap-1.5 font-medium">
+            <span className="truncate">{lead.name}</span>
+            <DoctorBadge lead={lead} />
+          </span>
           <span className="ml-3 shrink-0 text-xs text-muted-foreground">
             {lead.company || lead.follow_up_on}
           </span>
