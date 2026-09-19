@@ -48,6 +48,10 @@ export const Route = createFileRoute("/_crm/crm/leads")({
       { name: "robots", content: "noindex, nofollow" },
     ],
   }),
+  validateSearch: (search: Record<string, unknown>) => ({
+    from: isDay(search["from"]),
+    to: isDay(search["to"]),
+  }),
   component: LeadsPage,
 });
 
