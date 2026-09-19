@@ -86,7 +86,7 @@ function DoctorLeadsPage() {
   });
   const summary = useQuery({
     queryKey: ["crm-doctor-lead-summary", filters],
-    queryFn: () => fetchSummary({ data: { ...filters, tag: undefined } }),
+    queryFn: () => fetchSummary({ data: filters }),
   });
   const stages = useQuery({ queryKey: ["crm-stages"], queryFn: () => fetchStages() });
   const team = useQuery({ queryKey: ["crm-team"], queryFn: () => fetchTeam() });
