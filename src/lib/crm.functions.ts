@@ -956,7 +956,7 @@ export const countNewDoctorLeads = createServerFn({ method: "GET" })
 /** Adds the Doctor tag to an existing tag list when the lead looks like a doctor. */
 export function withDoctorTag(
   tags: string[],
-  input: { name?: string | null; company?: string | null; job_title?: string | null },
+  input: Parameters<typeof isDoctorLead>[0],
 ) {
   if (!isDoctorLead(input) || tags.includes(DOCTOR_TAG)) return tags;
   return [...tags, DOCTOR_TAG];
