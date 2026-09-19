@@ -47,13 +47,20 @@ export const Route = createFileRoute("/_crm/crm/doctor-leads")({
       { name: "robots", content: "noindex, nofollow" },
     ],
   }),
+  validateSearch: (search: Record<string, unknown>) => ({
+    from: isDay(search["from"]),
+    to: isDay(search["to"]),
+  }),
   component: DoctorLeadsPage,
 });
 
 const ANY = "any";
+const isDay = (v: unknown) => (typeof v === "string" && /^\d{4}-\d{2}-\d{2}$/.test(v) ? v : "");
 
 function DoctorLeadsPage() {
   const session = useCrmSession();
+  const { from, to } = Route.useSearch();
+  const navigate = useNavigate({ from: "/crm/doctor-leads" });
   const [status, setStatus] = useState(ANY);
   const [assignedTo, setAssignedTo] = useState(ANY);
   const [source, setSource] = useState(ANY);
@@ -62,6 +69,7 @@ function DoctorLeadsPage() {
   const fetchLeads = useServerFn(listLeads);
   const fetchStages = useServerFn(listStages);
   const fetchTeam = useServerFn(listTeam);
+  const fetchSummary = useServerFn(leadRangeSummary);
 
   const filters = {
     tag: DOCTOR_TAG,
@@ -69,11 +77,16 @@ function DoctorLeadsPage() {
     ...(assignedTo !== ANY ? { assignedTo } : {}),
     ...(source !== ANY ? { source } : {}),
     ...(search ? { search } : {}),
+    ...rangeToIsoFilters(from, to),
   };
 
   const leads = useQuery({
     queryKey: ["crm-doctor-leads", filters],
     queryFn: () => fetchLeads({ data: filters }),
+  });
+  const summary = useQuery({
+    queryKey: ["crm-doctor-lead-summary", filters],
+    queryFn: () => fetchSummary({ data: { ...filters, tag: undefined } }),
   });
   const stages = useQuery({ queryKey: ["crm-stages"], queryFn: () => fetchStages() });
   const team = useQuery({ queryKey: ["crm-team"], queryFn: () => fetchTeam() });
