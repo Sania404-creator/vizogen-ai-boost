@@ -1,13 +1,16 @@
 import { useMemo, useState } from "react";
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { Download, KanbanSquare, List, Search } from "lucide-react";
 import { toast } from "sonner";
 import { CrmShell, useCrmSession } from "@/components/crm/shell";
 import { DoctorBadge } from "@/components/crm/doctor-badge";
+import { LeadDateFilter } from "@/components/crm/lead-date-filter";
+import { rangeToIsoFilters } from "@/lib/crm-date-range";
 import { AddLeadDialog } from "@/components/crm/add-lead-dialog";
 import {
+  leadRangeSummary,
   listLeads,
   listStages,
   listTeam,
@@ -19,7 +22,6 @@ import {
 } from "@/lib/crm.functions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import {
   Select,
@@ -28,6 +30,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+
+const isDay = (v: unknown) => (typeof v === "string" && /^\d{4}-\d{2}-\d{2}$/.test(v) ? v : "");
 
 export const Route = createFileRoute("/_crm/crm/leads")({
   head: () => ({
