@@ -48,10 +48,11 @@ export const Route = createFileRoute("/_crm/crm/leads")({
       { name: "robots", content: "noindex, nofollow" },
     ],
   }),
-  validateSearch: (search: Record<string, unknown>) => ({
-    from: isDay(search["from"]),
-    to: isDay(search["to"]),
-  }),
+  validateSearch: (search: Record<string, unknown>): { from?: string; to?: string } => {
+    const from = isDay(search["from"]);
+    const to = isDay(search["to"]);
+    return { ...(from ? { from } : {}), ...(to ? { to } : {}) };
+  },
   component: LeadsPage,
 });
 
@@ -60,7 +61,7 @@ const ANY = "any";
 function LeadsPage() {
   const queryClient = useQueryClient();
   const session = useCrmSession();
-  const { from, to } = Route.useSearch();
+  const { from = "", to = "" } = Route.useSearch();
   const navigate = useNavigate({ from: "/crm/leads" });
   const [view, setView] = useState<"board" | "list">("board");
   const [status, setStatus] = useState(ANY);

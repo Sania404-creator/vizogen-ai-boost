@@ -47,10 +47,11 @@ export const Route = createFileRoute("/_crm/crm/doctor-leads")({
       { name: "robots", content: "noindex, nofollow" },
     ],
   }),
-  validateSearch: (search: Record<string, unknown>) => ({
-    from: isDay(search["from"]),
-    to: isDay(search["to"]),
-  }),
+  validateSearch: (search: Record<string, unknown>): { from?: string; to?: string } => {
+    const from = isDay(search["from"]);
+    const to = isDay(search["to"]);
+    return { ...(from ? { from } : {}), ...(to ? { to } : {}) };
+  },
   component: DoctorLeadsPage,
 });
 
@@ -59,7 +60,7 @@ const isDay = (v: unknown) => (typeof v === "string" && /^\d{4}-\d{2}-\d{2}$/.te
 
 function DoctorLeadsPage() {
   const session = useCrmSession();
-  const { from, to } = Route.useSearch();
+  const { from = "", to = "" } = Route.useSearch();
   const navigate = useNavigate({ from: "/crm/doctor-leads" });
   const [status, setStatus] = useState(ANY);
   const [assignedTo, setAssignedTo] = useState(ANY);
