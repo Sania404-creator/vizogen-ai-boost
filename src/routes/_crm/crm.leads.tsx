@@ -5,6 +5,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { Download, KanbanSquare, List, Search } from "lucide-react";
 import { toast } from "sonner";
 import { CrmShell, useCrmSession } from "@/components/crm/shell";
+import { DoctorBadge } from "@/components/crm/doctor-badge";
 import { AddLeadDialog } from "@/components/crm/add-lead-dialog";
 import {
   listLeads,
@@ -290,7 +291,10 @@ function LeadsPage() {
                     onDragStart={(e) => e.dataTransfer.setData("text/plain", lead.id)}
                     className="block rounded-xl border border-border bg-background p-3 transition-colors hover:border-primary/50"
                   >
-                    <p className="truncate text-sm font-semibold text-foreground">{lead.name}</p>
+                    <p className="flex min-w-0 items-center gap-1.5 text-sm font-semibold text-foreground">
+                      <span className="truncate">{lead.name}</span>
+                      <DoctorBadge lead={lead} />
+                    </p>
                     <p className="truncate text-xs text-muted-foreground">
                       {lead.company || lead.email || lead.phone}
                     </p>
@@ -336,13 +340,16 @@ function LeadsPage() {
               {(leads.data ?? []).map((lead) => (
                 <tr key={lead.id} className="hover:bg-muted/40">
                   <td className="px-4 py-3">
-                    <Link
-                      to="/crm/lead/$id"
-                      params={{ id: lead.id }}
-                      className="font-semibold text-foreground hover:text-primary"
-                    >
-                      {lead.name}
-                    </Link>
+                    <span className="flex items-center gap-1.5">
+                      <Link
+                        to="/crm/lead/$id"
+                        params={{ id: lead.id }}
+                        className="font-semibold text-foreground hover:text-primary"
+                      >
+                        {lead.name}
+                      </Link>
+                      <DoctorBadge lead={lead} />
+                    </span>
                     <p className="text-xs text-muted-foreground">{lead.email || lead.phone}</p>
                   </td>
                   <td className="px-4 py-3 text-muted-foreground">{lead.company || "—"}</td>

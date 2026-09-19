@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import { CrmShell } from "@/components/crm/shell";
+import { DoctorBadge } from "@/components/crm/doctor-badge";
 import {
   addActivity,
   getLead,
@@ -162,6 +163,7 @@ function LeadDetail() {
         </Button>
       }
     >
+      {row ? <DoctorBadge lead={row} className="mb-4 px-2.5 py-1 text-xs" /> : null}
       <div className="grid gap-6 lg:grid-cols-3">
         <div className="space-y-6 lg:col-span-2">
           <div className="rounded-2xl border border-border bg-card p-5 shadow-soft">
