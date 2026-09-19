@@ -5,9 +5,9 @@ export const DOCTOR_TAG = "Doctor";
 export const DOCTOR_PATTERN = /(^|[^a-z0-9])(dr|drs|doctor)([^a-z0-9]|$)/i;
 
 export function isDoctorLead(input: {
-  name?: string | null;
-  company?: string | null;
-  job_title?: string | null;
+  name?: string | null | undefined;
+  company?: string | null | undefined;
+  job_title?: string | null | undefined;
 }) {
   const haystack = [input.name, input.company, input.job_title].filter(Boolean).join(" ");
   return DOCTOR_PATTERN.test(haystack);
