@@ -205,7 +205,15 @@ function LeadsPage() {
         </div>
       }
     >
-      <div className="rounded-2xl border border-border bg-card p-4 shadow-soft">
+      <LeadDateFilter
+        from={from}
+        to={to}
+        onChange={(range) => void navigate({ search: range })}
+        summary={summary.data}
+        loading={summary.isPending}
+      />
+
+      <div className="mt-4 rounded-2xl border border-border bg-card p-4 shadow-soft">
         <div className="grid gap-3 md:grid-cols-3 xl:grid-cols-6">
           <div className="relative md:col-span-2 xl:col-span-2">
             <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
@@ -270,14 +278,6 @@ function LeadsPage() {
         </div>
         <div className="mt-3 grid gap-3 md:grid-cols-3">
           <Input value={tag} onChange={(e) => setTag(e.target.value)} placeholder="Tag e.g. Hot Lead" />
-          <div className="flex items-center gap-2">
-            <Label className="shrink-0 text-xs text-muted-foreground">Created from</Label>
-            <Input type="date" value={createdFrom} onChange={(e) => setCreatedFrom(e.target.value)} />
-          </div>
-          <div className="flex items-center gap-2">
-            <Label className="shrink-0 text-xs text-muted-foreground">to</Label>
-            <Input type="date" value={createdTo} onChange={(e) => setCreatedTo(e.target.value)} />
-          </div>
         </div>
       </div>
 
