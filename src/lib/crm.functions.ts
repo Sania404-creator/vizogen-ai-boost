@@ -914,3 +914,30 @@ export const adminAssignLeads = createServerFn({ method: "POST" })
     if (error) throw new Error(error.message);
     return { ok: true, count: data.leadIds.length };
   });
+
+/** Tag applied automatically to any lead that looks like a doctor / clinic. */
+export const DOCTOR_TAG = "Doctor";
+
+/** Case-insensitive "Dr", "Dr.", "DR ", "Doctor" detector used across the CRM. */
+export const DOCTOR_PATTERN = /(^|[^a-z0-9])(dr|drs|doctor)([^a-z0-9]|$)/i;
+
+export function isDoctorLead(input: {
+  name?: string | null;
+  company?: string | null;
+  job_title?: string | null;
+}) {
+  const haystack = [input.name, input.company, input.job_title].filter(Boolean).join(" ");
+  return DOCTOR_PATTERN.test(haystack);
+}
+
+/** Count of new (untouched) doctor leads, for the sidebar badge. */
+export const countNewDoctorLeads = createServerFn({ method: "GET" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    const { count } = await context.supabase
+      .from("crm_leads")
+      .select("id", { count: "exact", head: true })
+      .contains("tags", [DOCTOR_TAG])
+      .eq("status", "new");
+    return { newCount: count ?? 0 };
+  });
