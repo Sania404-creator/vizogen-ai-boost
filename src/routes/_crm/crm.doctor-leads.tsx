@@ -4,12 +4,14 @@ import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { Download, Search, Stethoscope } from "lucide-react";
 import { CrmShell, useCrmSession } from "@/components/crm/shell";
+import { AddLeadDialog } from "@/components/crm/add-lead-dialog";
 import {
   DOCTOR_TAG,
   listLeads,
   listStages,
   listTeam,
   LEAD_SOURCES,
+  LEAD_SOURCE_LABELS,
 } from "@/lib/crm.functions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -108,9 +110,12 @@ function DoctorLeadsPage() {
       title="Doctor leads"
       subtitle={`${rows.length} doctor lead${rows.length === 1 ? "" : "s"} in view`}
       actions={
-        <Button variant="outline" size="icon" onClick={exportCsv} aria-label="Export CSV">
-          <Download className="size-4" />
-        </Button>
+        <div className="flex items-center gap-2">
+          <Button variant="outline" size="icon" onClick={exportCsv} aria-label="Export CSV">
+            <Download className="size-4" />
+          </Button>
+          <AddLeadDialog team={team.data ?? []} />
+        </div>
       }
     >
       <div className="rounded-2xl border border-border bg-card p-4 shadow-soft">
@@ -164,7 +169,7 @@ function DoctorLeadsPage() {
               <SelectItem value={ANY}>All sources</SelectItem>
               {LEAD_SOURCES.map((s) => (
                 <SelectItem key={s} value={s}>
-                  {s.replace(/_/g, " ")}
+                  {LEAD_SOURCE_LABELS[s] ?? s}
                 </SelectItem>
               ))}
             </SelectContent>

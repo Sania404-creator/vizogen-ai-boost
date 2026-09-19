@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { z } from "zod";
+import { DOCTOR_TAG, isDoctorLead } from "@/lib/crm-detection";
 
 const payloadSchema = z.object({
   name: z.string().trim().min(2).max(120),
@@ -75,6 +76,7 @@ export const Route = createFileRoute("/api/public/leads")({
             company: parsed.company || "",
             source: parsed.source || "website_demo",
             status: "new",
+            tags: isDoctorLead({ name: parsed.name, company: parsed.company }) ? [DOCTOR_TAG] : [],
             message: parsed.message || null,
             source_page: parsed.sourcePage || null,
             requested_demo_at:
