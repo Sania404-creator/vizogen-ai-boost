@@ -1,13 +1,16 @@
 import { useMemo, useState } from "react";
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { Download, KanbanSquare, List, Search } from "lucide-react";
 import { toast } from "sonner";
 import { CrmShell, useCrmSession } from "@/components/crm/shell";
 import { DoctorBadge } from "@/components/crm/doctor-badge";
+import { LeadDateFilter } from "@/components/crm/lead-date-filter";
+import { rangeToIsoFilters } from "@/lib/crm-date-range";
 import { AddLeadDialog } from "@/components/crm/add-lead-dialog";
 import {
+  leadRangeSummary,
   listLeads,
   listStages,
   listTeam,
@@ -19,7 +22,6 @@ import {
 } from "@/lib/crm.functions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import {
   Select,
@@ -28,6 +30,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+
+const isDay = (v: unknown) => (typeof v === "string" && /^\d{4}-\d{2}-\d{2}$/.test(v) ? v : "");
 
 export const Route = createFileRoute("/_crm/crm/leads")({
   head: () => ({
@@ -44,6 +48,11 @@ export const Route = createFileRoute("/_crm/crm/leads")({
       { name: "robots", content: "noindex, nofollow" },
     ],
   }),
+  validateSearch: (search: Record<string, unknown>): { from?: string; to?: string } => {
+    const from = isDay(search["from"]);
+    const to = isDay(search["to"]);
+    return { ...(from ? { from } : {}), ...(to ? { to } : {}) };
+  },
   component: LeadsPage,
 });
 
@@ -52,6 +61,8 @@ const ANY = "any";
 function LeadsPage() {
   const queryClient = useQueryClient();
   const session = useCrmSession();
+  const { from = "", to = "" } = Route.useSearch();
+  const navigate = useNavigate({ from: "/crm/leads" });
   const [view, setView] = useState<"board" | "list">("board");
   const [status, setStatus] = useState(ANY);
   const [assignedTo, setAssignedTo] = useState(ANY);
@@ -59,12 +70,11 @@ function LeadsPage() {
   const [tag, setTag] = useState("");
   const [search, setSearch] = useState("");
   const [due, setDue] = useState(ANY);
-  const [createdFrom, setCreatedFrom] = useState("");
-  const [createdTo, setCreatedTo] = useState("");
 
   const fetchLeads = useServerFn(listLeads);
   const fetchStages = useServerFn(listStages);
   const fetchTeam = useServerFn(listTeam);
+  const fetchSummary = useServerFn(leadRangeSummary);
   const saveLead = useServerFn(updateLead);
 
   const filters = {
@@ -74,16 +84,20 @@ function LeadsPage() {
     ...(tag ? { tag } : {}),
     ...(search ? { search } : {}),
     ...(due !== ANY ? { due: due as "today" | "overdue" | "week" } : {}),
-    ...(createdFrom ? { createdFrom: new Date(createdFrom).toISOString() } : {}),
-    ...(createdTo ? { createdTo: new Date(`${createdTo}T23:59:59`).toISOString() } : {}),
+    ...rangeToIsoFilters(from, to),
   };
 
   const leads = useQuery({
     queryKey: ["crm-leads", filters],
     queryFn: () => fetchLeads({ data: filters }),
   });
+  const summary = useQuery({
+    queryKey: ["crm-lead-summary", filters],
+    queryFn: () => fetchSummary({ data: filters }),
+  });
   const stages = useQuery({ queryKey: ["crm-stages"], queryFn: () => fetchStages() });
   const team = useQuery({ queryKey: ["crm-team"], queryFn: () => fetchTeam() });
+
 
   const move = useMutation({
     mutationFn: (input: { id: string; status: string; lostReason?: string }) =>
@@ -192,7 +206,22 @@ function LeadsPage() {
         </div>
       }
     >
-      <div className="rounded-2xl border border-border bg-card p-4 shadow-soft">
+      <LeadDateFilter
+        from={from}
+        to={to}
+        onChange={(range) =>
+          void navigate({
+            search: {
+              ...(range.from ? { from: range.from } : {}),
+              ...(range.to ? { to: range.to } : {}),
+            },
+          })
+        }
+        summary={summary.data}
+        loading={summary.isPending}
+      />
+
+      <div className="mt-4 rounded-2xl border border-border bg-card p-4 shadow-soft">
         <div className="grid gap-3 md:grid-cols-3 xl:grid-cols-6">
           <div className="relative md:col-span-2 xl:col-span-2">
             <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
@@ -257,14 +286,6 @@ function LeadsPage() {
         </div>
         <div className="mt-3 grid gap-3 md:grid-cols-3">
           <Input value={tag} onChange={(e) => setTag(e.target.value)} placeholder="Tag e.g. Hot Lead" />
-          <div className="flex items-center gap-2">
-            <Label className="shrink-0 text-xs text-muted-foreground">Created from</Label>
-            <Input type="date" value={createdFrom} onChange={(e) => setCreatedFrom(e.target.value)} />
-          </div>
-          <div className="flex items-center gap-2">
-            <Label className="shrink-0 text-xs text-muted-foreground">to</Label>
-            <Input type="date" value={createdTo} onChange={(e) => setCreatedTo(e.target.value)} />
-          </div>
         </div>
       </div>
 

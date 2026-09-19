@@ -1,13 +1,16 @@
 import { useState } from "react";
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { Download, Search, Stethoscope } from "lucide-react";
 import { CrmShell, useCrmSession } from "@/components/crm/shell";
 import { DoctorBadge } from "@/components/crm/doctor-badge";
+import { LeadDateFilter } from "@/components/crm/lead-date-filter";
+import { rangeToIsoFilters } from "@/lib/crm-date-range";
 import { AddLeadDialog } from "@/components/crm/add-lead-dialog";
 import {
   DOCTOR_TAG,
+  leadRangeSummary,
   listLeads,
   listStages,
   listTeam,
@@ -44,13 +47,21 @@ export const Route = createFileRoute("/_crm/crm/doctor-leads")({
       { name: "robots", content: "noindex, nofollow" },
     ],
   }),
+  validateSearch: (search: Record<string, unknown>): { from?: string; to?: string } => {
+    const from = isDay(search["from"]);
+    const to = isDay(search["to"]);
+    return { ...(from ? { from } : {}), ...(to ? { to } : {}) };
+  },
   component: DoctorLeadsPage,
 });
 
 const ANY = "any";
+const isDay = (v: unknown) => (typeof v === "string" && /^\d{4}-\d{2}-\d{2}$/.test(v) ? v : "");
 
 function DoctorLeadsPage() {
   const session = useCrmSession();
+  const { from = "", to = "" } = Route.useSearch();
+  const navigate = useNavigate({ from: "/crm/doctor-leads" });
   const [status, setStatus] = useState(ANY);
   const [assignedTo, setAssignedTo] = useState(ANY);
   const [source, setSource] = useState(ANY);
@@ -59,6 +70,7 @@ function DoctorLeadsPage() {
   const fetchLeads = useServerFn(listLeads);
   const fetchStages = useServerFn(listStages);
   const fetchTeam = useServerFn(listTeam);
+  const fetchSummary = useServerFn(leadRangeSummary);
 
   const filters = {
     tag: DOCTOR_TAG,
@@ -66,11 +78,16 @@ function DoctorLeadsPage() {
     ...(assignedTo !== ANY ? { assignedTo } : {}),
     ...(source !== ANY ? { source } : {}),
     ...(search ? { search } : {}),
+    ...rangeToIsoFilters(from, to),
   };
 
   const leads = useQuery({
     queryKey: ["crm-doctor-leads", filters],
     queryFn: () => fetchLeads({ data: filters }),
+  });
+  const summary = useQuery({
+    queryKey: ["crm-doctor-lead-summary", filters],
+    queryFn: () => fetchSummary({ data: filters }),
   });
   const stages = useQuery({ queryKey: ["crm-stages"], queryFn: () => fetchStages() });
   const team = useQuery({ queryKey: ["crm-team"], queryFn: () => fetchTeam() });
@@ -119,7 +136,22 @@ function DoctorLeadsPage() {
         </div>
       }
     >
-      <div className="rounded-2xl border border-border bg-card p-4 shadow-soft">
+      <LeadDateFilter
+        from={from}
+        to={to}
+        onChange={(range) =>
+          void navigate({
+            search: {
+              ...(range.from ? { from: range.from } : {}),
+              ...(range.to ? { to: range.to } : {}),
+            },
+          })
+        }
+        summary={summary.data}
+        loading={summary.isPending}
+      />
+
+      <div className="mt-4 rounded-2xl border border-border bg-card p-4 shadow-soft">
         <p className="mb-3 flex items-center gap-2 text-xs text-muted-foreground">
           <Stethoscope className="size-4 text-primary" />
           Leads are added here automatically whenever the name or business name contains “Dr”,
