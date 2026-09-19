@@ -264,6 +264,53 @@ export const listLeads = createServerFn({ method: "POST" })
     return (rows ?? []) as Lead[];
   });
 
+/** Database-level counts for the lead date-range summary row. */
+export const leadRangeSummary = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((input: unknown) => filterSchema.parse(input ?? {}))
+  .handler(async ({ data, context }) => {
+    const base = (extra?: { tag?: string; source?: string }) => {
+      let query = context.supabase
+        .from("crm_leads")
+        .select("id", { count: "exact", head: true });
+      if (data.status) query = query.eq("status", data.status);
+      if (extra?.source ?? data.source) query = query.eq("source", extra?.source ?? data.source!);
+      if (data.assignedTo === "unassigned") query = query.is("assigned_to", null);
+      else if (data.assignedTo) query = query.eq("assigned_to", data.assignedTo);
+      const tag = extra?.tag ?? data.tag;
+      if (tag) query = query.contains("tags", [tag]);
+      if (data.createdFrom) query = query.gte("created_at", data.createdFrom);
+      if (data.createdTo) query = query.lte("created_at", data.createdTo);
+      if (data.search) {
+        const term = `%${data.search}%`;
+        query = query.or(
+          `name.ilike.${term},email.ilike.${term},company.ilike.${term},phone.ilike.${term}`,
+        );
+      }
+      return query;
+    };
+
+    const [totalRes, doctorRes, ...sourceRes] = await Promise.all([
+      base(),
+      base({ tag: DOCTOR_TAG }),
+      ...LEAD_SOURCES.map((s) => base({ source: s })),
+    ]);
+
+    const bySource: { source: string; label: string; count: number }[] = [];
+    LEAD_SOURCES.forEach((s, i) => {
+      const count = sourceRes[i]?.count ?? 0;
+      if (count > 0) bySource.push({ source: s, label: LEAD_SOURCE_LABELS[s] ?? s, count });
+    });
+
+    return {
+      total: totalRes.count ?? 0,
+      doctor: doctorRes.count ?? 0,
+      bySource: bySource.sort((a, b) => b.count - a.count),
+    };
+  });
+
+
+
 export const getLead = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((input: unknown) => z.object({ id: z.string().uuid() }).parse(input))
