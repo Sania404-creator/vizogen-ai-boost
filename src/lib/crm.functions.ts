@@ -5,11 +5,34 @@ import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 export const LEAD_SOURCES = [
   "website_demo",
   "website_popup",
+  "website",
   "meta_ads",
+  "whatsapp",
   "manual",
   "referral",
   "other",
 ] as const;
+
+/** Sources offered when a rep adds a lead by hand. */
+export const MANUAL_LEAD_SOURCES = [
+  "manual",
+  "meta_ads",
+  "website",
+  "whatsapp",
+  "referral",
+  "other",
+] as const;
+
+export const LEAD_SOURCE_LABELS: Record<string, string> = {
+  website_demo: "Website demo",
+  website_popup: "Website popup",
+  website: "Website",
+  meta_ads: "Meta Ads",
+  whatsapp: "WhatsApp",
+  manual: "Manual",
+  referral: "Referral",
+  other: "Other",
+};
 
 export const LOST_REASONS = [
   "Price",
@@ -324,7 +347,7 @@ export const createLead = createServerFn({ method: "POST" })
         status: data.status,
         assigned_to: data.assignedTo || context.userId,
         follow_up_on: data.followUpOn || null,
-        tags: data.tags,
+        tags: withDoctorTag(data.tags, { name: data.name, company: data.company }),
         message: data.message || null,
         created_by: context.userId,
       })
@@ -941,3 +964,12 @@ export const countNewDoctorLeads = createServerFn({ method: "GET" })
       .eq("status", "new");
     return { newCount: count ?? 0 };
   });
+
+/** Adds the Doctor tag to an existing tag list when the lead looks like a doctor. */
+export function withDoctorTag(
+  tags: string[],
+  input: { name?: string | null; company?: string | null; job_title?: string | null },
+) {
+  if (!isDoctorLead(input) || tags.includes(DOCTOR_TAG)) return tags;
+  return [...tags, DOCTOR_TAG];
+}
