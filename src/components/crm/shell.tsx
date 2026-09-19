@@ -14,18 +14,25 @@ import {
   LogOut,
   Menu,
   ShieldCheck,
+  Stethoscope,
   X,
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { getCrmSession, listNotifications, markNotificationsRead } from "@/lib/crm.functions";
+import {
+  countNewDoctorLeads,
+  getCrmSession,
+  listNotifications,
+  markNotificationsRead,
+} from "@/lib/crm.functions";
 import { VizogenLockup } from "@/components/brand/logo";
 import { CrmPageLoadingOverlay } from "./page-loading-overlay";
 
 const NAV = [
   { to: "/crm", label: "Dashboard", icon: LayoutDashboard, adminOnly: false },
   { to: "/crm/leads", label: "Leads", icon: KanbanSquare, adminOnly: false },
+  { to: "/crm/doctor-leads", label: "Doctor Leads", icon: Stethoscope, adminOnly: false },
   { to: "/crm/proposals", label: "Proposals", icon: FileText, adminOnly: false },
   { to: "/crm/funnel", label: "Sales funnel", icon: Filter, adminOnly: false },
   { to: "/crm/reports", label: "Reports", icon: BarChart3, adminOnly: false },
@@ -65,6 +72,14 @@ export function CrmShell({
   });
   const unread = (notifications.data ?? []).filter((n) => !n.read_at).length;
 
+  const fetchDoctorCount = useServerFn(countNewDoctorLeads);
+  const doctorCount = useQuery({
+    queryKey: ["crm-doctor-lead-count"],
+    queryFn: () => fetchDoctorCount(),
+    refetchInterval: 60000,
+  });
+  const newDoctorLeads = doctorCount.data?.newCount ?? 0;
+
   const isAdmin = session.data?.isAdmin ?? false;
   const items = NAV.filter((n) => !n.adminOnly || isAdmin);
 
@@ -89,7 +104,16 @@ export function CrmShell({
             }`}
           >
             <item.icon className="size-4" />
-            {item.label}
+            <span className="flex-1">{item.label}</span>
+            {item.to === "/crm/doctor-leads" && newDoctorLeads > 0 ? (
+              <span
+                className={`grid min-w-5 place-items-center rounded-full px-1.5 text-[10px] font-bold ${
+                  active ? "bg-white/20 text-white" : "bg-primary text-primary-foreground"
+                }`}
+              >
+                {newDoctorLeads}
+              </span>
+            ) : null}
           </Link>
         );
       })}
