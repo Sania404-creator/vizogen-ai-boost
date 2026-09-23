@@ -183,7 +183,7 @@ const sections: LegalSection[] = [
     body: (
       <p>
         These terms are governed by the laws of India, and any disputes shall be subject to the
-        exclusive jurisdiction of the courts located in New Delhi, Delhi.
+        exclusive jurisdiction of the courts located in Rajkot, Gujarat.
       </p>
     ),
   },
@@ -229,8 +229,8 @@ const sections: LegalSection[] = [
             Address
           </dt>
           <dd className="mt-1 text-sm leading-relaxed text-foreground">
-            Second Floor, Nehru Complex, Plot No. 9B, Patparganj Rd, near R.K.Hospital, Pandav Nagar,
-            New Delhi, Delhi 110092
+            Tower-B, RK ICONIC, 923, 150 Feet Ring Rd, nr. Ayodhya Chowk, Sheetal Park, Puneet Nagar, Bajrang Wadi,
+            Rajkot, Gujarat 360006
           </dd>
         </div>
       </dl>

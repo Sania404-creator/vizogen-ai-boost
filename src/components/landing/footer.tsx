@@ -125,7 +125,7 @@ export function Footer() {
               <li className="flex gap-2.5">
                 <MapPin className="mt-0.5 size-4 shrink-0 text-primary" />
                 <span className="min-w-0">
-                  Second Floor, Nehru Complex, Plot No. 9B, Patparganj Rd, near R.K.Hospital, Pandav Nagar, New Delhi, Delhi 110092
+                  Tower-B, RK ICONIC, 923, 150 Feet Ring Rd, nr. Ayodhya Chowk, Sheetal Park, Puneet Nagar, Bajrang Wadi, Rajkot, Gujarat 360006
                 </span>
               </li>
 

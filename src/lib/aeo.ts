@@ -14,10 +14,10 @@ export const NAP = {
   phone: "+91 84889 18358",
   phoneE164: "+918488918358",
   street:
-    "Second Floor, Nehru Complex, Plot No. 9B, Patparganj Rd, near R.K.Hospital, Pandav Nagar",
-  locality: "New Delhi",
-  region: "Delhi",
-  postalCode: "110092",
+    "Tower-B, RK ICONIC, 923, 150 Feet Ring Rd, nr. Ayodhya Chowk, Sheetal Park, Puneet Nagar, Bajrang Wadi",
+  locality: "Rajkot",
+  region: "Gujarat",
+  postalCode: "360006",
   country: "IN",
 } as const;
 
