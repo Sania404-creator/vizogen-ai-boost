@@ -25,7 +25,7 @@ const INDUSTRIES = "clinics/hospitals, restaurants, salons, gyms, real estate, e
 
 export function pageSummary(path?: string) {
   if (!path) return undefined;
-  const clean = path.split("?")[0].replace(/\/$/, "") || "/";
+  const clean = (path.split("?")[0] ?? "").replace(/\/$/, "") || "/";
   const match = PAGES.find((p) => p.path === clean);
   if (match) return match.summary;
   if (clean.endsWith("-marketing-software")) {

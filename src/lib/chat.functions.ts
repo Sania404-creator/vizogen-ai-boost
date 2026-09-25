@@ -35,7 +35,7 @@ export const askVizogenAssistant = createServerFn({ method: "POST" })
       body: JSON.stringify({
         model: "openai/gpt-5.6-sol",
         reasoning_effort: "none",
-        messages: [{ role: "system", content: SYSTEM_PROMPT }, ...data.messages],
+        messages: [{ role: "system", content: buildSystemPrompt(data.path) }, ...data.messages],
       }),
     });
 
