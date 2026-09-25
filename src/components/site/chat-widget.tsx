@@ -15,8 +15,10 @@ const WELCOME: Msg = {
 };
 
 const QUICK_REPLIES = [
+  "Summarise this page",
   "What does Vizogen do?",
   "See pricing",
+  "Partner programs",
   "Book a demo",
   "Talk to a human",
 ];
@@ -47,7 +49,10 @@ export function ChatWidget({
     setPending(true);
     try {
       const { reply } = await ask({
-        data: { messages: history.filter((m) => m.content !== WELCOME.content) },
+        data: {
+          messages: history.filter((m) => m.content !== WELCOME.content),
+          path: window.location.pathname,
+        },
       });
       setMessages((m) => [...m, { role: "assistant", content: reply }]);
     } catch (error) {
