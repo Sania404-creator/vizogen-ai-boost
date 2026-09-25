@@ -48,6 +48,7 @@ import truDentalLogo from "@/assets/clinic-logos/tru-dental-transparent.png";
 import drBatrasLogo from "@/assets/clinic-logos/dr-batras-healthcare-transparent.png";
 import drLalPathLabsLogo from "@/assets/clinic-logos/dr-lal-pathlabs-transparent.png";
 import microcareHospitalLogo from "@/assets/clinic-logos/microcare-hospital-transparent.png";
+import apolloClinicLogo from "@/assets/clinic-logos/apollo-clinic-transparent.png";
 
 /**
  * Content spec for one industry. Everything else (old vs new lists, gallery,
@@ -329,6 +330,7 @@ export const clinicConfig = buildConfig({
     { src: drBatrasLogo, alt: "Dr Batra's Healthcare" },
     { src: drLalPathLabsLogo, alt: "Dr Lal PathLabs" },
     { src: microcareHospitalLogo, alt: "Microcare Hospital" },
+    { src: apolloClinicLogo, alt: "Apollo Clinic" },
   ],
 });
 
