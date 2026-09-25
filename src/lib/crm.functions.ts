@@ -309,6 +309,84 @@ export const leadRangeSummary = createServerFn({ method: "POST" })
     };
   });
 
+/** Date-filtered sales performance for the CRM Reports dashboard. */
+export const getSalesDashboard = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((input: unknown) =>
+    z
+      .object({
+        createdFrom: z.string().max(30).optional(),
+        createdTo: z.string().max(30).optional(),
+      })
+      .parse(input ?? {}),
+  )
+  .handler(async ({ data, context }) => {
+    let leadsQuery = context.supabase
+      .from("crm_leads")
+      .select("id, source, status, tags");
+    if (data.createdFrom) leadsQuery = leadsQuery.gte("created_at", data.createdFrom);
+    if (data.createdTo) leadsQuery = leadsQuery.lte("created_at", data.createdTo);
+
+    const [{ data: leads, error: leadsError }, { data: stages, error: stagesError }] =
+      await Promise.all([
+        leadsQuery,
+        context.supabase
+          .from("crm_stages")
+          .select("key, label, position")
+          .order("position", { ascending: true }),
+      ]);
+    if (leadsError) throw new Error(leadsError.message);
+    if (stagesError) throw new Error(stagesError.message);
+
+    const rows = leads ?? [];
+    const doctorRows = rows.filter((lead) => (lead.tags ?? []).includes(DOCTOR_TAG));
+    const won = rows.filter((lead) => lead.status === "won").length;
+    const bySource = LEAD_SOURCES.map((source) => ({
+      source,
+      label: LEAD_SOURCE_LABELS[source] ?? source,
+      count: rows.filter((lead) => lead.source === source).length,
+    }))
+      .filter((source) => source.count > 0)
+      .sort((a, b) => b.count - a.count);
+    const doctorPipeline = (stages ?? []).map((stage) => ({
+      key: stage.key,
+      label: stage.label,
+      count: doctorRows.filter((lead) => lead.status === stage.key).length,
+    }));
+
+    const leadIds = rows.map((lead) => lead.id);
+    let proposals: { pricing: unknown; currency: string }[] = [];
+    if (leadIds.length) {
+      const { data: proposalRows, error: proposalError } = await context.supabase
+        .from("crm_proposals")
+        .select("pricing, currency")
+        .eq("status", "accepted")
+        .in("lead_id", leadIds);
+      if (proposalError) throw new Error(proposalError.message);
+      proposals = proposalRows ?? [];
+    }
+
+    const revenueByCurrency = proposals.reduce<Record<string, number>>((totals, proposal) => {
+      const lines = Array.isArray(proposal.pricing)
+        ? (proposal.pricing as { qty?: number; price?: number }[])
+        : [];
+      const value = lines.reduce((sum, line) => sum + (line.qty ?? 0) * (line.price ?? 0), 0);
+      const currency = proposal.currency || "INR";
+      totals[currency] = (totals[currency] ?? 0) + value;
+      return totals;
+    }, {});
+
+    return {
+      total: rows.length,
+      doctor: doctorRows.length,
+      won,
+      conversionRate: rows.length ? Math.round((won / rows.length) * 1000) / 10 : 0,
+      revenueByCurrency,
+      bySource,
+      doctorPipeline,
+    };
+  });
+
 
 
 export const getLead = createServerFn({ method: "POST" })
