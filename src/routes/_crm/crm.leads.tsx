@@ -109,6 +109,7 @@ function LeadsPage() {
       void queryClient.invalidateQueries({ queryKey: ["crm-doctor-leads"] });
       void queryClient.invalidateQueries({ queryKey: ["crm-doctor-lead-summary"] });
       void queryClient.invalidateQueries({ queryKey: ["crm-doctor-lead-count"] });
+      void queryClient.invalidateQueries({ queryKey: ["crm-sales-dashboard"] });
     },
     onError: (e: Error) => toast.error(e.message),
   });

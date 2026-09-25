@@ -85,6 +85,7 @@ export function AddLeadDialog({ team }: { team: TeamMember[] }) {
       void queryClient.invalidateQueries({ queryKey: ["crm-lead-summary"] });
       void queryClient.invalidateQueries({ queryKey: ["crm-doctor-lead-summary"] });
       void queryClient.invalidateQueries({ queryKey: ["crm-dashboard"] });
+      void queryClient.invalidateQueries({ queryKey: ["crm-sales-dashboard"] });
     } catch (error) {
       toast.error(error instanceof Error ? error.message : "Could not add the lead.");
     } finally {
