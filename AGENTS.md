@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- CRM sales reporting uses `getSalesDashboard` with IST date bounds from URL search parameters so metrics stay database-filtered, shareable, and consistent with Leads.
