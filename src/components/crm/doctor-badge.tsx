@@ -30,3 +30,21 @@ export function DoctorBadge({ lead, className }: { lead: LeadLike; className?: s
     </span>
   );
 }
+
+export const BILLING_CONFIRMED_TAG = "Billing Confirmed";
+
+/** Green chip shown once a lead has signed a billing. */
+export function BillingConfirmedBadge({ lead, className }: { lead: LeadLike; className?: string }) {
+  if (!(lead.tags ?? []).includes(BILLING_CONFIRMED_TAG)) return null;
+  return (
+    <span
+      title="Billing confirmed"
+      className={cn(
+        "inline-flex shrink-0 items-center gap-1 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2 py-0.5 text-[10px] font-semibold leading-none text-emerald-600 dark:text-emerald-300",
+        className,
+      )}
+    >
+      ✓ Billing Confirmed
+    </span>
+  );
+}

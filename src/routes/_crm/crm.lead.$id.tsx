@@ -14,7 +14,8 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import { CrmShell } from "@/components/crm/shell";
-import { DoctorBadge } from "@/components/crm/doctor-badge";
+import { BillingActions, BillingStatusBadge } from "@/components/crm/billing-actions";
+import { BillingConfirmedBadge, DoctorBadge } from "@/components/crm/doctor-badge";
 import {
   addActivity,
   getLead,
@@ -164,6 +165,7 @@ function LeadDetail() {
       }
     >
       {row ? <DoctorBadge lead={row} className="mb-4 px-2.5 py-1 text-xs" /> : null}
+      {row ? <BillingConfirmedBadge lead={row} className="mb-4 ml-2 px-2.5 py-1 text-xs" /> : null}
       <div className="grid gap-6 lg:grid-cols-3">
         <div className="space-y-6 lg:col-span-2">
           <div className="rounded-2xl border border-border bg-card p-5 shadow-soft">
@@ -421,9 +423,7 @@ function LeadDetail() {
                 <div key={p.id} className="rounded-xl border border-border p-3">
                   <div className="flex items-center justify-between gap-2">
                     <p className="truncate text-sm font-medium text-foreground">{p.title}</p>
-                    <Badge variant="secondary" className="capitalize">
-                      {p.status}
-                    </Badge>
+                    <BillingStatusBadge status={p.status} expiresAt={p.expires_at} />
                   </div>
                   <p className="mt-1 text-xs text-muted-foreground">
                     v{p.version} ·{" "}
@@ -431,13 +431,16 @@ function LeadDetail() {
                     {p.viewed_at ? ` · viewed ${new Date(p.viewed_at).toLocaleDateString()}` : ""}
                   </p>
                   <a
-                    href={`/proposal/${p.share_token}`}
+                    href={`/billing/${p.share_token}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline"
                   >
                     Open client view <ExternalLink className="size-3" />
                   </a>
+                  <div className="mt-3">
+                    <BillingActions billing={p} />
+                  </div>
                 </div>
               ))}
               {(lead.data?.proposals ?? []).length === 0 ? (

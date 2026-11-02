@@ -5,7 +5,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { Download, KanbanSquare, List, Search } from "lucide-react";
 import { toast } from "sonner";
 import { CrmShell, useCrmSession } from "@/components/crm/shell";
-import { DoctorBadge } from "@/components/crm/doctor-badge";
+import { BillingConfirmedBadge, DoctorBadge } from "@/components/crm/doctor-badge";
 import { LeadDateFilter } from "@/components/crm/lead-date-filter";
 import { rangeToIsoFilters } from "@/lib/crm-date-range";
 import { AddLeadDialog } from "@/components/crm/add-lead-dialog";
@@ -320,6 +320,7 @@ function LeadsPage() {
                     <p className="flex min-w-0 items-center gap-1.5 text-sm font-semibold text-foreground">
                       <span className="truncate">{lead.name}</span>
                       <DoctorBadge lead={lead} />
+                      <BillingConfirmedBadge lead={lead} />
                     </p>
                     <p className="truncate text-xs text-muted-foreground">
                       {lead.company || lead.email || lead.phone}
@@ -375,6 +376,7 @@ function LeadsPage() {
                         {lead.name}
                       </Link>
                       <DoctorBadge lead={lead} />
+                      <BillingConfirmedBadge lead={lead} />
                     </span>
                     <p className="text-xs text-muted-foreground">{lead.email || lead.phone}</p>
                   </td>

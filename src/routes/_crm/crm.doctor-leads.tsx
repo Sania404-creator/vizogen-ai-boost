@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { Download, Search, Stethoscope } from "lucide-react";
 import { CrmShell, useCrmSession } from "@/components/crm/shell";
-import { DoctorBadge } from "@/components/crm/doctor-badge";
+import { BillingConfirmedBadge, DoctorBadge } from "@/components/crm/doctor-badge";
 import { LeadDateFilter } from "@/components/crm/lead-date-filter";
 import { rangeToIsoFilters } from "@/lib/crm-date-range";
 import { AddLeadDialog } from "@/components/crm/add-lead-dialog";
@@ -236,6 +236,7 @@ function DoctorLeadsPage() {
                       {lead.name}
                     </Link>
                     <DoctorBadge lead={lead} />
+                    <BillingConfirmedBadge lead={lead} />
                   </span>
                   <p className="text-xs text-muted-foreground">{lead.company || "—"}</p>
                 </td>

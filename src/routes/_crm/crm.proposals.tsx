@@ -5,6 +5,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { ExternalLink, FileText, Plus, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import { CrmShell } from "@/components/crm/shell";
+import { BillingActions, BillingStatusBadge } from "@/components/crm/billing-actions";
 import {
   deleteTemplate,
   listProposals,
@@ -113,26 +114,13 @@ function ProposalsPage() {
                         {total.toLocaleString()}
                       </td>
                       <td className="px-4 py-3">
-                        <Select
-                          value={p.status}
-                          onValueChange={async (v) => {
-                            await setStatus({
-                              data: { id: p.id, status: v as "sent" | "viewed" | "accepted" | "rejected" | "draft" },
-                            });
-                            refresh();
-                          }}
-                        >
-                          <SelectTrigger className="h-8 w-32 capitalize">
-                            <SelectValue />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="draft">Draft</SelectItem>
-                            <SelectItem value="sent">Sent</SelectItem>
-                            <SelectItem value="viewed">Viewed</SelectItem>
-                            <SelectItem value="accepted">Accepted</SelectItem>
-                            <SelectItem value="rejected">Rejected</SelectItem>
-                          </SelectContent>
-                        </Select>
+                        <div className="space-y-2">
+                          <BillingStatusBadge status={p.status} expiresAt={p.expires_at} />
+                          {p.billing_number ? (
+                            <p className="text-[11px] text-muted-foreground font-mono">{p.billing_number}</p>
+                          ) : null}
+                          <BillingActions billing={p} />
+                        </div>
                       </td>
                       <td className="px-4 py-3 text-muted-foreground">
                         {p.sent_at ? new Date(p.sent_at).toLocaleDateString() : "—"}
@@ -144,7 +132,7 @@ function ProposalsPage() {
                       </td>
                       <td className="px-4 py-3">
                         <a
-                          href={`/proposal/${p.share_token}`}
+                          href={`/billing/${p.share_token}`}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline"
