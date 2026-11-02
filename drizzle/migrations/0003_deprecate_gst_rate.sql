@@ -1,0 +1,1 @@
+COMMENT ON COLUMN public.crm_proposals.gst_rate IS 'DEPRECATED: Vizogen bills carry no GST. Column retained for history, no longer read or written by the app.';
