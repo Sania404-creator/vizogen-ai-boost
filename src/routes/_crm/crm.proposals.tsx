@@ -144,7 +144,7 @@ function ProposalsPage() {
                       </td>
                       <td className="px-4 py-3">
                         <a
-                          href={`/proposal/${p.share_token}`}
+                          href={`/billing/${p.share_token}`}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline"

@@ -431,7 +431,7 @@ function LeadDetail() {
                     {p.viewed_at ? ` · viewed ${new Date(p.viewed_at).toLocaleDateString()}` : ""}
                   </p>
                   <a
-                    href={`/proposal/${p.share_token}`}
+                    href={`/billing/${p.share_token}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline"
