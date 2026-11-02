@@ -178,7 +178,7 @@ function BillingPage() {
       {doc.scope ? <p className="mt-5 whitespace-pre-line text-sm leading-relaxed text-muted-foreground">{doc.scope}</p> : null}
 
       <div className="mt-5 overflow-x-auto rounded-xl border border-border">
-        <table className="w-full min-w-[480px] text-sm">
+        <table className="w-full text-xs sm:text-sm">
           <thead className="bg-muted/60 text-left text-xs uppercase tracking-wide text-muted-foreground">
             <tr><th className="px-3 py-2.5">Description</th><th className="px-3 py-2.5 text-right">Qty</th><th className="px-3 py-2.5 text-right">Rate</th><th className="px-3 py-2.5 text-right">Amount</th></tr>
           </thead>
