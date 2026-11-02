@@ -386,14 +386,21 @@ export type Database = {
       crm_proposals: {
         Row: {
           accepted_at: string | null
+          billing_number: string | null
+          change_request: string | null
+          change_requested_at: string | null
           client_company: string
           client_email: string
           client_name: string
+          confirmed_at: string | null
           created_at: string
           created_by: string | null
           currency: string
           decided_at: string | null
           deliverables: string[]
+          document_hash: string | null
+          expires_at: string | null
+          gst_rate: number
           id: string
           invoice_number: string | null
           invoice_sent_at: string | null
@@ -404,12 +411,18 @@ export type Database = {
           sent_at: string | null
           share_token: string
           signature_data: string | null
+          signature_path: string | null
+          signed_ip: string | null
+          signed_pdf_path: string | null
+          signed_user_agent: string | null
+          signer_designation: string | null
           signer_name: string | null
           status: string
           template_id: string | null
           terms: string
           terms_agreed_at: string | null
           title: string
+          token_used_at: string | null
           updated_at: string
           valid_until: string | null
           version: number
@@ -417,14 +430,21 @@ export type Database = {
         }
         Insert: {
           accepted_at?: string | null
+          billing_number?: string | null
+          change_request?: string | null
+          change_requested_at?: string | null
           client_company?: string
           client_email?: string
           client_name?: string
+          confirmed_at?: string | null
           created_at?: string
           created_by?: string | null
           currency?: string
           decided_at?: string | null
           deliverables?: string[]
+          document_hash?: string | null
+          expires_at?: string | null
+          gst_rate?: number
           id?: string
           invoice_number?: string | null
           invoice_sent_at?: string | null
@@ -435,12 +455,18 @@ export type Database = {
           sent_at?: string | null
           share_token?: string
           signature_data?: string | null
+          signature_path?: string | null
+          signed_ip?: string | null
+          signed_pdf_path?: string | null
+          signed_user_agent?: string | null
+          signer_designation?: string | null
           signer_name?: string | null
           status?: string
           template_id?: string | null
           terms?: string
           terms_agreed_at?: string | null
           title?: string
+          token_used_at?: string | null
           updated_at?: string
           valid_until?: string | null
           version?: number
@@ -448,14 +474,21 @@ export type Database = {
         }
         Update: {
           accepted_at?: string | null
+          billing_number?: string | null
+          change_request?: string | null
+          change_requested_at?: string | null
           client_company?: string
           client_email?: string
           client_name?: string
+          confirmed_at?: string | null
           created_at?: string
           created_by?: string | null
           currency?: string
           decided_at?: string | null
           deliverables?: string[]
+          document_hash?: string | null
+          expires_at?: string | null
+          gst_rate?: number
           id?: string
           invoice_number?: string | null
           invoice_sent_at?: string | null
@@ -466,12 +499,18 @@ export type Database = {
           sent_at?: string | null
           share_token?: string
           signature_data?: string | null
+          signature_path?: string | null
+          signed_ip?: string | null
+          signed_pdf_path?: string | null
+          signed_user_agent?: string | null
+          signer_designation?: string | null
           signer_name?: string | null
           status?: string
           template_id?: string | null
           terms?: string
           terms_agreed_at?: string | null
           title?: string
+          token_used_at?: string | null
           updated_at?: string
           valid_until?: string | null
           version?: number
@@ -1257,6 +1296,7 @@ export type Database = {
       }
       crm_can_view_all: { Args: { _user_id: string }; Returns: boolean }
       crm_is_member: { Args: { _user_id: string }; Returns: boolean }
+      crm_next_billing_number: { Args: never; Returns: string }
       crm_view_proposal: {
         Args: { _token: string }
         Returns: {
