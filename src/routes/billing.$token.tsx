@@ -12,7 +12,6 @@ import { UpiPay } from "@/components/site/upi-pay";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Checkbox } from "@/components/ui/checkbox";
 
 const SIG_FONTS = ["Dancing Script", "Great Vibes", "Caveat", "Satisfy"];
 const WHATSAPP = `https://wa.me/${NAP.phone.replace(/\D/g, "")}?text=${encodeURIComponent("Hi Vizogen, my billing link has expired. Please send a new one.")}`;
@@ -195,7 +194,6 @@ function BillingPage() {
           </tbody>
           <tfoot className="font-mono text-sm">
             <tr className="border-t border-border"><td colSpan={3} className="px-2 sm:px-3 py-2 text-right font-sans text-muted-foreground">Subtotal</td><td className="px-2 sm:px-3 py-2 text-right">{money(totals.subtotal)}</td></tr>
-            <tr><td colSpan={3} className="px-2 sm:px-3 py-2 text-right font-sans text-muted-foreground">GST ({doc.gstRate}%)</td><td className="px-2 sm:px-3 py-2 text-right">{money(totals.gst)}</td></tr>
             <tr className="bg-muted/40"><td colSpan={3} className="px-2 sm:px-3 py-3 text-right font-sans font-semibold">Total</td><td className="px-2 sm:px-3 py-3 text-right text-base font-bold">{money(totals.total)}</td></tr>
           </tfoot>
         </table>
@@ -228,7 +226,6 @@ function SignPanel({ token, defaultName, onSigned, changesRequested }: { token: 
   const [font, setFont] = useState(SIG_FONTS[0]!);
   const [typed, setTyped] = useState(defaultName);
   const [drawn, setDrawn] = useState(false);
-  const [consent, setConsent] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -280,7 +277,7 @@ function SignPanel({ token, defaultName, onSigned, changesRequested }: { token: 
   };
 
   const hasSig = mode === "draw" ? drawn : typed.trim().length >= 2;
-  const ready = name.trim().length >= 2 && hasSig && consent;
+  const ready = name.trim().length >= 2 && hasSig;
 
   const submit = async () => {
     setError("");
@@ -387,10 +384,6 @@ function SignPanel({ token, defaultName, onSigned, changesRequested }: { token: 
                 )}
               </div>
 
-              <label className="flex items-start gap-2.5 text-sm text-foreground">
-                <Checkbox checked={consent} onCheckedChange={(v) => setConsent(v === true)} className="mt-0.5" />
-                <span>I have reviewed this billing and agree to its terms. I understand my digital signature is legally binding.</span>
-              </label>
 
               {error ? <p className="text-sm text-destructive">{error}</p> : null}
               <Button onClick={submit} disabled={!ready || busy} size="lg" className="gradient-brand w-full text-white">

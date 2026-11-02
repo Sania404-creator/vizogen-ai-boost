@@ -20,8 +20,9 @@ export const BILLING_STATUS_LABELS: Record<string, string> = {
 
 export function billingTotals(lines: BillingLine[], gstRate: number) {
   const subtotal = lines.reduce((s, l) => s + l.qty * l.price, 0);
-  const gst = Math.round(subtotal * (gstRate / 100) * 100) / 100;
-  return { subtotal, gst, total: Math.round((subtotal + gst) * 100) / 100 };
+  void gstRate; // GST is not charged on Vizogen bills
+  const gst = 0;
+  return { subtotal, gst, total: Math.round(subtotal * 100) / 100 };
 }
 
 export function formatAmount(n: number, currency: string, ascii = false) {
