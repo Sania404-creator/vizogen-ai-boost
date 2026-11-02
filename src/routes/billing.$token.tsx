@@ -181,22 +181,22 @@ function BillingPage() {
       <div className="mt-5 overflow-x-auto rounded-xl border border-border">
         <table className="w-full text-xs sm:text-sm">
           <thead className="bg-muted/60 text-left text-xs uppercase tracking-wide text-muted-foreground">
-            <tr><th className="px-3 py-2.5">Description</th><th className="px-3 py-2.5 text-right">Qty</th><th className="px-3 py-2.5 text-right">Rate</th><th className="px-3 py-2.5 text-right">Amount</th></tr>
+            <tr><th className="px-2 sm:px-3 py-2.5">Description</th><th className="px-2 sm:px-3 py-2.5 text-right">Qty</th><th className="px-2 sm:px-3 py-2.5 text-right">Rate</th><th className="px-2 sm:px-3 py-2.5 text-right">Amount</th></tr>
           </thead>
           <tbody className="divide-y divide-border font-mono">
             {doc.pricing.map((l, i) => (
               <tr key={`${l.item}-${i}`}>
-                <td className="px-3 py-2.5 font-sans text-foreground">{l.item}</td>
-                <td className="px-3 py-2.5 text-right text-muted-foreground">{l.qty}</td>
-                <td className="px-3 py-2.5 text-right text-muted-foreground">{money(l.price)}</td>
-                <td className="px-3 py-2.5 text-right text-foreground">{money(l.qty * l.price)}</td>
+                <td className="px-2 sm:px-3 py-2.5 font-sans text-foreground">{l.item}</td>
+                <td className="px-2 sm:px-3 py-2.5 text-right text-muted-foreground">{l.qty}</td>
+                <td className="px-2 sm:px-3 py-2.5 text-right text-muted-foreground">{money(l.price)}</td>
+                <td className="px-2 sm:px-3 py-2.5 text-right text-foreground">{money(l.qty * l.price)}</td>
               </tr>
             ))}
           </tbody>
           <tfoot className="font-mono text-sm">
-            <tr className="border-t border-border"><td colSpan={3} className="px-3 py-2 text-right font-sans text-muted-foreground">Subtotal</td><td className="px-3 py-2 text-right">{money(totals.subtotal)}</td></tr>
-            <tr><td colSpan={3} className="px-3 py-2 text-right font-sans text-muted-foreground">GST ({doc.gstRate}%)</td><td className="px-3 py-2 text-right">{money(totals.gst)}</td></tr>
-            <tr className="bg-muted/40"><td colSpan={3} className="px-3 py-3 text-right font-sans font-semibold">Total</td><td className="px-3 py-3 text-right text-base font-bold">{money(totals.total)}</td></tr>
+            <tr className="border-t border-border"><td colSpan={3} className="px-2 sm:px-3 py-2 text-right font-sans text-muted-foreground">Subtotal</td><td className="px-2 sm:px-3 py-2 text-right">{money(totals.subtotal)}</td></tr>
+            <tr><td colSpan={3} className="px-2 sm:px-3 py-2 text-right font-sans text-muted-foreground">GST ({doc.gstRate}%)</td><td className="px-2 sm:px-3 py-2 text-right">{money(totals.gst)}</td></tr>
+            <tr className="bg-muted/40"><td colSpan={3} className="px-2 sm:px-3 py-3 text-right font-sans font-semibold">Total</td><td className="px-2 sm:px-3 py-3 text-right text-base font-bold">{money(totals.total)}</td></tr>
           </tfoot>
         </table>
       </div>

@@ -1,1 +1,1 @@
-- [ ] UPI payment QR (exact amount) on billing page, emails & PDF — UPI 9586387958@kotakbank
+- [x] UPI payment QR (exact amount) on billing page, emails & PDF — UPI 9586387958@kotakbank
