@@ -360,7 +360,7 @@ export const getSalesDashboard = createServerFn({ method: "POST" })
       const { data: proposalRows, error: proposalError } = await context.supabase
         .from("crm_proposals")
         .select("pricing, currency")
-        .eq("status", "accepted")
+        .in("status", ["accepted", "confirmed"])
         .in("lead_id", leadIds);
       if (proposalError) throw new Error(proposalError.message);
       proposals = proposalRows ?? [];
@@ -956,7 +956,7 @@ export const getSalesFunnel = createServerFn({ method: "GET" })
       : 0;
 
     const wonValue = proposals
-      .filter((p) => p.status === "accepted")
+      .filter((p) => (p.status === "accepted" || p.status === "confirmed"))
       .reduce((sum, p) => {
         const lines = Array.isArray(p.pricing) ? (p.pricing as { qty?: number; price?: number }[]) : [];
         return sum + lines.reduce((s, l) => s + (l.qty ?? 0) * (l.price ?? 0), 0);
@@ -1033,7 +1033,7 @@ export const getAdminOverview = createServerFn({ method: "GET" })
       proposals: {
         total: (proposals ?? []).length,
         sent: (proposals ?? []).filter((p) => p.status !== "draft").length,
-        accepted: (proposals ?? []).filter((p) => p.status === "accepted").length,
+        accepted: (proposals ?? []).filter((p) => (p.status === "accepted" || p.status === "confirmed")).length,
       },
       unassigned: leadRows
         .filter((l) => !l.assigned_to)
