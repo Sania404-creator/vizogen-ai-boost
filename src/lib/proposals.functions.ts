@@ -352,3 +352,61 @@ export const viewProposal = createServerFn({ method: "POST" })
     const row = (rows ?? [])[0];
     return row ? { proposal: row } : { proposal: null };
   });
+
+/** Public: client agrees to T&C, e-signs and accepts; a bill is emailed. */
+export const acceptProposal = createServerFn({ method: "POST" })
+  .inputValidator((input: unknown) =>
+    z
+      .object({
+        token: z.string().trim().min(10).max(80),
+        signerName: z.string().trim().min(2).max(120),
+        signature: z.string().startsWith("data:image/png;base64,").max(400000),
+        agreed: z.literal(true),
+      })
+      .parse(input),
+  )
+  .handler(async ({ data }) => {
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { data: rows, error } = await supabaseAdmin.rpc("crm_accept_proposal", {
+      _token: data.token,
+      _signer_name: data.signerName,
+      _signature: data.signature,
+      _agreed: data.agreed,
+    });
+    if (error) throw new Error(error.message);
+    const res = (rows ?? [])[0];
+    if (!res) throw new Error("Could not accept the proposal.");
+    if (res.already) return { invoiceNumber: res.invoice_number, emailed: true };
+
+    const { data: p } = await supabaseAdmin
+      .from("crm_proposals")
+      .select("title, client_name, client_company, client_email, pricing, currency, signer_name, accepted_at, share_token")
+      .eq("id", res.proposal_id)
+      .single();
+    let emailed = false;
+    if (p) {
+      const { sendGmail } = await import("@/lib/email.server");
+      const { buildInvoiceEmail } = await import("@/lib/crm-emails");
+      const html = buildInvoiceEmail({
+        invoiceNumber: res.invoice_number,
+        clientName: p.client_name,
+        company: p.client_company,
+        signerName: p.signer_name ?? data.signerName,
+        title: p.title,
+        currency: p.currency,
+        lines: (p.pricing as unknown as PricingLine[]) ?? [],
+        acceptedAt: p.accepted_at ?? new Date().toISOString(),
+        link: `${SITE_URL}/proposal/${p.share_token}`,
+      });
+      const subject = `Your Vizogen bill ${res.invoice_number}`;
+      emailed = Boolean(await sendGmail(p.client_email, subject, html).catch(() => false));
+      await sendGmail("info.vizogen@gmail.com", `Proposal accepted · ${subject}`, html).catch(() => false);
+      if (emailed) {
+        await supabaseAdmin
+          .from("crm_proposals")
+          .update({ invoice_sent_at: new Date().toISOString() })
+          .eq("id", res.proposal_id);
+      }
+    }
+    return { invoiceNumber: res.invoice_number, emailed };
+  });
