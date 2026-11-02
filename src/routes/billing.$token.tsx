@@ -235,18 +235,22 @@ function SignPanel({ token, defaultName, onSigned, changesRequested }: { token: 
     if (typeof window !== "undefined" && window.location.hash === "#changes") setChangesOpen(true);
   }, []);
 
-  useEffect(() => {
-    const c = canvasRef.current;
-    if (!c || !open || mode !== "draw") return;
+  const prepCanvas = (c: HTMLCanvasElement) => {
     const ratio = window.devicePixelRatio || 1;
-    c.width = c.offsetWidth * ratio;
-    c.height = c.offsetHeight * ratio;
+    const w = Math.round(c.offsetWidth * ratio);
+    const h = Math.round(c.offsetHeight * ratio);
+    if (c.width === w && c.height === h) return;
+    c.width = w;
+    c.height = h;
     const ctx = c.getContext("2d")!;
     ctx.scale(ratio, ratio);
     ctx.lineWidth = 2.4;
     ctx.lineCap = "round";
     ctx.lineJoin = "round";
     ctx.strokeStyle = "#14161F";
+  };
+
+  useEffect(() => {
     setDrawn(false);
   }, [open, mode]);
 
@@ -361,7 +365,7 @@ function SignPanel({ token, defaultName, onSigned, changesRequested }: { token: 
                     ref={canvasRef}
                     aria-label="Signature pad — draw your signature"
                     className="mt-2 h-44 w-full touch-none rounded-xl border border-dashed border-border bg-background"
-                    onPointerDown={(e) => { e.currentTarget.setPointerCapture(e.pointerId); drawing.current = true; const ctx = e.currentTarget.getContext("2d")!; const [x, y] = pos(e); ctx.beginPath(); ctx.moveTo(x, y); }}
+                    onPointerDown={(e) => { if (!drawn) prepCanvas(e.currentTarget); e.currentTarget.setPointerCapture(e.pointerId); drawing.current = true; const ctx = e.currentTarget.getContext("2d")!; const [x, y] = pos(e); ctx.beginPath(); ctx.moveTo(x, y); }}
                     onPointerMove={(e) => { if (!drawing.current) return; const ctx = e.currentTarget.getContext("2d")!; const [x, y] = pos(e); ctx.lineTo(x, y); ctx.stroke(); setDrawn(true); }}
                     onPointerUp={() => (drawing.current = false)}
                     onPointerCancel={() => (drawing.current = false)}
