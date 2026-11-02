@@ -115,3 +115,59 @@ export function buildInvoiceEmail(input: {
     <p style="margin:18px 0 0"><a href="${input.link}" style="display:inline-block;background:${BRAND};color:#ffffff;text-decoration:none;padding:12px 20px;border-radius:999px;font-weight:700">View signed proposal</a></p>
   `);
 }
+
+export function buildBillingSentEmail(input: {
+  billingNumber: string;
+  clientName: string;
+  total: string;
+  validity: string;
+  link: string;
+  message?: string;
+}) {
+  return wrap(`
+    <h2 style="margin:0 0 10px;font-size:22px">Billing ${esc(input.billingNumber)}</h2>
+    <p style="margin:0 0 14px;color:#4a4f5c">Hi ${esc(input.clientName)},</p>
+    ${input.message ? `<p style="margin:0 0 14px;color:#4a4f5c;white-space:pre-line">${esc(input.message)}</p>` : ""}
+    <table style="font-size:14px;margin-bottom:18px">
+      <tr><td style="padding:4px 16px 4px 0;color:#8a8f9c">Billing no.</td><td><b>${esc(input.billingNumber)}</b></td></tr>
+      <tr><td style="padding:4px 16px 4px 0;color:#8a8f9c">Total (incl. GST)</td><td><b>${esc(input.total)}</b></td></tr>
+      <tr><td style="padding:4px 16px 4px 0;color:#8a8f9c">Valid until</td><td>${esc(input.validity)}</td></tr>
+    </table>
+    <p style="margin:0">
+      <a href="${input.link}" style="display:inline-block;background:linear-gradient(90deg,#2F80FF,#8B2FE0);background-color:${BRAND};color:#ffffff;text-decoration:none;padding:12px 22px;border-radius:999px;font-weight:700;margin:0 8px 8px 0">Review &amp; Accept</a>
+      <a href="${input.link}#changes" style="display:inline-block;border:2px solid ${BRAND};color:${BRAND};text-decoration:none;padding:10px 20px;border-radius:999px;font-weight:700">Request Changes</a>
+    </p>
+    <p style="margin:16px 0 0;font-size:13px;color:#8a8f9c">The billing PDF is attached.</p>
+  `);
+}
+
+export function buildBillingConfirmedClientEmail(input: { clientName: string; billingNumber: string; total: string }) {
+  return wrap(`
+    <h2 style="margin:0 0 10px;font-size:22px">Thank you, ${esc(input.clientName)}!</h2>
+    <p style="margin:0 0 12px;color:#4a4f5c">Billing <b>${esc(input.billingNumber)}</b> is signed and confirmed for <b>${esc(input.total)}</b>.</p>
+    <p style="margin:0;color:#4a4f5c">Your signed copy is attached. Our team will contact you shortly about next steps.</p>
+  `);
+}
+
+export function buildBillingConfirmedAdminEmail(input: {
+  clientName: string;
+  billingNumber: string;
+  total: string;
+  signedAt: string;
+  crmLink: string;
+}) {
+  return wrap(`
+    <h2 style="margin:0 0 10px;font-size:22px">${esc(input.clientName)} signed ${esc(input.billingNumber)}</h2>
+    <p style="margin:0 0 6px;color:#4a4f5c">Amount: <b>${esc(input.total)}</b></p>
+    <p style="margin:0 0 16px;color:#4a4f5c">Signed: ${esc(input.signedAt)}</p>
+    <a href="${input.crmLink}" style="display:inline-block;background:${BRAND};color:#ffffff;text-decoration:none;padding:12px 20px;border-radius:999px;font-weight:700">Open in CRM</a>
+  `);
+}
+
+export function buildChangesRequestedEmail(input: { clientName: string; billingNumber: string; message: string; crmLink: string }) {
+  return wrap(`
+    <h2 style="margin:0 0 10px;font-size:20px">${esc(input.clientName)} requested changes to ${esc(input.billingNumber)}</h2>
+    <p style="margin:0 0 16px;color:#4a4f5c;white-space:pre-line">${esc(input.message)}</p>
+    <a href="${input.crmLink}" style="display:inline-block;background:${BRAND};color:#ffffff;text-decoration:none;padding:12px 20px;border-radius:999px;font-weight:700">Open in CRM</a>
+  `);
+}
