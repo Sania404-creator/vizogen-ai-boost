@@ -403,7 +403,7 @@ export const getLead = createServerFn({ method: "POST" })
         .limit(200),
       context.supabase
         .from("crm_proposals")
-        .select("id, title, status, version, share_token, valid_until, sent_at, viewed_at, created_at")
+        .select("id, title, status, version, share_token, valid_until, sent_at, viewed_at, created_at, billing_number, expires_at, confirmed_at, signer_name, signed_pdf_path, change_request, change_requested_at")
         .eq("lead_id", data.id)
         .order("created_at", { ascending: false }),
     ]);
