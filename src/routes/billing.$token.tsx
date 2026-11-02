@@ -12,7 +12,6 @@ import { UpiPay } from "@/components/site/upi-pay";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Checkbox } from "@/components/ui/checkbox";
 
 const SIG_FONTS = ["Dancing Script", "Great Vibes", "Caveat", "Satisfy"];
 const WHATSAPP = `https://wa.me/${NAP.phone.replace(/\D/g, "")}?text=${encodeURIComponent("Hi Vizogen, my billing link has expired. Please send a new one.")}`;
