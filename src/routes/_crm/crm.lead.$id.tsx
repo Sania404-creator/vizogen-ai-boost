@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import { CrmShell } from "@/components/crm/shell";
+import { BillingActions, BillingStatusBadge } from "@/components/crm/billing-actions";
 import { BillingConfirmedBadge, DoctorBadge } from "@/components/crm/doctor-badge";
 import {
   addActivity,
@@ -422,9 +423,7 @@ function LeadDetail() {
                 <div key={p.id} className="rounded-xl border border-border p-3">
                   <div className="flex items-center justify-between gap-2">
                     <p className="truncate text-sm font-medium text-foreground">{p.title}</p>
-                    <Badge variant="secondary" className="capitalize">
-                      {p.status}
-                    </Badge>
+                    <BillingStatusBadge status={p.status} expiresAt={p.expires_at} />
                   </div>
                   <p className="mt-1 text-xs text-muted-foreground">
                     v{p.version} ·{" "}
@@ -439,6 +438,9 @@ function LeadDetail() {
                   >
                     Open client view <ExternalLink className="size-3" />
                   </a>
+                  <div className="mt-3">
+                    <BillingActions billing={p} />
+                  </div>
                 </div>
               ))}
               {(lead.data?.proposals ?? []).length === 0 ? (
