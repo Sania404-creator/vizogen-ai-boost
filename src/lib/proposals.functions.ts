@@ -168,11 +168,21 @@ export const saveProposal = createServerFn({ method: "POST" })
       created_by: context.userId,
     };
 
-    if (data.id) {
+    let editId = data.id;
+    if (editId) {
+      const { data: existing } = await context.supabase
+        .from("crm_proposals")
+        .select("status")
+        .eq("id", editId)
+        .maybeSingle();
+      // Signed billings are locked: edits become a new version.
+      if (existing?.status === "confirmed") editId = undefined;
+    }
+    if (editId) {
       const { data: updated, error } = await context.supabase
         .from("crm_proposals")
         .update(payload)
-        .eq("id", data.id)
+        .eq("id", editId)
         .select(PROPOSAL_COLUMNS)
         .single();
       if (error) throw new Error(error.message);
