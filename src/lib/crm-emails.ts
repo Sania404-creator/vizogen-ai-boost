@@ -137,6 +137,10 @@ export function buildBillingSentEmail(input: {
       <a href="${input.link}" style="display:inline-block;background:linear-gradient(90deg,#2F80FF,#8B2FE0);background-color:${BRAND};color:#ffffff;text-decoration:none;padding:12px 22px;border-radius:999px;font-weight:700;margin:0 8px 8px 0">Review &amp; Accept</a>
       <a href="${input.link}#changes" style="display:inline-block;border:2px solid ${BRAND};color:${BRAND};text-decoration:none;padding:10px 20px;border-radius:999px;font-weight:700">Request Changes</a>
     </p>
+    <div style="margin:18px 0 0;padding:14px;border-radius:12px;background:#f6f7fb;font-size:14px">
+      <b>Pay via UPI</b><br/>UPI ID: <b>9586387958@kotakbank</b><br/>Amount: <b>${esc(input.total)}</b><br/>
+      <span style="color:#8a8f9c;font-size:12px">Or scan the UPI QR in the attached PDF / on the billing page.</span>
+    </div>
     <p style="margin:16px 0 0;font-size:13px;color:#8a8f9c">The billing PDF is attached.</p>
   `);
 }
@@ -146,6 +150,10 @@ export function buildBillingConfirmedClientEmail(input: { clientName: string; bi
     <h2 style="margin:0 0 10px;font-size:22px">Thank you, ${esc(input.clientName)}!</h2>
     <p style="margin:0 0 12px;color:#4a4f5c">Billing <b>${esc(input.billingNumber)}</b> is signed and confirmed for <b>${esc(input.total)}</b>.</p>
     <p style="margin:0;color:#4a4f5c">Your signed copy is attached. Our team will contact you shortly about next steps.</p>
+    <div style="margin:18px 0 0;padding:14px;border-radius:12px;background:#f6f7fb;font-size:14px">
+      <b>Pay via UPI</b><br/>UPI ID: <b>9586387958@kotakbank</b><br/>Amount: <b>${esc(input.total)}</b><br/>
+      <span style="color:#8a8f9c;font-size:12px">Or scan the UPI QR in the attached PDF / on the billing page.</span>
+    </div>
   `);
 }
 

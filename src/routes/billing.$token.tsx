@@ -8,6 +8,7 @@ import { downloadBillingPdf, getBilling, requestBillingChanges, signBilling } fr
 import { formatAmount } from "@/lib/billing";
 import { VizogenMark } from "@/components/brand/logo";
 import { NAP } from "@/lib/aeo";
+import { UpiPay } from "@/components/site/upi-pay";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -202,6 +203,8 @@ function BillingPage() {
 
       {doc.terms ? (<section className="mt-5"><h2 className="text-sm font-semibold text-foreground">Payment terms</h2><p className="mt-1 whitespace-pre-line text-sm text-muted-foreground">{doc.terms}</p></section>) : null}
       {doc.notes ? (<section className="mt-4"><h2 className="text-sm font-semibold text-foreground">Notes</h2><p className="mt-1 whitespace-pre-line text-sm text-muted-foreground">{doc.notes}</p></section>) : null}
+
+      {doc.currency === "INR" && totals.total > 0 ? <UpiPay amount={totals.total} billingNumber={doc.billingNumber} /> : null}
 
       <button type="button" onClick={download.run} disabled={download.busy} className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:underline">
         {download.busy ? <Loader2 className="size-4 animate-spin" /> : <Download className="size-4" />} Download PDF

@@ -39,3 +39,18 @@ export function effectiveBillingStatus(status: string, expiresAt: string | null)
 export function istDateTime(iso: string) {
   return new Date(iso).toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }) + " IST";
 }
+
+export const UPI_ID = "9586387958@kotakbank";
+export const UPI_PAYEE = "Vizogen";
+
+/** UPI deep link for the exact bill amount (INR only). */
+export function upiPayLink(amount: number, billingNumber: string) {
+  const p = new URLSearchParams({
+    pa: UPI_ID,
+    pn: UPI_PAYEE,
+    am: amount.toFixed(2),
+    cu: "INR",
+    tn: `Billing ${billingNumber}`,
+  });
+  return `upi://pay?${p.toString()}`;
+}

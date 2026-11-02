@@ -1,5 +1,5 @@
 import { PDFDocument, StandardFonts, rgb, type PDFFont, type PDFPage } from "pdf-lib";
-import { billingTotals, formatAmount, istDateTime, type BillingLine } from "@/lib/billing";
+import { UPI_ID, billingTotals, formatAmount, istDateTime, upiPayLink, type BillingLine } from "@/lib/billing";
 import { NAP } from "@/lib/aeo";
 
 export interface BillingDoc {
@@ -150,6 +150,22 @@ export async function renderBillingPdf(doc: BillingDoc, sig?: SignatureInfo) {
   text("Total", 390, 11, bold);
   text(formatAmount(t.total, doc.currency, true), 475, 11, bold);
   y -= 28;
+
+  if (doc.currency === "INR" && t.total > 0) {
+    ensure(130);
+    const QR = await import("qrcode");
+    const dataUrl = await QR.toDataURL(upiPayLink(t.total, doc.billingNumber), { margin: 1, width: 300 });
+    const qr = await pdf.embedPng(Buffer.from(dataUrl.split(",")[1]!, "base64"));
+    page.drawImage(qr, { x: M, y: y - 110, width: 110, height: 110 });
+    text("Pay via UPI", M + 125, 12, bold, BLUE);
+    y -= 18;
+    text(`UPI ID: ${UPI_ID}`, M + 125, 10, mono);
+    y -= 15;
+    text(`Amount: ${formatAmount(t.total, doc.currency, true)}`, M + 125, 10, mono);
+    y -= 15;
+    text("Scan with any UPI app - the exact amount is filled in.", M + 125, 9, font, MUTED);
+    y -= 92;
+  }
 
   if (doc.terms) {
     ensure(30);
