@@ -232,7 +232,9 @@ export const signBilling = createServerFn({ method: "POST" })
       }).eq("id", r.id);
       if (error) throw new Error(error.message);
 
-      await db.from("crm_leads").update({ status: "won" }).eq("id", r.lead_id);
+      const { data: leadRow } = await db.from("crm_leads").select("tags").eq("id", r.lead_id).maybeSingle();
+      const tags = Array.from(new Set([...(leadRow?.tags ?? []), "Billing Confirmed"]));
+      await db.from("crm_leads").update({ status: "won", tags }).eq("id", r.lead_id);
       await db.from("crm_activities").insert({
         lead_id: r.lead_id, actor_name: data.signerName, type: "billing_signed",
         body: `${data.signerName} accepted & signed billing ${doc.billingNumber}.`,
