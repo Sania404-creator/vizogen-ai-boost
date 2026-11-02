@@ -226,7 +226,6 @@ function SignPanel({ token, defaultName, onSigned, changesRequested }: { token: 
   const [font, setFont] = useState(SIG_FONTS[0]!);
   const [typed, setTyped] = useState(defaultName);
   const [drawn, setDrawn] = useState(false);
-  const [consent, setConsent] = useState(false);
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -278,7 +277,7 @@ function SignPanel({ token, defaultName, onSigned, changesRequested }: { token: 
   };
 
   const hasSig = mode === "draw" ? drawn : typed.trim().length >= 2;
-  const ready = name.trim().length >= 2 && hasSig && consent;
+  const ready = name.trim().length >= 2 && hasSig;
 
   const submit = async () => {
     setError("");
