@@ -11,7 +11,6 @@ export interface BillingDoc {
   scope: string;
   pricing: BillingLine[];
   currency: string;
-  gstRate: number;
   notes: string;
   terms: string;
   validUntil: string | null;
@@ -61,7 +60,7 @@ function wrap(text: string, font: PDFFont, size: number, width: number) {
 export async function billingHash(doc: BillingDoc) {
   const canonical = JSON.stringify([
     doc.billingNumber, doc.title, doc.clientName, doc.clientCompany, doc.scope,
-    doc.pricing, doc.currency, doc.gstRate, doc.notes, doc.terms, doc.validUntil,
+    doc.pricing, doc.currency, doc.notes, doc.terms, doc.validUntil,
   ]);
   const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(canonical));
   return Array.from(new Uint8Array(buf)).map((b) => b.toString(16).padStart(2, "0")).join("");
@@ -137,14 +136,13 @@ export async function renderBillingPdf(doc: BillingDoc, sig?: SignatureInfo) {
     }
     y -= 4;
   }
-  const t = billingTotals(doc.pricing, doc.gstRate);
+  const t = billingTotals(doc.pricing);
   ensure(60);
   page.drawLine({ start: { x: 330, y: y + 6 }, end: { x: W - M, y: y + 6 }, color: MUTED, thickness: 0.5 });
   y -= 8;
   text("Subtotal", 390, 10);
   text(formatAmount(t.subtotal, doc.currency, true), 475, 10, mono);
   y -= 15;
-  y -= 2;
   text("Total", 390, 11, bold);
   text(formatAmount(t.total, doc.currency, true), 475, 11, bold);
   y -= 28;

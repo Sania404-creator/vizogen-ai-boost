@@ -18,11 +18,10 @@ export const BILLING_STATUS_LABELS: Record<string, string> = {
   rejected: "Rejected",
 };
 
-export function billingTotals(lines: BillingLine[], gstRate: number) {
+/** Bill total = line items only. No GST or other tax is added. */
+export function billingTotals(lines: BillingLine[]) {
   const subtotal = lines.reduce((s, l) => s + l.qty * l.price, 0);
-  void gstRate; // GST is not charged on Vizogen bills
-  const gst = 0;
-  return { subtotal, gst, total: Math.round(subtotal * 100) / 100 };
+  return { subtotal, total: Math.round(subtotal * 100) / 100 };
 }
 
 export function formatAmount(n: number, currency: string, ascii = false) {
