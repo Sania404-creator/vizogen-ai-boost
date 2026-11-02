@@ -45,6 +45,7 @@ import { Route as YogaWellnessMarketingSoftwareRouteImport } from './routes/yoga
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedPartnerPortalRouteImport } from './routes/_authenticated/partner-portal'
 import { Route as CrmCrmRouteImport } from './routes/_crm/crm'
+import { Route as BillingTokenRouteImport } from './routes/billing.$token'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as CrmLoginRouteImport } from './routes/crm.login'
@@ -288,6 +289,11 @@ const CrmCrmRoute = CrmCrmRouteImport.update({
   id: '/crm',
   path: '/crm',
   getParentRoute: () => CrmRoute,
+} as any)
+const BillingTokenRoute = BillingTokenRouteImport.update({
+  id: '/billing/$token',
+  path: '/billing/$token',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const BlogIndexRoute = BlogIndexRouteImport.update({
   id: '/blog/',
@@ -616,6 +622,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof AuthenticatedDashboardRouteWithChildren
   '/partner-portal': typeof AuthenticatedPartnerPortalRoute
   '/crm': typeof CrmCrmRouteWithChildren
+  '/billing/$token': typeof BillingTokenRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/crm/login': typeof CrmLoginRoute
   '/crm/reset-password': typeof CrmResetPasswordRoute
@@ -705,6 +712,7 @@ export interface FileRoutesByTo {
   '/tour-travel-marketing-software': typeof TourTravelMarketingSoftwareRoute
   '/yoga-wellness-marketing-software': typeof YogaWellnessMarketingSoftwareRoute
   '/partner-portal': typeof AuthenticatedPartnerPortalRoute
+  '/billing/$token': typeof BillingTokenRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/crm/login': typeof CrmLoginRoute
   '/crm/reset-password': typeof CrmResetPasswordRoute
@@ -799,6 +807,7 @@ export interface FileRoutesById {
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRouteWithChildren
   '/_authenticated/partner-portal': typeof AuthenticatedPartnerPortalRoute
   '/_crm/crm': typeof CrmCrmRouteWithChildren
+  '/billing/$token': typeof BillingTokenRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/crm/login': typeof CrmLoginRoute
   '/crm/reset-password': typeof CrmResetPasswordRoute
@@ -892,6 +901,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/partner-portal'
     | '/crm'
+    | '/billing/$token'
     | '/blog/$slug'
     | '/crm/login'
     | '/crm/reset-password'
@@ -981,6 +991,7 @@ export interface FileRouteTypes {
     | '/tour-travel-marketing-software'
     | '/yoga-wellness-marketing-software'
     | '/partner-portal'
+    | '/billing/$token'
     | '/blog/$slug'
     | '/crm/login'
     | '/crm/reset-password'
@@ -1074,6 +1085,7 @@ export interface FileRouteTypes {
     | '/_authenticated/dashboard'
     | '/_authenticated/partner-portal'
     | '/_crm/crm'
+    | '/billing/$token'
     | '/blog/$slug'
     | '/crm/login'
     | '/crm/reset-password'
@@ -1165,6 +1177,7 @@ export interface RootRouteChildren {
   TermsAndConditionsRoute: typeof TermsAndConditionsRoute
   TourTravelMarketingSoftwareRoute: typeof TourTravelMarketingSoftwareRoute
   YogaWellnessMarketingSoftwareRoute: typeof YogaWellnessMarketingSoftwareRoute
+  BillingTokenRoute: typeof BillingTokenRoute
   BlogSlugRoute: typeof BlogSlugRoute
   CrmLoginRoute: typeof CrmLoginRoute
   CrmResetPasswordRoute: typeof CrmResetPasswordRoute
@@ -1458,6 +1471,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/crm'
       preLoaderRoute: typeof CrmCrmRouteImport
       parentRoute: typeof CrmRoute
+    }
+    '/billing/$token': {
+      id: '/billing/$token'
+      path: '/billing/$token'
+      fullPath: '/billing/$token'
+      preLoaderRoute: typeof BillingTokenRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/blog/': {
       id: '/blog/'
@@ -1960,6 +1980,7 @@ const rootRouteChildren: RootRouteChildren = {
   TermsAndConditionsRoute: TermsAndConditionsRoute,
   TourTravelMarketingSoftwareRoute: TourTravelMarketingSoftwareRoute,
   YogaWellnessMarketingSoftwareRoute: YogaWellnessMarketingSoftwareRoute,
+  BillingTokenRoute: BillingTokenRoute,
   BlogSlugRoute: BlogSlugRoute,
   CrmLoginRoute: CrmLoginRoute,
   CrmResetPasswordRoute: CrmResetPasswordRoute,
