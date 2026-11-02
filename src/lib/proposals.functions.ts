@@ -39,10 +39,17 @@ export interface Proposal {
   sent_at: string | null;
   viewed_at: string | null;
   created_at: string;
+  billing_number?: string | null;
+  gst_rate?: number;
+  expires_at?: string | null;
+  confirmed_at?: string | null;
+  signer_name?: string | null;
+  signed_pdf_path?: string | null;
+  change_request?: string | null;
 }
 
 const PROPOSAL_COLUMNS =
-  "id, lead_id, title, client_name, client_company, client_email, scope, deliverables, pricing, currency, notes, terms, valid_until, status, version, share_token, sent_at, viewed_at, created_at";
+  "billing_number, gst_rate, expires_at, confirmed_at, signer_name, signed_pdf_path, change_request, id, lead_id, title, client_name, client_company, client_email, scope, deliverables, pricing, currency, notes, terms, valid_until, status, version, share_token, sent_at, viewed_at, created_at";
 
 const pricingSchema = z.array(
   z.object({
@@ -206,26 +213,60 @@ export const sendProposal = createServerFn({ method: "POST" })
     if (error || !proposal) throw new Error("Proposal not found.");
     const row = proposal as unknown as Proposal;
 
-    const link = `${SITE_URL}/proposal/${row.share_token}`;
+    if (row.status === "confirmed") throw new Error("This billing is already signed. Create a new version instead.");
+    const extra = proposal as unknown as { billing_number: string | null; gst_rate: number | null };
+    let billingNumber = extra.billing_number;
+    if (!billingNumber) {
+      const { data: n } = await context.supabase.rpc("crm_next_billing_number");
+      billingNumber = (n as string | null) ?? `VZ-${row.id.slice(0, 8).toUpperCase()}`;
+    }
+    const expiresAt = new Date(Date.now() + 14 * 864e5).toISOString();
+    const link = `${SITE_URL}/billing/${row.share_token}`;
     const { sendGmail } = await import("@/lib/email.server");
-    const { buildProposalEmail } = await import("@/lib/crm-emails");
+    const { buildBillingSentEmail } = await import("@/lib/crm-emails");
+    const { renderBillingPdf, toBase64 } = await import("@/lib/billing-pdf.server");
+    const { billingTotals, formatAmount } = await import("@/lib/billing");
+    const gstRate = Number(extra.gst_rate ?? 18);
+    const totals = billingTotals(row.pricing ?? [], gstRate);
+    const pdf = await renderBillingPdf({
+      billingNumber,
+      title: row.title,
+      clientName: row.client_name,
+      clientCompany: row.client_company,
+      clientEmail: row.client_email,
+      scope: row.scope,
+      pricing: row.pricing ?? [],
+      currency: row.currency,
+      gstRate,
+      notes: row.notes,
+      terms: row.terms,
+      validUntil: row.valid_until,
+      createdAt: row.created_at,
+    });
     const sent = await sendGmail(
       row.client_email,
-      data.subject,
-      buildProposalEmail({
+      `Your Quotation/Invoice ${billingNumber} from Vizogen`,
+      buildBillingSentEmail({
+        billingNumber,
         clientName: row.client_name,
-        company: row.client_company,
-        title: row.title,
+        total: formatAmount(totals.total, row.currency),
+        validity: new Date(row.valid_until ?? expiresAt).toLocaleDateString("en-IN"),
         link,
         message: data.message,
-        validUntil: row.valid_until,
       }),
+      [{ filename: `${billingNumber}.pdf`, contentType: "application/pdf", base64: toBase64(pdf) }],
     );
     if (!sent) throw new Error("Email sending failed. Check the Vizogen email connection.");
 
     await context.supabase
       .from("crm_proposals")
-      .update({ status: "sent", sent_at: new Date().toISOString() })
+      .update({
+        status: "sent",
+        sent_at: new Date().toISOString(),
+        billing_number: billingNumber,
+        expires_at: expiresAt,
+        token_used_at: null,
+      })
       .eq("id", row.id);
 
     const { data: member } = await context.supabase
@@ -297,7 +338,7 @@ export const setProposalStatus = createServerFn({ method: "POST" })
     z
       .object({
         id: z.string().uuid(),
-        status: z.enum(["draft", "sent", "viewed", "accepted", "rejected"]),
+        status: z.enum(["draft", "sent", "viewed", "changes_requested", "accepted", "rejected"]),
       })
       .parse(input),
   )
