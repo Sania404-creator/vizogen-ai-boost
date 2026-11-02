@@ -33,10 +33,10 @@ const TONE: Record<string, string> = {
   rejected: "bg-destructive/10 text-destructive",
 };
 
-export function BillingStatusBadge({ status, expiresAt }: { status: string; expiresAt?: string | null }) {
+export function BillingStatusBadge({ status, expiresAt }: { status: string; expiresAt?: string | null | undefined }) {
   const s = effectiveBillingStatus(status, expiresAt ?? null);
   return (
-    <span className={cn("inline-flex rounded-full px-2.5 py-0.5 text-[11px] font-semibold", TONE[s] ?? TONE.draft)}>
+    <span className={cn("inline-flex rounded-full px-2.5 py-0.5 text-[11px] font-semibold", TONE[s] ?? TONE["draft"])}>
       {BILLING_STATUS_LABELS[s] ?? s}
     </span>
   );
