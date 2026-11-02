@@ -130,7 +130,7 @@ export function buildBillingSentEmail(input: {
     ${input.message ? `<p style="margin:0 0 14px;color:#4a4f5c;white-space:pre-line">${esc(input.message)}</p>` : ""}
     <table style="font-size:14px;margin-bottom:18px">
       <tr><td style="padding:4px 16px 4px 0;color:#8a8f9c">Billing no.</td><td><b>${esc(input.billingNumber)}</b></td></tr>
-      <tr><td style="padding:4px 16px 4px 0;color:#8a8f9c">Total (incl. GST)</td><td><b>${esc(input.total)}</b></td></tr>
+      <tr><td style="padding:4px 16px 4px 0;color:#8a8f9c">Total</td><td><b>${esc(input.total)}</b></td></tr>
       <tr><td style="padding:4px 16px 4px 0;color:#8a8f9c">Valid until</td><td>${esc(input.validity)}</td></tr>
     </table>
     <p style="margin:0">

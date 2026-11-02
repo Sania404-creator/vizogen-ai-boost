@@ -144,9 +144,7 @@ export async function renderBillingPdf(doc: BillingDoc, sig?: SignatureInfo) {
   text("Subtotal", 390, 10);
   text(formatAmount(t.subtotal, doc.currency, true), 475, 10, mono);
   y -= 15;
-  text(`GST (${doc.gstRate}%)`, 390, 10);
-  text(formatAmount(t.gst, doc.currency, true), 475, 10, mono);
-  y -= 17;
+  y -= 2;
   text("Total", 390, 11, bold);
   text(formatAmount(t.total, doc.currency, true), 475, 11, bold);
   y -= 28;
