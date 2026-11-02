@@ -8,10 +8,47 @@ function base64Url(input: string) {
     .replace(/=+$/, "");
 }
 
-function buildRaw(to: string, subject: string, html: string) {
+export interface EmailAttachment {
+  filename: string;
+  contentType: string;
+  base64: string;
+}
+
+function encodeSubject(subject: string) {
+  return /^[\x20-\x7e]*$/.test(subject)
+    ? subject
+    : `=?UTF-8?B?${Buffer.from(subject, "utf8").toString("base64")}?=`;
+}
+
+function buildRaw(to: string, subject: string, html: string, attachments: EmailAttachment[] = []) {
+  if (attachments.length) {
+    const b = `vz_${crypto.randomUUID().replace(/-/g, "")}`;
+    const parts = [
+      `To: ${to}`,
+      `Subject: ${encodeSubject(subject)}`,
+      "MIME-Version: 1.0",
+      `Content-Type: multipart/mixed; boundary="${b}"`,
+      "",
+      `--${b}`,
+      'Content-Type: text/html; charset="UTF-8"',
+      "Content-Transfer-Encoding: base64",
+      "",
+      Buffer.from(html, "utf8").toString("base64").replace(/(.{76})/g, "$1\r\n"),
+      ...attachments.flatMap((a) => [
+        `--${b}`,
+        `Content-Type: ${a.contentType}; name="${a.filename}"`,
+        `Content-Disposition: attachment; filename="${a.filename}"`,
+        "Content-Transfer-Encoding: base64",
+        "",
+        a.base64.replace(/(.{76})/g, "$1\r\n"),
+      ]),
+      `--${b}--`,
+    ];
+    return base64Url(parts.join("\r\n"));
+  }
   const message = [
     `To: ${to}`,
-    `Subject: ${subject}`,
+    `Subject: ${encodeSubject(subject)}`,
     "MIME-Version: 1.0",
     'Content-Type: text/html; charset="UTF-8"',
     "",
@@ -21,7 +58,12 @@ function buildRaw(to: string, subject: string, html: string) {
 }
 
 /** Sends an email from the connected Vizogen Gmail account. Returns true on success. */
-export async function sendGmail(to: string, subject: string, html: string) {
+export async function sendGmail(
+  to: string,
+  subject: string,
+  html: string,
+  attachments: EmailAttachment[] = [],
+) {
   const lovableApiKey = process.env["LOVABLE_API_KEY"];
   const gmailKey = process.env["GOOGLE_MAIL_API_KEY"];
   if (!lovableApiKey || !gmailKey) {
@@ -36,7 +78,7 @@ export async function sendGmail(to: string, subject: string, html: string) {
       Authorization: `Bearer ${lovableApiKey}`,
       "X-Connection-Api-Key": gmailKey,
     },
-    body: JSON.stringify({ raw: buildRaw(to, subject, html) }),
+    body: JSON.stringify({ raw: buildRaw(to, subject, html, attachments) }),
   });
 
   if (!response.ok) {
