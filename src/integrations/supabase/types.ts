@@ -10,7 +10,7 @@ export type Database = {
   // Allows to automatically instantiate createClient with right options
   // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
-    PostgrestVersion: "14.5"
+    PostgrestVersion: "14.17"
   }
   public: {
     Tables: {
@@ -385,6 +385,7 @@ export type Database = {
       }
       crm_proposals: {
         Row: {
+          accepted_at: string | null
           client_company: string
           client_email: string
           client_name: string
@@ -394,15 +395,20 @@ export type Database = {
           decided_at: string | null
           deliverables: string[]
           id: string
+          invoice_number: string | null
+          invoice_sent_at: string | null
           lead_id: string
           notes: string
           pricing: Json
           scope: string
           sent_at: string | null
           share_token: string
+          signature_data: string | null
+          signer_name: string | null
           status: string
           template_id: string | null
           terms: string
+          terms_agreed_at: string | null
           title: string
           updated_at: string
           valid_until: string | null
@@ -410,6 +416,7 @@ export type Database = {
           viewed_at: string | null
         }
         Insert: {
+          accepted_at?: string | null
           client_company?: string
           client_email?: string
           client_name?: string
@@ -419,15 +426,20 @@ export type Database = {
           decided_at?: string | null
           deliverables?: string[]
           id?: string
+          invoice_number?: string | null
+          invoice_sent_at?: string | null
           lead_id: string
           notes?: string
           pricing?: Json
           scope?: string
           sent_at?: string | null
           share_token?: string
+          signature_data?: string | null
+          signer_name?: string | null
           status?: string
           template_id?: string | null
           terms?: string
+          terms_agreed_at?: string | null
           title?: string
           updated_at?: string
           valid_until?: string | null
@@ -435,6 +447,7 @@ export type Database = {
           viewed_at?: string | null
         }
         Update: {
+          accepted_at?: string | null
           client_company?: string
           client_email?: string
           client_name?: string
@@ -444,15 +457,20 @@ export type Database = {
           decided_at?: string | null
           deliverables?: string[]
           id?: string
+          invoice_number?: string | null
+          invoice_sent_at?: string | null
           lead_id?: string
           notes?: string
           pricing?: Json
           scope?: string
           sent_at?: string | null
           share_token?: string
+          signature_data?: string | null
+          signer_name?: string | null
           status?: string
           template_id?: string | null
           terms?: string
+          terms_agreed_at?: string | null
           title?: string
           updated_at?: string
           valid_until?: string | null
@@ -1224,20 +1242,36 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      crm_accept_proposal: {
+        Args: {
+          _agreed: boolean
+          _signature: string
+          _signer_name: string
+          _token: string
+        }
+        Returns: {
+          already: boolean
+          invoice_number: string
+          proposal_id: string
+        }[]
+      }
       crm_can_view_all: { Args: { _user_id: string }; Returns: boolean }
       crm_is_member: { Args: { _user_id: string }; Returns: boolean }
       crm_view_proposal: {
         Args: { _token: string }
         Returns: {
+          accepted_at: string
           client_company: string
           client_name: string
           created_at: string
           currency: string
           deliverables: string[]
+          invoice_number: string
           notes: string
           pricing: Json
           scope: string
           sent_at: string
+          signer_name: string
           status: string
           terms: string
           title: string

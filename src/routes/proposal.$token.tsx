@@ -5,6 +5,7 @@ import { CheckCircle2, Loader2, Mail, Phone } from "lucide-react";
 import { viewProposal, type PricingLine } from "@/lib/proposals.functions";
 import { VizogenMark } from "@/components/brand/logo";
 import { NAP } from "@/lib/aeo";
+import { ProposalAccept } from "@/components/crm/proposal-accept";
 
 export const Route = createFileRoute("/proposal/$token")({
   head: () => ({
@@ -53,6 +54,10 @@ interface ProposalRow {
   valid_until: string | null;
   version: number;
   created_at: string;
+  status: string;
+  signer_name: string | null;
+  accepted_at: string | null;
+  invoice_number: string | null;
 }
 
 function PublicProposal() {
@@ -188,6 +193,16 @@ function PublicProposal() {
                 This proposal is valid until {new Date(p.valid_until).toLocaleDateString()}.
               </p>
             ) : null}
+
+            <ProposalAccept
+              token={token}
+              total={`${symbol}${total.toLocaleString()}`}
+              status={p.status}
+              signerName={p.signer_name}
+              acceptedAt={p.accepted_at}
+              invoiceNumber={p.invoice_number}
+              onDone={() => query.refetch()}
+            />
 
             <footer className="border-t border-border pt-6 text-sm text-muted-foreground">
               <p className="font-semibold text-foreground">{NAP.name}</p>

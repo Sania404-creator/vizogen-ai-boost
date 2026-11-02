@@ -73,3 +73,45 @@ export function buildFollowUpReminderEmail(input: { repName: string; leads: stri
     </p>
   `);
 }
+
+const esc = (s: string) =>
+  String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!);
+
+export function buildInvoiceEmail(input: {
+  invoiceNumber: string;
+  clientName: string;
+  company: string;
+  signerName: string;
+  title: string;
+  currency: string;
+  lines: { item: string; qty: number; price: number }[];
+  acceptedAt: string;
+  link: string;
+}) {
+  const sym = input.currency === "USD" ? "$" : "₹";
+  const fmt = (n: number) => sym + n.toLocaleString("en-IN");
+  const total = input.lines.reduce((s, l) => s + l.qty * l.price, 0);
+  const rows = input.lines
+    .map(
+      (l) =>
+        `<tr><td style="padding:8px;border-bottom:1px solid #eef0f6">${esc(l.item)}</td><td style="padding:8px;border-bottom:1px solid #eef0f6;text-align:center">${l.qty}</td><td style="padding:8px;border-bottom:1px solid #eef0f6;text-align:right">${fmt(l.price)}</td><td style="padding:8px;border-bottom:1px solid #eef0f6;text-align:right">${fmt(l.qty * l.price)}</td></tr>`,
+    )
+    .join("");
+  const date = new Date(input.acceptedAt).toLocaleString("en-IN", { timeZone: "Asia/Kolkata" });
+  return wrap(`
+    <h2 style="margin:0 0 6px;font-size:22px">Your bill · ${esc(input.invoiceNumber)}</h2>
+    <p style="margin:0 0 14px;color:#4a4f5c">Hi ${esc(input.clientName)}, thank you for accepting <b>${esc(input.title)}</b>. Here is your bill.</p>
+    <table style="font-size:13px;color:#4a4f5c;margin-bottom:14px">
+      <tr><td style="padding:3px 14px 3px 0">Billed to</td><td><b>${esc(input.company || input.clientName)}</b></td></tr>
+      <tr><td style="padding:3px 14px 3px 0">Billed by</td><td>Vizogen / NG Marketing Solution, Rajkot, Gujarat</td></tr>
+      <tr><td style="padding:3px 14px 3px 0">Accepted &amp; e-signed</td><td>${esc(input.signerName)} · ${date} IST</td></tr>
+    </table>
+    <table style="width:100%;font-size:14px;border-collapse:collapse">
+      <tr style="background:#f6f7fb;text-align:left"><th style="padding:8px">Item</th><th style="padding:8px">Qty</th><th style="padding:8px;text-align:right">Price</th><th style="padding:8px;text-align:right">Amount</th></tr>
+      ${rows}
+      <tr><td colspan="3" style="padding:10px 8px;font-weight:700">Total payable</td><td style="padding:10px 8px;text-align:right;font-weight:700">${fmt(total)}</td></tr>
+    </table>
+    <p style="margin:16px 0 0;font-size:13px;color:#4a4f5c">You agreed to the Vizogen Terms &amp; Conditions (www.vizogen.in/terms-and-conditions). All payments are non-refundable.</p>
+    <p style="margin:18px 0 0"><a href="${input.link}" style="display:inline-block;background:${BRAND};color:#ffffff;text-decoration:none;padding:12px 20px;border-radius:999px;font-weight:700">View signed proposal</a></p>
+  `);
+}
