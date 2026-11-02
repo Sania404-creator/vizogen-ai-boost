@@ -118,7 +118,6 @@ export const oneTimeServices: OneTimeService[] = [
   {
     name: "GMB Creation & Management Plan (From Scratch)",
     price: 3000,
-    priceNote: "+ 18% GST",
     items: [
       "GMB Creation From Scratch",
       "Address Verification Guidance",

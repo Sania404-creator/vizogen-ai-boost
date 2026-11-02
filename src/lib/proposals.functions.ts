@@ -40,7 +40,6 @@ export interface Proposal {
   viewed_at: string | null;
   created_at: string;
   billing_number?: string | null;
-  gst_rate?: number;
   expires_at?: string | null;
   confirmed_at?: string | null;
   signer_name?: string | null;
@@ -49,7 +48,7 @@ export interface Proposal {
 }
 
 const PROPOSAL_COLUMNS =
-  "billing_number, gst_rate, expires_at, confirmed_at, signer_name, signed_pdf_path, change_request, id, lead_id, title, client_name, client_company, client_email, scope, deliverables, pricing, currency, notes, terms, valid_until, status, version, share_token, sent_at, viewed_at, created_at";
+  "billing_number, expires_at, confirmed_at, signer_name, signed_pdf_path, change_request, id, lead_id, title, client_name, client_company, client_email, scope, deliverables, pricing, currency, notes, terms, valid_until, status, version, share_token, sent_at, viewed_at, created_at";
 
 const pricingSchema = z.array(
   z.object({
@@ -224,7 +223,7 @@ export const sendProposal = createServerFn({ method: "POST" })
     const row = proposal as unknown as Proposal;
 
     if (row.status === "confirmed") throw new Error("This billing is already signed. Create a new version instead.");
-    const extra = proposal as unknown as { billing_number: string | null; gst_rate: number | null };
+    const extra = proposal as unknown as { billing_number: string | null };
     let billingNumber = extra.billing_number;
     if (!billingNumber) {
       const { data: n } = await context.supabase.rpc("crm_next_billing_number");
@@ -236,8 +235,7 @@ export const sendProposal = createServerFn({ method: "POST" })
     const { buildBillingSentEmail } = await import("@/lib/crm-emails");
     const { renderBillingPdf, toBase64 } = await import("@/lib/billing-pdf.server");
     const { billingTotals, formatAmount } = await import("@/lib/billing");
-    const gstRate = Number(extra.gst_rate ?? 18);
-    const totals = billingTotals(row.pricing ?? [], gstRate);
+    const totals = billingTotals(row.pricing ?? []);
     const pdf = await renderBillingPdf({
       billingNumber,
       title: row.title,
@@ -247,7 +245,6 @@ export const sendProposal = createServerFn({ method: "POST" })
       scope: row.scope,
       pricing: row.pricing ?? [],
       currency: row.currency,
-      gstRate,
       notes: row.notes,
       terms: row.terms,
       validUntil: row.valid_until,

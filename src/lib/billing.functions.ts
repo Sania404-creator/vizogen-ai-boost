@@ -17,7 +17,7 @@ const BUCKET = "billing-docs";
 const tokenSchema = z.string().trim().regex(/^[A-Za-z0-9_-]{20,80}$/);
 
 const COLS =
-  "id, lead_id, title, client_name, client_company, client_email, scope, deliverables, pricing, currency, gst_rate, notes, terms, valid_until, status, version, share_token, sent_at, viewed_at, created_at, expires_at, token_used_at, billing_number, signer_name, signer_designation, confirmed_at, signed_ip, document_hash, signed_pdf_path, change_request, change_requested_at";
+  "id, lead_id, title, client_name, client_company, client_email, scope, deliverables, pricing, currency, notes, terms, valid_until, status, version, share_token, sent_at, viewed_at, created_at, expires_at, token_used_at, billing_number, signer_name, signer_designation, confirmed_at, signed_ip, document_hash, signed_pdf_path, change_request, change_requested_at";
 
 type Row = {
   id: string;
@@ -30,7 +30,6 @@ type Row = {
   deliverables: string[];
   pricing: BillingLine[];
   currency: string;
-  gst_rate: number;
   notes: string;
   terms: string;
   valid_until: string | null;
@@ -71,7 +70,6 @@ const toDoc = (r: Row) => ({
   scope: r.scope,
   pricing: r.pricing ?? [],
   currency: r.currency,
-  gstRate: Number(r.gst_rate ?? 18),
   notes: r.notes,
   terms: r.terms,
   validUntil: r.valid_until,
@@ -124,7 +122,7 @@ export const getBilling = createServerFn({ method: "POST" })
       status: r.status === "sent" ? "viewed" : r.status,
       doc,
       deliverables: r.deliverables ?? [],
-      totals: billingTotals(doc.pricing, doc.gstRate),
+      totals: billingTotals(doc.pricing),
       expiresAt: r.expires_at,
     };
   });
@@ -242,7 +240,7 @@ export const signBilling = createServerFn({ method: "POST" })
       });
       const assigned = await notifyTeam(r.lead_id, `${r.client_name} signed ${doc.billingNumber}`, "Billing confirmed.");
 
-      const totals = billingTotals(doc.pricing, doc.gstRate);
+      const totals = billingTotals(doc.pricing);
       const total = formatAmount(totals.total, doc.currency);
       const attachment = [{ filename: `${doc.billingNumber}-signed.pdf`, contentType: "application/pdf", base64: toBase64(pdfBytes) }];
       const { sendGmail } = await import("@/lib/email.server");

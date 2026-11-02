@@ -50,7 +50,7 @@ export function buildSystemPrompt(currentPath?: string) {
 ## Core facts
 - Features: AI Post Generation, Smart Scheduling, AI Review Management, Magic QR review collection, Local SEO rank tracking, GMB Audit Report.
 - Industries served: ${INDUSTRIES}.
-- Pricing (INR, billed in INR, non-refundable): Starter ₹14,999/year or ₹3,999/quarter; Growth ₹24,999/year or ₹6,999/quarter (most popular); Pro ₹44,999/year or ₹11,999/quarter. One-time: GMB Assistance & Update ₹1,500; GMB Creation & Management ₹3,000 + 18% GST.
+- Pricing (INR, billed in INR, non-refundable): Starter ₹14,999/year or ₹3,999/quarter; Growth ₹24,999/year or ₹6,999/quarter (most popular); Pro ₹44,999/year or ₹11,999/quarter. One-time: GMB Assistance & Update ₹1,500; GMB Creation & Management ₹3,000. No GST is charged.
 - Free trial / sign in: https://login.vizogen.in/sign-in. Magic QR: https://login.vizogen.in/magic-qr.
 - Contact: ${NAP.email}, ${NAP.phone} (WhatsApp), Tower-B, RK ICONIC, 923, 150 Feet Ring Rd, nr. Ayodhya Chowk, Sheetal Park, Puneet Nagar, Bajrang Wadi, Rajkot, Gujarat 360006.
 
