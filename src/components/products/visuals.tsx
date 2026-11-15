@@ -46,7 +46,7 @@ function Hrm() {
         <motion.p animate={{ opacity: t >= 1 ? 1 : 0 }} className="mt-3 flex items-center gap-1 text-[11px] font-bold text-foreground">Check-in 9:02 AM <Check className="size-3.5 text-primary" /></motion.p>
       </div>
       <div className={box}><p className="text-[11px] font-semibold text-muted-foreground">Attendance</p>
-        <div className="mt-2 grid grid-cols-7 gap-1">{Array.from({ length: 28 }).map((_, i) => <motion.span key={i} className={`aspect-square rounded-full ${i % 9 === 4 ? "bg-wa-lime" : "bg-primary"}`} initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: i * 0.05, repeat: Infinity, repeatDelay: 5 }} />)}</div>
+        <div className="mt-2 grid grid-cols-7 gap-1">{Array.from({ length: 28 }).map((_, i) => <motion.span key={i} className={`size-3 rounded-full ${i % 9 === 4 ? "bg-wa-lime" : "bg-primary"}`} initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: i * 0.05, repeat: Infinity, repeatDelay: 5 }} />)}</div>
       </div>
       <div className={box}><p className="text-[11px] font-semibold text-muted-foreground">Leave request · Priya</p><p className="mt-1 text-[10px] text-muted-foreground">12–13 Dec · Casual</p>
         <motion.span animate={{ scale: t === 3 ? 0.9 : 1 }} className={`mt-2 inline-flex rounded-full px-3 py-1 text-[10px] font-bold ${t >= 3 ? "gradient-wa text-primary-foreground" : "border border-border text-foreground"}`}>{t >= 3 ? "Approved ✓" : "Approve"}</motion.span>
