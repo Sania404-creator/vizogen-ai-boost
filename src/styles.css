@@ -260,4 +260,22 @@
 }
 @theme inline {
   --color-wa-lime: var(--wa-lime);
+  --color-wa-green: var(--wa-green);
 }
+@utility wa-dots {
+  background-image: radial-gradient(color-mix(in oklab, var(--wa-green) 14%, transparent) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+@utility btn-shine {
+  &::after { content: ""; position: absolute; inset: 0; transform: translateX(-120%) skewX(-20deg); background: linear-gradient(90deg, transparent, oklch(1 0 0 / 0.35), transparent); transition: transform .7s ease; }
+  &:hover::after { transform: translateX(120%) skewX(-20deg); }
+}
+@utility wa-blob { animation: wa-drift 16s ease-in-out infinite alternate; }
+@utility wa-bar { animation: wa-grow 1.4s ease-in-out infinite alternate; transform-origin: bottom; }
+@utility wa-line { animation: wa-draw 1.6s ease-in-out infinite; }
+@utility wa-dot { animation: wa-type 1s ease-in-out infinite; }
+@keyframes wa-drift { from { transform: translate(0,0) scale(1); } to { transform: translate(60px,40px) scale(1.15); } }
+@keyframes wa-grow { from { transform: scaleY(.35); } to { transform: scaleY(1); } }
+@keyframes wa-draw { 0% { transform: scaleX(0); } 60%,100% { transform: scaleX(1); } }
+@keyframes wa-type { 0%,100% { transform: translateY(0); opacity: .4; } 50% { transform: translateY(-4px); opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .wa-blob, .wa-bar, .wa-line, .wa-dot { animation: none !important; } }

@@ -13,7 +13,7 @@ export const Route = createFileRoute("/whatsapp-crm")({
       { title: TITLE },
       { name: "description", content: DESC },
       { name: "keywords", content: "WhatsApp CRM, Instagram DM automation, WhatsApp chatbot, unified inbox, WhatsApp Business API, customer support automation, Vizogen" },
-      { name: "theme-color", content: "#000000" },
+      { name: "theme-color", content: "#16A34A" },
       { property: "og:title", content: TITLE },
       { property: "og:description", content: DESC },
       { property: "og:type", content: "product" },
