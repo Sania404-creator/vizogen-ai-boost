@@ -1,3 +1,4 @@
+import mark from "@/assets/vizogen-ai-v-logo.png.asset.json";
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Check, X, Plus, ShieldCheck, Play, ArrowRight } from "lucide-react";
@@ -22,7 +23,7 @@ export function WhatsAppCrmPage() {
       <div aria-hidden className="wa-splash pointer-events-none fixed inset-0 z-[100] grid place-items-center bg-background">
         <div className="relative grid size-28 place-items-center">
           <span className="wa-splash-ring absolute inset-0 rounded-full border-2 border-primary" />
-          <img src="/favicon.png" alt="" width={88} height={88} className="size-22" />
+          <img src={mark.url} alt="" width={88} height={88} className="size-22 object-contain" />
         </div>
       </div>
       <Nav onDemo={openDemo} />

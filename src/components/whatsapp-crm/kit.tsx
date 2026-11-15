@@ -168,8 +168,6 @@ export function Nav({ onDemo, base = "" }: { onDemo: () => void; base?: string }
               <ul className="mt-6 flex flex-col">
                 {side.map((n) => <li key={n.href}><a href={href(n.href)} onClick={() => setOpen(false)} className="block border-b border-border py-3.5 font-medium text-foreground">{n.label}</a></li>)}
                 <li><a href={WA.links.vizogenAIStudio} {...ext} onClick={() => setOpen(false)} className="flex items-center gap-2 border-b border-border py-3.5 font-medium text-foreground"><Sparkles className="size-4 text-primary" />Vizogen AI Studio<span className="rounded-full gradient-wa px-2 py-0.5 text-[10px] font-bold text-primary-foreground">New</span></a></li>
-                <li className="pt-4 text-[11px] font-bold uppercase tracking-wider text-muted-foreground">Products</li>
-                {PRODUCTS.map((p) => <li key={p.slug}><a href={`/products/${p.slug}`} onClick={() => setOpen(false)} className={`flex items-center gap-2 border-b border-border py-3 font-medium ${pathname === `/products/${p.slug}` ? "text-primary" : "text-foreground"}`}><Icon name={p.icon} className="size-4 text-primary" />{p.name}{soon}</a></li>)}
               </ul>
               <div className="mt-auto grid gap-3">
                 <a href={WA.app.dashboard} {...ext} onClick={() => setOpen(false)} className={btnSecondary + " w-full"}>Login</a>
@@ -254,10 +252,10 @@ export function Footer({ base = "" }: { base?: string }) {
           </div>
         </div>
         {WA.footer.columns.map((c) => (
-          <div key={c.title}><p className="font-semibold text-foreground">{c.title}</p><ul className="mt-4 space-y-2 text-sm">{c.links.map((l) => <li key={l.label}><a href={href(l.href)} className="text-muted-foreground hover:text-primary">{l.label}{"note" in l && l.note ? <span className="block text-xs text-muted-foreground/70">({l.note})</span> : null}</a></li>)}</ul></div>
+          <div key={c.title}><p className="font-semibold text-foreground">{c.title}</p><ul className="mt-4 space-y-2 text-sm">{c.links.map((l) => <li key={l.label}><a href={href(l.href)} className="text-muted-foreground hover:text-primary">{l.label}{"badge" in l && l.badge ? <span className={`ml-1.5 rounded-full px-1.5 py-0.5 text-[10px] font-bold ${l.badge === "New" ? "gradient-wa text-primary-foreground" : "bg-primary/10 text-primary"}`}>{l.badge}</span> : null}{"note" in l && l.note ? <span className="block text-xs text-muted-foreground/70">({l.note})</span> : null}</a></li>)}</ul></div>
         ))}
       </div>
-      <p className="border-t border-border py-6 text-center text-sm text-muted-foreground">{WA.footer.copyright} · Powered by <span className="font-semibold text-foreground">{WA.footer.poweredBy}</span></p>
+      <p className="border-t border-border py-6 text-center text-sm text-muted-foreground">{WA.footer.copyright} · Operated by <span className="font-semibold text-foreground">{WA.footer.poweredBy}</span></p>
     </footer>
   );
 }

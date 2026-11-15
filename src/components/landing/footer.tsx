@@ -36,6 +36,16 @@ const columns = [
     ],
   },
   {
+    title: "Our Other Products",
+    items: [
+      { label: "WhatsApp Marketing", to: "/whatsapp-crm", badge: "New" },
+      { label: "Enterprise ERP", to: "/products/enterprise-erp", badge: "Coming Soon" },
+      { label: "Smart HRM & Payroll", to: "/products/hrm-payroll", badge: "Coming Soon" },
+      { label: "Commerce Cloud", to: "/products/commerce-cloud", badge: "Coming Soon" },
+      { label: "Appointment Booking", to: "/products/appointment-booking", badge: "Coming Soon" },
+    ],
+  },
+  {
     title: "Legal",
     items: [
       { label: "Privacy Policy", to: "/privacy-policy" },
@@ -55,7 +65,7 @@ export function Footer() {
   return (
     <footer className="relative bg-navy pt-16 text-navy-foreground">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1fr_1fr_1.2fr]">
+        <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-[1.3fr_1fr_1fr_1.2fr_1fr_1.2fr]">
           <div>
             <div className="flex items-center gap-2">
               <img
@@ -100,6 +110,9 @@ export function Footer() {
                       className="text-sm text-navy-foreground/65 transition-colors hover:text-navy-foreground"
                     >
                       {item.label}
+                      {"badge" in item && item.badge ? (
+                        <span className={`ml-1.5 rounded-full px-1.5 py-0.5 text-[10px] font-bold ${item.badge === "New" ? "gradient-brand text-primary-foreground" : "bg-navy-foreground/10 text-navy-foreground"}`}>{item.badge}</span>
+                      ) : null}
                     </Link>
                   </li>
                 ))}
