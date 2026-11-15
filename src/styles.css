@@ -216,3 +216,48 @@
   body { font-family: var(--font-sans); }
   h1, h2, h3, .font-display { font-family: var(--font-display); }
 }
+
+/* Vizogen.ai WhatsApp CRM page theme (scoped to /whatsapp-crm) */
+.theme-wa {
+  color-scheme: light;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.21 0.04 265);          /* #0F172A */
+  --muted-foreground: oklch(0.45 0.03 257);    /* #475569 */
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.21 0.04 265);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.21 0.04 265);
+  --primary: oklch(0.63 0.15 150);              /* #16A34A */
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.98 0.02 155);            /* #F0FDF4 */
+  --secondary-foreground: oklch(0.21 0.04 265);
+  --muted: oklch(0.98 0.003 248);               /* #F8FAFC */
+  --accent: oklch(0.96 0.04 155);
+  --accent-foreground: oklch(0.35 0.1 150);
+  --border: oklch(0.93 0.01 250);
+  --input: oklch(0.9 0.01 250);
+  --ring: oklch(0.7 0.16 155);
+  --wa-lime: oklch(0.77 0.2 131);               /* #84CC16 */
+  --wa-emerald: oklch(0.7 0.15 162);            /* #10B981 */
+  --wa-green: oklch(0.63 0.15 150);             /* #16A34A */
+  --gradient-wa: linear-gradient(120deg, var(--wa-lime), var(--wa-emerald) 55%, var(--wa-green));
+  --shadow-wa: 0 18px 40px -18px color-mix(in oklab, var(--wa-green) 55%, transparent);
+  background: var(--background);
+  color: var(--foreground);
+}
+
+@utility gradient-wa {
+  background-image: var(--gradient-wa);
+}
+@utility text-gradient-wa {
+  background-image: var(--gradient-wa);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+@utility shadow-wa {
+  box-shadow: var(--shadow-wa);
+}
+@theme inline {
+  --color-wa-lime: var(--wa-lime);
+}

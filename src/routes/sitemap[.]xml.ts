@@ -48,6 +48,7 @@ function buildEntries(): SitemapEntry[] {
   const entries: SitemapEntry[] = [
     { path: "/", changefreq: "weekly", priority: "1.0" },
     { path: "/pricing", changefreq: "weekly", priority: "0.8" },
+    { path: "/whatsapp-crm", changefreq: "weekly", priority: "0.8" },
     { path: "/partner", changefreq: "monthly", priority: "0.8" },
     { path: "/partner-application", changefreq: "monthly", priority: "0.7" },
     { path: "/partner/affiliate-partner", changefreq: "monthly", priority: "0.8" },
