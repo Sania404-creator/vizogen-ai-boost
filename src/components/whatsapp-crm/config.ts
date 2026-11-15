@@ -9,10 +9,10 @@ export const WA_PRODUCTS: WAProductLink[] = [
   { label: "WhatsApp Marketing", href: "/whatsapp-crm", icon: "MessageCircle", badge: "New" },
   { label: "GMB Automation", href: "/", icon: "MapPin" },
   { label: "AI Vizogen Studio", href: "#ai-studio", icon: "Sparkles", badge: "New" },
-  { label: "Enterprise ERP", href: "/products/enterprise-erp", icon: "Building2", note: "Supply chain, inventory & GST accounting", badge: "Coming Soon" },
-  { label: "Smart HRM & Payroll", href: "/products/hrm-payroll", icon: "Fingerprint", note: "Biometric attendance, leaves & 1-click payroll", badge: "Coming Soon" },
-  { label: "Commerce Cloud", href: "/products/commerce-cloud", icon: "ShoppingCart", note: "High-converting digital storefront & checkout", badge: "Coming Soon" },
-  { label: "Appointment Booking", href: "/products/appointment-booking", icon: "CalendarCheck", note: "Online booking, calendar & staff schedule", badge: "Coming Soon" },
+  { label: "Enterprise ERP", href: "/products/enterprise-erp", icon: "Building2", badge: "Coming Soon" },
+  { label: "Smart HRM & Payroll", href: "/products/hrm-payroll", icon: "Fingerprint", badge: "Coming Soon" },
+  { label: "Commerce Cloud", href: "/products/commerce-cloud", icon: "ShoppingCart", badge: "Coming Soon" },
+  { label: "Appointment Booking", href: "/products/appointment-booking", icon: "CalendarCheck", badge: "Coming Soon" },
 ];
 
 export const WA = {
