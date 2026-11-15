@@ -2,6 +2,19 @@
  * Vizogen.ai WhatsApp & Instagram CRM page — every editable piece of copy,
  * number, URL, logo, review and price lives here.
  */
+export type WAProductLink = { label: string; href: string; icon: string; note?: string; badge?: string };
+
+/** The Vizogen product family — the footer and the side menu render this same list. */
+export const WA_PRODUCTS: WAProductLink[] = [
+  { label: "WhatsApp Marketing", href: "/whatsapp-crm", icon: "MessageCircle", badge: "New" },
+  { label: "GMB Automation", href: "/", icon: "MapPin" },
+  { label: "AI Vizogen Studio", href: "#ai-studio", icon: "Sparkles", badge: "New" },
+  { label: "Enterprise ERP", href: "/products/enterprise-erp", icon: "Building2", note: "Supply chain, inventory & GST accounting", badge: "Coming Soon" },
+  { label: "Smart HRM & Payroll", href: "/products/hrm-payroll", icon: "Fingerprint", note: "Biometric attendance, leaves & 1-click payroll", badge: "Coming Soon" },
+  { label: "Commerce Cloud", href: "/products/commerce-cloud", icon: "ShoppingCart", note: "High-converting digital storefront & checkout", badge: "Coming Soon" },
+  { label: "Appointment Booking", href: "/products/appointment-booking", icon: "CalendarCheck", note: "Online booking, calendar & staff schedule", badge: "Coming Soon" },
+];
+
 export const WA = {
   app: { dashboard: "https://app.vizogen.in/dashboard" },
   loginUrl: "https://app.vizogen.in/dashboard",
@@ -234,7 +247,7 @@ export const WA = {
     columns: [
       { title: "Product", links: [{ label: "Features", href: "#features" }, { label: "Pricing", href: "#pricing" }, { label: "Compare plans", href: "/compare" }, { label: "India Growth offer", href: "/india-growth" }, { label: "Reviews", href: "#reviews" }] },
       { title: "Solutions", links: [{ label: "E-commerce", href: "#solutions" }, { label: "Real Estate", href: "#solutions" }, { label: "Healthcare", href: "#solutions" }] },
-      { title: "Our Products", links: [{ label: "GMB Automation", href: "/" }, { label: "WhatsApp Marketing", href: "/whatsapp-crm", badge: "New" }, { label: "Vizogen AI Studio", href: "#ai-studio", badge: "New" }, { label: "Enterprise ERP", note: "Supply chain, inventory & GST accounting", href: "/products/enterprise-erp", badge: "Coming Soon" }, { label: "Smart HRM & Payroll", note: "Biometric attendance, leaves & 1-click payroll", href: "/products/hrm-payroll", badge: "Coming Soon" }, { label: "Commerce Cloud", note: "High-converting digital storefront & checkout", href: "/products/commerce-cloud", badge: "Coming Soon" }, { label: "Appointment Booking", note: "Online booking, calendar & staff schedule", href: "/products/appointment-booking", badge: "Coming Soon" }] },
+      { title: "Our Products", links: WA_PRODUCTS },
       { title: "Company", links: [{ label: "About", href: "/" }, { label: "Partner with us", href: "/partner" }, { label: "Contact", href: "/contact" }] },
       { title: "Legal", links: [{ label: "Privacy", href: "/whatsapp-crm/privacy-policy" }, { label: "Terms", href: "/whatsapp-crm/terms-and-conditions" }] },
     ],

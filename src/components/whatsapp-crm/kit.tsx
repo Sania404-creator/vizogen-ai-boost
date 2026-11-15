@@ -3,9 +3,8 @@ import { motion, useInView, useReducedMotion, useScroll, useSpring, AnimatePrese
 import * as Icons from "lucide-react";
 import { Sparkles, Check, ChevronDown, Menu, Star, X, Plus, ShieldCheck, Zap, TrendingUp, BadgeCheck, MessageCircle, Instagram, Users, Play, ArrowRight } from "lucide-react";
 import { toast } from "sonner";
-import { WA } from "./config";
+import { WA, WA_PRODUCTS } from "./config";
 import { useRouterState } from "@tanstack/react-router";
-import { PRODUCTS } from "@/components/products/site.config";
 import logo from "@/assets/vizogen-ai-logo.png.asset.json";
 import mark from "@/assets/vizogen-ai-v-logo.png.asset.json";
 import heroWoman from "@/assets/wa-hero-woman.png";
@@ -108,7 +107,7 @@ export function Nav({ onDemo, base = "" }: { onDemo: () => void; base?: string }
   const [feat, setFeat] = useState(false);
   const [prod, setProd] = useState(false);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const soon = <span className="ml-auto shrink-0 rounded-full bg-primary/15 px-2 py-0.5 text-[10px] font-bold text-primary">Coming Soon</span>;
+  const badge = (b: string) => <span className={`ml-auto shrink-0 rounded-full px-2 py-0.5 text-[10px] font-bold ${b === "New" ? "gradient-wa text-primary-foreground" : "bg-primary/15 text-primary"}`}>{b}</span>;
   const { scrollYProgress } = useScroll();
   const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 30 });
   useEffect(() => {
@@ -134,7 +133,7 @@ export function Nav({ onDemo, base = "" }: { onDemo: () => void; base?: string }
                   <div className="rounded-2xl border border-border bg-card p-2 shadow-xl">
                     <a href={href("#features")} className="block rounded-xl px-3 py-2.5 text-sm text-foreground hover:bg-muted">All features</a>
                     <a href={href("#demo")} className="block rounded-xl px-3 py-2.5 text-sm text-foreground hover:bg-muted">See Vizogen in action</a>
-                    <a href={WA.links.vizogenAIStudio} {...ext} className="flex items-center gap-2 rounded-xl px-3 py-2.5 text-sm text-foreground hover:bg-muted"><Sparkles className="size-4 text-primary" />Vizogen AI Studio<span className="ml-auto rounded-full gradient-wa px-2 py-0.5 text-[10px] font-bold text-primary-foreground">New</span></a>
+                    <a href={WA.links.vizogenAIStudio} {...ext} className="flex items-center gap-2 rounded-xl px-3 py-2.5 text-sm text-foreground hover:bg-muted"><Sparkles className="size-4 text-primary" />AI Vizogen Studio<span className="ml-auto rounded-full gradient-wa px-2 py-0.5 text-[10px] font-bold text-primary-foreground">New</span></a>
                   </div>
                 </motion.div>)}</AnimatePresence>
             </li>
@@ -144,10 +143,10 @@ export function Nav({ onDemo, base = "" }: { onDemo: () => void; base?: string }
             <AnimatePresence>{prod && (
               <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 8 }} transition={{ duration: 0.18 }} className="absolute right-0 top-full w-96 pt-3">
                 <div className="rounded-2xl border border-border bg-card p-2 shadow-xl">
-                  {PRODUCTS.map((p) => { const active = pathname === `/products/${p.slug}`; return (
-                    <a key={p.slug} href={`/products/${p.slug}`} aria-current={active ? "page" : undefined} className={`flex items-start gap-3 rounded-xl px-3 py-2.5 hover:bg-muted ${active ? "bg-primary/10" : ""}`}>
+                  {WA_PRODUCTS.map((p) => { const active = pathname === p.href; return (
+                    <a key={p.label} href={href(p.href)} aria-current={active ? "page" : undefined} className={`flex items-start gap-3 rounded-xl px-3 py-2.5 hover:bg-muted ${active ? "bg-primary/10" : ""}`}>
                       <Icon name={p.icon} className="mt-0.5 size-5 shrink-0 text-primary" />
-                      <span className="min-w-0"><span className="block text-sm font-semibold text-foreground">{p.name}</span><span className="block text-xs text-muted-foreground">{p.short}</span></span>{soon}
+                      <span className="min-w-0"><span className="block text-sm font-semibold text-foreground">{p.label}</span>{p.note ? <span className="block text-xs text-muted-foreground">{p.note}</span> : null}</span>{p.badge ? badge(p.badge) : null}
                     </a>); })}
                 </div>
               </motion.div>)}</AnimatePresence>
@@ -167,7 +166,20 @@ export function Nav({ onDemo, base = "" }: { onDemo: () => void; base?: string }
               <div className="flex items-center justify-between"><img src={logo.url} alt="Vizogen.ai" className="h-7 w-auto" /><button onClick={() => setOpen(false)} aria-label="Close menu" className="p-1"><X className="size-6" /></button></div>
               <ul className="mt-6 flex flex-col">
                 {side.map((n) => <li key={n.href}><a href={href(n.href)} onClick={() => setOpen(false)} className="block border-b border-border py-3.5 font-medium text-foreground">{n.label}</a></li>)}
-                <li><a href={WA.links.vizogenAIStudio} {...ext} onClick={() => setOpen(false)} className="flex items-center gap-2 border-b border-border py-3.5 font-medium text-foreground"><Sparkles className="size-4 text-primary" />Vizogen AI Studio<span className="rounded-full gradient-wa px-2 py-0.5 text-[10px] font-bold text-primary-foreground">New</span></a></li>
+                <li className="pt-5">
+                  <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Our Products</p>
+                  <ul className="mt-1">
+                    {WA_PRODUCTS.map((p) => (
+                      <li key={p.label}>
+                        <a href={href(p.href)} onClick={() => setOpen(false)} className="flex items-start gap-2.5 border-b border-border py-3">
+                          <Icon name={p.icon} className="mt-0.5 size-4 shrink-0 text-primary" />
+                          <span className="min-w-0"><span className="block text-sm font-medium text-foreground">{p.label}</span>{p.note ? <span className="block text-xs text-muted-foreground">{p.note}</span> : null}</span>
+                          {p.badge ? badge(p.badge) : null}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </li>
               </ul>
               <div className="mt-auto grid gap-3">
                 <a href={WA.app.dashboard} {...ext} onClick={() => setOpen(false)} className={btnSecondary + " w-full"}>Login</a>
