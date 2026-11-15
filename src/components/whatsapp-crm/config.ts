@@ -219,7 +219,7 @@ export const WA = {
     ],
   },
   faqs: [
-    { q: "What is Vizogen?", a: "Vizogen.ai is a unified inbox and automation platform for WhatsApp, Instagram and Messenger — chat with customers, build no-code chatbots, run broadcasts and deploy AI agents from one place." },
+    { q: "What is Vizogen WhatsApp Marketing?", a: "Vizogen.ai is a unified inbox and automation platform for WhatsApp, Instagram and Messenger — chat with customers, build no-code chatbots, run broadcasts and deploy AI agents from one place." },
     { q: "Do I need the WhatsApp Business API?", a: "Yes, for automation and broadcasts. We help you get WhatsApp Business API access as part of setup." },
     { q: "How fast can I go live?", a: "Most businesses are live in about 30 minutes." },
     { q: "Can I connect Instagram?", a: "Yes. Connect your Instagram business account to reply to DMs and automate comment replies." },
@@ -234,7 +234,7 @@ export const WA = {
     columns: [
       { title: "Product", links: [{ label: "Features", href: "#features" }, { label: "Pricing", href: "#pricing" }, { label: "Compare plans", href: "/compare" }, { label: "India Growth offer", href: "/india-growth" }, { label: "Reviews", href: "#reviews" }] },
       { title: "Solutions", links: [{ label: "E-commerce", href: "#solutions" }, { label: "Real Estate", href: "#solutions" }, { label: "Healthcare", href: "#solutions" }] },
-      { title: "Integrations", links: [{ label: "Shopify", href: "#integrations" }, { label: "Razorpay", href: "#integrations" }, { label: "Zapier", href: "#integrations" }] },
+      { title: "Our Products", links: [{ label: "GMB Automation", href: "/" }, { label: "WhatsApp Marketing", href: "/whatsapp-crm" }, { label: "AI Studio", href: "#ai-studio" }, { label: "Enterprise ERP", note: "Supply chain, inventory & GST accounting", href: "/contact" }, { label: "Smart HRM & Payroll", note: "Biometric attendance, leaves & 1-click payroll", href: "/contact" }, { label: "Commerce Cloud", note: "High-converting digital storefront & checkout", href: "/contact" }, { label: "Appointment Booking", note: "Online booking, calendar & staff schedule", href: "/contact" }] },
       { title: "Company", links: [{ label: "About", href: "/" }, { label: "Partner with us", href: "/partner" }, { label: "Contact", href: "/contact" }] },
       { title: "Legal", links: [{ label: "Privacy", href: "/privacy-policy" }, { label: "Terms", href: "/terms-and-conditions" }] },
     ],

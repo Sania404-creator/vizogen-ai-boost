@@ -233,7 +233,7 @@ export function Footer({ base = "" }: { base?: string }) {
           </div>
         </div>
         {WA.footer.columns.map((c) => (
-          <div key={c.title}><p className="font-semibold text-foreground">{c.title}</p><ul className="mt-4 space-y-2 text-sm">{c.links.map((l) => <li key={l.label}><a href={href(l.href)} className="text-muted-foreground hover:text-primary">{l.label}</a></li>)}</ul></div>
+          <div key={c.title}><p className="font-semibold text-foreground">{c.title}</p><ul className="mt-4 space-y-2 text-sm">{c.links.map((l) => <li key={l.label}><a href={href(l.href)} className="text-muted-foreground hover:text-primary">{l.label}{"note" in l && l.note ? <span className="block text-xs text-muted-foreground/70">({l.note})</span> : null}</a></li>)}</ul></div>
         ))}
       </div>
       <p className="border-t border-border py-6 text-center text-sm text-muted-foreground">{WA.footer.copyright}</p>

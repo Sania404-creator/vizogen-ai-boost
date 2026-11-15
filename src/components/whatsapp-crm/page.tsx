@@ -50,6 +50,17 @@ export function WhatsAppCrmPage() {
           <div className="relative px-4"><HeroCollage /></div>
         </section>
 
+        {/* Official Meta partner */}
+        <section className="mx-auto max-w-5xl px-4 py-8 md:px-6" aria-label="Official Meta Partner">
+          <Fade className="flex flex-col items-center justify-center gap-4 rounded-2xl border border-border bg-card p-6 text-center shadow-sm sm:flex-row sm:text-left">
+            <img src="https://cdn.simpleicons.org/meta/0081FB" alt="Meta logo" width={56} height={56} className="size-14" loading="lazy" />
+            <div>
+              <p className="text-xl font-extrabold text-foreground">We are an Official Meta Partner</p>
+              <p className="text-sm text-muted-foreground">Built on the official WhatsApp Business API by Meta — secure, verified and reliable messaging at scale.</p>
+            </div>
+          </Fade>
+        </section>
+
         <DemoSection onDemo={openDemo} />
 
         {/* Logo marquee */}
