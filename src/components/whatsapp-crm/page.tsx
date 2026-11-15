@@ -489,7 +489,7 @@ export function WhatsAppCrmPage() {
             <p className="mt-4 max-w-xs text-sm text-muted-foreground">{WA.footer.description}</p>
             <p className="mt-4 text-sm"><a className="text-foreground hover:text-primary" href={`mailto:${WA.contactEmail}`}>{WA.contactEmail}</a><br /><a className="text-foreground hover:text-primary" href={`tel:${WA.contactPhone.replace(/\s/g, "")}`}>{WA.contactPhone}</a></p>
             <div className="mt-4 flex gap-3 text-muted-foreground">
-              {[["Instagram", "https://instagram.com"], ["Facebook", "https://facebook.com"], ["Linkedin", "https://linkedin.com"], ["Youtube", "https://youtube.com"]].map(([n, h]) => (
+              {([["Instagram", "https://instagram.com"], ["Facebook", "https://facebook.com"], ["Linkedin", "https://linkedin.com"], ["Youtube", "https://youtube.com"]] as const).map(([n, h]) => (
                 <a key={n} href={h} target="_blank" rel="noopener noreferrer" aria-label={n} className="hover:text-primary"><Icon name={n} className="size-5" /></a>
               ))}
             </div>
