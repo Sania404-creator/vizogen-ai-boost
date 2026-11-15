@@ -4,6 +4,8 @@ import * as Icons from "lucide-react";
 import { Sparkles, Check, ChevronDown, Menu, Star, X, Plus, ShieldCheck, Zap, TrendingUp, BadgeCheck, MessageCircle, Instagram, Users, Play, ArrowRight } from "lucide-react";
 import { toast } from "sonner";
 import { WA } from "./config";
+import { useRouterState } from "@tanstack/react-router";
+import { PRODUCTS } from "@/components/products/site.config";
 import logo from "@/assets/vizogen-ai-logo.png.asset.json";
 import mark from "@/assets/vizogen-ai-v-logo.png.asset.json";
 import heroWoman from "@/assets/wa-hero-woman.png";
@@ -104,6 +106,9 @@ export function Nav({ onDemo, base = "" }: { onDemo: () => void; base?: string }
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [feat, setFeat] = useState(false);
+  const [prod, setProd] = useState(false);
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const soon = <span className="ml-auto shrink-0 rounded-full bg-primary/15 px-2 py-0.5 text-[10px] font-bold text-primary">Coming Soon</span>;
   const { scrollYProgress } = useScroll();
   const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 30 });
   useEffect(() => {
@@ -134,6 +139,19 @@ export function Nav({ onDemo, base = "" }: { onDemo: () => void; base?: string }
                 </motion.div>)}</AnimatePresence>
             </li>
           ) : <li key={n.href}><a href={href(n.href)} className="text-sm font-medium text-muted-foreground hover:text-foreground">{n.label}</a></li>)}
+          <li className="relative" onMouseEnter={() => setProd(true)} onMouseLeave={() => setProd(false)}>
+            <button type="button" aria-haspopup="true" aria-expanded={prod} onClick={() => setProd((v) => !v)} onFocus={() => setProd(true)} className={`inline-flex items-center gap-1 text-sm font-medium hover:text-foreground ${pathname.startsWith("/products/") ? "text-foreground" : "text-muted-foreground"}`}>Products<ChevronDown className="size-3.5" /></button>
+            <AnimatePresence>{prod && (
+              <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 8 }} transition={{ duration: 0.18 }} className="absolute right-0 top-full w-96 pt-3">
+                <div className="rounded-2xl border border-border bg-card p-2 shadow-xl">
+                  {PRODUCTS.map((p) => { const active = pathname === `/products/${p.slug}`; return (
+                    <a key={p.slug} href={`/products/${p.slug}`} aria-current={active ? "page" : undefined} className={`flex items-start gap-3 rounded-xl px-3 py-2.5 hover:bg-muted ${active ? "bg-primary/10" : ""}`}>
+                      <Icon name={p.icon} className="mt-0.5 size-5 shrink-0 text-primary" />
+                      <span className="min-w-0"><span className="block text-sm font-semibold text-foreground">{p.name}</span><span className="block text-xs text-muted-foreground">{p.short}</span></span>{soon}
+                    </a>); })}
+                </div>
+              </motion.div>)}</AnimatePresence>
+          </li>
         </ul>
         <div className="hidden items-center gap-4 lg:flex">
           <a href={WA.app.dashboard} {...ext} className="text-sm font-semibold text-foreground hover:text-primary">Login</a>
@@ -145,11 +163,13 @@ export function Nav({ onDemo, base = "" }: { onDemo: () => void; base?: string }
         {open && (
           <>
             <motion.div className="fixed inset-0 z-50 bg-foreground/40 lg:hidden" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.25 }} onClick={() => setOpen(false)} />
-            <motion.div role="dialog" aria-label="Menu" className="fixed inset-y-0 right-0 z-50 flex w-[82%] max-w-sm flex-col bg-background p-6 shadow-2xl lg:hidden" initial={{ x: "100%", opacity: 0 }} animate={{ x: 0, opacity: 1 }} exit={{ x: "100%", opacity: 0 }} transition={{ duration: 0.25, ease: "easeOut" }}>
+            <motion.div role="dialog" aria-label="Menu" className="fixed inset-y-0 right-0 z-50 flex w-[82%] max-w-sm flex-col overflow-y-auto bg-background p-6 shadow-2xl lg:hidden" initial={{ x: "100%", opacity: 0 }} animate={{ x: 0, opacity: 1 }} exit={{ x: "100%", opacity: 0 }} transition={{ duration: 0.25, ease: "easeOut" }}>
               <div className="flex items-center justify-between"><img src={logo.url} alt="Vizogen.ai" className="h-7 w-auto" /><button onClick={() => setOpen(false)} aria-label="Close menu" className="p-1"><X className="size-6" /></button></div>
               <ul className="mt-6 flex flex-col">
                 {side.map((n) => <li key={n.href}><a href={href(n.href)} onClick={() => setOpen(false)} className="block border-b border-border py-3.5 font-medium text-foreground">{n.label}</a></li>)}
                 <li><a href={WA.links.vizogenAIStudio} {...ext} onClick={() => setOpen(false)} className="flex items-center gap-2 border-b border-border py-3.5 font-medium text-foreground"><Sparkles className="size-4 text-primary" />Vizogen AI Studio<span className="rounded-full gradient-wa px-2 py-0.5 text-[10px] font-bold text-primary-foreground">New</span></a></li>
+                <li className="pt-4 text-[11px] font-bold uppercase tracking-wider text-muted-foreground">Products</li>
+                {PRODUCTS.map((p) => <li key={p.slug}><a href={`/products/${p.slug}`} onClick={() => setOpen(false)} className={`flex items-center gap-2 border-b border-border py-3 font-medium ${pathname === `/products/${p.slug}` ? "text-primary" : "text-foreground"}`}><Icon name={p.icon} className="size-4 text-primary" />{p.name}{soon}</a></li>)}
               </ul>
               <div className="mt-auto grid gap-3">
                 <a href={WA.app.dashboard} {...ext} onClick={() => setOpen(false)} className={btnSecondary + " w-full"}>Login</a>
@@ -227,6 +247,7 @@ export function Footer({ base = "" }: { base?: string }) {
           <img src={logo.url} alt="Vizogen.ai" className="h-8 w-auto" loading="lazy" width={132} height={30} />
           <p className="mt-4 max-w-xs text-sm text-muted-foreground">{WA.footer.description}</p>
           <p className="mt-4 text-sm"><a className="text-foreground hover:text-primary" href={`mailto:${WA.contactEmail}`}>{WA.contactEmail}</a><br /><a className="text-foreground hover:text-primary" href={`tel:${WA.contactPhone.replace(/\s/g, "")}`}>{WA.contactPhone}</a></p>
+          <address className="mt-3 max-w-xs text-sm not-italic text-muted-foreground">{WA.footer.address}</address>
           <div className="mt-5 flex flex-wrap gap-3">
             <a href={WA.app.dashboard} {...ext} className={btnSecondary + " py-2"}>Login</a>
             <a href={WA.app.dashboard} {...ext} className={btnPrimary + " py-2"}>Start Free Demo</a>
@@ -236,7 +257,7 @@ export function Footer({ base = "" }: { base?: string }) {
           <div key={c.title}><p className="font-semibold text-foreground">{c.title}</p><ul className="mt-4 space-y-2 text-sm">{c.links.map((l) => <li key={l.label}><a href={href(l.href)} className="text-muted-foreground hover:text-primary">{l.label}{"note" in l && l.note ? <span className="block text-xs text-muted-foreground/70">({l.note})</span> : null}</a></li>)}</ul></div>
         ))}
       </div>
-      <p className="border-t border-border py-6 text-center text-sm text-muted-foreground">{WA.footer.copyright}</p>
+      <p className="border-t border-border py-6 text-center text-sm text-muted-foreground">{WA.footer.copyright} · Powered by <span className="font-semibold text-foreground">{WA.footer.poweredBy}</span></p>
     </footer>
   );
 }

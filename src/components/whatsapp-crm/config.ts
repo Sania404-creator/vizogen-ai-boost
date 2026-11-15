@@ -234,10 +234,12 @@ export const WA = {
     columns: [
       { title: "Product", links: [{ label: "Features", href: "#features" }, { label: "Pricing", href: "#pricing" }, { label: "Compare plans", href: "/compare" }, { label: "India Growth offer", href: "/india-growth" }, { label: "Reviews", href: "#reviews" }] },
       { title: "Solutions", links: [{ label: "E-commerce", href: "#solutions" }, { label: "Real Estate", href: "#solutions" }, { label: "Healthcare", href: "#solutions" }] },
-      { title: "Our Products", links: [{ label: "GMB Automation", href: "/" }, { label: "WhatsApp Marketing", href: "/whatsapp-crm" }, { label: "AI Studio", href: "#ai-studio" }, { label: "Enterprise ERP", note: "Supply chain, inventory & GST accounting", href: "/contact" }, { label: "Smart HRM & Payroll", note: "Biometric attendance, leaves & 1-click payroll", href: "/contact" }, { label: "Commerce Cloud", note: "High-converting digital storefront & checkout", href: "/contact" }, { label: "Appointment Booking", note: "Online booking, calendar & staff schedule", href: "/contact" }] },
+      { title: "Our Products", links: [{ label: "GMB Automation", href: "/" }, { label: "WhatsApp Marketing", href: "/whatsapp-crm" }, { label: "AI Studio", href: "#ai-studio" }, { label: "Enterprise ERP", note: "Supply chain, inventory & GST accounting", href: "/products/enterprise-erp" }, { label: "Smart HRM & Payroll", note: "Biometric attendance, leaves & 1-click payroll", href: "/products/hrm-payroll" }, { label: "Commerce Cloud", note: "High-converting digital storefront & checkout", href: "/products/commerce-cloud" }, { label: "Appointment Booking", note: "Online booking, calendar & staff schedule", href: "/products/appointment-booking" }] },
       { title: "Company", links: [{ label: "About", href: "/" }, { label: "Partner with us", href: "/partner" }, { label: "Contact", href: "/contact" }] },
-      { title: "Legal", links: [{ label: "Privacy", href: "/privacy-policy" }, { label: "Terms", href: "/terms-and-conditions" }] },
+      { title: "Legal", links: [{ label: "Privacy", href: "/whatsapp-crm/privacy-policy" }, { label: "Terms", href: "/whatsapp-crm/terms-and-conditions" }] },
     ],
     copyright: "© 2026 Vizogen.ai. All rights reserved.",
+    poweredBy: "NG Marketing Solution",
+    address: "Tower-B, RK ICONIC, 923, 150 Feet Ring Rd, nr. Ayodhya Chowk, Sheetal Park, Puneet Nagar, Bajrang Wadi, Rajkot, Gujarat 360006",
   },
 } as const;

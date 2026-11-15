@@ -60,6 +60,10 @@ import { Route as FeaturesSmartSchedulingRouteImport } from './routes/features.s
 import { Route as PartnerAffiliatePartnerRouteImport } from './routes/partner_.affiliate-partner'
 import { Route as PartnerPrimePlusPartnerRouteImport } from './routes/partner_.prime-plus-partner'
 import { Route as PartnerWhiteLabelledPartnerRouteImport } from './routes/partner_.white-labelled-partner'
+import { Route as ProductsAppointmentBookingRouteImport } from './routes/products.appointment-booking'
+import { Route as ProductsCommerceCloudRouteImport } from './routes/products.commerce-cloud'
+import { Route as ProductsEnterpriseErpRouteImport } from './routes/products.enterprise-erp'
+import { Route as ProductsHrmPayrollRouteImport } from './routes/products.hrm-payroll'
 import { Route as ProposalTokenRouteImport } from './routes/proposal.$token'
 import { Route as RSlugRouteImport } from './routes/r.$slug'
 import { Route as ServicesLocalSeoRouteImport } from './routes/services.local-seo'
@@ -82,6 +86,8 @@ import { Route as ServicesLocalSeoRajkotRouteImport } from './routes/services.lo
 import { Route as ServicesLocalSeoSuratRouteImport } from './routes/services.local-seo-surat'
 import { Route as ServicesLocalSeoUdaipurRouteImport } from './routes/services.local-seo-udaipur'
 import { Route as ServicesLocalSeoVadodaraRouteImport } from './routes/services.local-seo-vadodara'
+import { Route as WhatsappCrmPrivacyPolicyRouteImport } from './routes/whatsapp-crm_.privacy-policy'
+import { Route as WhatsappCrmTermsAndConditionsRouteImport } from './routes/whatsapp-crm_.terms-and-conditions'
 import { Route as AuthenticatedDashboardIndexRouteImport } from './routes/_authenticated/dashboard.index'
 import { Route as AuthenticatedDashboardAgentRouteImport } from './routes/_authenticated/dashboard.agent'
 import { Route as AuthenticatedDashboardAuditRouteImport } from './routes/_authenticated/dashboard.audit'
@@ -371,6 +377,27 @@ const PartnerWhiteLabelledPartnerRoute =
     path: '/partner/white-labelled-partner',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ProductsAppointmentBookingRoute =
+  ProductsAppointmentBookingRouteImport.update({
+    id: '/products/appointment-booking',
+    path: '/products/appointment-booking',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ProductsCommerceCloudRoute = ProductsCommerceCloudRouteImport.update({
+  id: '/products/commerce-cloud',
+  path: '/products/commerce-cloud',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProductsEnterpriseErpRoute = ProductsEnterpriseErpRouteImport.update({
+  id: '/products/enterprise-erp',
+  path: '/products/enterprise-erp',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProductsHrmPayrollRoute = ProductsHrmPayrollRouteImport.update({
+  id: '/products/hrm-payroll',
+  path: '/products/hrm-payroll',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProposalTokenRoute = ProposalTokenRouteImport.update({
   id: '/proposal/$token',
   path: '/proposal/$token',
@@ -484,6 +511,18 @@ const ServicesLocalSeoVadodaraRoute =
   ServicesLocalSeoVadodaraRouteImport.update({
     id: '/services/local-seo-vadodara',
     path: '/services/local-seo-vadodara',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const WhatsappCrmPrivacyPolicyRoute =
+  WhatsappCrmPrivacyPolicyRouteImport.update({
+    id: '/whatsapp-crm_/privacy-policy',
+    path: '/whatsapp-crm/privacy-policy',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const WhatsappCrmTermsAndConditionsRoute =
+  WhatsappCrmTermsAndConditionsRouteImport.update({
+    id: '/whatsapp-crm_/terms-and-conditions',
+    path: '/whatsapp-crm/terms-and-conditions',
     getParentRoute: () => rootRouteImport,
   } as any)
 const AuthenticatedDashboardIndexRoute =
@@ -654,6 +693,10 @@ export interface FileRoutesByFullPath {
   '/partner/affiliate-partner': typeof PartnerAffiliatePartnerRoute
   '/partner/prime-plus-partner': typeof PartnerPrimePlusPartnerRoute
   '/partner/white-labelled-partner': typeof PartnerWhiteLabelledPartnerRoute
+  '/products/appointment-booking': typeof ProductsAppointmentBookingRoute
+  '/products/commerce-cloud': typeof ProductsCommerceCloudRoute
+  '/products/enterprise-erp': typeof ProductsEnterpriseErpRoute
+  '/products/hrm-payroll': typeof ProductsHrmPayrollRoute
   '/proposal/$token': typeof ProposalTokenRoute
   '/r/$slug': typeof RSlugRoute
   '/services/local-seo': typeof ServicesLocalSeoRoute
@@ -676,6 +719,8 @@ export interface FileRoutesByFullPath {
   '/services/local-seo-surat': typeof ServicesLocalSeoSuratRoute
   '/services/local-seo-udaipur': typeof ServicesLocalSeoUdaipurRoute
   '/services/local-seo-vadodara': typeof ServicesLocalSeoVadodaraRoute
+  '/whatsapp-crm/privacy-policy': typeof WhatsappCrmPrivacyPolicyRoute
+  '/whatsapp-crm/terms-and-conditions': typeof WhatsappCrmTermsAndConditionsRoute
   '/blog/': typeof BlogIndexRoute
   '/dashboard/agent': typeof AuthenticatedDashboardAgentRoute
   '/dashboard/audit': typeof AuthenticatedDashboardAuditRoute
@@ -747,6 +792,10 @@ export interface FileRoutesByTo {
   '/partner/affiliate-partner': typeof PartnerAffiliatePartnerRoute
   '/partner/prime-plus-partner': typeof PartnerPrimePlusPartnerRoute
   '/partner/white-labelled-partner': typeof PartnerWhiteLabelledPartnerRoute
+  '/products/appointment-booking': typeof ProductsAppointmentBookingRoute
+  '/products/commerce-cloud': typeof ProductsCommerceCloudRoute
+  '/products/enterprise-erp': typeof ProductsEnterpriseErpRoute
+  '/products/hrm-payroll': typeof ProductsHrmPayrollRoute
   '/proposal/$token': typeof ProposalTokenRoute
   '/r/$slug': typeof RSlugRoute
   '/services/local-seo': typeof ServicesLocalSeoRoute
@@ -769,6 +818,8 @@ export interface FileRoutesByTo {
   '/services/local-seo-surat': typeof ServicesLocalSeoSuratRoute
   '/services/local-seo-udaipur': typeof ServicesLocalSeoUdaipurRoute
   '/services/local-seo-vadodara': typeof ServicesLocalSeoVadodaraRoute
+  '/whatsapp-crm/privacy-policy': typeof WhatsappCrmPrivacyPolicyRoute
+  '/whatsapp-crm/terms-and-conditions': typeof WhatsappCrmTermsAndConditionsRoute
   '/blog': typeof BlogIndexRoute
   '/dashboard/agent': typeof AuthenticatedDashboardAgentRoute
   '/dashboard/audit': typeof AuthenticatedDashboardAuditRoute
@@ -845,6 +896,10 @@ export interface FileRoutesById {
   '/partner_/affiliate-partner': typeof PartnerAffiliatePartnerRoute
   '/partner_/prime-plus-partner': typeof PartnerPrimePlusPartnerRoute
   '/partner_/white-labelled-partner': typeof PartnerWhiteLabelledPartnerRoute
+  '/products/appointment-booking': typeof ProductsAppointmentBookingRoute
+  '/products/commerce-cloud': typeof ProductsCommerceCloudRoute
+  '/products/enterprise-erp': typeof ProductsEnterpriseErpRoute
+  '/products/hrm-payroll': typeof ProductsHrmPayrollRoute
   '/proposal/$token': typeof ProposalTokenRoute
   '/r/$slug': typeof RSlugRoute
   '/services/local-seo': typeof ServicesLocalSeoRoute
@@ -867,6 +922,8 @@ export interface FileRoutesById {
   '/services/local-seo-surat': typeof ServicesLocalSeoSuratRoute
   '/services/local-seo-udaipur': typeof ServicesLocalSeoUdaipurRoute
   '/services/local-seo-vadodara': typeof ServicesLocalSeoVadodaraRoute
+  '/whatsapp-crm_/privacy-policy': typeof WhatsappCrmPrivacyPolicyRoute
+  '/whatsapp-crm_/terms-and-conditions': typeof WhatsappCrmTermsAndConditionsRoute
   '/blog/': typeof BlogIndexRoute
   '/_authenticated/dashboard/agent': typeof AuthenticatedDashboardAgentRoute
   '/_authenticated/dashboard/audit': typeof AuthenticatedDashboardAuditRoute
@@ -942,6 +999,10 @@ export interface FileRouteTypes {
     | '/partner/affiliate-partner'
     | '/partner/prime-plus-partner'
     | '/partner/white-labelled-partner'
+    | '/products/appointment-booking'
+    | '/products/commerce-cloud'
+    | '/products/enterprise-erp'
+    | '/products/hrm-payroll'
     | '/proposal/$token'
     | '/r/$slug'
     | '/services/local-seo'
@@ -964,6 +1025,8 @@ export interface FileRouteTypes {
     | '/services/local-seo-surat'
     | '/services/local-seo-udaipur'
     | '/services/local-seo-vadodara'
+    | '/whatsapp-crm/privacy-policy'
+    | '/whatsapp-crm/terms-and-conditions'
     | '/blog/'
     | '/dashboard/agent'
     | '/dashboard/audit'
@@ -1035,6 +1098,10 @@ export interface FileRouteTypes {
     | '/partner/affiliate-partner'
     | '/partner/prime-plus-partner'
     | '/partner/white-labelled-partner'
+    | '/products/appointment-booking'
+    | '/products/commerce-cloud'
+    | '/products/enterprise-erp'
+    | '/products/hrm-payroll'
     | '/proposal/$token'
     | '/r/$slug'
     | '/services/local-seo'
@@ -1057,6 +1124,8 @@ export interface FileRouteTypes {
     | '/services/local-seo-surat'
     | '/services/local-seo-udaipur'
     | '/services/local-seo-vadodara'
+    | '/whatsapp-crm/privacy-policy'
+    | '/whatsapp-crm/terms-and-conditions'
     | '/blog'
     | '/dashboard/agent'
     | '/dashboard/audit'
@@ -1132,6 +1201,10 @@ export interface FileRouteTypes {
     | '/partner_/affiliate-partner'
     | '/partner_/prime-plus-partner'
     | '/partner_/white-labelled-partner'
+    | '/products/appointment-booking'
+    | '/products/commerce-cloud'
+    | '/products/enterprise-erp'
+    | '/products/hrm-payroll'
     | '/proposal/$token'
     | '/r/$slug'
     | '/services/local-seo'
@@ -1154,6 +1227,8 @@ export interface FileRouteTypes {
     | '/services/local-seo-surat'
     | '/services/local-seo-udaipur'
     | '/services/local-seo-vadodara'
+    | '/whatsapp-crm_/privacy-policy'
+    | '/whatsapp-crm_/terms-and-conditions'
     | '/blog/'
     | '/_authenticated/dashboard/agent'
     | '/_authenticated/dashboard/audit'
@@ -1227,6 +1302,10 @@ export interface RootRouteChildren {
   PartnerAffiliatePartnerRoute: typeof PartnerAffiliatePartnerRoute
   PartnerPrimePlusPartnerRoute: typeof PartnerPrimePlusPartnerRoute
   PartnerWhiteLabelledPartnerRoute: typeof PartnerWhiteLabelledPartnerRoute
+  ProductsAppointmentBookingRoute: typeof ProductsAppointmentBookingRoute
+  ProductsCommerceCloudRoute: typeof ProductsCommerceCloudRoute
+  ProductsEnterpriseErpRoute: typeof ProductsEnterpriseErpRoute
+  ProductsHrmPayrollRoute: typeof ProductsHrmPayrollRoute
   ProposalTokenRoute: typeof ProposalTokenRoute
   RSlugRoute: typeof RSlugRoute
   ServicesLocalSeoRoute: typeof ServicesLocalSeoRoute
@@ -1249,6 +1328,8 @@ export interface RootRouteChildren {
   ServicesLocalSeoSuratRoute: typeof ServicesLocalSeoSuratRoute
   ServicesLocalSeoUdaipurRoute: typeof ServicesLocalSeoUdaipurRoute
   ServicesLocalSeoVadodaraRoute: typeof ServicesLocalSeoVadodaraRoute
+  WhatsappCrmPrivacyPolicyRoute: typeof WhatsappCrmPrivacyPolicyRoute
+  WhatsappCrmTermsAndConditionsRoute: typeof WhatsappCrmTermsAndConditionsRoute
   BlogIndexRoute: typeof BlogIndexRoute
   ApiPublicLeadsRoute: typeof ApiPublicLeadsRoute
   ApiPublicCronAgentRoute: typeof ApiPublicCronAgentRoute
@@ -1616,6 +1697,34 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PartnerWhiteLabelledPartnerRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/products/appointment-booking': {
+      id: '/products/appointment-booking'
+      path: '/products/appointment-booking'
+      fullPath: '/products/appointment-booking'
+      preLoaderRoute: typeof ProductsAppointmentBookingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/products/commerce-cloud': {
+      id: '/products/commerce-cloud'
+      path: '/products/commerce-cloud'
+      fullPath: '/products/commerce-cloud'
+      preLoaderRoute: typeof ProductsCommerceCloudRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/products/enterprise-erp': {
+      id: '/products/enterprise-erp'
+      path: '/products/enterprise-erp'
+      fullPath: '/products/enterprise-erp'
+      preLoaderRoute: typeof ProductsEnterpriseErpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/products/hrm-payroll': {
+      id: '/products/hrm-payroll'
+      path: '/products/hrm-payroll'
+      fullPath: '/products/hrm-payroll'
+      preLoaderRoute: typeof ProductsHrmPayrollRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/proposal/$token': {
       id: '/proposal/$token'
       path: '/proposal/$token'
@@ -1768,6 +1877,20 @@ declare module '@tanstack/react-router' {
       path: '/services/local-seo-vadodara'
       fullPath: '/services/local-seo-vadodara'
       preLoaderRoute: typeof ServicesLocalSeoVadodaraRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/whatsapp-crm_/privacy-policy': {
+      id: '/whatsapp-crm_/privacy-policy'
+      path: '/whatsapp-crm/privacy-policy'
+      fullPath: '/whatsapp-crm/privacy-policy'
+      preLoaderRoute: typeof WhatsappCrmPrivacyPolicyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/whatsapp-crm_/terms-and-conditions': {
+      id: '/whatsapp-crm_/terms-and-conditions'
+      path: '/whatsapp-crm/terms-and-conditions'
+      fullPath: '/whatsapp-crm/terms-and-conditions'
+      preLoaderRoute: typeof WhatsappCrmTermsAndConditionsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/_authenticated/dashboard/': {
@@ -2054,6 +2177,10 @@ const rootRouteChildren: RootRouteChildren = {
   PartnerAffiliatePartnerRoute: PartnerAffiliatePartnerRoute,
   PartnerPrimePlusPartnerRoute: PartnerPrimePlusPartnerRoute,
   PartnerWhiteLabelledPartnerRoute: PartnerWhiteLabelledPartnerRoute,
+  ProductsAppointmentBookingRoute: ProductsAppointmentBookingRoute,
+  ProductsCommerceCloudRoute: ProductsCommerceCloudRoute,
+  ProductsEnterpriseErpRoute: ProductsEnterpriseErpRoute,
+  ProductsHrmPayrollRoute: ProductsHrmPayrollRoute,
   ProposalTokenRoute: ProposalTokenRoute,
   RSlugRoute: RSlugRoute,
   ServicesLocalSeoRoute: ServicesLocalSeoRoute,
@@ -2076,6 +2203,8 @@ const rootRouteChildren: RootRouteChildren = {
   ServicesLocalSeoSuratRoute: ServicesLocalSeoSuratRoute,
   ServicesLocalSeoUdaipurRoute: ServicesLocalSeoUdaipurRoute,
   ServicesLocalSeoVadodaraRoute: ServicesLocalSeoVadodaraRoute,
+  WhatsappCrmPrivacyPolicyRoute: WhatsappCrmPrivacyPolicyRoute,
+  WhatsappCrmTermsAndConditionsRoute: WhatsappCrmTermsAndConditionsRoute,
   BlogIndexRoute: BlogIndexRoute,
   ApiPublicLeadsRoute: ApiPublicLeadsRoute,
   ApiPublicCronAgentRoute: ApiPublicCronAgentRoute,

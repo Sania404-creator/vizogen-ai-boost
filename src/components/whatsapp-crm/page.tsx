@@ -19,6 +19,12 @@ export function WhatsAppCrmPage() {
   return (
     <div id="top" className="theme-wa min-h-screen overflow-x-clip font-sans">
       <style>{`html{scroll-behavior:smooth}`}</style>
+      <div aria-hidden className="wa-splash pointer-events-none fixed inset-0 z-[100] grid place-items-center bg-background">
+        <div className="relative grid size-28 place-items-center">
+          <span className="wa-splash-ring absolute inset-0 rounded-full border-2 border-primary" />
+          <img src="/favicon.png" alt="" width={88} height={88} className="size-22" />
+        </div>
+      </div>
       <Nav onDemo={openDemo} />
       <main>
         {/* Hero */}

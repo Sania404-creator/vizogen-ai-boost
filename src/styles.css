@@ -284,3 +284,12 @@
 @keyframes wa-glow-pulse { 0%, 100% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--primary) 30%, transparent); } 50% { box-shadow: 0 0 28px 4px color-mix(in oklab, var(--primary) 30%, transparent); } }
 .wa-glow { animation: wa-glow-pulse 3s ease-in-out infinite; }
 @media (prefers-reduced-motion: reduce) { .wa-glow { animation: none; } }
+
+/* WhatsApp page entry splash: animated V mark, pure CSS so it never blocks */
+.wa-splash { animation: wa-splash-out 0.45s ease 1.3s forwards; }
+.wa-splash img { animation: wa-splash-mark 1.3s cubic-bezier(.22,1,.36,1) both; }
+.wa-splash .wa-splash-ring { animation: wa-splash-ring 1.2s ease-out infinite; }
+@keyframes wa-splash-out { to { opacity: 0; visibility: hidden; } }
+@keyframes wa-splash-mark { 0% { transform: scale(.3) rotate(-25deg); opacity: 0; } 55% { transform: scale(1.12) rotate(4deg); opacity: 1; } 100% { transform: scale(1) rotate(0); } }
+@keyframes wa-splash-ring { from { transform: scale(.6); opacity: .6; } to { transform: scale(1.8); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .wa-splash { animation-delay: .3s; } .wa-splash img, .wa-splash .wa-splash-ring { animation: none; } }

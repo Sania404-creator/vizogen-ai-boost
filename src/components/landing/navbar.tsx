@@ -154,6 +154,9 @@ export function Navbar() {
               ) : null}
             </AnimatePresence>
           </div>
+          <Link to="/whatsapp-crm" className={`rounded-full px-3 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-foreground ${pathname.startsWith("/whatsapp-crm") ? "text-foreground" : "text-muted-foreground"}`}>
+            WhatsApp Marketing
+          </Link>
         </div>
 
         <div className="hidden items-center gap-3 xl:flex">
@@ -271,6 +274,9 @@ export function Navbar() {
                 </motion.div>
               ) : null}
             </AnimatePresence>
+            <Link to="/whatsapp-crm" onClick={() => setOpen(false)} className="mt-1 rounded-lg px-2 py-2.5 text-sm font-semibold text-foreground hover:bg-accent">
+              WhatsApp Marketing
+            </Link>
           </div>
 
           <div className="mt-3 flex flex-col gap-2">

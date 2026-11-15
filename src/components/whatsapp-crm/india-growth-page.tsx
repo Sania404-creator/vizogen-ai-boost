@@ -246,7 +246,7 @@ export function IndiaGrowthPage() {
 
       <footer className="border-t border-border py-8 text-center text-sm text-muted-foreground">
         <p className="flex items-center justify-center gap-1.5"><BadgeCheck className="size-4 text-primary" />{WA.footer.copyright}</p>
-        <p className="mt-2"><a href="/privacy-policy" className="hover:text-primary">Privacy</a> · <a href="/terms-and-conditions" className="hover:text-primary">Terms</a> · <a href="/compare" className="hover:text-primary">Compare plans</a></p>
+        <p className="mt-2"><a href="/whatsapp-crm/privacy-policy" className="hover:text-primary">Privacy</a> · <a href="/whatsapp-crm/terms-and-conditions" className="hover:text-primary">Terms</a> · <a href="/compare" className="hover:text-primary">Compare plans</a></p>
       </footer>
 
       <DemoModal open={demo} onClose={() => setDemo(false)} />
