@@ -3,14 +3,51 @@
  * number, URL, logo, review and price lives here.
  */
 export const WA = {
-  loginUrl: "https://login.vizogen.in/sign-in",
-  signupUrl: "https://login.vizogen.in/sign-in",
+  app: { dashboard: "https://app.vizogen.in/dashboard" },
+  loginUrl: "https://app.vizogen.in/dashboard",
+  signupUrl: "https://app.vizogen.in/dashboard",
+  /** POST JSON endpoints. Leave "" to save leads into the Vizogen CRM instead. */
+  leadWebhookUrl: "",
+  demoWebhookUrl: "",
+  /** Optional Calendly embed URL for the Join Live Demo modal. */
+  calendlyUrl: "",
+  /** Product walkthrough video (YouTube embed or MP4). Leave "" to hide the player. */
+  videoUrl: "",
+  /** Vertical customer video shorts. Section is hidden while empty. */
+  shorts: [] as { name: string; biz: string; src: string; poster?: string }[],
+  /** URL returning real recent signups [{name,business,minutesAgo}]. Toast is hidden while empty. */
+  recentSignupsUrl: "",
+  offer: {
+    /** ISO date, e.g. "2026-12-31T23:59:59+05:30". Leave "" to hide every countdown. */
+    endsAt: "",
+    plan: "Business",
+    bar: "Cancel anytime • Free expert setup • Price locked for you",
+    /** Optional free credit boxes on the offer card. */
+    credits: [] as { label: string; value: string }[],
+    discount: 0,
+  },
+  welcome: {
+    badge: "Limited-time offer",
+    title: "Turn WhatsApp into your revenue channel",
+    benefits: ["Official WhatsApp API — no number blocking", "Broadcasts, chatbots & payments in one place", "Free expert setup, live in 30 minutes"],
+    businessTypes: ["D2C / E-commerce", "Real Estate", "Clinic / Healthcare", "Coaching / Education", "Agency", "Restaurant / Retail", "Other"],
+  },
+  /** Real Vizogen client names for the /india-growth logo marquee. Hidden while empty. */
+  realClients: [] as string[],
+  results: [
+    { value: 38, suffix: "%", label: "cart drop-offs recovered", quote: "Abandoned-cart flows brought back lost orders within weeks." },
+    { value: 4, prefix: "₹", suffix: "", label: "average cost per lead", quote: "Click-to-WhatsApp ads beat our landing-page funnel." },
+    { value: 30, suffix: " min", label: "time to go live", quote: "Setup call in the morning, first broadcast by lunch." },
+    { value: 92, suffix: "%", label: "broadcast read rate", quote: "Customers actually read WhatsApp — unlike email." },
+  ],
   contactEmail: "info.vizogen@gmail.com",
   contactPhone: "+91 84889 18358",
   whatsappNumber: "918488918358",
   links: {
     // Replace with the Vizogen Shopify App Store listing / install URL.
     shopify: "https://apps.shopify.com/",
+    // Placeholder — replace with the Vizogen AI Studio URL.
+    vizogenAIStudio: "https://app.vizogen.in/dashboard",
   },
   nav: [
     { label: "Features", href: "#features" },
@@ -93,29 +130,29 @@ export const WA = {
     { icon: "UtensilsCrossed", title: "Restaurants & Retail", text: "Menus, orders, offers and loyalty messages." },
   ],
   integrations: [
-    { name: "Zoho CRM", icon: "Database", url: "https://www.zoho.com/crm/" },
-    { name: "Shopify", icon: "ShoppingBag", url: "shopify" },
-    { name: "Justdial", icon: "PhoneCall", url: "https://www.justdial.com/" },
-    { name: "WhatsApp", icon: "MessageCircle", url: "https://business.whatsapp.com/" },
-    { name: "Google Calendar", icon: "CalendarDays", url: "https://calendar.google.com/" },
-    { name: "Razorpay", icon: "CreditCard", url: "https://razorpay.com/" },
-    { name: "Zapier", icon: "Zap", url: "https://zapier.com/" },
-    { name: "Facebook", icon: "Facebook", url: "https://www.facebook.com/business" },
-    { name: "CleverTap", icon: "Target", url: "https://clevertap.com/" },
-    { name: "LeadSquared", icon: "Filter", url: "https://www.leadsquared.com/" },
-    { name: "Gemini", icon: "Sparkles", url: "https://gemini.google.com/" },
-    { name: "WooCommerce", icon: "Store", url: "https://woocommerce.com/" },
-    { name: "Tally Prime", icon: "Calculator", url: "https://tallysolutions.com/" },
-    { name: "Calendly", icon: "CalendarCheck", url: "https://calendly.com/" },
-    { name: "HTTP Webhook", icon: "Webhook", url: "/contact" },
-    { name: "Shiprocket", icon: "Truck", url: "https://www.shiprocket.in/" },
-    { name: "Google Sheet", icon: "Sheet", url: "https://sheets.google.com/" },
-    { name: "TradeIndia", icon: "Globe", url: "https://www.tradeindia.com/" },
-    { name: "Instamojo", icon: "Wallet", url: "https://www.instamojo.com/" },
-    { name: "Instagram", icon: "Instagram", url: "https://business.instagram.com/" },
-    { name: "ChatGPT", icon: "Bot", url: "https://openai.com/chatgpt" },
-    { name: "Google Contact", icon: "Contact", url: "https://contacts.google.com/" },
-    { name: "Pabbly", icon: "Repeat", url: "https://www.pabbly.com/" },
+    { name: "Zoho CRM", logo: "/logos/zoho.svg", url: "https://www.zoho.com/crm/" },
+    { name: "Shopify", logo: "/logos/shopify.svg", url: "shopify" },
+    { name: "Justdial", logo: "/logos/justdial.png", url: "https://www.justdial.com/" },
+    { name: "WhatsApp", logo: "/logos/whatsapp.svg", url: "https://business.whatsapp.com/" },
+    { name: "Google Calendar", logo: "/logos/google-calendar.svg", url: "https://calendar.google.com/" },
+    { name: "Razorpay", logo: "/logos/razorpay.svg", url: "https://razorpay.com/" },
+    { name: "Zapier", logo: "/logos/zapier.svg", url: "https://zapier.com/" },
+    { name: "Facebook", logo: "/logos/facebook.svg", url: "https://www.facebook.com/business" },
+    { name: "CleverTap", logo: "/logos/clevertap.png", url: "https://clevertap.com/" },
+    { name: "LeadSquared", logo: "/logos/leadsquared.png", url: "https://www.leadsquared.com/" },
+    { name: "Gemini", logo: "/logos/gemini.svg", url: "https://gemini.google.com/" },
+    { name: "WooCommerce", logo: "/logos/woocommerce.svg", url: "https://woocommerce.com/" },
+    { name: "Tally Prime", logo: "/logos/tally.png", url: "https://tallysolutions.com/" },
+    { name: "Calendly", logo: "/logos/calendly.svg", url: "https://calendly.com/" },
+    { name: "HTTP Webhook", logo: "/logos/webhook.svg", url: "/contact" },
+    { name: "Shiprocket", logo: "/logos/shiprocket.png", url: "https://www.shiprocket.in/" },
+    { name: "Google Sheets", logo: "/logos/google-sheets.svg", url: "https://sheets.google.com/" },
+    { name: "TradeIndia", logo: "/logos/tradeindia.png", url: "https://www.tradeindia.com/" },
+    { name: "Instamojo", logo: "/logos/instamojo.png", url: "https://www.instamojo.com/" },
+    { name: "Instagram", logo: "/logos/instagram.svg", url: "https://business.instagram.com/" },
+    { name: "ChatGPT / OpenAI", logo: "/logos/openai.png", url: "https://openai.com/chatgpt" },
+    { name: "Google Contacts", logo: "/logos/google-contacts.png", url: "https://contacts.google.com/" },
+    { name: "Pabbly", logo: "/logos/pabbly.png", url: "https://www.pabbly.com/" },
   ],
   rating: { score: 4.9, businesses: 1500 },
   reviews: [
@@ -138,14 +175,13 @@ export const WA = {
     { value: 40, decimals: 0, suffix: "%", label: "cart recovery", brand: "Luxe Living" },
   ],
   pricing: {
-    yearlyDiscountLabel: "Save 20%",
     plans: [
-      { name: "Starter", monthly: 999, yearly: 799, tagline: "For small teams getting started", cta: "Start Free Trial",
-        features: ["1 WhatsApp number", "Unified inbox", "2 team members", "Basic chatbot", "Opt-In & Opt-outs Manager", "Website Widgets"] },
-      { name: "Growth", monthly: 2499, yearly: 1999, tagline: "For growing brands", popular: true, cta: "Start Free Trial",
-        features: ["Everything in Starter", "Instagram & Messenger", "10 team members", "Advanced chatbot flows", "Shopify integration", "Webhooks & API"] },
-      { name: "Enterprise", monthly: null, yearly: null, tagline: "For large teams and custom needs", cta: "Talk to Sales",
-        features: ["Everything in Growth", "Unlimited team members", "AI agents", "Custom integrations", "Dedicated Customer Success Manager", "Priority WhatsApp + phone support"] },
+      { name: "Starter", monthly: 1499, yearly: 14999, tagline: "For small teams getting started",
+        features: ["Unlimited messages/month (+ Meta charges)", "Up to 2,000 contacts", "Official WhatsApp API", "1 Owner + 5 FREE Agents included", "Broadcasting & Retargeting", "Template Message APIs", "Create 2 Audience Segments"] },
+      { name: "Business", monthly: 2999, yearly: 34999, tagline: "For growing brands", popular: true,
+        features: ["Unlimited messages/month (+ Meta charges)", "Unlimited contacts", "Official WhatsApp API", "1 Owner + 5 FREE Agents included", "Broadcasting & Retargeting", "Template Message APIs", "Create 3 Audience Segments", "5 Chatbots", "Shopify Integration", "AI Integration", "Unified WhatsApp + Facebook Inbox"] },
+      { name: "Pro", monthly: 3999, yearly: 44999, tagline: "For scaling teams",
+        features: ["Unlimited messages/month (+ Meta charges)", "Unlimited contacts", "Official WhatsApp API", "1 Owner + 7 FREE Agents included", "Broadcasting & Retargeting", "Template Message APIs", "Create Unlimited Audience Segments", "Unlimited Chatbots", "Shopify Integration", "AI Integration – Vizogen AI Studio", "Unified WhatsApp + Facebook Inbox"] },
     ],
     guarantee: "30-day money back guarantee on all paid plans | Meta WhatsApp conversation charges billed at zero markup.",
     metaRatesDate: "1 Jan 2026",
@@ -156,15 +192,30 @@ export const WA = {
       { cat: "Service", rate: "Free" },
     ],
     comparison: [
-      { f: "WhatsApp numbers", v: ["1", "3", "Unlimited"] },
-      { f: "Team members", v: ["2", "10", "Unlimited"] },
-      { f: "Instagram & Messenger", v: [false, true, true] },
-      { f: "Chatbot flows", v: ["Basic", "Advanced", "Advanced"] },
-      { f: "Broadcasts", v: [true, true, true] },
-      { f: "Shopify / WooCommerce", v: [false, true, true] },
-      { f: "Webhooks & API", v: [false, true, true] },
-      { f: "AI agents", v: [false, false, true] },
-      { f: "Dedicated CSM", v: [false, false, true] },
+      { group: "Messaging", rows: [
+        { f: "Messages/month", v: ["Unlimited", "Unlimited", "Unlimited"] },
+        { f: "Meta charges", v: ["Extra, zero markup", "Extra, zero markup", "Extra, zero markup"] },
+        { f: "Official WhatsApp API", v: [true, true, true] },
+        { f: "Template Message APIs", v: [true, true, true] },
+      ] },
+      { group: "Contacts & Audience", rows: [
+        { f: "Contacts", v: ["2,000", "Unlimited", "Unlimited"] },
+        { f: "Audience segments", v: ["2", "3", "Unlimited"] },
+        { f: "Broadcasting & Retargeting", v: [true, true, true] },
+      ] },
+      { group: "Team", rows: [{ f: "Included seats", v: ["1 Owner + 5 Agents", "1 Owner + 5 Agents", "1 Owner + 7 Agents"] }] },
+      { group: "Automation", rows: [{ f: "Chatbots", v: [false, "5", "Unlimited"] }] },
+      { group: "Integrations & Inbox", rows: [
+        { f: "Shopify Integration", v: [false, true, true] },
+        { f: "Unified WhatsApp + Facebook Inbox", v: [false, true, true] },
+      ] },
+      { group: "AI", rows: [{ f: "AI Integration", v: [false, true, "✔ Vizogen AI Studio"] }] },
+    ],
+    faqs: [
+      { q: "Can I switch plans later?", a: "Yes. Upgrade or downgrade any time from your dashboard; the difference is adjusted on your next bill." },
+      { q: "Are Meta message charges included?", a: "No. Meta's per-message charges are billed separately at zero markup." },
+      { q: "What does yearly billing save?", a: "Yearly plans cost less than 12 monthly payments — the exact saving is shown on each plan." },
+      { q: "Is there a money-back guarantee?", a: "Yes, a 30-day money back guarantee on all paid plans." },
     ],
   },
   faqs: [
@@ -181,7 +232,7 @@ export const WA = {
   footer: {
     description: "The unified WhatsApp, Instagram & Messenger CRM, chatbot and AI-agent platform for Indian businesses.",
     columns: [
-      { title: "Product", links: [{ label: "Features", href: "#features" }, { label: "Pricing", href: "#pricing" }, { label: "Reviews", href: "#reviews" }] },
+      { title: "Product", links: [{ label: "Features", href: "#features" }, { label: "Pricing", href: "#pricing" }, { label: "Compare plans", href: "/compare" }, { label: "India Growth offer", href: "/india-growth" }, { label: "Reviews", href: "#reviews" }] },
       { title: "Solutions", links: [{ label: "E-commerce", href: "#solutions" }, { label: "Real Estate", href: "#solutions" }, { label: "Healthcare", href: "#solutions" }] },
       { title: "Integrations", links: [{ label: "Shopify", href: "#integrations" }, { label: "Razorpay", href: "#integrations" }, { label: "Zapier", href: "#integrations" }] },
       { title: "Company", links: [{ label: "About", href: "/" }, { label: "Partner with us", href: "/partner" }, { label: "Contact", href: "/contact" }] },

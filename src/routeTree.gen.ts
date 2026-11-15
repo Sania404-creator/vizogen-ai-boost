@@ -16,6 +16,7 @@ import { Route as AuthRouteImport } from './routes/auth'
 import { Route as BakeryMarketingSoftwareRouteImport } from './routes/bakery-marketing-software'
 import { Route as CarGarageMarketingSoftwareRouteImport } from './routes/car-garage-marketing-software'
 import { Route as ClinicMarketingSoftwareRouteImport } from './routes/clinic-marketing-software'
+import { Route as CompareRouteImport } from './routes/compare'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as DemoRouteImport } from './routes/demo'
 import { Route as EducationMarketingSoftwareRouteImport } from './routes/education-marketing-software'
@@ -26,6 +27,7 @@ import { Route as HowToCreatePostRouteImport } from './routes/how-to-create-post
 import { Route as HowToGenerateMagicQrRouteImport } from './routes/how-to-generate-magic-qr'
 import { Route as HowToPostOnGbpRouteImport } from './routes/how-to-post-on-gbp'
 import { Route as HowToReplyReviewRouteImport } from './routes/how-to-reply-review'
+import { Route as IndiaGrowthRouteImport } from './routes/india-growth'
 import { Route as LocalSeoCafeResortRestaurantUdaipurRouteImport } from './routes/local-seo-cafe-resort-restaurant-udaipur'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as OfficialPartnerRouteImport } from './routes/official-partner'
@@ -137,6 +139,11 @@ const ClinicMarketingSoftwareRoute = ClinicMarketingSoftwareRouteImport.update({
   path: '/clinic-marketing-software',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CompareRoute = CompareRouteImport.update({
+  id: '/compare',
+  path: '/compare',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
@@ -187,6 +194,11 @@ const HowToPostOnGbpRoute = HowToPostOnGbpRouteImport.update({
 const HowToReplyReviewRoute = HowToReplyReviewRouteImport.update({
   id: '/how-to-reply-review',
   path: '/how-to-reply-review',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IndiaGrowthRoute = IndiaGrowthRouteImport.update({
+  id: '/india-growth',
+  path: '/india-growth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LocalSeoCafeResortRestaurantUdaipurRoute =
@@ -599,6 +611,7 @@ export interface FileRoutesByFullPath {
   '/bakery-marketing-software': typeof BakeryMarketingSoftwareRoute
   '/car-garage-marketing-software': typeof CarGarageMarketingSoftwareRoute
   '/clinic-marketing-software': typeof ClinicMarketingSoftwareRoute
+  '/compare': typeof CompareRoute
   '/contact': typeof ContactRoute
   '/demo': typeof DemoRoute
   '/education-marketing-software': typeof EducationMarketingSoftwareRoute
@@ -609,6 +622,7 @@ export interface FileRoutesByFullPath {
   '/how-to-generate-magic-qr': typeof HowToGenerateMagicQrRoute
   '/how-to-post-on-gbp': typeof HowToPostOnGbpRoute
   '/how-to-reply-review': typeof HowToReplyReviewRoute
+  '/india-growth': typeof IndiaGrowthRoute
   '/local-seo-cafe-resort-restaurant-udaipur': typeof LocalSeoCafeResortRestaurantUdaipurRoute
   '/login': typeof LoginRoute
   '/official-partner': typeof OfficialPartnerRoute
@@ -692,6 +706,7 @@ export interface FileRoutesByTo {
   '/bakery-marketing-software': typeof BakeryMarketingSoftwareRoute
   '/car-garage-marketing-software': typeof CarGarageMarketingSoftwareRoute
   '/clinic-marketing-software': typeof ClinicMarketingSoftwareRoute
+  '/compare': typeof CompareRoute
   '/contact': typeof ContactRoute
   '/demo': typeof DemoRoute
   '/education-marketing-software': typeof EducationMarketingSoftwareRoute
@@ -702,6 +717,7 @@ export interface FileRoutesByTo {
   '/how-to-generate-magic-qr': typeof HowToGenerateMagicQrRoute
   '/how-to-post-on-gbp': typeof HowToPostOnGbpRoute
   '/how-to-reply-review': typeof HowToReplyReviewRoute
+  '/india-growth': typeof IndiaGrowthRoute
   '/local-seo-cafe-resort-restaurant-udaipur': typeof LocalSeoCafeResortRestaurantUdaipurRoute
   '/login': typeof LoginRoute
   '/official-partner': typeof OfficialPartnerRoute
@@ -786,6 +802,7 @@ export interface FileRoutesById {
   '/bakery-marketing-software': typeof BakeryMarketingSoftwareRoute
   '/car-garage-marketing-software': typeof CarGarageMarketingSoftwareRoute
   '/clinic-marketing-software': typeof ClinicMarketingSoftwareRoute
+  '/compare': typeof CompareRoute
   '/contact': typeof ContactRoute
   '/demo': typeof DemoRoute
   '/education-marketing-software': typeof EducationMarketingSoftwareRoute
@@ -796,6 +813,7 @@ export interface FileRoutesById {
   '/how-to-generate-magic-qr': typeof HowToGenerateMagicQrRoute
   '/how-to-post-on-gbp': typeof HowToPostOnGbpRoute
   '/how-to-reply-review': typeof HowToReplyReviewRoute
+  '/india-growth': typeof IndiaGrowthRoute
   '/local-seo-cafe-resort-restaurant-udaipur': typeof LocalSeoCafeResortRestaurantUdaipurRoute
   '/login': typeof LoginRoute
   '/official-partner': typeof OfficialPartnerRoute
@@ -881,6 +899,7 @@ export interface FileRouteTypes {
     | '/bakery-marketing-software'
     | '/car-garage-marketing-software'
     | '/clinic-marketing-software'
+    | '/compare'
     | '/contact'
     | '/demo'
     | '/education-marketing-software'
@@ -891,6 +910,7 @@ export interface FileRouteTypes {
     | '/how-to-generate-magic-qr'
     | '/how-to-post-on-gbp'
     | '/how-to-reply-review'
+    | '/india-growth'
     | '/local-seo-cafe-resort-restaurant-udaipur'
     | '/login'
     | '/official-partner'
@@ -974,6 +994,7 @@ export interface FileRouteTypes {
     | '/bakery-marketing-software'
     | '/car-garage-marketing-software'
     | '/clinic-marketing-software'
+    | '/compare'
     | '/contact'
     | '/demo'
     | '/education-marketing-software'
@@ -984,6 +1005,7 @@ export interface FileRouteTypes {
     | '/how-to-generate-magic-qr'
     | '/how-to-post-on-gbp'
     | '/how-to-reply-review'
+    | '/india-growth'
     | '/local-seo-cafe-resort-restaurant-udaipur'
     | '/login'
     | '/official-partner'
@@ -1067,6 +1089,7 @@ export interface FileRouteTypes {
     | '/bakery-marketing-software'
     | '/car-garage-marketing-software'
     | '/clinic-marketing-software'
+    | '/compare'
     | '/contact'
     | '/demo'
     | '/education-marketing-software'
@@ -1077,6 +1100,7 @@ export interface FileRouteTypes {
     | '/how-to-generate-magic-qr'
     | '/how-to-post-on-gbp'
     | '/how-to-reply-review'
+    | '/india-growth'
     | '/local-seo-cafe-resort-restaurant-udaipur'
     | '/login'
     | '/official-partner'
@@ -1163,6 +1187,7 @@ export interface RootRouteChildren {
   BakeryMarketingSoftwareRoute: typeof BakeryMarketingSoftwareRoute
   CarGarageMarketingSoftwareRoute: typeof CarGarageMarketingSoftwareRoute
   ClinicMarketingSoftwareRoute: typeof ClinicMarketingSoftwareRoute
+  CompareRoute: typeof CompareRoute
   ContactRoute: typeof ContactRoute
   DemoRoute: typeof DemoRoute
   EducationMarketingSoftwareRoute: typeof EducationMarketingSoftwareRoute
@@ -1173,6 +1198,7 @@ export interface RootRouteChildren {
   HowToGenerateMagicQrRoute: typeof HowToGenerateMagicQrRoute
   HowToPostOnGbpRoute: typeof HowToPostOnGbpRoute
   HowToReplyReviewRoute: typeof HowToReplyReviewRoute
+  IndiaGrowthRoute: typeof IndiaGrowthRoute
   LocalSeoCafeResortRestaurantUdaipurRoute: typeof LocalSeoCafeResortRestaurantUdaipurRoute
   LoginRoute: typeof LoginRoute
   OfficialPartnerRoute: typeof OfficialPartnerRoute
@@ -1282,6 +1308,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ClinicMarketingSoftwareRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/compare': {
+      id: '/compare'
+      path: '/compare'
+      fullPath: '/compare'
+      preLoaderRoute: typeof CompareRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contact': {
       id: '/contact'
       path: '/contact'
@@ -1350,6 +1383,13 @@ declare module '@tanstack/react-router' {
       path: '/how-to-reply-review'
       fullPath: '/how-to-reply-review'
       preLoaderRoute: typeof HowToReplyReviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/india-growth': {
+      id: '/india-growth'
+      path: '/india-growth'
+      fullPath: '/india-growth'
+      preLoaderRoute: typeof IndiaGrowthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/local-seo-cafe-resort-restaurant-udaipur': {
@@ -1973,6 +2013,7 @@ const rootRouteChildren: RootRouteChildren = {
   BakeryMarketingSoftwareRoute: BakeryMarketingSoftwareRoute,
   CarGarageMarketingSoftwareRoute: CarGarageMarketingSoftwareRoute,
   ClinicMarketingSoftwareRoute: ClinicMarketingSoftwareRoute,
+  CompareRoute: CompareRoute,
   ContactRoute: ContactRoute,
   DemoRoute: DemoRoute,
   EducationMarketingSoftwareRoute: EducationMarketingSoftwareRoute,
@@ -1983,6 +2024,7 @@ const rootRouteChildren: RootRouteChildren = {
   HowToGenerateMagicQrRoute: HowToGenerateMagicQrRoute,
   HowToPostOnGbpRoute: HowToPostOnGbpRoute,
   HowToReplyReviewRoute: HowToReplyReviewRoute,
+  IndiaGrowthRoute: IndiaGrowthRoute,
   LocalSeoCafeResortRestaurantUdaipurRoute:
     LocalSeoCafeResortRestaurantUdaipurRoute,
   LoginRoute: LoginRoute,

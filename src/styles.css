@@ -279,3 +279,8 @@
 @keyframes wa-draw { 0% { transform: scaleX(0); } 60%,100% { transform: scaleX(1); } }
 @keyframes wa-type { 0%,100% { transform: translateY(0); opacity: .4; } 50% { transform: translateY(-4px); opacity: 1; } }
 @media (prefers-reduced-motion: reduce) { .wa-blob, .wa-bar, .wa-line, .wa-dot { animation: none !important; } }
+
+/* Business column / featured card pulsing glow (WhatsApp CRM pages) */
+@keyframes wa-glow-pulse { 0%, 100% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--primary) 30%, transparent); } 50% { box-shadow: 0 0 28px 4px color-mix(in oklab, var(--primary) 30%, transparent); } }
+.wa-glow { animation: wa-glow-pulse 3s ease-in-out infinite; }
+@media (prefers-reduced-motion: reduce) { .wa-glow { animation: none; } }

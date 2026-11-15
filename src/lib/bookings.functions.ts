@@ -55,7 +55,7 @@ export const createDemoBooking = createServerFn({ method: "POST" })
       `New Demo Booked — ${data.businessName} (${pretty})`,
       buildAdminEmail(data, pretty),
     );
-    const customerSent = await sendGmail(
+    const customerSent = !data.email ? false : await sendGmail(
       data.email,
       "Your Vizogen Demo is Confirmed",
       buildCustomerEmail(data, pretty),
@@ -78,8 +78,9 @@ const leadSchema = z.object({
     .min(8)
     .max(20)
     .regex(/^[0-9+\-\s()]+$/),
-  email: z.string().trim().email().max(255),
+  email: z.union([z.string().trim().email().max(255), z.literal("")]).optional(),
   industry: z.string().trim().min(2).max(60),
+  preferredTime: z.string().trim().max(60).optional(),
 });
 
 export type DemoLeadInput = z.infer<typeof leadSchema>;
@@ -97,11 +98,11 @@ export const createDemoLead = createServerFn({ method: "POST" })
       .from("demo_bookings")
       .insert({
         name: data.name,
-        email: data.email,
+        email: data.email || "",
         phone: data.phone,
         business_name: data.businessName,
         slot_date: today,
-        slot_time: "To be confirmed",
+        slot_time: data.preferredTime || "To be confirmed",
         source: "popup",
         note: `Industry: ${data.industry}`,
       })
@@ -116,12 +117,12 @@ export const createDemoLead = createServerFn({ method: "POST" })
     const adminSent = await sendGmail(
       ADMIN_EMAIL,
       `New Free Demo Request — ${data.businessName} (${data.industry})`,
-      buildLeadAdminEmail(data),
+      buildLeadAdminEmail({ ...data, email: data.email || "(not provided)" }),
     );
-    const customerSent = await sendGmail(
+    const customerSent = !data.email ? false : await sendGmail(
       data.email,
       "We've received your Vizogen demo request",
-      buildLeadCustomerEmail(data),
+      buildLeadCustomerEmail({ ...data, email: data.email || "" }),
     );
 
     await supabaseAdmin
