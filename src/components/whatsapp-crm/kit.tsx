@@ -252,7 +252,7 @@ export function Footer({ base = "" }: { base?: string }) {
           </div>
         </div>
         {WA.footer.columns.map((c) => (
-          <div key={c.title}><p className="font-semibold text-foreground">{c.title}</p><ul className="mt-4 space-y-2 text-sm">{c.links.map((l) => <li key={l.label}><a href={href(l.href)} className="text-muted-foreground hover:text-primary">{l.label}{"badge" in l && l.badge ? <span className={`ml-1.5 rounded-full px-1.5 py-0.5 text-[10px] font-bold ${l.badge === "New" ? "gradient-wa text-primary-foreground" : "bg-primary/10 text-primary"}`}>{l.badge}</span> : null}{"note" in l && l.note ? <span className="block text-xs text-muted-foreground/70">({l.note})</span> : null}</a></li>)}</ul></div>
+          <div key={c.title}><p className="font-semibold text-foreground">{c.title}</p><ul className="mt-4 space-y-2 text-sm">{c.links.map((l) => <li key={l.label}><a href={href(l.href)} className="text-muted-foreground hover:text-primary">{l.label}{"badge" in l && l.badge ? <span className={`ml-1.5 rounded-full px-1.5 py-0.5 text-[10px] font-bold ${l.badge === "New" ? "gradient-wa text-primary-foreground" : "bg-primary/10 text-primary"}`}>{l.badge}</span> : null}{"note" in l && l.note ? <span className="block text-xs text-muted-foreground/70">{l.note}</span> : null}</a></li>)}</ul></div>
         ))}
       </div>
       <p className="border-t border-border py-6 text-center text-sm text-muted-foreground">{WA.footer.copyright} · Operated by <span className="font-semibold text-foreground">{WA.footer.poweredBy}</span></p>
