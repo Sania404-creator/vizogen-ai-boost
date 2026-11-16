@@ -6,8 +6,8 @@ export type WAProductLink = { label: string; href: string; icon: string; note?: 
 
 /** The Vizogen product family — the footer and the side menu render this same list. */
 export const WA_PRODUCTS: WAProductLink[] = [
-  { label: "WhatsApp Marketing", href: "/whatsapp-crm", icon: "MessageCircle", badge: "New" },
   { label: "GMB Automation", href: "/", icon: "MapPin" },
+  { label: "WhatsApp Marketing", href: "/whatsapp-crm", icon: "MessageCircle", badge: "New" },
   { label: "AI Vizogen Studio", href: "#ai-studio", icon: "Sparkles", badge: "New" },
   { label: "Enterprise ERP", href: "/products/enterprise-erp", icon: "Building2", badge: "Coming Soon" },
   { label: "Smart HRM & Payroll", href: "/products/hrm-payroll", icon: "Fingerprint", badge: "Coming Soon" },

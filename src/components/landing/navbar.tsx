@@ -14,6 +14,16 @@ const links = [
   { label: "FAQ", href: "#faq" },
 ];
 
+const productLinks = [
+  { label: "WhatsApp Marketing", to: "/whatsapp-crm", badge: "New" },
+  { label: "GMB Automation", to: "/" },
+  { label: "AI Vizogen Studio", to: "/whatsapp-crm#ai-studio", badge: "New" },
+  { label: "Enterprise ERP", to: "/products/enterprise-erp", badge: "Coming Soon" },
+  { label: "Smart HRM & Payroll", to: "/products/hrm-payroll", badge: "Coming Soon" },
+  { label: "Commerce Cloud", to: "/products/commerce-cloud", badge: "Coming Soon" },
+  { label: "Appointment Booking", to: "/products/appointment-booking", badge: "Coming Soon" },
+];
+
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -274,9 +284,34 @@ export function Navbar() {
                 </motion.div>
               ) : null}
             </AnimatePresence>
-            <Link to="/whatsapp-crm" onClick={() => setOpen(false)} className="mt-1 rounded-lg px-2 py-2.5 text-sm font-semibold text-foreground hover:bg-accent">
-              WhatsApp Marketing
-            </Link>
+            <div className="mt-2 border-t border-border pt-2">
+              <p className="px-2 pb-1 pt-1 text-[11px] font-bold uppercase tracking-[0.18em] text-muted-foreground">
+                Our Products
+              </p>
+              {productLinks.map((p) => (
+                <Link
+                  key={p.label}
+                  to={p.to}
+                  onClick={() => setOpen(false)}
+                  className={`flex items-center justify-between rounded-lg px-2 py-2.5 text-sm font-medium hover:bg-accent ${
+                    pathname === p.to ? "text-foreground" : "text-muted-foreground"
+                  }`}
+                >
+                  {p.label}
+                  {p.badge ? (
+                    <span
+                      className={`rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide ${
+                        p.badge === "New"
+                          ? "gradient-brand text-primary-foreground"
+                          : "bg-muted text-muted-foreground"
+                      }`}
+                    >
+                      {p.badge}
+                    </span>
+                  ) : null}
+                </Link>
+              ))}
+            </div>
           </div>
 
           <div className="mt-3 flex flex-col gap-2">

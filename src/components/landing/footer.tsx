@@ -39,6 +39,8 @@ const columns = [
     title: "Our Other Products",
     items: [
       { label: "WhatsApp Marketing", to: "/whatsapp-crm", badge: "New" },
+      { label: "GMB Automation", to: "/" },
+      { label: "AI Vizogen Studio", to: "/whatsapp-crm#ai-studio", badge: "New" },
       { label: "Enterprise ERP", to: "/products/enterprise-erp", badge: "Coming Soon" },
       { label: "Smart HRM & Payroll", to: "/products/hrm-payroll", badge: "Coming Soon" },
       { label: "Commerce Cloud", to: "/products/commerce-cloud", badge: "Coming Soon" },
