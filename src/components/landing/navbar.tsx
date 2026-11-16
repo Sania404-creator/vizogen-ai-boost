@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { Button } from "@/components/ui/button";
 import { gbpGuideLinks } from "@/components/landing/gbp-guide-menu";
 import logoAsset from "@/assets/vizogen-logo.png.asset.json";
+import { site } from "@/lib/site.config";
 
 const links = [
   { label: "Features", href: "#features" },
@@ -14,15 +15,6 @@ const links = [
   { label: "FAQ", href: "#faq" },
 ];
 
-const productLinks = [
-  { label: "WhatsApp Marketing", to: "/whatsapp-crm", badge: "New" },
-  { label: "GMB Automation", to: "/" },
-  { label: "AI Vizogen Studio", to: "/whatsapp-crm#ai-studio", badge: "New" },
-  { label: "Enterprise ERP", to: "/products/enterprise-erp", badge: "Coming Soon" },
-  { label: "Smart HRM & Payroll", to: "/products/hrm-payroll", badge: "Coming Soon" },
-  { label: "Commerce Cloud", to: "/products/commerce-cloud", badge: "Coming Soon" },
-  { label: "Appointment Booking", to: "/products/appointment-booking", badge: "Coming Soon" },
-];
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -40,6 +32,13 @@ export function Navbar() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
 
   const openMenu = () => {
     if (closeTimer.current) clearTimeout(closeTimer.current);
@@ -288,29 +287,41 @@ export function Navbar() {
               <p className="px-2 pb-1 pt-1 text-[11px] font-bold uppercase tracking-[0.18em] text-muted-foreground">
                 Our Products
               </p>
-              {productLinks.map((p) => (
-                <Link
-                  key={p.label}
-                  to={p.to}
-                  onClick={() => setOpen(false)}
-                  className={`flex items-center justify-between rounded-lg px-2 py-2.5 text-sm font-medium hover:bg-accent ${
-                    pathname === p.to ? "text-foreground" : "text-muted-foreground"
-                  }`}
-                >
-                  {p.label}
-                  {p.badge ? (
-                    <span
-                      className={`rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide ${
-                        p.badge === "New"
-                          ? "gradient-brand text-primary-foreground"
-                          : "bg-muted text-muted-foreground"
+              {site.products.map((p, i) => {
+                const active = pathname === p.to;
+                return (
+                  <motion.div
+                    key={p.name}
+                    initial={{ opacity: 0, x: 16 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: i * 0.06, duration: 0.25 }}
+                  >
+                    <Link
+                      to={p.to}
+                      onClick={() => setOpen(false)}
+                      aria-current={active ? "page" : undefined}
+                      className={`flex items-start gap-3 rounded-xl px-2 py-2.5 outline-none hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring ${
+                        p.highlight || active ? "bg-brand/10" : ""
                       }`}
                     >
-                      {p.badge}
-                    </span>
-                  ) : null}
-                </Link>
-              ))}
+                      <p.icon className="mt-0.5 size-5 shrink-0 text-brand" strokeWidth={1.75} />
+                      <span className="min-w-0 flex-1">
+                        <span className="block text-sm font-semibold text-foreground">{p.name}</span>
+                        <span className="mt-0.5 block text-xs text-muted-foreground">{p.description}</span>
+                      </span>
+                      {p.badge ? (
+                        <span
+                          className={`shrink-0 rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide ${
+                            p.badge === "Coming Soon" ? "bg-muted text-muted-foreground" : "gradient-brand text-primary-foreground"
+                          }`}
+                        >
+                          {p.badge}
+                        </span>
+                      ) : null}
+                    </Link>
+                  </motion.div>
+                );
+              })}
             </div>
           </div>
 

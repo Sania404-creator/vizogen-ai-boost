@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import logoAsset from "@/assets/vizogen-logo.png.asset.json";
+import { site } from "@/lib/site.config";
 
 const columns = [
   {
@@ -36,16 +37,8 @@ const columns = [
     ],
   },
   {
-    title: "Our Other Products",
-    items: [
-      { label: "WhatsApp Marketing", to: "/whatsapp-crm", badge: "New" },
-      { label: "GMB Automation", to: "/" },
-      { label: "AI Vizogen Studio", to: "/whatsapp-crm#ai-studio", badge: "New" },
-      { label: "Enterprise ERP", to: "/products/enterprise-erp", badge: "Coming Soon" },
-      { label: "Smart HRM & Payroll", to: "/products/hrm-payroll", badge: "Coming Soon" },
-      { label: "Commerce Cloud", to: "/products/commerce-cloud", badge: "Coming Soon" },
-      { label: "Appointment Booking", to: "/products/appointment-booking", badge: "Coming Soon" },
-    ],
+    title: "Our Products",
+    items: site.products.map((p) => ({ label: p.name, to: p.to, badge: p.badge ?? undefined })),
   },
   {
     title: "Legal",
@@ -109,11 +102,11 @@ export function Footer() {
                   <li key={item.label}>
                     <Link
                       to={item.to}
-                      className="text-sm text-navy-foreground/65 transition-colors hover:text-navy-foreground"
+                      className="text-sm text-navy-foreground/65 underline-offset-4 transition-colors hover:text-primary hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded"
                     >
                       {item.label}
                       {"badge" in item && item.badge ? (
-                        <span className={`ml-1.5 rounded-full px-1.5 py-0.5 text-[10px] font-bold ${item.badge === "New" ? "gradient-brand text-primary-foreground" : "bg-navy-foreground/10 text-navy-foreground"}`}>{item.badge}</span>
+                        <span className={`ml-1.5 rounded-full px-1.5 py-0.5 text-[10px] font-bold ${item.badge !== "Coming Soon" ? "gradient-brand text-primary-foreground" : "bg-navy-foreground/10 text-navy-foreground"}`}>{item.badge}</span>
                       ) : null}
                     </Link>
                   </li>

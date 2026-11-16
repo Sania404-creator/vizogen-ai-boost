@@ -44,6 +44,7 @@ import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as TermsAndConditionsRouteImport } from './routes/terms-and-conditions'
 import { Route as TourTravelMarketingSoftwareRouteImport } from './routes/tour-travel-marketing-software'
 import { Route as WhatsappCrmRouteImport } from './routes/whatsapp-crm'
+import { Route as WhatsappMarketingAutomationRouteImport } from './routes/whatsapp-marketing-automation'
 import { Route as YogaWellnessMarketingSoftwareRouteImport } from './routes/yoga-wellness-marketing-software'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedPartnerPortalRouteImport } from './routes/_authenticated/partner-portal'
@@ -292,6 +293,12 @@ const WhatsappCrmRoute = WhatsappCrmRouteImport.update({
   path: '/whatsapp-crm',
   getParentRoute: () => rootRouteImport,
 } as any)
+const WhatsappMarketingAutomationRoute =
+  WhatsappMarketingAutomationRouteImport.update({
+    id: '/whatsapp-marketing-automation',
+    path: '/whatsapp-marketing-automation',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const YogaWellnessMarketingSoftwareRoute =
   YogaWellnessMarketingSoftwareRouteImport.update({
     id: '/yoga-wellness-marketing-software',
@@ -678,6 +685,7 @@ export interface FileRoutesByFullPath {
   '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/tour-travel-marketing-software': typeof TourTravelMarketingSoftwareRoute
   '/whatsapp-crm': typeof WhatsappCrmRoute
+  '/whatsapp-marketing-automation': typeof WhatsappMarketingAutomationRoute
   '/yoga-wellness-marketing-software': typeof YogaWellnessMarketingSoftwareRoute
   '/dashboard': typeof AuthenticatedDashboardRouteWithChildren
   '/partner-portal': typeof AuthenticatedPartnerPortalRoute
@@ -779,6 +787,7 @@ export interface FileRoutesByTo {
   '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/tour-travel-marketing-software': typeof TourTravelMarketingSoftwareRoute
   '/whatsapp-crm': typeof WhatsappCrmRoute
+  '/whatsapp-marketing-automation': typeof WhatsappMarketingAutomationRoute
   '/yoga-wellness-marketing-software': typeof YogaWellnessMarketingSoftwareRoute
   '/partner-portal': typeof AuthenticatedPartnerPortalRoute
   '/billing/$token': typeof BillingTokenRoute
@@ -881,6 +890,7 @@ export interface FileRoutesById {
   '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/tour-travel-marketing-software': typeof TourTravelMarketingSoftwareRoute
   '/whatsapp-crm': typeof WhatsappCrmRoute
+  '/whatsapp-marketing-automation': typeof WhatsappMarketingAutomationRoute
   '/yoga-wellness-marketing-software': typeof YogaWellnessMarketingSoftwareRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRouteWithChildren
   '/_authenticated/partner-portal': typeof AuthenticatedPartnerPortalRoute
@@ -984,6 +994,7 @@ export interface FileRouteTypes {
     | '/terms-and-conditions'
     | '/tour-travel-marketing-software'
     | '/whatsapp-crm'
+    | '/whatsapp-marketing-automation'
     | '/yoga-wellness-marketing-software'
     | '/dashboard'
     | '/partner-portal'
@@ -1085,6 +1096,7 @@ export interface FileRouteTypes {
     | '/terms-and-conditions'
     | '/tour-travel-marketing-software'
     | '/whatsapp-crm'
+    | '/whatsapp-marketing-automation'
     | '/yoga-wellness-marketing-software'
     | '/partner-portal'
     | '/billing/$token'
@@ -1186,6 +1198,7 @@ export interface FileRouteTypes {
     | '/terms-and-conditions'
     | '/tour-travel-marketing-software'
     | '/whatsapp-crm'
+    | '/whatsapp-marketing-automation'
     | '/yoga-wellness-marketing-software'
     | '/_authenticated/dashboard'
     | '/_authenticated/partner-portal'
@@ -1290,6 +1303,7 @@ export interface RootRouteChildren {
   TermsAndConditionsRoute: typeof TermsAndConditionsRoute
   TourTravelMarketingSoftwareRoute: typeof TourTravelMarketingSoftwareRoute
   WhatsappCrmRoute: typeof WhatsappCrmRoute
+  WhatsappMarketingAutomationRoute: typeof WhatsappMarketingAutomationRoute
   YogaWellnessMarketingSoftwareRoute: typeof YogaWellnessMarketingSoftwareRoute
   BillingTokenRoute: typeof BillingTokenRoute
   BlogSlugRoute: typeof BlogSlugRoute
@@ -1583,6 +1597,13 @@ declare module '@tanstack/react-router' {
       path: '/whatsapp-crm'
       fullPath: '/whatsapp-crm'
       preLoaderRoute: typeof WhatsappCrmRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/whatsapp-marketing-automation': {
+      id: '/whatsapp-marketing-automation'
+      path: '/whatsapp-marketing-automation'
+      fullPath: '/whatsapp-marketing-automation'
+      preLoaderRoute: typeof WhatsappMarketingAutomationRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/yoga-wellness-marketing-software': {
@@ -2165,6 +2186,7 @@ const rootRouteChildren: RootRouteChildren = {
   TermsAndConditionsRoute: TermsAndConditionsRoute,
   TourTravelMarketingSoftwareRoute: TourTravelMarketingSoftwareRoute,
   WhatsappCrmRoute: WhatsappCrmRoute,
+  WhatsappMarketingAutomationRoute: WhatsappMarketingAutomationRoute,
   YogaWellnessMarketingSoftwareRoute: YogaWellnessMarketingSoftwareRoute,
   BillingTokenRoute: BillingTokenRoute,
   BlogSlugRoute: BlogSlugRoute,
