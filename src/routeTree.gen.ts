@@ -49,6 +49,9 @@ import { Route as YogaWellnessMarketingSoftwareRouteImport } from './routes/yoga
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedPartnerPortalRouteImport } from './routes/_authenticated/partner-portal'
 import { Route as CrmCrmRouteImport } from './routes/_crm/crm'
+import { Route as ApisIndexRouteImport } from './routes/apis.index'
+import { Route as ApisGoogleReviewApiRouteImport } from './routes/apis.google-review-api'
+import { Route as ApisWhatsappApiRouteImport } from './routes/apis.whatsapp-api'
 import { Route as BillingTokenRouteImport } from './routes/billing.$token'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
@@ -320,6 +323,21 @@ const CrmCrmRoute = CrmCrmRouteImport.update({
   id: '/crm',
   path: '/crm',
   getParentRoute: () => CrmRoute,
+} as any)
+const ApisIndexRoute = ApisIndexRouteImport.update({
+  id: '/apis/',
+  path: '/apis/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApisGoogleReviewApiRoute = ApisGoogleReviewApiRouteImport.update({
+  id: '/apis/google-review-api',
+  path: '/apis/google-review-api',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApisWhatsappApiRoute = ApisWhatsappApiRouteImport.update({
+  id: '/apis/whatsapp-api',
+  path: '/apis/whatsapp-api',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const BillingTokenRoute = BillingTokenRouteImport.update({
   id: '/billing/$token',
@@ -690,6 +708,8 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof AuthenticatedDashboardRouteWithChildren
   '/partner-portal': typeof AuthenticatedPartnerPortalRoute
   '/crm': typeof CrmCrmRouteWithChildren
+  '/apis/google-review-api': typeof ApisGoogleReviewApiRoute
+  '/apis/whatsapp-api': typeof ApisWhatsappApiRoute
   '/billing/$token': typeof BillingTokenRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/crm/login': typeof CrmLoginRoute
@@ -729,6 +749,7 @@ export interface FileRoutesByFullPath {
   '/services/local-seo-vadodara': typeof ServicesLocalSeoVadodaraRoute
   '/whatsapp-crm/privacy-policy': typeof WhatsappCrmPrivacyPolicyRoute
   '/whatsapp-crm/terms-and-conditions': typeof WhatsappCrmTermsAndConditionsRoute
+  '/apis/': typeof ApisIndexRoute
   '/blog/': typeof BlogIndexRoute
   '/dashboard/agent': typeof AuthenticatedDashboardAgentRoute
   '/dashboard/audit': typeof AuthenticatedDashboardAuditRoute
@@ -790,6 +811,8 @@ export interface FileRoutesByTo {
   '/whatsapp-marketing-automation': typeof WhatsappMarketingAutomationRoute
   '/yoga-wellness-marketing-software': typeof YogaWellnessMarketingSoftwareRoute
   '/partner-portal': typeof AuthenticatedPartnerPortalRoute
+  '/apis/google-review-api': typeof ApisGoogleReviewApiRoute
+  '/apis/whatsapp-api': typeof ApisWhatsappApiRoute
   '/billing/$token': typeof BillingTokenRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/crm/login': typeof CrmLoginRoute
@@ -829,6 +852,7 @@ export interface FileRoutesByTo {
   '/services/local-seo-vadodara': typeof ServicesLocalSeoVadodaraRoute
   '/whatsapp-crm/privacy-policy': typeof WhatsappCrmPrivacyPolicyRoute
   '/whatsapp-crm/terms-and-conditions': typeof WhatsappCrmTermsAndConditionsRoute
+  '/apis': typeof ApisIndexRoute
   '/blog': typeof BlogIndexRoute
   '/dashboard/agent': typeof AuthenticatedDashboardAgentRoute
   '/dashboard/audit': typeof AuthenticatedDashboardAuditRoute
@@ -895,6 +919,8 @@ export interface FileRoutesById {
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRouteWithChildren
   '/_authenticated/partner-portal': typeof AuthenticatedPartnerPortalRoute
   '/_crm/crm': typeof CrmCrmRouteWithChildren
+  '/apis/google-review-api': typeof ApisGoogleReviewApiRoute
+  '/apis/whatsapp-api': typeof ApisWhatsappApiRoute
   '/billing/$token': typeof BillingTokenRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/crm/login': typeof CrmLoginRoute
@@ -934,6 +960,7 @@ export interface FileRoutesById {
   '/services/local-seo-vadodara': typeof ServicesLocalSeoVadodaraRoute
   '/whatsapp-crm_/privacy-policy': typeof WhatsappCrmPrivacyPolicyRoute
   '/whatsapp-crm_/terms-and-conditions': typeof WhatsappCrmTermsAndConditionsRoute
+  '/apis/': typeof ApisIndexRoute
   '/blog/': typeof BlogIndexRoute
   '/_authenticated/dashboard/agent': typeof AuthenticatedDashboardAgentRoute
   '/_authenticated/dashboard/audit': typeof AuthenticatedDashboardAuditRoute
@@ -999,6 +1026,8 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/partner-portal'
     | '/crm'
+    | '/apis/google-review-api'
+    | '/apis/whatsapp-api'
     | '/billing/$token'
     | '/blog/$slug'
     | '/crm/login'
@@ -1038,6 +1067,7 @@ export interface FileRouteTypes {
     | '/services/local-seo-vadodara'
     | '/whatsapp-crm/privacy-policy'
     | '/whatsapp-crm/terms-and-conditions'
+    | '/apis/'
     | '/blog/'
     | '/dashboard/agent'
     | '/dashboard/audit'
@@ -1099,6 +1129,8 @@ export interface FileRouteTypes {
     | '/whatsapp-marketing-automation'
     | '/yoga-wellness-marketing-software'
     | '/partner-portal'
+    | '/apis/google-review-api'
+    | '/apis/whatsapp-api'
     | '/billing/$token'
     | '/blog/$slug'
     | '/crm/login'
@@ -1138,6 +1170,7 @@ export interface FileRouteTypes {
     | '/services/local-seo-vadodara'
     | '/whatsapp-crm/privacy-policy'
     | '/whatsapp-crm/terms-and-conditions'
+    | '/apis'
     | '/blog'
     | '/dashboard/agent'
     | '/dashboard/audit'
@@ -1203,6 +1236,8 @@ export interface FileRouteTypes {
     | '/_authenticated/dashboard'
     | '/_authenticated/partner-portal'
     | '/_crm/crm'
+    | '/apis/google-review-api'
+    | '/apis/whatsapp-api'
     | '/billing/$token'
     | '/blog/$slug'
     | '/crm/login'
@@ -1242,6 +1277,7 @@ export interface FileRouteTypes {
     | '/services/local-seo-vadodara'
     | '/whatsapp-crm_/privacy-policy'
     | '/whatsapp-crm_/terms-and-conditions'
+    | '/apis/'
     | '/blog/'
     | '/_authenticated/dashboard/agent'
     | '/_authenticated/dashboard/audit'
@@ -1305,6 +1341,8 @@ export interface RootRouteChildren {
   WhatsappCrmRoute: typeof WhatsappCrmRoute
   WhatsappMarketingAutomationRoute: typeof WhatsappMarketingAutomationRoute
   YogaWellnessMarketingSoftwareRoute: typeof YogaWellnessMarketingSoftwareRoute
+  ApisGoogleReviewApiRoute: typeof ApisGoogleReviewApiRoute
+  ApisWhatsappApiRoute: typeof ApisWhatsappApiRoute
   BillingTokenRoute: typeof BillingTokenRoute
   BlogSlugRoute: typeof BlogSlugRoute
   CrmLoginRoute: typeof CrmLoginRoute
@@ -1344,6 +1382,7 @@ export interface RootRouteChildren {
   ServicesLocalSeoVadodaraRoute: typeof ServicesLocalSeoVadodaraRoute
   WhatsappCrmPrivacyPolicyRoute: typeof WhatsappCrmPrivacyPolicyRoute
   WhatsappCrmTermsAndConditionsRoute: typeof WhatsappCrmTermsAndConditionsRoute
+  ApisIndexRoute: typeof ApisIndexRoute
   BlogIndexRoute: typeof BlogIndexRoute
   ApiPublicLeadsRoute: typeof ApiPublicLeadsRoute
   ApiPublicCronAgentRoute: typeof ApiPublicCronAgentRoute
@@ -1633,6 +1672,27 @@ declare module '@tanstack/react-router' {
       fullPath: '/crm'
       preLoaderRoute: typeof CrmCrmRouteImport
       parentRoute: typeof CrmRoute
+    }
+    '/apis/': {
+      id: '/apis/'
+      path: '/apis'
+      fullPath: '/apis/'
+      preLoaderRoute: typeof ApisIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/apis/google-review-api': {
+      id: '/apis/google-review-api'
+      path: '/apis/google-review-api'
+      fullPath: '/apis/google-review-api'
+      preLoaderRoute: typeof ApisGoogleReviewApiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/apis/whatsapp-api': {
+      id: '/apis/whatsapp-api'
+      path: '/apis/whatsapp-api'
+      fullPath: '/apis/whatsapp-api'
+      preLoaderRoute: typeof ApisWhatsappApiRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/billing/$token': {
       id: '/billing/$token'
@@ -2188,6 +2248,8 @@ const rootRouteChildren: RootRouteChildren = {
   WhatsappCrmRoute: WhatsappCrmRoute,
   WhatsappMarketingAutomationRoute: WhatsappMarketingAutomationRoute,
   YogaWellnessMarketingSoftwareRoute: YogaWellnessMarketingSoftwareRoute,
+  ApisGoogleReviewApiRoute: ApisGoogleReviewApiRoute,
+  ApisWhatsappApiRoute: ApisWhatsappApiRoute,
   BillingTokenRoute: BillingTokenRoute,
   BlogSlugRoute: BlogSlugRoute,
   CrmLoginRoute: CrmLoginRoute,
@@ -2227,6 +2289,7 @@ const rootRouteChildren: RootRouteChildren = {
   ServicesLocalSeoVadodaraRoute: ServicesLocalSeoVadodaraRoute,
   WhatsappCrmPrivacyPolicyRoute: WhatsappCrmPrivacyPolicyRoute,
   WhatsappCrmTermsAndConditionsRoute: WhatsappCrmTermsAndConditionsRoute,
+  ApisIndexRoute: ApisIndexRoute,
   BlogIndexRoute: BlogIndexRoute,
   ApiPublicLeadsRoute: ApiPublicLeadsRoute,
   ApiPublicCronAgentRoute: ApiPublicCronAgentRoute,
