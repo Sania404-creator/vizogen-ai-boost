@@ -13,8 +13,8 @@ export type SiteProduct = {
 export const site = {
   links: { whatsappPlatform: "/whatsapp-crm" },
   products: [
-    { name: "WhatsApp Marketing & Automation", description: "Unified WhatsApp + Instagram inbox, chatbots, broadcasts and AI agents.", to: "/whatsapp-marketing-automation", badge: "Live", icon: MessageCircle, highlight: true },
     { name: "GMB Automation", description: "AI posts, reviews and local ranking for your Google profile.", to: "/", badge: null, icon: CalendarCheck },
+    { name: "WhatsApp Marketing & Automation", description: "Unified WhatsApp + Instagram inbox, chatbots, broadcasts and AI agents.", to: "/whatsapp-marketing-automation", badge: "Live", icon: MessageCircle, highlight: true },
     { name: "AI Vizogen Studio", description: "AI creatives and content studio.", to: "/whatsapp-crm#ai-studio", badge: "New", icon: Boxes },
     { name: "Enterprise ERP", description: "Supply chain, inventory & GST accounting", to: "/products/enterprise-erp", badge: "Coming Soon", icon: Boxes },
     { name: "Smart HRM & Payroll", description: "Biometric attendance, leaves & 1-click payroll", to: "/products/hrm-payroll", badge: "Coming Soon", icon: Users },
