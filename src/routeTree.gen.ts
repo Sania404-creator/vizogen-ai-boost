@@ -20,6 +20,7 @@ import { Route as CompareRouteImport } from './routes/compare'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as DemoRouteImport } from './routes/demo'
 import { Route as EducationMarketingSoftwareRouteImport } from './routes/education-marketing-software'
+import { Route as GoogleReviewApiRouteImport } from './routes/google-review-api'
 import { Route as GymMarketingSoftwareRouteImport } from './routes/gym-marketing-software'
 import { Route as HandymanMarketingSoftwareRouteImport } from './routes/handyman-marketing-software'
 import { Route as HowToConnectGbpRouteImport } from './routes/how-to-connect-gbp'
@@ -43,6 +44,7 @@ import { Route as SalonMarketingSoftwareRouteImport } from './routes/salon-marke
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as TermsAndConditionsRouteImport } from './routes/terms-and-conditions'
 import { Route as TourTravelMarketingSoftwareRouteImport } from './routes/tour-travel-marketing-software'
+import { Route as WhatsappApiRouteImport } from './routes/whatsapp-api'
 import { Route as WhatsappCrmRouteImport } from './routes/whatsapp-crm'
 import { Route as WhatsappMarketingAutomationRouteImport } from './routes/whatsapp-marketing-automation'
 import { Route as YogaWellnessMarketingSoftwareRouteImport } from './routes/yoga-wellness-marketing-software'
@@ -170,6 +172,11 @@ const EducationMarketingSoftwareRoute =
     path: '/education-marketing-software',
     getParentRoute: () => rootRouteImport,
   } as any)
+const GoogleReviewApiRoute = GoogleReviewApiRouteImport.update({
+  id: '/google-review-api',
+  path: '/google-review-api',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const GymMarketingSoftwareRoute = GymMarketingSoftwareRouteImport.update({
   id: '/gym-marketing-software',
   path: '/gym-marketing-software',
@@ -291,6 +298,11 @@ const TourTravelMarketingSoftwareRoute =
     path: '/tour-travel-marketing-software',
     getParentRoute: () => rootRouteImport,
   } as any)
+const WhatsappApiRoute = WhatsappApiRouteImport.update({
+  id: '/whatsapp-api',
+  path: '/whatsapp-api',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const WhatsappCrmRoute = WhatsappCrmRouteImport.update({
   id: '/whatsapp-crm',
   path: '/whatsapp-crm',
@@ -679,6 +691,7 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/demo': typeof DemoRoute
   '/education-marketing-software': typeof EducationMarketingSoftwareRoute
+  '/google-review-api': typeof GoogleReviewApiRoute
   '/gym-marketing-software': typeof GymMarketingSoftwareRoute
   '/handyman-marketing-software': typeof HandymanMarketingSoftwareRoute
   '/how-to-connect-gbp': typeof HowToConnectGbpRoute
@@ -702,6 +715,7 @@ export interface FileRoutesByFullPath {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/tour-travel-marketing-software': typeof TourTravelMarketingSoftwareRoute
+  '/whatsapp-api': typeof WhatsappApiRoute
   '/whatsapp-crm': typeof WhatsappCrmRoute
   '/whatsapp-marketing-automation': typeof WhatsappMarketingAutomationRoute
   '/yoga-wellness-marketing-software': typeof YogaWellnessMarketingSoftwareRoute
@@ -784,6 +798,7 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/demo': typeof DemoRoute
   '/education-marketing-software': typeof EducationMarketingSoftwareRoute
+  '/google-review-api': typeof GoogleReviewApiRoute
   '/gym-marketing-software': typeof GymMarketingSoftwareRoute
   '/handyman-marketing-software': typeof HandymanMarketingSoftwareRoute
   '/how-to-connect-gbp': typeof HowToConnectGbpRoute
@@ -807,6 +822,7 @@ export interface FileRoutesByTo {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/tour-travel-marketing-software': typeof TourTravelMarketingSoftwareRoute
+  '/whatsapp-api': typeof WhatsappApiRoute
   '/whatsapp-crm': typeof WhatsappCrmRoute
   '/whatsapp-marketing-automation': typeof WhatsappMarketingAutomationRoute
   '/yoga-wellness-marketing-software': typeof YogaWellnessMarketingSoftwareRoute
@@ -890,6 +906,7 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/demo': typeof DemoRoute
   '/education-marketing-software': typeof EducationMarketingSoftwareRoute
+  '/google-review-api': typeof GoogleReviewApiRoute
   '/gym-marketing-software': typeof GymMarketingSoftwareRoute
   '/handyman-marketing-software': typeof HandymanMarketingSoftwareRoute
   '/how-to-connect-gbp': typeof HowToConnectGbpRoute
@@ -913,6 +930,7 @@ export interface FileRoutesById {
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/tour-travel-marketing-software': typeof TourTravelMarketingSoftwareRoute
+  '/whatsapp-api': typeof WhatsappApiRoute
   '/whatsapp-crm': typeof WhatsappCrmRoute
   '/whatsapp-marketing-automation': typeof WhatsappMarketingAutomationRoute
   '/yoga-wellness-marketing-software': typeof YogaWellnessMarketingSoftwareRoute
@@ -997,6 +1015,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/demo'
     | '/education-marketing-software'
+    | '/google-review-api'
     | '/gym-marketing-software'
     | '/handyman-marketing-software'
     | '/how-to-connect-gbp'
@@ -1020,6 +1039,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/terms-and-conditions'
     | '/tour-travel-marketing-software'
+    | '/whatsapp-api'
     | '/whatsapp-crm'
     | '/whatsapp-marketing-automation'
     | '/yoga-wellness-marketing-software'
@@ -1102,6 +1122,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/demo'
     | '/education-marketing-software'
+    | '/google-review-api'
     | '/gym-marketing-software'
     | '/handyman-marketing-software'
     | '/how-to-connect-gbp'
@@ -1125,6 +1146,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/terms-and-conditions'
     | '/tour-travel-marketing-software'
+    | '/whatsapp-api'
     | '/whatsapp-crm'
     | '/whatsapp-marketing-automation'
     | '/yoga-wellness-marketing-software'
@@ -1207,6 +1229,7 @@ export interface FileRouteTypes {
     | '/contact'
     | '/demo'
     | '/education-marketing-software'
+    | '/google-review-api'
     | '/gym-marketing-software'
     | '/handyman-marketing-software'
     | '/how-to-connect-gbp'
@@ -1230,6 +1253,7 @@ export interface FileRouteTypes {
     | '/sitemap.xml'
     | '/terms-and-conditions'
     | '/tour-travel-marketing-software'
+    | '/whatsapp-api'
     | '/whatsapp-crm'
     | '/whatsapp-marketing-automation'
     | '/yoga-wellness-marketing-software'
@@ -1315,6 +1339,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   DemoRoute: typeof DemoRoute
   EducationMarketingSoftwareRoute: typeof EducationMarketingSoftwareRoute
+  GoogleReviewApiRoute: typeof GoogleReviewApiRoute
   GymMarketingSoftwareRoute: typeof GymMarketingSoftwareRoute
   HandymanMarketingSoftwareRoute: typeof HandymanMarketingSoftwareRoute
   HowToConnectGbpRoute: typeof HowToConnectGbpRoute
@@ -1338,6 +1363,7 @@ export interface RootRouteChildren {
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TermsAndConditionsRoute: typeof TermsAndConditionsRoute
   TourTravelMarketingSoftwareRoute: typeof TourTravelMarketingSoftwareRoute
+  WhatsappApiRoute: typeof WhatsappApiRoute
   WhatsappCrmRoute: typeof WhatsappCrmRoute
   WhatsappMarketingAutomationRoute: typeof WhatsappMarketingAutomationRoute
   YogaWellnessMarketingSoftwareRoute: typeof YogaWellnessMarketingSoftwareRoute
@@ -1468,6 +1494,13 @@ declare module '@tanstack/react-router' {
       path: '/education-marketing-software'
       fullPath: '/education-marketing-software'
       preLoaderRoute: typeof EducationMarketingSoftwareRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/google-review-api': {
+      id: '/google-review-api'
+      path: '/google-review-api'
+      fullPath: '/google-review-api'
+      preLoaderRoute: typeof GoogleReviewApiRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/gym-marketing-software': {
@@ -1629,6 +1662,13 @@ declare module '@tanstack/react-router' {
       path: '/tour-travel-marketing-software'
       fullPath: '/tour-travel-marketing-software'
       preLoaderRoute: typeof TourTravelMarketingSoftwareRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/whatsapp-api': {
+      id: '/whatsapp-api'
+      path: '/whatsapp-api'
+      fullPath: '/whatsapp-api'
+      preLoaderRoute: typeof WhatsappApiRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/whatsapp-crm': {
@@ -2221,6 +2261,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   DemoRoute: DemoRoute,
   EducationMarketingSoftwareRoute: EducationMarketingSoftwareRoute,
+  GoogleReviewApiRoute: GoogleReviewApiRoute,
   GymMarketingSoftwareRoute: GymMarketingSoftwareRoute,
   HandymanMarketingSoftwareRoute: HandymanMarketingSoftwareRoute,
   HowToConnectGbpRoute: HowToConnectGbpRoute,
@@ -2245,6 +2286,7 @@ const rootRouteChildren: RootRouteChildren = {
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   TermsAndConditionsRoute: TermsAndConditionsRoute,
   TourTravelMarketingSoftwareRoute: TourTravelMarketingSoftwareRoute,
+  WhatsappApiRoute: WhatsappApiRoute,
   WhatsappCrmRoute: WhatsappCrmRoute,
   WhatsappMarketingAutomationRoute: WhatsappMarketingAutomationRoute,
   YogaWellnessMarketingSoftwareRoute: YogaWellnessMarketingSoftwareRoute,

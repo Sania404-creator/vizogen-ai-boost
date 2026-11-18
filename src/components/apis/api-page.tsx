@@ -5,28 +5,29 @@ import { Footer } from "@/components/landing/footer";
 import { Button } from "@/components/ui/button";
 import { API_PRODUCTS, UPI_ID, priceForWeek, upiLink, type ApiProduct } from "./config";
 
-function usePrice(slug: string) {
+function usePrice(slug: string, fixed?: number) {
   const [price, setPrice] = useState<number | null>(null);
   useEffect(() => {
+    if (fixed) { setPrice(fixed); return; }
     const key = `vz-api-first-${slug}`;
     let first = Number(localStorage.getItem(key));
     if (!first) { first = Date.now(); localStorage.setItem(key, String(first)); }
     setPrice(priceForWeek(first, Date.now()));
-  }, [slug]);
+  }, [slug, fixed]);
   return price;
 }
 
 export function ApiCard({ p, detail }: { p: ApiProduct; detail?: boolean }) {
-  const price = usePrice(p.slug);
+  const price = usePrice(p.slug, p.fixedPrice);
   return (
-    <div className="rounded-2xl border border-border bg-card p-6 shadow-sm flex flex-col gap-4">
+    <div className={`${p.green ? "theme-wa " : ""}rounded-2xl border border-border bg-card p-6 shadow-sm flex flex-col gap-4`}>
       <h2 className="text-2xl font-bold text-foreground">{p.name}</h2>
       <p className="text-muted-foreground">{p.short}</p>
       <ul className="space-y-1 text-sm text-foreground">{p.features.map((f) => <li key={f}>✓ {f}</li>)}</ul>
       <p className="text-4xl font-extrabold text-foreground">{price ? `₹${price.toLocaleString("en-IN")}` : "—"}</p>
       <div className="flex flex-wrap gap-2">
-        <Button asChild disabled={!price}>
-          <a href={price ? upiLink(price, `${p.name} - Vizogen`) : "#"}>Buy Now (UPI)</a>
+        <Button asChild disabled={!price} className={p.green ? "bg-primary text-primary-foreground" : undefined}>
+          <a href={price ? upiLink(price, `${p.name} - Vizogen`) : "#"}>Buy Now — Paytm / GPay / PhonePe</a>
         </Button>
         {!detail && <Button variant="outline" asChild><Link to={`/apis/${p.slug}` as "/apis/whatsapp-api"}>Details</Link></Button>}
       </div>
@@ -35,9 +36,9 @@ export function ApiCard({ p, detail }: { p: ApiProduct; detail?: boolean }) {
   );
 }
 
-export function ApiShell({ title, children }: { title: string; children: React.ReactNode }) {
+export function ApiShell({ title, children, green }: { title: string; children: React.ReactNode; green?: boolean }) {
   return (
-    <div className="min-h-screen bg-background">
+    <div className={`${green ? "theme-wa " : ""}min-h-screen bg-background`}>
       <Navbar />
       <main className="mx-auto max-w-5xl px-4 py-24">
         <h1 className="text-4xl font-bold text-foreground mb-8">{title}</h1>
