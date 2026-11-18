@@ -21,6 +21,7 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
   const [guideOpen, setGuideOpen] = useState(false);
   const [mobileGuideOpen, setMobileGuideOpen] = useState(false);
+  const [mobileProductsOpen, setMobileProductsOpen] = useState(false);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const onHome = pathname === "/";
@@ -284,44 +285,67 @@ export function Navbar() {
               ) : null}
             </AnimatePresence>
             <div className="mt-2 border-t border-border pt-2">
-              <p className="px-2 pb-1 pt-1 text-[11px] font-bold uppercase tracking-[0.18em] text-muted-foreground">
+              <button
+                type="button"
+                aria-expanded={mobileProductsOpen}
+                onClick={() => setMobileProductsOpen((v) => !v)}
+                className="flex w-full items-center justify-between rounded-lg px-2 py-2.5 text-sm font-semibold text-foreground hover:bg-accent"
+              >
                 Our Products
-              </p>
-              {site.products.map((p, i) => {
-                const active = pathname === p.to;
-                return (
+                <ChevronDown
+                  className={`size-4 transition-transform duration-200 ${
+                    mobileProductsOpen ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
+
+              <AnimatePresence initial={false}>
+                {mobileProductsOpen ? (
                   <motion.div
-                    key={p.name}
-                    initial={{ opacity: 0, x: 16 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.06, duration: 0.25 }}
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                    className="overflow-hidden"
                   >
-                    <Link
-                      to={p.to}
-                      onClick={() => setOpen(false)}
-                      aria-current={active ? "page" : undefined}
-                      className={`flex items-start gap-3 rounded-xl px-2 py-2.5 outline-none hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring ${
-                        p.highlight || active ? "bg-brand/10" : ""
-                      }`}
-                    >
-                      <p.icon className="mt-0.5 size-5 shrink-0 text-brand" strokeWidth={1.75} />
-                      <span className="min-w-0 flex-1">
-                        <span className="block text-sm font-semibold text-foreground">{p.name}</span>
-                        <span className="mt-0.5 block text-xs text-muted-foreground">{p.description}</span>
-                      </span>
-                      {p.badge ? (
-                        <span
-                          className={`shrink-0 rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide ${
-                            p.badge === "Coming Soon" ? "bg-muted text-muted-foreground" : "gradient-brand text-primary-foreground"
-                          }`}
+                    {site.products.map((p, i) => {
+                      const active = pathname === p.to;
+                      return (
+                        <motion.div
+                          key={p.name}
+                          initial={{ opacity: 0, x: 16 }}
+                          animate={{ opacity: 1, x: 0 }}
+                          transition={{ delay: i * 0.06, duration: 0.25 }}
                         >
-                          {p.badge}
-                        </span>
-                      ) : null}
-                    </Link>
+                          <Link
+                            to={p.to}
+                            onClick={() => setOpen(false)}
+                            aria-current={active ? "page" : undefined}
+                            className={`flex items-start gap-3 rounded-xl px-2 py-2.5 outline-none hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring ${
+                              p.highlight || active ? "bg-brand/10" : ""
+                            }`}
+                          >
+                            <p.icon className="mt-0.5 size-5 shrink-0 text-brand" strokeWidth={1.75} />
+                            <span className="min-w-0 flex-1">
+                              <span className="block text-sm font-semibold text-foreground">{p.name}</span>
+                              <span className="mt-0.5 block text-xs text-muted-foreground">{p.description}</span>
+                            </span>
+                            {p.badge ? (
+                              <span
+                                className={`shrink-0 rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide ${
+                                  p.badge === "Coming Soon" ? "bg-muted text-muted-foreground" : "gradient-brand text-primary-foreground"
+                                }`}
+                              >
+                                {p.badge}
+                              </span>
+                            ) : null}
+                          </Link>
+                        </motion.div>
+                      );
+                    })}
                   </motion.div>
-                );
-              })}
+                ) : null}
+              </AnimatePresence>
             </div>
           </div>
 

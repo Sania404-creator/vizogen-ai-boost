@@ -133,7 +133,7 @@ export function Nav({ onDemo, base = "" }: { onDemo: () => void; base?: string }
                   <div className="rounded-2xl border border-border bg-card p-2 shadow-xl">
                     <a href={href("#features")} className="block rounded-xl px-3 py-2.5 text-sm text-foreground hover:bg-muted">All features</a>
                     <a href={href("#demo")} className="block rounded-xl px-3 py-2.5 text-sm text-foreground hover:bg-muted">See Vizogen in action</a>
-                    <a href={WA.links.vizogenAIStudio} {...ext} className="flex items-center gap-2 rounded-xl px-3 py-2.5 text-sm text-foreground hover:bg-muted"><Sparkles className="size-4 text-primary" />AI Vizogen Studio<span className="ml-auto rounded-full gradient-wa px-2 py-0.5 text-[10px] font-bold text-primary-foreground">New</span></a>
+                    <a href={WA.links.vizogenAIStudio} {...ext} className="flex items-center gap-2 rounded-xl px-3 py-2.5 text-sm text-foreground hover:bg-muted"><Sparkles className="size-4 text-primary" />Vizogen AI Studio<span className="ml-auto rounded-full gradient-wa px-2 py-0.5 text-[10px] font-bold text-primary-foreground">New</span></a>
                   </div>
                 </motion.div>)}</AnimatePresence>
             </li>
