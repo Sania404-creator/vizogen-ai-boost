@@ -1,0 +1,2 @@
+ALTER TABLE public.crm_proposals ADD COLUMN IF NOT EXISTS kind text NOT NULL DEFAULT 'proposal';
+ALTER TABLE public.crm_proposals ADD CONSTRAINT crm_proposals_kind_check CHECK (kind IN ('proposal','billing'));

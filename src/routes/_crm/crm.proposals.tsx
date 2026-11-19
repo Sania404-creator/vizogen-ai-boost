@@ -5,6 +5,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { ExternalLink, FileText, Plus, Trash2 } from "lucide-react";
 import { toast } from "sonner";
 import { CrmShell } from "@/components/crm/shell";
+import { CreateBillingDialog } from "@/components/crm/create-billing-dialog";
 import { BillingActions, BillingStatusBadge } from "@/components/crm/billing-actions";
 import {
   deleteTemplate,
@@ -68,8 +69,28 @@ function ProposalsPage() {
     void queryClient.invalidateQueries({ queryKey: ["crm-templates"] });
   };
 
+  const [kindFilter, setKindFilter] = useState<"all" | "proposal" | "billing">("all");
+  const rows = (proposals.data ?? []).filter((p) => kindFilter === "all" || (p.kind ?? "proposal") === kindFilter);
+
   return (
     <CrmShell title="Proposals" subtitle="Sent proposals and reusable Vizogen templates">
+      <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+        <div className="flex gap-2">
+          {(["all", "proposal", "billing"] as const).map((k) => (
+            <Button key={k} size="sm" variant={kindFilter === k ? "default" : "outline"} onClick={() => setKindFilter(k)}>
+              {k === "all" ? "All" : k === "proposal" ? "Proposals" : "Direct Bills"}
+            </Button>
+          ))}
+        </div>
+        <CreateBillingDialog
+          onDone={refresh}
+          trigger={
+            <Button className="gradient-brand text-white">
+              <Plus className="size-4" /> Create Billing
+            </Button>
+          }
+        />
+      </div>
       <Tabs defaultValue="sent">
         <TabsList>
           <TabsTrigger value="sent">Sent proposals</TabsTrigger>
@@ -90,7 +111,7 @@ function ProposalsPage() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-border">
-                {(proposals.data ?? []).map((p) => {
+                {rows.map((p) => {
                   const total = (p.pricing ?? []).reduce((s, l) => s + l.qty * l.price, 0);
                   return (
                     <tr key={p.id} className="hover:bg-muted/40">
@@ -102,7 +123,7 @@ function ProposalsPage() {
                         >
                           {p.title}
                         </Link>
-                        <p className="text-xs text-muted-foreground">v{p.version}</p>
+                        <p className="text-xs text-muted-foreground">v{p.version}{p.kind === "billing" ? <Badge variant="secondary" className="ml-2">Direct Bill</Badge> : null}</p>
                       </td>
                       <td className="px-4 py-3 text-muted-foreground">
                         {p.client_company || p.client_name}

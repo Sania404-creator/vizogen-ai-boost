@@ -45,10 +45,11 @@ export interface Proposal {
   signer_name?: string | null;
   signed_pdf_path?: string | null;
   change_request?: string | null;
+  kind?: string;
 }
 
 const PROPOSAL_COLUMNS =
-  "billing_number, expires_at, confirmed_at, signer_name, signed_pdf_path, change_request, id, lead_id, title, client_name, client_company, client_email, scope, deliverables, pricing, currency, notes, terms, valid_until, status, version, share_token, sent_at, viewed_at, created_at";
+  "kind, billing_number, expires_at, confirmed_at, signer_name, signed_pdf_path, change_request, id, lead_id, title, client_name, client_company, client_email, scope, deliverables, pricing, currency, notes, terms, valid_until, status, version, share_token, sent_at, viewed_at, created_at";
 
 const pricingSchema = z.array(
   z.object({
@@ -144,6 +145,7 @@ const proposalSchema = z.object({
   notes: z.string().trim().max(3000).default(""),
   terms: z.string().trim().max(6000).default(""),
   validUntil: z.string().max(20).optional().or(z.literal("")),
+  kind: z.enum(["proposal", "billing"]).default("proposal"),
 });
 
 export const saveProposal = createServerFn({ method: "POST" })
@@ -164,6 +166,7 @@ export const saveProposal = createServerFn({ method: "POST" })
       notes: data.notes,
       terms: data.terms,
       valid_until: data.validUntil || null,
+      kind: data.kind,
       created_by: context.userId,
     };
 
@@ -287,7 +290,7 @@ export const sendProposal = createServerFn({ method: "POST" })
       actor_id: context.userId,
       actor_name: member?.full_name || member?.email || "Team",
       type: "proposal_sent",
-      body: `Proposal "${row.title}" (v${row.version}) sent to ${row.client_email}.`,
+      body: `${row.kind === "billing" ? "Bill" : "Proposal"} "${row.title}" (v${row.version}) sent to ${row.client_email}.`,
     });
 
     await context.supabase

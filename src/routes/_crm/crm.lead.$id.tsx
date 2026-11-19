@@ -1,3 +1,4 @@
+import { Receipt } from "lucide-react";
 import { useEffect, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
@@ -25,6 +26,7 @@ import {
   LOST_REASONS,
 } from "@/lib/crm.functions";
 import { ProposalEditor } from "@/components/crm/proposal-editor";
+import { CreateBillingDialog } from "@/components/crm/create-billing-dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -207,6 +209,17 @@ function LeadDetail() {
                   trigger={
                     <Button size="sm" className="gradient-brand text-white">
                       <FileText className="size-4" /> Send proposal
+                    </Button>
+                  }
+                />
+              ) : null}
+              {row ? (
+                <CreateBillingDialog
+                  lead={row}
+                  onDone={refresh}
+                  trigger={
+                    <Button size="sm" variant="outline">
+                      <Receipt className="size-4" /> Create billing
                     </Button>
                   }
                 />

@@ -404,6 +404,7 @@ export type Database = {
           id: string
           invoice_number: string | null
           invoice_sent_at: string | null
+          kind: string
           lead_id: string
           notes: string
           pricing: Json
@@ -448,6 +449,7 @@ export type Database = {
           id?: string
           invoice_number?: string | null
           invoice_sent_at?: string | null
+          kind?: string
           lead_id: string
           notes?: string
           pricing?: Json
@@ -492,6 +494,7 @@ export type Database = {
           id?: string
           invoice_number?: string | null
           invoice_sent_at?: string | null
+          kind?: string
           lead_id?: string
           notes?: string
           pricing?: Json
