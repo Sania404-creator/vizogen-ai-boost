@@ -137,7 +137,7 @@ const proposalSchema = z.object({
   title: z.string().trim().min(2).max(160),
   clientName: z.string().trim().min(2).max(160),
   clientCompany: z.string().trim().max(160).default(""),
-  clientEmail: z.string().trim().email().max(200),
+  clientEmail: z.string().trim().email().max(200).or(z.literal("")),
   scope: z.string().trim().max(6000).default(""),
   deliverables: z.array(z.string().trim().min(1).max(200)).max(30).default([]),
   pricing: pricingSchema.max(30).default([]),
@@ -225,6 +225,7 @@ export const sendProposal = createServerFn({ method: "POST" })
     if (error || !proposal) throw new Error("Proposal not found.");
     const row = proposal as unknown as Proposal;
 
+    if (!row.client_email) throw new Error("Client email missing — email add karo ya WhatsApp se bhejo.");
     if (row.status === "confirmed") throw new Error("This billing is already signed. Create a new version instead.");
     const extra = proposal as unknown as { billing_number: string | null };
     let billingNumber = extra.billing_number;

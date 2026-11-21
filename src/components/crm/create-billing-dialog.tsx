@@ -64,6 +64,19 @@ export function CreateBillingDialog({
   const [notes, setNotes] = useState("");
   const [validUntil, setValidUntil] = useState(plusDays(14));
 
+  const [billId, setBillId] = useState<string | undefined>();
+  const reset = () => {
+    setBillId(undefined);
+    setLeadId(fixedLead?.id ?? "");
+    setClientName(fixedLead?.name ?? "");
+    setCompany(fixedLead?.company ?? "");
+    setEmail(fixedLead?.email ?? "");
+    setPhone(fixedLead?.phone ?? "");
+    setItems([{ item: "", qty: 1, price: 0 }]);
+    setNotes("");
+    setValidUntil(plusDays(14));
+  };
+
   const total = useMemo(() => items.reduce((s, l) => s + l.qty * l.price, 0), [items]);
 
   const pickLead = (id: string) => {
@@ -90,8 +103,11 @@ export function CreateBillingDialog({
     if (!lead) throw new Error("Pehle lead select karo.");
     const pricing = items.filter((l) => l.item.trim());
     if (!pricing.length) throw new Error("Kam se kam ek item add karo.");
-    return save({
+    if (clientName.trim().length < 2) throw new Error("Client name daalo.");
+    if (email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) throw new Error("Email sahi nahi hai.");
+    const saved = await save({
       data: {
+        id: billId,
         leadId: lead.id,
         title: `Bill for ${company || clientName}`,
         clientName,
@@ -107,6 +123,8 @@ export function CreateBillingDialog({
         kind: "billing",
       },
     });
+    setBillId(saved.id);
+    return saved;
   }
 
   async function run(mode: "draft" | "email" | "wa") {
@@ -131,16 +149,18 @@ export function CreateBillingDialog({
         toast.success("Bill create ho gaya — WhatsApp khul raha hai.");
       } else toast.success("Bill draft save ho gaya.");
       setOpen(false);
+      reset();
       refresh();
     } catch (e) {
-      toast.error(e instanceof Error ? e.message : "Bill create nahi hua.");
+      const msg = e instanceof Error ? e.message : "";
+      toast.error(msg && !msg.trim().startsWith("[") ? msg : "Bill create nahi hua — details check karo.");
     } finally {
       setBusy(false);
     }
   }
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={open} onOpenChange={(o) => { setOpen(o); if (!o) { if (billId) refresh(); reset(); } }}>
       <DialogTrigger asChild>{trigger}</DialogTrigger>
       <DialogContent className="max-h-[90vh] max-w-2xl overflow-y-auto">
         <DialogHeader>
@@ -196,7 +216,7 @@ export function CreateBillingDialog({
         <DialogFooter className="flex-wrap gap-2">
           <Button variant="outline" disabled={busy} onClick={() => run("draft")}><Save className="size-4" /> Save as Draft</Button>
           <Button variant="outline" disabled={busy || !phone} onClick={() => run("wa")}><MessageCircle className="size-4" /> WhatsApp</Button>
-          <Button className="gradient-brand text-white" disabled={busy} onClick={() => run("email")}>
+          <Button className="gradient-brand text-white" disabled={busy || !email.trim()} onClick={() => run("email")}>
             {busy ? <Loader2 className="size-4 animate-spin" /> : <Send className="size-4" />} Create & Send
           </Button>
         </DialogFooter>
