@@ -3,6 +3,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { Loader2, MessageCircle, Plus, Save, Send, Trash2 } from "lucide-react";
 import { toast } from "sonner";
+import { parseExtraEmails } from "@/lib/extra-emails";
 import {
   saveProposal,
   sendProposal,
@@ -43,6 +44,7 @@ export function CreateBillingDialog({
   const qc = useQueryClient();
   const [open, setOpen] = useState(false);
   const [busy, setBusy] = useState(false);
+  const [extraEmails, setExtraEmails] = useState("");
   const fetchLeads = useServerFn(listLeads);
   const save = useServerFn(saveProposal);
   const send = useServerFn(sendProposal);
@@ -74,6 +76,7 @@ export function CreateBillingDialog({
     setPhone(fixedLead?.phone ?? "");
     setItems([{ item: "", qty: 1, price: 0 }]);
     setNotes("");
+    setExtraEmails("");
     setValidUntil(plusDays(14));
   };
 
@@ -100,11 +103,11 @@ export function CreateBillingDialog({
   };
 
   async function persist() {
-    if (!lead) throw new Error("Pehle lead select karo.");
+    if (!lead) throw new Error("Please select a lead.");
     const pricing = items.filter((l) => l.item.trim());
-    if (!pricing.length) throw new Error("Kam se kam ek item add karo.");
-    if (clientName.trim().length < 2) throw new Error("Client name daalo.");
-    if (email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) throw new Error("Email sahi nahi hai.");
+    if (!pricing.length) throw new Error("Please add at least one line item.");
+    if (clientName.trim().length < 2) throw new Error("Please enter the client name.");
+    if (email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) throw new Error("Please enter a valid email address.");
     const saved = await save({
       data: {
         id: billId,
@@ -128,6 +131,15 @@ export function CreateBillingDialog({
   }
 
   async function run(mode: "draft" | "email" | "wa") {
+    const extra = parseExtraEmails(extraEmails);
+    if (mode === "email" && extra.invalid.length) {
+      toast.error(`Please check these email addresses: ${extra.invalid.join(", ")}`);
+      return;
+    }
+    if (extra.list.length > 5) {
+      toast.error("You can add up to 5 additional email addresses.");
+      return;
+    }
     setBusy(true);
     try {
       const bill = await persist();
@@ -136,24 +148,25 @@ export function CreateBillingDialog({
           data: {
             id: bill.id,
             subject: `Your bill from Vizogen`,
-            message: `Hi ${clientName}, please find your Vizogen bill attached. Review, sign and pay via UPI using the link.`,
+            message: `Dear ${clientName},\n\nPlease find your Vizogen bill attached. Kindly review, sign and complete the payment via UPI using the secure link below.`,
+            cc: extra.list,
           },
         });
-        toast.success("Bill create ho gaya aur mail par bhej diya.");
+        toast.success("Bill sent successfully", { description: `Delivered to ${[email, ...extra.list].join(", ")}.` });
       } else if (mode === "wa") {
         const { link } = await sendWa({ data: { id: bill.id } });
         const text = encodeURIComponent(
-          `Hi ${clientName}, aapka Vizogen bill (₹${total.toLocaleString("en-IN")}) ready hai. Sign karke UPI se pay karein:\n\n${link}\n\n— Vizogen Team`,
+          `Hi ${clientName}, your Vizogen bill for ₹${total.toLocaleString("en-IN")} is ready. Please review, sign and pay securely via UPI using the link below:\n\n${link}\n\nRegards,\nVizogen Team`,
         );
         window.open(`https://wa.me/${toWa(phone)}?text=${text}`, "_blank");
-        toast.success("Bill create ho gaya — WhatsApp khul raha hai.");
-      } else toast.success("Bill draft save ho gaya.");
+        toast.success("Bill ready to share", { description: "WhatsApp is opening with your bill link." });
+      } else toast.success("Bill saved", { description: "Your bill has been saved as a draft." });
       setOpen(false);
       reset();
       refresh();
     } catch (e) {
       const msg = e instanceof Error ? e.message : "";
-      toast.error(msg && !msg.trim().startsWith("[") ? msg : "Bill create nahi hua — details check karo.");
+      toast.error(msg && !msg.trim().startsWith("[") ? msg : "We couldn't create the bill. Please review the details and try again.");
     } finally {
       setBusy(false);
     }
@@ -172,7 +185,7 @@ export function CreateBillingDialog({
               <Label>Lead</Label>
               <Select value={leadId} onValueChange={pickLead}>
                 <SelectTrigger>
-                  <SelectValue placeholder={leads.isLoading ? "Loading..." : "Lead select karo"} />
+                  <SelectValue placeholder={leads.isLoading ? "Loading..." : "Select a lead"} />
                 </SelectTrigger>
                 <SelectContent>
                   {(leads.data ?? []).map((l) => (
@@ -210,6 +223,11 @@ export function CreateBillingDialog({
           </div>
           <div className="grid gap-3 sm:grid-cols-2">
             <div className="space-y-1.5"><Label>Valid till</Label><Input type="date" value={validUntil} onChange={(e) => setValidUntil(e.target.value)} /></div>
+          </div>
+          <div className="space-y-1.5">
+            <Label>Additional email addresses (optional)</Label>
+            <Input placeholder="accounts@client.com, owner@client.com" value={extraEmails} onChange={(e) => setExtraEmails(e.target.value)} />
+            <p className="text-xs text-muted-foreground">Separate multiple addresses with commas. Up to 5.</p>
           </div>
           <div className="space-y-1.5"><Label>Notes (optional)</Label><Textarea rows={2} value={notes} onChange={(e) => setNotes(e.target.value)} /></div>
         </div>

@@ -3,6 +3,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { Loader2, MessageCircle, Plus, Send, Trash2 } from "lucide-react";
 import { toast } from "sonner";
+import { parseExtraEmails } from "@/lib/extra-emails";
 import {
   listTemplates,
   saveProposal,
@@ -51,6 +52,7 @@ export function ProposalEditor({
   const queryClient = useQueryClient();
   const [open, setOpen] = useState(false);
   const [busy, setBusy] = useState(false);
+  const [extraEmails, setExtraEmails] = useState("");
 
   const fetchTemplates = useServerFn(listTemplates);
   const save = useServerFn(saveProposal);
@@ -95,6 +97,15 @@ export function ProposalEditor({
       toast.error("This lead has no email address. Add one first.");
       return;
     }
+    const extra = parseExtraEmails(extraEmails);
+    if (sendNow && extra.invalid.length) {
+      toast.error(`Please check these email addresses: ${extra.invalid.join(", ")}`);
+      return;
+    }
+    if (extra.list.length > 5) {
+      toast.error("You can add up to 5 additional email addresses.");
+      return;
+    }
     setBusy(true);
     try {
       const proposal = await save({
@@ -123,11 +134,14 @@ export function ProposalEditor({
             id: proposal.id,
             subject,
             message,
+            cc: extra.list,
           },
         });
-        toast.success(`Proposal emailed to ${lead.email}.`);
+        toast.success("Proposal sent successfully", {
+          description: `Delivered to ${[lead.email, ...extra.list].join(", ")}.`,
+        });
       } else {
-        toast.success("Proposal saved as a draft.");
+        toast.success("Proposal saved", { description: "Your proposal has been saved as a draft." });
       }
       setOpen(false);
       onSent?.();
@@ -171,7 +185,7 @@ export function ProposalEditor({
         `Hi ${lead.name}, thanks for your interest in Vizogen. Here is your proposal "${title}" — tap the link to review scope, deliverables and pricing:\n\n${link}\n\nValid until ${validUntil}. Happy to walk you through it on a quick call.\n\n— Vizogen Sales Team`,
       );
       window.open(`https://wa.me/${toWhatsAppNumber(lead.phone)}?text=${text}`, "_blank");
-      toast.success("Proposal marked sent — WhatsApp is opening.");
+      toast.success("Proposal ready to share", { description: "WhatsApp is opening with your proposal link." });
       setOpen(false);
       onSent?.();
       void queryClient.invalidateQueries({ queryKey: ["crm-proposals"] });
@@ -318,6 +332,11 @@ export function ProposalEditor({
             <Textarea rows={2} value={terms} onChange={(e) => setTerms(e.target.value)} />
           </div>
 
+          <div className="space-y-1.5">
+            <Label>Additional email addresses (optional)</Label>
+            <Input placeholder="accounts@client.com, owner@client.com" value={extraEmails} onChange={(e) => setExtraEmails(e.target.value)} />
+            <p className="text-xs text-muted-foreground">Separate multiple addresses with commas. Up to 5.</p>
+          </div>
           <div className="rounded-xl border border-border bg-muted/40 p-4">
             <p className="text-sm font-semibold text-foreground">Email to {lead.email || "—"}</p>
             <div className="mt-3 space-y-3">

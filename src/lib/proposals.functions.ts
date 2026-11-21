@@ -213,6 +213,7 @@ export const sendProposal = createServerFn({ method: "POST" })
         id: z.string().uuid(),
         subject: z.string().trim().min(3).max(200),
         message: z.string().trim().min(10).max(4000),
+        cc: z.array(z.string().trim().email().max(200)).max(5).default([]),
       })
       .parse(input),
   )
@@ -225,7 +226,7 @@ export const sendProposal = createServerFn({ method: "POST" })
     if (error || !proposal) throw new Error("Proposal not found.");
     const row = proposal as unknown as Proposal;
 
-    if (!row.client_email) throw new Error("Client email missing — email add karo ya WhatsApp se bhejo.");
+    if (!row.client_email) throw new Error("A client email address is required to send by email. Please add an email address or share via WhatsApp.");
     if (row.status === "confirmed") throw new Error("This billing is already signed. Create a new version instead.");
     const extra = proposal as unknown as { billing_number: string | null };
     let billingNumber = extra.billing_number;
@@ -254,8 +255,9 @@ export const sendProposal = createServerFn({ method: "POST" })
       validUntil: row.valid_until,
       createdAt: row.created_at,
     });
+    const recipients = Array.from(new Set([row.client_email, ...data.cc].map((e) => e.toLowerCase())));
     const sent = await sendGmail(
-      row.client_email,
+      recipients.join(", "),
       `Your Quotation/Invoice ${billingNumber} from Vizogen`,
       buildBillingSentEmail({
         billingNumber,
@@ -291,7 +293,7 @@ export const sendProposal = createServerFn({ method: "POST" })
       actor_id: context.userId,
       actor_name: member?.full_name || member?.email || "Team",
       type: "proposal_sent",
-      body: `${row.kind === "billing" ? "Bill" : "Proposal"} "${row.title}" (v${row.version}) sent to ${row.client_email}.`,
+      body: `${row.kind === "billing" ? "Bill" : "Proposal"} "${row.title}" (v${row.version}) sent to ${recipients.join(", ")}.`,
     });
 
     await context.supabase
