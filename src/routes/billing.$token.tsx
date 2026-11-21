@@ -227,6 +227,7 @@ function SignPanel({ token, defaultName, onSigned, changesRequested }: { token: 
   const [typed, setTyped] = useState(defaultName);
   const [drawn, setDrawn] = useState(false);
   const [busy, setBusy] = useState(false);
+  const [agreed, setAgreed] = useState(false);
   const [error, setError] = useState("");
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const drawing = useRef(false);
@@ -277,14 +278,14 @@ function SignPanel({ token, defaultName, onSigned, changesRequested }: { token: 
   };
 
   const hasSig = mode === "draw" ? drawn : typed.trim().length >= 2;
-  const ready = name.trim().length >= 2 && hasSig;
+  const ready = name.trim().length >= 2 && hasSig && agreed;
 
   const submit = async () => {
     setError("");
     setBusy(true);
     try {
       const signature = mode === "draw" ? canvasRef.current!.toDataURL("image/png") : await typedPng();
-      const r = await sign({ data: { token, signerName: name.trim(), designation: designation.trim(), signature, consent: true } });
+      const r = await sign({ data: { token, signerName: name.trim(), designation: designation.trim(), signature, consent: agreed as true } });
       onSigned({ emailed: r.emailed });
     } catch (e) {
       setError(e instanceof Error ? e.message : "Something went wrong.");
@@ -385,6 +386,14 @@ function SignPanel({ token, defaultName, onSigned, changesRequested }: { token: 
               </div>
 
 
+              <label className="flex items-start gap-2 rounded-xl border border-border bg-muted/40 p-3 text-sm text-foreground">
+                <input type="checkbox" checked={agreed} onChange={(e) => setAgreed(e.target.checked)} className="mt-0.5 size-4 accent-primary" />
+                <span>
+                  I have read and agree to the{" "}
+                  <a href="/terms-and-conditions" target="_blank" rel="noreferrer" className="font-semibold text-primary underline">Terms &amp; Conditions</a>{" "}
+                  and accept this bill/proposal. All payments are non-refundable.
+                </span>
+              </label>
               {error ? <p className="text-sm text-destructive">{error}</p> : null}
               <Button onClick={submit} disabled={!ready || busy} size="lg" className="gradient-brand w-full text-white">
                 {busy ? <Loader2 className="size-4 animate-spin" /> : <CheckCircle2 className="size-4" />} Confirm &amp; Sign
